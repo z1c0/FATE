@@ -1,0 +1,140 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Austria) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BUTTON_FOLIEN       BITMAP  DISCARDABLE     "res_pics\\button_folien.bmp"
+IDB_CURRENT_SLIDE       BITMAP  DISCARDABLE     "res_pics\\current_slide.bmp"
+IDB_NEXT_SLIDE          BITMAP  DISCARDABLE     "res_pics\\next_slide.bmp"
+IDB_SKIP_SMALL          BITMAP  DISCARDABLE     "res_pics\\skip_small.bmp"
+IDB_DROP_ARROW          BITMAP  DISCARDABLE     "res_pics\\drop_arrow.bmp"
+IDB_UP_SCROLL           BITMAP  DISCARDABLE     "res_pics\\up_scroll.bmp"
+IDB_DOWN_SCROLL         BITMAP  DISCARDABLE     "res_pics\\down_scroll.bmp"
+IDB_BUTTON_NEXT_S       BITMAP  DISCARDABLE     "res_pics\\button_next_s.bmp"
+IDB_BUTTON_NEXT_S_P     BITMAP  DISCARDABLE     "res_pics\\button_next_s_p.bmp"
+IDB_BUTTON_PREV_S       BITMAP  DISCARDABLE     "res_pics\\button_prev_s.bmp"
+IDB_BUTTON_PREV_S_P     BITMAP  DISCARDABLE     "res_pics\\button_prev_s_p.bmp"
+IDB_BUTTON_NEXT_HL      BITMAP  DISCARDABLE     "res_pics\\button_next_hl.bmp"
+IDB_BUTTON_NEXT_HL_P    BITMAP  DISCARDABLE     "res_pics\\button_next_hl_p.bmp"
+IDB_BUTTON_PREV_HL      BITMAP  DISCARDABLE     "res_pics\\button_prev_hl.bmp"
+IDB_BUTTON_PREV_HL_P    BITMAP  DISCARDABLE     "res_pics\\button_prev_hl_p.bmp"
+IDB_BUTTON_HYPER        BITMAP  DISCARDABLE     "res_pics\\button_hyper.bmp"
+IDB_BUTTON_HYPER_P      BITMAP  DISCARDABLE     "res_pics\\button_hyper_p.bmp"
+IDB_BUTTON_BLACK        BITMAP  DISCARDABLE     "res_pics\\button_black.bmp"
+IDB_BUTTON_BLACK_P      BITMAP  DISCARDABLE     "res_pics\\button_black_p.bmp"
+IDB_BUTTON_WHITE        BITMAP  DISCARDABLE     "res_pics\\button_white.bmp"
+IDB_BUTTON_WHITE_P      BITMAP  DISCARDABLE     "res_pics\\button_white_p.bmp"
+IDB_SCREENS_BACK        BITMAP  DISCARDABLE     "res_pics\\screens_back.bmp"
+IDB_BLANC_LEFT          BITMAP  DISCARDABLE     "res_pics\\blanc_left.bmp"
+IDB_ACTIVE_LEFT         BITMAP  DISCARDABLE     "res_pics\\active_left.bmp"
+IDB_SET_LEFT            BITMAP  DISCARDABLE     "res_pics\\set_left.bmp"
+IDB_BLANC_MID           BITMAP  DISCARDABLE     "res_pics\\blanc_mid.bmp"
+IDB_ACTIVE_MID          BITMAP  DISCARDABLE     "res_pics\\active_mid.bmp"
+IDB_SET_MID             BITMAP  DISCARDABLE     "res_pics\\set_mid.bmp"
+IDB_BLANC_RIGHT         BITMAP  DISCARDABLE     "res_pics\\blanc_right.bmp"
+IDB_ACTIVE_RIGHT        BITMAP  DISCARDABLE     "res_pics\\active_right.bmp"
+IDB_SET_RIGHT           BITMAP  DISCARDABLE     "res_pics\\set_right.bmp"
+IDB_PLAY                BITMAP  DISCARDABLE     "res_pics\\play.bmp"
+IDB_PAUSE               BITMAP  DISCARDABLE     "res_pics\\pause.bmp"
+IDB_VR_TITLE            BITMAP  DISCARDABLE     "res_pics\\vr_title.bmp"
+IDB_LI_UP               BITMAP  DISCARDABLE     "res_pics\\li_up.bmp"
+IDB_MI_UP               BITMAP  DISCARDABLE     "res_pics\\mi_up.bmp"
+IDB_RE_UP               BITMAP  DISCARDABLE     "res_pics\\re_up.bmp"
+IDB_LINKS               BITMAP  DISCARDABLE     "res_pics\\links.bmp"
+IDB_LINKS_PR            BITMAP  DISCARDABLE     "res_pics\\links_pr.bmp"
+IDB_LINKS_END           BITMAP  DISCARDABLE     "res_pics\\links_end.bmp"
+IDB_RECHTS              BITMAP  DISCARDABLE     "res_pics\\rechts.bmp"
+IDB_RECHTS_PR           BITMAP  DISCARDABLE     "res_pics\\rechts_pr.bmp"
+IDB_RECHTS_END          BITMAP  DISCARDABLE     "res_pics\\rechts_end.bmp"
+IDB_RESET               BITMAP  DISCARDABLE     "res_pics\\reset.bmp"
+IDB_ARSBOX_ICON         BITMAP  DISCARDABLE     "res_pics\\arsbox_icon.bmp"
+IDB_ARSBOX_PIC          BITMAP  DISCARDABLE     "res_pics\\arsbox_pic.bmp"
+IDB_TITLE               BITMAP  DISCARDABLE     "res_pics\\title.bmp"
+IDB_BUTTON_PPT          BITMAP  DISCARDABLE     "res_pics\\button_ppt.bmp"
+IDB_BUTTON_PPT_P        BITMAP  DISCARDABLE     "res_pics\\button_ppt_p.bmp"
+IDB_BUTTON_VIDEO        BITMAP  DISCARDABLE     "res_pics\\button_video.bmp"
+IDB_BUTTON_VIDEO_P      BITMAP  DISCARDABLE     "res_pics\\button_video_p.bmp"
+IDB_BUTTON_PICS         BITMAP  DISCARDABLE     "res_pics\\button_pics.bmp"
+IDB_BUTTON_PICS_P       BITMAP  DISCARDABLE     "res_pics\\button_pics_p.bmp"
+IDB_BUTTON_3D           BITMAP  DISCARDABLE     "res_pics\\button_3D.bmp"
+IDB_BUTTON_3D_P         BITMAP  DISCARDABLE     "res_pics\\button_3D_p.bmp"
+IDB_BUTTON_VR           BITMAP  DISCARDABLE     "res_pics\\button_vr.bmp"
+IDB_BUTTON_VR_P         BITMAP  DISCARDABLE     "res_pics\\button_vr_p.bmp"
+IDB_SKIP                BITMAP  DISCARDABLE     "res_pics\\skip.bmp"
+IDB_SKIP_DIS            BITMAP  DISCARDABLE     "res_pics\\skip_dis.bmp"
+IDB_INTRO               BITMAP  DISCARDABLE     "res_pics\\intro.bmp"
+IDB_FRAME0              BITMAP  DISCARDABLE     "res_pics\\frame0.bmp"
+IDB_FRAME1              BITMAP  DISCARDABLE     "res_pics\\frame1.bmp"
+IDB_FRAME2              BITMAP  DISCARDABLE     "res_pics\\frame2.bmp"
+IDB_FRAME3              BITMAP  DISCARDABLE     "res_pics\\frame3.bmp"
+IDB_FRAME4              BITMAP  DISCARDABLE     "res_pics\\frame4.bmp"
+IDB_FRAME5              BITMAP  DISCARDABLE     "res_pics\\frame5.bmp"
+IDB_FRAME6              BITMAP  DISCARDABLE     "res_pics\\frame6.bmp"
+IDB_FRAME7              BITMAP  DISCARDABLE     "res_pics\\frame7.bmp"
+IDB_FRAME8              BITMAP  DISCARDABLE     "res_pics\\frame8.bmp"
+IDB_FRAME9              BITMAP  DISCARDABLE     "res_pics\\frame9.bmp"
+IDB_FRAME10             BITMAP  DISCARDABLE     "res_pics\\frame10.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // German (Austria) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

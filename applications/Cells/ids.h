@@ -1,0 +1,1 @@
+#define ID_BTN_QUIT             0xA001

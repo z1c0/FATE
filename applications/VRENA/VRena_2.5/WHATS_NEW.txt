@@ -1,0 +1,2 @@
+- Behandlung von Stereo-Videos (über Namens-Konvention).
+- Matrix Kommunikation geändert.

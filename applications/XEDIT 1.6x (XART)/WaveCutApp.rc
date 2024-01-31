@@ -1,0 +1,145 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "newres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Austria) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
+#ifdef _WIN32
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""newres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_TITLE               BITMAP  DISCARDABLE     "IMAGES\\title.bmp"
+IDB_LOAD_P              BITMAP  DISCARDABLE     "IMAGES\\button_open_p.bmp"
+IDB_LOAD                BITMAP  DISCARDABLE     "IMAGES\\button_open.bmp"
+IDB_CUTOUT              BITMAP  DISCARDABLE     "IMAGES\\button_cutout.bmp"
+IDB_CUTOUT_P            BITMAP  DISCARDABLE     "IMAGES\\button_cutout_p.bmp"
+IDB_INFO                BITMAP  DISCARDABLE     "IMAGES\\button_i.bmp"
+IDB_INFO_P              BITMAP  DISCARDABLE     "IMAGES\\button_i_p.bmp"
+IDB_REDO                BITMAP  DISCARDABLE     "IMAGES\\button_redo.bmp"
+IDB_REDO_P              BITMAP  DISCARDABLE     "IMAGES\\button_redo_p.bmp"
+IDB_SAVE                BITMAP  DISCARDABLE     "IMAGES\\button_save.bmp"
+IDB_SAVE_P              BITMAP  DISCARDABLE     "IMAGES\\button_save_p.bmp"
+IDB_UNDO                BITMAP  DISCARDABLE     "IMAGES\\button_undo.bmp"
+IDB_CHEAT               BITMAP  DISCARDABLE     "IMAGES\\cheat.bmp"
+IDB_ZOOMIN              BITMAP  DISCARDABLE     "IMAGES\\button_zoomin.bmp"
+IDB_ZOOMIN_P            BITMAP  DISCARDABLE     "IMAGES\\button_zoomin_p.bmp"
+IDB_ZOOMOUT             BITMAP  DISCARDABLE     "IMAGES\\button_zoomout.bmp"
+IDB_ZOOMOUT_P           BITMAP  DISCARDABLE     "IMAGES\\button_zoomout_p.bmp"
+IDB_MASK                BITMAP  DISCARDABLE     "IMAGES\\maske.bmp"
+IDB_LEVEL               BITMAP  DISCARDABLE     "IMAGES\\vol_level.bmp"
+IDB_QUIT                BITMAP  DISCARDABLE     "IMAGES\\skip.bmp"
+IDB_AREAMARKER          BITMAP  DISCARDABLE     "IMAGES\\marker.bmp"
+IDB_POSMARKER           BITMAP  DISCARDABLE     "IMAGES\\tonkopf.bmp"
+IDB_ZOOMBAR             BITMAP  DISCARDABLE     "IMAGES\\zoomarea.bmp"
+IDB_PLAYFROM            BITMAP  DISCARDABLE     "IMAGES\\button_from.bmp"
+IDB_PLAYFROM_P          BITMAP  DISCARDABLE     "IMAGES\\button_from_p.bmp"
+IDB_MARIN_P             BITMAP  DISCARDABLE     "IMAGES\\button_mout_p.bmp"
+IDB_MARKIN_P            BITMAP  DISCARDABLE     "IMAGES\\button_min_p.bmp"
+IDB_MARKOUT             BITMAP  DISCARDABLE     "IMAGES\\button_mout.bmp"
+IDB_MARKIN              BITMAP  DISCARDABLE     "IMAGES\\button_min.bmp"
+IDB_PLAYOUT             BITMAP  DISCARDABLE     "IMAGES\\button_outside.bmp"
+IDB_PLAYOUT_P           BITMAP  DISCARDABLE     "IMAGES\\button_outside_p.bmp"
+IDB_PAUSE               BITMAP  DISCARDABLE     "IMAGES\\button_pause.bmp"
+IDB_PAUSE_P             BITMAP  DISCARDABLE     "IMAGES\\button_pause_p.bmp"
+IDB_PLAY                BITMAP  DISCARDABLE     "IMAGES\\button_play.bmp"
+IDB_PLAY_P              BITMAP  DISCARDABLE     "IMAGES\\button_play_p.bmp"
+IDB_BIGREC              BITMAP  DISCARDABLE     "IMAGES\\bbutton_rec.bmp"
+IDB_BIGREC_P            BITMAP  DISCARDABLE     "IMAGES\\bbutton_rec_p.bmp"
+IDB_STOP                BITMAP  DISCARDABLE     "IMAGES\\button_stop.bmp"
+IDB_MARKOUT_P           BITMAP  DISCARDABLE     "IMAGES\\button_mout_p.bmp"
+IDB_REC                 BITMAP  DISCARDABLE     "IMAGES\\button_rec.bmp"
+IDB_STOP_P              BITMAP  DISCARDABLE     "IMAGES\\button_stop_p.bmp"
+IDB_PLAYIN              BITMAP  DISCARDABLE     "IMAGES\\button_inside.bmp"
+IDB_PLAYIN_P            BITMAP  DISCARDABLE     "IMAGES\\button_inside_p.bmp"
+IDB_PLAYTILL            BITMAP  DISCARDABLE     "IMAGES\\button_till.bmp"
+IDB_PLAYTILL_P          BITMAP  DISCARDABLE     "IMAGES\\button_till_p.bmp"
+IDB_BIGEDIT_P           BITMAP  DISCARDABLE     "IMAGES\\bbutton_edit_p.bmp"
+IDB_BIGEDIT             BITMAP  DISCARDABLE     "IMAGES\\bbutton_edit.bmp"
+IDB_WAVEPANEL           BITMAP  DISCARDABLE     "IMAGES\\wav_window.bmp"
+IDB_VOL                 BITMAP  DISCARDABLE     "IMAGES\\vol.bmp"
+IDB_UNDO_P              BITMAP  DISCARDABLE     "IMAGES\\button_undo_p.bmp"
+IDB_CUTIN_P             BITMAP  DISCARDABLE     "IMAGES\\button_cutin_p.bmp"
+IDB_CUTIN               BITMAP  DISCARDABLE     "IMAGES\\button_cutin.bmp"
+IDB_SLIDE               BITMAP  DISCARDABLE     "IMAGES\\vol_slide.bmp"
+IDB_ARROWUP             BITMAP  DISCARDABLE     "IMAGES\\up_scroll.bmp"
+IDB_ARROWDOWN           BITMAP  DISCARDABLE     "IMAGES\\down_scroll.bmp"
+IDB_DIR                 BITMAP  DISCARDABLE     "IMAGES\\button_dir.bmp"
+IDB_DIR_P               BITMAP  DISCARDABLE     "IMAGES\\button_dir_p.bmp"
+IDB_DROP_ARROWUP        BITMAP  DISCARDABLE     "images\\dropupar.bmp"
+IDB_DROP_ARROWDOWN      BITMAP  DISCARDABLE     "images\\dropdown.bmp"
+IDB_DROP_ARROW          BITMAP  DISCARDABLE     "images\\drop.bmp"
+IDB_BIGPAUSE            BITMAP  DISCARDABLE     "IMAGES\\bbutton_pause.bmp"
+IDB_BIGPAUSE_P          BITMAP  DISCARDABLE     "IMAGES\\bbutton_pause_p.bmp"
+IDB_REC_P               BITMAP  DISCARDABLE     "IMAGES\\button_rec_p.bmp"
+IDB_SAVING              BITMAP  DISCARDABLE     "IMAGES\\saving.bmp"
+IDB_LOADING             BITMAP  DISCARDABLE     "IMAGES\\loading.bmp"
+IDB_BUTTON_XART         BITMAP  DISCARDABLE     "IMAGES\\button_xart.bmp"
+IDB_XARTINFO            BITMAP  DISCARDABLE     "IMAGES\\xartinfo.bmp"
+IDB_TITLE_TRIAL         BITMAP  DISCARDABLE     "IMAGES\\title_trial.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON                ICON    DISCARDABLE     "IMAGES\\icon1.ico"
+#endif    // German (Austria) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

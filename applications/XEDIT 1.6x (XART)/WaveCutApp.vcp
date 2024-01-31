@@ -1,0 +1,627 @@
+# Microsoft eMbedded Visual Tools Project File - Name="WaveCutApp" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE ARM) Application" 0x8501
+
+CFG=WaveCutApp - Win32 (WCE ARM) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE use the Export Makefile command and run
+!MESSAGE 
+!MESSAGE NMAKE /f "WaveCutApp.vcn".
+!MESSAGE 
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE 
+!MESSAGE NMAKE /f "WaveCutApp.vcn" CFG="WaveCutApp - Win32 (WCE ARM) Debug"
+!MESSAGE 
+!MESSAGE Possible choices for configuration are:
+!MESSAGE 
+!MESSAGE "WaveCutApp - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Application")
+!MESSAGE "WaveCutApp - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Application")
+!MESSAGE 
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+
+!IF  "$(CFG)" == "WaveCutApp - Win32 (WCE ARM) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMRel"
+# PROP BASE Intermediate_Dir "ARMRel"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "ARMRel"
+# PROP Intermediate_Dir "ARMRel"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib aygshell.lib ..\FATE\ArmRel\FATE.lib gx.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /nodefaultlib:"$(CENoDefaultLib)" /out:"ARMRel/xEdit.exe" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "NDEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /Yu"stdafx.h" /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /Oxs /M$(CECrtMT) /c
+
+!ELSEIF  "$(CFG)" == "WaveCutApp - Win32 (WCE ARM) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMDbg"
+# PROP BASE Intermediate_Dir "ARMDbg"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "ARMDbg"
+# PROP Intermediate_Dir "ARMDbg"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+LINK32=link.exe
+# ADD BASE LINK32 commctrl.lib coredll.lib aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib aygshell.lib ..\FATE\ArmDbg\FATEDbg.lib gx.lib winsock.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /out:"ARMDbg/xEditDbg.exe" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+RSC=rc.exe
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
+MTL=midl.exe
+# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /Yu"stdafx.h" /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "_REMOTE_CONSOLE" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /FR /YX /M$(CECrtMTDebug) /c
+
+!ENDIF 
+
+# Begin Target
+
+# Name "WaveCutApp - Win32 (WCE ARM) Release"
+# Name "WaveCutApp - Win32 (WCE ARM) Debug"
+# Begin Group "Source Files"
+
+# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=.\FDirPanel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FInfoPanel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FLoadPanel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FMarker.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FRecordPanel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FSavePanel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FWaveCutApp.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FWavePanel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FZoomSlider.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\StdAfx.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\WaveCutApp.rc
+# End Source File
+# End Group
+# Begin Group "Header Files"
+
+# PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\FDirPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FInfoPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FLoadPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FMarker.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FRecordPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FSavePanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FWaveCutApp.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FWavePanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\FZoomSlider.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\IDS.H
+# End Source File
+# Begin Source File
+
+SOURCE=.\newres.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\StdAfx.h
+# End Source File
+# End Group
+# Begin Group "Resource Files"
+
+# PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_edit.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_edit_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_min.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_min_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_mout.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_mout_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_pause.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_pause_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_play.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_play_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_rec.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_rec_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_rec_r.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_rec_rp.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_stop.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\bbutton_stop_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_+1.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_+10.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_+100.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_+100_p.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_+10_p.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_+1_p.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_-1.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_-10.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_-100.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_-100_p.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_-10_p.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=".\IMAGES\button_-1_p.bmp"
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_cutin.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_cutin_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_cutout.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_cutout_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_dir.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_dir_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_from.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_from_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_frompos.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_frompos_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_i.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_i_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_inside.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_inside_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_min.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_min_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_mout.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_mout_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_open.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_open_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_outside.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_outside_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_pause.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_pause_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_play.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_play_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_rec.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_rec_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_redo.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_redo_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_save.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_save_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_stop.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_stop_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_till.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_till_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_undo.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_undo_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_xart.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_youk.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_youk_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_zoomin.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_zoomin_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_zoomout.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\button_zoomout_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\cheat.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\dir.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\dir_p.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\down_scroll.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\drop.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\dropdown.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\dropupar.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\flab_info.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\flap.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\icon1.ico
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\infopane.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\loading.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\marker.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\marker_k.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\maske.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\powered_by.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\rec.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\saving.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\skip.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\title.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\title_trial.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\tonkopf.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\tonkopf_k.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\up_scroll.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\vol.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\vol_level.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\vol_slide.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\wav_window.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\xartinfo.bmp
+# End Source File
+# Begin Source File
+
+SOURCE=.\IMAGES\zoomarea.bmp
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=.\ReadMe.txt
+# End Source File
+# End Target
+# End Project

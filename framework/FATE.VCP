@@ -1,0 +1,498 @@
+# Microsoft eMbedded Visual Tools Project File - Name="FATE" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE ARM) Static Library" 0x8504
+
+CFG=FATE - Win32 (WCE ARM) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE use the Export Makefile command and run
+!MESSAGE 
+!MESSAGE NMAKE /f "FATE.VCN".
+!MESSAGE 
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE 
+!MESSAGE NMAKE /f "FATE.VCN" CFG="FATE - Win32 (WCE ARM) Debug"
+!MESSAGE 
+!MESSAGE Possible choices for configuration are:
+!MESSAGE 
+!MESSAGE "FATE - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Static Library")
+!MESSAGE "FATE - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Static Library")
+!MESSAGE 
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+CPP=clarm.exe
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMRel"
+# PROP BASE Intermediate_Dir "ARMRel"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "lib\WIN32_WCE"
+# PROP Intermediate_Dir "src\ARMRel"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /O2 /I "include" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Oxs /M$(CECrtMT) /c
+# SUBTRACT CPP /YX /Yc /Yu
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMDbg"
+# PROP BASE Intermediate_Dir "ARMDbg"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "lib\WIN32_WCE"
+# PROP Intermediate_Dir "src\ARMDbg"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "include" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /FR /M$(CECrtMTDebug) /c
+# SUBTRACT CPP /YX /Yc /Yu
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo /out:"lib\WIN32_WCE\FATEDbg.lib"
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ENDIF 
+
+# Begin Target
+
+# Name "FATE - Win32 (WCE ARM) Release"
+# Name "FATE - Win32 (WCE ARM) Debug"
+# Begin Group "base"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\base\FATE_WIN32_WCE.cpp
+DEP_CPP_FATE_=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FBitmap_WIN32.h"\
+	".\base\FFile_WIN32.h"\
+	".\base\FLinkedList.h"\
+	".\base\FPoint.h"\
+	".\base\FSystem.h"\
+	".\base\FSystem_WIN32.h"\
+	".\base\FSystem_WIN32_WCE.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\comm\FComPort_WIN32.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket_WIN32.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_FATE_=\
+	".\base\FBitmap_PalmOS.h"\
+	".\base\FSystem_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FateApp.cpp
+DEP_CPP_FATEA=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FBitmap_WIN32.h"\
+	".\base\FLinkedList.h"\
+	".\base\FSystem.h"\
+	".\base\FSystem_WIN32.h"\
+	".\base\FSystem_WIN32_WCE.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\gui\FLabel.h"\
+	".\gui\FMsgPanel.h"\
+	".\gui\FPanel.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_FATEA=\
+	".\base\FBitmap_PalmOS.h"\
+	".\base\FSystem_PalmOS.h"\
+	".\comm\FSocket_PalmOS.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FateApp.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FateTypeDefs.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FBitmap.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FBitmap_WIN32.cpp
+DEP_CPP_FBITM=\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap_WIN32.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FBitmap_WIN32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FFile.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FFile_WIN32.cpp
+DEP_CPP_FFILE=\
+	".\base\FateTypeDefs.h"\
+	".\base\FFile_WIN32.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FFile_WIN32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FLinkedList.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FPoint.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FSystem.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FSystem_WIN32_WCE.cpp
+DEP_CPP_FSYST=\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap_WIN32.h"\
+	".\base\FSystem_WIN32_WCE.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FSystem_WIN32_WCE.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFateComponent.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFateContainer.cpp
+DEP_CPP_IFATE=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FBitmap_WIN32.h"\
+	".\base\FLinkedList.h"\
+	".\base\FSystem.h"\
+	".\base\FSystem_WIN32.h"\
+	".\base\FSystem_WIN32_WCE.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\gui\FTextField.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_IFATE=\
+	".\base\FBitmap_PalmOS.h"\
+	".\base\FSystem_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFateContainer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFButtonListener.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFCharListener.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFConnectionListener.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFDropListListener.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFItemListListener.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFMenuListener.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\IFSliderListener.h
+# End Source File
+# End Group
+# Begin Group "comm"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\comm\FComPort.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FComPort_WIN32.cpp
+DEP_CPP_FCOMP=\
+	".\comm\FComPort.h"\
+	".\comm\FComPort_WIN32.h"\
+	
+NODEP_CPP_FCOMP=\
+	".\comm\FComPort_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FComPort_WIN32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FInetAddr_WIN32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FServer.cpp
+DEP_CPP_FSERV=\
+	".\base\FLinkedList.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
+NODEP_CPP_FSERV=\
+	".\comm\FSocket_PalmOS.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FServer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FSocket.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FSocket_WIN32.cpp
+DEP_CPP_FSOCK=\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
+NODEP_CPP_FSOCK=\
+	".\comm\IFSocket_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FSocket_WIN32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FUDPSocket.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FUDPSocket_WIN32.cpp
+DEP_CPP_FUDPS=\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FUDPSocket_WIN32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\IFSocket.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\IFSocket_WIN32.cpp
+DEP_CPP_IFSOC=\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
+NODEP_CPP_IFSOC=\
+	".\comm\IFSocket_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\IFSocket_WIN32.h
+# End Source File
+# End Group
+# Begin Group "gui"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\gui\FButton.cpp
+DEP_CPP_FBUTT=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FBitmap_WIN32.h"\
+	".\base\FLinkedList.h"\
+	".\base\FSystem.h"\
+	".\base\FSystem_WIN32.h"\
+	".\base\FSystem_WIN32_WCE.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\gui\FButton.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_FBUTT=\
+	".\base\FBitmap_PalmOS.h"\
+	".\base\FSystem_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FButton.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FLabel.cpp
+DEP_CPP_FLABE=\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FBitmap_WIN32.h"\
+	".\base\FSystem.h"\
+	".\base\FSystem_WIN32.h"\
+	".\base\FSystem_WIN32_WCE.h"\
+	".\base\IFateComponent.h"\
+	".\gui\FLabel.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"gx.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_FLABE=\
+	".\base\FBitmap_PalmOS.h"\
+	".\base\FSystem_PalmOS.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FLabel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FMsgPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FTextField.h
+# End Source File
+# End Group
+# Begin Group "include"
+
+# PROP Default_Filter ""
+# End Group
+# End Target
+# End Project

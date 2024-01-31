@@ -1,0 +1,106 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Austria) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BUTTON_BLACK        BITMAP  DISCARDABLE     "res_pics\\button_black.bmp"
+IDB_BUTTON_BLACK_P      BITMAP  DISCARDABLE     "res_pics\\button_black_p.bmp"
+IDB_BUTTON_DIR_UP       BITMAP  DISCARDABLE     "res_pics\\button_dir_up.bmp"
+IDB_BUTTON_DIR_UP_P     BITMAP  DISCARDABLE     "res_pics\\button_dir_up_p.bmp"
+IDB_BUTTON_FOLIEN       BITMAP  DISCARDABLE     "res_pics\\button_folien.bmp"
+IDB_BUTTON_HYPER        BITMAP  DISCARDABLE     "res_pics\\button_hyper.bmp"
+IDB_BUTTON_HYPER_P      BITMAP  DISCARDABLE     "res_pics\\button_hyper_p.bmp"
+IDB_BUTTON_NEXT_HL      BITMAP  DISCARDABLE     "res_pics\\button_next_hl.bmp"
+IDB_BUTTON_NEXT_HL_P    BITMAP  DISCARDABLE     "res_pics\\button_next_hl_p.bmp"
+IDB_BUTTON_NEXT_S       BITMAP  DISCARDABLE     "res_pics\\button_next_s.bmp"
+IDB_BUTTON_NEXT_S_P     BITMAP  DISCARDABLE     "res_pics\\button_next_s_p.bmp"
+IDB_BUTTON_PREV_HL      BITMAP  DISCARDABLE     "res_pics\\button_prev_hl.bmp"
+IDB_BUTTON_PREV_HL_P    BITMAP  DISCARDABLE     "res_pics\\button_prev_hl_p.bmp"
+IDB_BUTTON_PREV_S       BITMAP  DISCARDABLE     "res_pics\\button_prev_s.bmp"
+IDB_BUTTON_PREV_S_P     BITMAP  DISCARDABLE     "res_pics\\button_prev_s_p.bmp"
+IDB_BUTTON_WHITE        BITMAP  DISCARDABLE     "res_pics\\button_white.bmp"
+IDB_BUTTON_WHITE_P      BITMAP  DISCARDABLE     "res_pics\\button_white_p.bmp"
+IDB_CURRENT_SLIDE       BITMAP  DISCARDABLE     "res_pics\\current_slide.bmp"
+IDB_DOWN_SCROLL         BITMAP  DISCARDABLE     "res_pics\\down_scroll.bmp"
+IDB_DROP_ARROW          BITMAP  DISCARDABLE     "res_pics\\drop_arrow.bmp"
+IDB_NEXT_SLIDE          BITMAP  DISCARDABLE     "res_pics\\next_slide.bmp"
+IDB_SKIP                BITMAP  DISCARDABLE     "res_pics\\skip.bmp"
+IDB_SKIP_DIS            BITMAP  DISCARDABLE     "res_pics\\skip_dis.bmp"
+IDB_SKIP_SMALL          BITMAP  DISCARDABLE     "res_pics\\skip_small.bmp"
+IDB_TITLE               BITMAP  DISCARDABLE     "res_pics\\title.bmp"
+IDB_UP_SCROLL           BITMAP  DISCARDABLE     "res_pics\\up_scroll.bmp"
+IDB_FOLDER_ICON         BITMAP  DISCARDABLE     "res_pics\\folder_icon.bmp"
+IDB_PPT_ICON            BITMAP  DISCARDABLE     "res_pics\\ppt_icon.bmp"
+IDB_FLOPPY_ICON         BITMAP  DISCARDABLE     "res_pics\\floppy_icon.bmp"
+IDB_CDROM_ICON          BITMAP  DISCARDABLE     "res_pics\\cdrom_icon.bmp"
+IDB_HD_ICON             BITMAP  DISCARDABLE     "res_pics\\hd_icon.bmp"
+IDB_BUTTON_REFRESH      BITMAP  DISCARDABLE     "res_pics\\button_refresh.bmp"
+IDB_BUTTON_REFRESH_P    BITMAP  DISCARDABLE     "res_pics\\button_refresh_p.bmp"
+IDB_BUTTON_HOME         BITMAP  DISCARDABLE     "res_pics\\button_home.bmp"
+IDB_BUTTON_HOME_P       BITMAP  DISCARDABLE     "res_pics\\button_home_p.bmp"
+IDB_BUTTON_LOAD         BITMAP  DISCARDABLE     "res_pics\\button_load.bmp"
+IDB_BUTTON_LOAD_P       BITMAP  DISCARDABLE     "res_pics\\button_load_p.bmp"
+#endif    // German (Austria) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -396,3 +396,18 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+# custom stuff
+ARMDbg
+ARMRel
+PalmDebug
+PalmRelease
+*.lib
+*.vcb
+*.VCB
+*.vcl
+*.VCL
+*.vco
+*.VCO	
+

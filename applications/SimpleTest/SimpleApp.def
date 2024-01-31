@@ -1,0 +1,2 @@
+application { "SimpleApp" SIMPLE_APP }
+multiple code { sect_APP sect_FW }
