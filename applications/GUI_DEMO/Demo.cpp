@@ -59,7 +59,7 @@ bool CDemo::InitFateApp()
   m_droplist->AddItem(TEXT("entry 8"));
   m_droplist->AddItem(TEXT("entry 9"));
   m_droplist->SetY(50);
-  //Add(*m_droplist);
+  Add(*m_droplist);
 
   m_itemlist= new CFItemList(3, 150, NULL, NULL);
   m_itemlist->AddItem(TEXT("entry 1"));
@@ -74,10 +74,8 @@ bool CDemo::InitFateApp()
   m_itemlist->SetY(50);
   Add(*m_itemlist);
 
-  /*
-  m_pVEPanel= new CFVEObjPanel();
-  Add(*m_pVEPanel);  
-  */
+  //m_pVEPanel= new CFVEObjPanel();
+  //Add(*m_pVEPanel);  
 
   return true;
 }

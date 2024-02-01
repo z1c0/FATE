@@ -77,7 +77,7 @@ void CGame::Draw()
   m_rectcardtarget.bottom = top1 + CARD_HEIGHT;
   m_pDblBuffer->SetColor(RGB(0,0,0));
   m_pDblBuffer->SetBackgroundColor(COL_GREEN_BACK);
-  m_pDblBuffer->DrawRect(m_rectcardtarget);
+  m_pDblBuffer->DrawFilledRect(m_rectcardtarget);
 }
 
 //--------------------------------------------------------------------------------

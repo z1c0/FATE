@@ -1,0 +1,191 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "Cells"=".\Cells\Cells.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "FATE_GUI_DEMO"=".\GUI_DEMO\FATE_GUI_DEMO.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "FATEsim"="..\framework\FATEsim.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "GetID_Sim"=".\GetID\GetID_Sim.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "Navi"=".\Navi\Navi.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "OffRenderDemo"=".\OffRenderDemo\OffRenderDemo.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "PPTRCsim"=".\PPC_PPTRC\PPTRCsim.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "SimpleTest"=".\SimpleTest\SimpleTest.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "Snake"=".\Snake\Snake.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "VRENAsim"=".\VRENA\VRena_2.0\VRENAsim.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "WAND"=".\WAND\WAND.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "liquor"=".\liquor\liquor.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

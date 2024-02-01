@@ -126,6 +126,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_KEYDOWN:          
       // which key?
       switch(wParam) {
+        case 13:  // ENTER
+          key= KeyEnter;
+          break;
+
         case 37:  // LEFT
           key = KeyWest;
           break;
@@ -172,6 +176,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_KEYUP:
       // which key?
       switch(wParam) {
+        case 13:  // ENTER
+          key= KeyEnter;
+          break;
+
         case 37:  // LEFT
           key= KeyWest;
           break;
