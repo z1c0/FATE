@@ -239,11 +239,27 @@ SOURCE=.\gui\FButton.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\gui\FDirList.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FDirList.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\gui\FDropList.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\gui\FDropList.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FFileList.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FFileList.h
 # End Source File
 # Begin Source File
 
@@ -376,6 +392,50 @@ SOURCE=.\ext\FVEObjPanel.h
 # Begin Source File
 
 SOURCE=.\ext\ve_protocol.h
+# End Source File
+# End Group
+# Begin Group "audio"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\audio\FMMWave.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FMMWave.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FSampleList.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FSampleList.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWave.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWave.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveIn.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveIn.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveOut.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveOut.h
 # End Source File
 # End Group
 # End Target

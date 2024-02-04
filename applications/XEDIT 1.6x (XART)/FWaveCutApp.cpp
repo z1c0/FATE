@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "FWaveCutApp.h"
 #include "Resource.h"
-
+#include <stdlib.h>
 
 //--------------------------------------------------------------------------------
 // Global function for creating the one and only application object.
@@ -32,7 +32,8 @@ CFWaveCutApp::CFWaveCutApp() : CFateApp(DM_LANDSCAPE_FLIPPED)
 //--------------------------------------------------------------------------------
 CFWaveCutApp::~CFWaveCutApp()
 {
-  EnableSuspend(TRUE);
+  //EnableSuspend(TRUE); // TODO
+
   delete(m_bmpTitle);
   delete(m_bmpVol);
   delete(m_bmpSlide);
@@ -58,7 +59,7 @@ CFWaveCutApp::~CFWaveCutApp()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::InitFateApp()
+bool CFWaveCutApp::InitFateApp()
 { 
   INIT_REMOTE_CONSOLE(TEXT("COM"), 1);
   REMOTE_CONSOLE(TEXT("xEdit says hello"));
@@ -71,9 +72,10 @@ BOOL CFWaveCutApp::InitFateApp()
 #endif
 
   // disable suspend so the application won't freeze
-  EnableSuspend(FALSE);
+  //EnableSuspend(FALSE); // TODO
 
-  m_bmpTitle= new CFBitmap(m_hdc);
+  //m_bmpTitle = new CFBitmap(m_hdc); TODO
+  m_bmpTitle = new CFBitmap();
 #ifdef _XEDIT_DEMO  
   if (!m_bmpTitle->Load(IDB_TITLE_TRIAL)) return(FALSE);
 #else 
@@ -82,7 +84,7 @@ BOOL CFWaveCutApp::InitFateApp()
   
   // create and add label for filename
   m_fileLabel= new CFLabel(TEXT(" "), 245, 17);
-  Add(m_fileLabel);
+  Add(*m_fileLabel);
   m_fileLabel->SetVisible(TRUE);
 
   // create and add panel which displays the waves
@@ -90,18 +92,20 @@ BOOL CFWaveCutApp::InitFateApp()
   
   // create and add panel for buttons
   m_buttonPanel= new CFPanel();
-  Add(m_buttonPanel);
+  Add(*m_buttonPanel);
   m_buttonPanel->SetVisible(TRUE);
   
   // create "load" button
-  CFBitmap *bmpDef= new CFBitmap(m_hdc);
+  //CFBitmap *bmpDef= new CFBitmap(m_hdc); TODO
+  CFBitmap *bmpDef= new CFBitmap();
   if (!bmpDef->Load(IDB_LOAD)) return(FALSE);
-  CFBitmap *bmpPress= new CFBitmap(m_hdc);
+  //CFBitmap *bmpPress= new CFBitmap(m_hdc); TODO
+  CFBitmap *bmpPress= new CFBitmap();
   if (!bmpPress->Load(IDB_LOAD_P)) return(FALSE);
   m_btnLoad= new CFButton(bmpDef, bmpPress);
-  m_btnLoad->SetID(ID_BTN_APP_OPEN);
+  m_btnLoad->SetId(ID_BTN_APP_OPEN);
   m_btnLoad->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnLoad);
+  m_buttonPanel->Add(*m_btnLoad);
   
   // create "save" button
   bmpDef= new CFBitmap(m_hdc);
@@ -109,9 +113,9 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_SAVE_P)) return(FALSE);
   m_btnSave= new CFButton(bmpDef, bmpPress);;
-  m_btnSave->SetID(ID_BTN_APP_SAVE);
+  m_btnSave->SetId(ID_BTN_APP_SAVE);
   m_btnSave->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnSave);
+  m_buttonPanel->Add(*m_btnSave);
   
   // create "undo" button
   bmpDef= new CFBitmap(m_hdc);
@@ -119,9 +123,9 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_UNDO_P)) return(FALSE);
   m_btnUndo= new CFButton(bmpDef, bmpPress);
-  m_btnUndo->SetID(ID_BTN_APP_UNDO);
+  m_btnUndo->SetId(ID_BTN_APP_UNDO);
   m_btnUndo->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnUndo);
+  m_buttonPanel->Add(*m_btnUndo);
   
   // create "redo "button
   bmpDef= new CFBitmap(m_hdc);
@@ -129,9 +133,9 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_REDO_P)) return(FALSE);
   m_btnRedo= new CFButton(bmpDef, bmpPress);
-  m_btnRedo->SetID(ID_BTN_APP_REDO);
+  m_btnRedo->SetId(ID_BTN_APP_REDO);
   m_btnRedo->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnRedo);
+  m_buttonPanel->Add(*m_btnRedo);
   
   // create "cutout" button
   bmpDef= new CFBitmap(m_hdc);
@@ -139,9 +143,9 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_CUTOUT_P)) return(FALSE);
   m_btnCutOut= new CFButton(bmpDef, bmpPress);
-  m_btnCutOut->SetID(ID_BTN_APP_CUTOUT);
+  m_btnCutOut->SetId(ID_BTN_APP_CUTOUT);
   m_btnCutOut->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnCutOut);
+  m_buttonPanel->Add(*m_btnCutOut);
   
   // create "cutin" button
   bmpDef= new CFBitmap(m_hdc);
@@ -149,9 +153,9 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_CUTIN_P)) return(FALSE);
   m_btnCutIn= new CFButton(bmpDef, bmpPress);
-  m_btnCutIn->SetID(ID_BTN_APP_CUTIN);
+  m_btnCutIn->SetId(ID_BTN_APP_CUTIN);
   m_btnCutIn->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnCutIn);
+  m_buttonPanel->Add(*m_btnCutIn);
   
   // create "zoomin" button
   bmpDef= new CFBitmap(m_hdc);
@@ -159,9 +163,9 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_ZOOMIN_P)) return(FALSE);
   m_btnZoomIn= new CFButton(bmpDef, bmpPress);
-  m_btnZoomIn->SetID(ID_BTN_APP_ZOOMIN);
+  m_btnZoomIn->SetId(ID_BTN_APP_ZOOMIN);
   m_btnZoomIn->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnZoomIn);
+  m_buttonPanel->Add(*m_btnZoomIn);
   
   // create "zoomout" button
   bmpDef= new CFBitmap(m_hdc);
@@ -169,9 +173,9 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_ZOOMOUT_P)) return(FALSE);
   m_btnZoomOut= new CFButton(bmpDef, bmpPress);
-  m_btnZoomOut->SetID(ID_BTN_APP_ZOOMOUT);
+  m_btnZoomOut->SetId(ID_BTN_APP_ZOOMOUT);
   m_btnZoomOut->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnZoomOut);
+  m_buttonPanel->Add(*m_btnZoomOut);
   
   // create "info" button
   bmpDef= new CFBitmap(m_hdc);
@@ -179,20 +183,20 @@ BOOL CFWaveCutApp::InitFateApp()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_INFO_P)) return(FALSE);
   m_btnInfo= new CFButton(bmpDef, bmpPress);
-  m_btnInfo->SetID(ID_BTN_APP_INFO);
+  m_btnInfo->SetId(ID_BTN_APP_INFO);
   m_btnInfo->SetVisible(TRUE);
-  m_buttonPanel->Add(m_btnInfo);
+  m_buttonPanel->Add(*m_btnInfo);
 
   // create "quit" button
   bmpDef= new CFBitmap(m_hdc);
   if (!bmpDef->Load(IDB_QUIT)) return(FALSE);
   m_btnQuit= new CFButton(bmpDef);
-  m_btnQuit->SetID(ID_BTN_APP_QUIT);
+  m_btnQuit->SetId(ID_BTN_APP_QUIT);
   m_btnQuit->SetVisible(TRUE);
-  Add(m_btnQuit);  
+  Add(*m_btnQuit);  
   
   // add the wave-edit panel
-  Add(m_wavePanel);
+  Add(*m_wavePanel);
   if (!m_wavePanel->Create()) return(FALSE);
   m_wavePanel->SetVisible(TRUE);
 
@@ -206,13 +210,13 @@ BOOL CFWaveCutApp::InitFateApp()
     CreateDirectory((LPCTSTR)&szFilePath, NULL); 
   }
   m_recordPanel= new CFRecordPanel(szFilePath);
-  Add(m_recordPanel);
+  Add(*m_recordPanel);
   if (!m_recordPanel->Create()) return(FALSE);
   m_recordPanel->SetVisible(FALSE);
   
   // create panel for wave loading dialog
   m_loadPanel= new CFLoadPanel(szFilePath);
-  Add(m_loadPanel);
+  Add(*m_loadPanel);
   if (!m_loadPanel->Create()) return(FALSE);
   m_loadPanel->Refresh();
   m_loadPanel->SetVisible(FALSE);
@@ -226,7 +230,7 @@ BOOL CFWaveCutApp::InitFateApp()
   }
 
   m_savePanel= new CFSavePanel(szFilePath);
-  Add(m_savePanel);
+  Add(*m_savePanel);
   if (!m_savePanel->Create()) return(FALSE);
   m_savePanel->Refresh();
   m_savePanel->SetVisible(FALSE);
@@ -256,13 +260,13 @@ BOOL CFWaveCutApp::InitFateApp()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::ActivateFateApp()
+bool CFWaveCutApp::ActivateFateApp()
 { 
   return(TRUE);
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::CloseFateApp()
+bool CFWaveCutApp::CloseFateApp()
 {
   return(TRUE);
 }
@@ -285,7 +289,7 @@ void CFWaveCutApp::Draw()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::StylusDown(int xPos, int yPos)
+bool CFWaveCutApp::StylusDown(int xPos, int yPos)
 {
   // TODO: remove later!
   //if (m_bmpTitle->PointInside(xPos, yPos)) SaveDoubleBuffer(TEXT("\\screenshot.bmp"));
@@ -311,7 +315,7 @@ BOOL CFWaveCutApp::StylusDown(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::StylusMove(int xPos, int yPos)
+bool CFWaveCutApp::StylusMove(int xPos, int yPos)
 {
   // volume change?
   if ((m_bMoveSlide)&&(m_bmpVol->PointInside(xPos, yPos) || m_bmpSlide->PointInside(xPos, yPos))) {
@@ -329,20 +333,20 @@ BOOL CFWaveCutApp::StylusMove(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::StylusUp(int xPos, int yPos)
+bool CFWaveCutApp::StylusUp(int xPos, int yPos)
 {
   m_bMoveSlide= FALSE;
   return(FALSE);  // event not handled
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::KeyDown(int vkKey)
+bool CFWaveCutApp::KeyDown(int vkKey)
 {
   return(FALSE);  // event not handled
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::KeyUp(int vkKey)
+bool CFWaveCutApp::KeyUp(int vkKey)
 {
   return(FALSE);  // event not handled
 }
@@ -401,7 +405,7 @@ void CFWaveCutApp::ResetLevel()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::SerialOK()
+bool CFWaveCutApp::SerialOK()
 {
   HMODULE hMod;
   PROCESS_INFORMATION pi;
@@ -438,13 +442,13 @@ BOOL CFWaveCutApp::SerialOK()
     _iPAQGetSerialNumber iPAQGetSerialNumber= NULL;
     HMODULE hModIpaq= LoadLibrary(TEXT("ipaqutil.dll"));
     if (!hModIpaq) {
-      MessageBox(m_hWnd, TEXT("Device is not an iPaq!"), TEXT(""), MB_OK);
+      MessageBox(NULL, TEXT("Device is not an iPaq!"), TEXT(""), MB_OK);
       return(FALSE);
     } 
 
     iPAQGetSerialNumber= (_iPAQGetSerialNumber)GetProcAddress(hModIpaq, TEXT("iPAQGetSerialNumber"));
     if (!iPAQGetSerialNumber(szSN)) {
-      MessageBox(m_hWnd, TEXT("Could not verify serial number!"), TEXT(""), MB_OK);
+      MessageBox(NULL, TEXT("Could not verify serial number!"), TEXT(""), MB_OK);
       FreeLibrary(hModIpaq);
       return(FALSE);
     }  
@@ -502,7 +506,7 @@ BOOL CFWaveCutApp::SerialOK()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::ButtonReleased(DWORD dwBtnID)
+bool CFWaveCutApp::ButtonReleased(DWORD dwBtnID)
 {
   switch(dwBtnID) {    
     case ID_BTN_APP_OPEN:
@@ -604,7 +608,7 @@ BOOL CFWaveCutApp::ButtonReleased(DWORD dwBtnID)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWaveCutApp::ButtonPressed(DWORD dwBtnID)
+bool CFWaveCutApp::ButtonPressed(DWORD dwBtnID)
 {
   return(FALSE);  // event not handled
 }
@@ -696,13 +700,13 @@ void CFWaveCutApp::SetFileLabelText(LPCTSTR pText)
 }
 
 //--------------------------------------------------------------------------------
-void CFWaveCutApp::HideVolumeLevel(BOOL bHide)
+void CFWaveCutApp::HideVolumeLevel(bool bHide)
 {
   m_bDisplayLevel = !bHide;
 }
 
 //--------------------------------------------------------------------------------
-void CFWaveCutApp::ShowFileLabel(BOOL bShow)
+void CFWaveCutApp::ShowFileLabel(bool bShow)
 {
   m_fileLabel->SetVisible(bShow);
 }

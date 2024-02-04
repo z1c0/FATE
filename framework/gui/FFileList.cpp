@@ -3,7 +3,9 @@
 #include <windows.h>
 #include <commctrl.h>
 #include "FFileList.h"
-#include "FateApp.h"
+#include "../base/FateTypeDefs.h"
+#include "../base/FateApp.h"
+#include "../base/FBitmap.h"
 
 
 //--------------------------------------------------------------------------------
@@ -49,33 +51,40 @@ void CFFileList::DrawItems()
   while (pAuxEntry) {
     if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
       // item selected?
-      if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index)) {      
-        SetBkColor(m_hdc, m_colHiBack);
-        SetTextColor(m_hdc, m_colHiText);
+      if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index)) {
+       
+        //SetBkColor(m_hdc, m_colHiBack);
+        //SetTextColor(m_hdc, m_colHiText);
+        m_bmpBack->SetBackgroundColor(m_colHiBack);
+        m_bmpBack->SetTextColor(m_colHiText);
         
         itemRect.right+= 2 * m_iHorMargin - 1;
-        FillRect(m_hdc, &itemRect, m_hBrushHiBack);
+        //FillRect(m_hdc, &itemRect, m_hBrushHiBack);
+        m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
         // redraw the items        
-        ExtTextOut(m_hdc, m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
+        ExtTextOut(m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
                    ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
         SHFILEINFO shfi;
         HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_hdc, m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_BLEND50);
+        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_BLEND50);
       } else {
-        SetBkColor(m_hdc, m_colBack);
-        SetTextColor(m_hdc, m_colText);
+        m_bmpBack->SetBackgroundColor(m_colBack);
+        m_bmpBack->SetTextColor(m_colText);
+        //SetBkColor(m_hdc, m_colBack);
+        //SetTextColor(m_hdc, m_colText);
       
         // clear old item
         itemRect.right+= 2 * m_iHorMargin - 1;
-        FillRect(m_hdc, &itemRect, m_hBrushBack);
+        //FillRect(m_hdc, &itemRect, m_hBrushBack);
+        m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
         // redraw the items
-        ExtTextOut(m_hdc, m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
+        ExtTextOut(m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
                    ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
         SHFILEINFO shfi;
         HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_hdc, m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_NORMAL);
+        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_NORMAL);
       }
       index++;
       itemRect.top+= m_iItemHeight;

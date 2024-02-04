@@ -14,6 +14,8 @@
 #endif
 
 #else
+
+#define _PALM_OS
  
 // PalmOS specfic
 #ifndef FATE_SECTION

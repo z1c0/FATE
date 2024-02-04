@@ -9,8 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
-
 class CFInfoPanel : public CFPanel
 {
 public:
@@ -19,7 +17,7 @@ public:
   void Create(CFBitmap *bmpFlabInfo) { m_bmpFlabInfo= bmpFlabInfo; };
   virtual void SetX(int iPosX) { m_bmpFlabInfo->SetX(iPosX); };
   virtual void SetY(int iPosY) { m_bmpFlabInfo->SetY(iPosY); }; 
-  virtual BOOL StylusDown(int xPos, int yPos);
+  virtual bool StylusDown(int xPos, int yPos);
   virtual void Draw() { m_bmpFlabInfo->Blit(); };
 private:
   CFBitmap *m_bmpFlabInfo;

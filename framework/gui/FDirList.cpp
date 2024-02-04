@@ -4,8 +4,8 @@
 #include <commctrl.h>
 #include <tchar.h>
 #include "FDirList.h"
-#include "FBitmap.h"
-#include "FateApp.h"
+#include "../base/FBitmap.h"
+#include "../base/FateApp.h"
 
 
 //--------------------------------------------------------------------------------
@@ -24,14 +24,20 @@ CFDirList::~CFDirList()
 
 //--------------------------------------------------------------------------------
 /// Method is inherited from IFateComponent and overwritten because some additional
-/// initialization using the HDC is necessary.
-void CFDirList::SetDC(HDC hdc)
+/// initialization is necessary.
+void CFDirList::SetSystem(CFSystem *pSystem)
 {
-  m_hdc= hdc;
+  m_pSystem = pSystem;
+   
+  // Depending on height, calculate number of possible items.
+  RECT rect = {0};
+  CFBitmap::CalcRectForText(TEXT("W"), rect);
+  m_iItemHeight = max(18, (rect.bottom - rect.top) + m_iVerMargin);
+
   // depending on height, calculate number of possible items
-  TEXTMETRIC tm;
-  GetTextMetrics(m_hdc, &tm);
-  m_iItemHeight= max(18, tm.tmHeight + tm.tmExternalLeading + m_iVerMargin);
+  //TEXTMETRIC tm;
+  //GetTextMetrics(m_hdc, &tm);
+  //m_iItemHeight= max(18, tm.tmHeight + tm.tmExternalLeading + m_iVerMargin);
   
   // create background bitmap
   // TODO
@@ -78,32 +84,38 @@ void CFDirList::DrawItems()
     if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
       // item selected?
       if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index)) {      
-        SetBkColor(m_hdc, m_colHiBack);
-        SetTextColor(m_hdc, m_colHiText);
+        //SetBkColor(m_hdc, m_colHiBack);
+        //SetTextColor(m_hdc, m_colHiText);
+        m_bmpBack->SetBackgroundColor(m_colHiBack);
+        m_bmpBack->SetTextColor(m_colHiText);
         
         itemRect.right+= 2 * m_iHorMargin - 1;
-        FillRect(m_hdc, &itemRect, m_hBrushHiBack);
+        //FillRect(m_hdc, &itemRect, m_hBrushHiBack);
+        m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
         // redraw the items        
-        ExtTextOut(m_hdc, m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
+        ExtTextOut(m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
                    ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
         SHFILEINFO shfi;
         HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_hdc, m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_BLEND50);
+        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_BLEND50);
       } else {
-        SetBkColor(m_hdc, m_colBack);
-        SetTextColor(m_hdc, m_colText);
+        //SetBkColor(m_hdc, m_colBack);
+        //SetTextColor(m_hdc, m_colText);
+        m_bmpBack->SetBackgroundColor(m_colHiBack);
+        m_bmpBack->SetTextColor(m_colText);
       
         // clear old item
         itemRect.right+= 2 * m_iHorMargin - 1;
-        FillRect(m_hdc, &itemRect, m_hBrushBack);
+        //FillRect(m_hdc, &itemRect, m_hBrushBack);
+        m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
         // redraw the items
-        ExtTextOut(m_hdc, m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
+        ExtTextOut(m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
                    ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
         SHFILEINFO shfi;
         HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_hdc, m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_NORMAL);
+        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_NORMAL);
       }
       index++;
       itemRect.top+= m_iItemHeight;

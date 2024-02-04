@@ -1,7 +1,7 @@
 #ifndef __FFILELIST__H__
 #define __FFILELIST__H__
 
-#include "FateTypeDefs.h"
+#include "../base/FateTypeDefs.h"
 #include "FItemList.h"
 
 

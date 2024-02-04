@@ -9,7 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
+#include "../../framework/include/fate.h"
 #include "FWavePanel.h"
 #include "FLoadPanel.h"
 #include "FSavePanel.h"
@@ -25,21 +25,21 @@ typedef BOOL (*GetFunc)(char **ppSN);
 class CFWaveCutApp : public CFateApp  
 {
 public:
-	void HideVolumeLevel(BOOL bHide);	
-  void ShowFileLabel(BOOL bShow);  
+	void HideVolumeLevel(bool bHide);	
+  void ShowFileLabel(bool bShow);  
   void SetFileLabelText(LPCTSTR pText);
   CFWaveCutApp();
   virtual ~CFWaveCutApp();  
-  virtual BOOL InitFateApp();
-  virtual BOOL ActivateFateApp();
-  virtual BOOL CloseFateApp();  
-  virtual BOOL ButtonPressed(DWORD dwBtnID);
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
-  virtual BOOL StylusDown(int xPos, int yPos);
-  virtual BOOL StylusMove(int xPos, int yPos);
-  virtual BOOL StylusUp(int xPos, int yPos);
-  virtual BOOL KeyDown(int vkKey);
-  virtual BOOL KeyUp(int vkKey);  
+  virtual bool InitFateApp();
+  virtual bool ActivateFateApp();
+  virtual bool CloseFateApp();  
+  virtual bool ButtonPressed(DWORD dwBtnID);
+  virtual bool ButtonReleased(DWORD dwBtnID);
+  virtual bool StylusDown(int xPos, int yPos);
+  virtual bool StylusMove(int xPos, int yPos);
+  virtual bool StylusUp(int xPos, int yPos);
+  virtual bool KeyDown(int vkKey);
+  virtual bool KeyUp(int vkKey);  
   virtual void Draw();  
   void FileLoaded(BOOL bLoaded);
   void SetFileName(LPCTSTR pFileName);
@@ -49,7 +49,7 @@ public:
   void ResetLevel();
 private:  
 	void UpdatePos();
-  BOOL SerialOK();
+  bool SerialOK();
   CFLabel *m_fileLabel;
   CFBitmap *m_bmpTitle;
   CFBitmap *m_bmpVol;

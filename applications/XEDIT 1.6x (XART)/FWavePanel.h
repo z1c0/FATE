@@ -7,7 +7,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
+#include "../../framework/include/fate.h"
 #include "FMarker.h"
 #include "FZoomSlider.h"
 #include "FInfoPanel.h"
@@ -42,13 +42,13 @@ public:
 	BOOL Create();
 	CFWavePanel();
   virtual ~CFWavePanel();  
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
-	virtual BOOL ButtonPressed(DWORD dwBtnID);
-	virtual BOOL StylusDown(int xPos, int yPos);
-  virtual BOOL StylusMove(int xPos, int yPos);
-	virtual BOOL StylusUp(int xPos, int yPos);
-  virtual BOOL KeyDown(PdaKey key) { return(FALSE); };
-  virtual BOOL KeyUp(PdaKey key) { return(FALSE); };
+  virtual bool ButtonReleased(DWORD dwBtnID);
+	virtual bool ButtonPressed(DWORD dwBtnID);
+	virtual bool StylusDown(int xPos, int yPos);
+  virtual bool StylusMove(int xPos, int yPos);
+	virtual bool StylusUp(int xPos, int yPos);
+  virtual bool KeyDown(PdaKey key) { return(FALSE); };
+  virtual bool KeyUp(PdaKey key) { return(FALSE); };
   void Draw();
   virtual void SetX(int iPosX); 
   virtual void SetY(int iPosY); 

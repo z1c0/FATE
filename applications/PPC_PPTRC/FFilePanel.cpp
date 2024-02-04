@@ -50,7 +50,7 @@ BOOL CFFilePanel::Create()
                              bmpUp, bmpDown);
   Add(m_ItemList);
   m_ItemList->SetVisible(TRUE);
-  m_ItemList->SetID(ID_LIST_PPT);   
+  m_ItemList->SetId(ID_LIST_PPT);   
 
   // create button for loading PPT presentations
   CFBitmap *bmpA= new CFBitmap(m_hdc);
@@ -60,7 +60,7 @@ BOOL CFFilePanel::Create()
   m_btnLoad= new CFButton(bmpA, bmpB);
   m_btnLoad->SetVisible(TRUE);
   m_btnLoad->SetEnabled(FALSE);
-  m_btnLoad->SetID(ID_BTN_LOAD);
+  m_btnLoad->SetId(ID_BTN_LOAD);
   Add(m_btnLoad);
   
   // create button for back-navigation in file system
@@ -70,7 +70,7 @@ BOOL CFFilePanel::Create()
   if (!bmp2->Load(IDB_BUTTON_DIR_UP_P)) return(FALSE);
   m_btnDirUp= new CFButton(bmp1, bmp2);
   m_btnDirUp->SetVisible(TRUE);
-  m_btnDirUp->SetID(ID_BTN_DIR_UP);
+  m_btnDirUp->SetId(ID_BTN_DIR_UP);
   Add(m_btnDirUp);
   
   // create button for refreshing the list of PPT presentations
@@ -81,7 +81,7 @@ BOOL CFFilePanel::Create()
   m_btnRefresh= new CFButton(bmp3,bmp4);
   Add(m_btnRefresh);
   m_btnRefresh->SetVisible(TRUE);
-  m_btnRefresh->SetID(ID_BTN_REFRESH);
+  m_btnRefresh->SetId(ID_BTN_REFRESH);
 
   // create button for navigating to home directory
   CFBitmap *bmp5= new CFBitmap(m_hdc);
@@ -91,7 +91,7 @@ BOOL CFFilePanel::Create()
   m_btnHome= new CFButton(bmp5,bmp6);
   Add(m_btnHome);
   m_btnHome->SetVisible(TRUE);
-  m_btnHome->SetID(ID_BTN_HOME);
+  m_btnHome->SetId(ID_BTN_HOME);
 
   // create label for showing file information
   m_fileLabel= new CFLabel(220, 20);

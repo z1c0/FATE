@@ -8,8 +8,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
-
 class CFDirPanel : public CFPanel  
 {
 public:
@@ -18,9 +16,9 @@ public:
   
   void Refresh();
 	
-  virtual BOOL ButtonPressed(DWORD dwBtnID);
-	virtual BOOL ButtonReleased(DWORD dwBtnID);
-	virtual BOOL ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry);
+  virtual bool ButtonPressed(DWORD dwBtnID);
+	virtual bool ButtonReleased(DWORD dwBtnID);
+	virtual bool ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
   
   BOOL Create();
   

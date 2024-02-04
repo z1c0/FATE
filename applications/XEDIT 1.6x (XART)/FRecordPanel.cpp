@@ -2,8 +2,9 @@
 //////////////////////////////////////////////////////////////////////
 #include "stdafx.h"
 #include "FRecordPanel.h"
-#include "../FATE/FWaveIn.h"
+#include "../../framework/audio/FWaveIn.h"
 #include "Resource.h"
+#include <stdlib.h>
 
 //--------------------------------------------------------------------------------
 // Callback function for arrived sample data.
@@ -136,23 +137,27 @@ BOOL CFRecordPanel::Create()
   
   // CREATE BUTTONS
   // Rec button
-  CFBitmap *bmpDef= new CFBitmap(m_hdc);
+  //CFBitmap *bmpDef= new CFBitmap(m_hdc); TODO
+  CFBitmap *bmpDef= new CFBitmap();
   if (!bmpDef->Load(IDB_BIGREC)) return(FALSE);
-  CFBitmap *bmpPress= new CFBitmap(m_hdc);
+  //CFBitmap *bmpPress= new CFBitmap(m_hdc);  // TODO
+  CFBitmap *bmpPress= new CFBitmap();
   if (!bmpPress->Load(IDB_BIGREC_P)) return(FALSE);  
   m_btnRec= new CFButton(bmpDef, bmpPress);
-  m_btnRec->SetID(ID_BTN_REC_REC);
-  Add(m_btnRec);
+  m_btnRec->SetId(ID_BTN_REC_REC);
+  Add(*m_btnRec);
   m_btnRec->SetVisible(TRUE);
   
   // Pause button
-  bmpDef= new CFBitmap(m_hdc);
+  //bmpDef= new CFBitmap(m_hdc); TODO
+  bmpDef = new CFBitmap();
   if (!bmpDef->Load(IDB_BIGPAUSE)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  //bmpPress= new CFBitmap(m_hdc);  // TODO
+  bmpPress= new CFBitmap();
   if (!bmpPress->Load(IDB_BIGPAUSE_P)) return(FALSE);  
   m_btnPause= new CFButton(bmpDef, bmpPress);
-  m_btnPause->SetID(ID_BTN_REC_PAUSE);
-  Add(m_btnPause);
+  m_btnPause->SetId(ID_BTN_REC_PAUSE);
+  Add(*m_btnPause);
   m_btnPause->SetVisible(FALSE);
   
   // Edit button
@@ -161,8 +166,8 @@ BOOL CFRecordPanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_BIGEDIT_P)) return(FALSE);  
   m_btnEdit= new CFButton(bmpDef, bmpPress);
-  m_btnEdit->SetID(ID_BTN_REC_EDIT);
-  Add(m_btnEdit);
+  m_btnEdit->SetId(ID_BTN_REC_EDIT);
+  Add(*m_btnEdit);
   m_btnEdit->SetVisible(TRUE);
 
   // create "dir" button
@@ -171,13 +176,13 @@ BOOL CFRecordPanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_DIR_P)) return(FALSE);
   m_btnDir= new CFButton(bmpDef, bmpPress);;
-  m_btnDir->SetID(ID_BTN_APP_DIR);
+  m_btnDir->SetId(ID_BTN_APP_DIR);
   m_btnDir->SetVisible(TRUE);
-  Add(m_btnDir);
+  Add(*m_btnDir);
 
   // create panel for recording directory selection dialog
   m_dirPanel= new CFDirPanel(m_szFilePath);
-  ((CFWaveCutApp*)m_app)->Add(m_dirPanel);
+  ((CFWaveCutApp*)m_app)->Add(*m_dirPanel);
   if (!m_dirPanel->Create()) return(FALSE);
   m_dirPanel->Refresh();
   m_dirPanel->SetVisible(FALSE);
@@ -185,27 +190,27 @@ BOOL CFRecordPanel::Create()
   // CREATE LABELS
   m_dirLabel= new CFLabel(m_szFilePath, 220, 17);
   m_dirLabel->SetVisible(TRUE);
-  Add(m_dirLabel);
+  Add(*m_dirLabel);
   
   m_totLabel= new CFLabel(TEXT("total: "), 120, 17);
   m_totLabel->SetVisible(TRUE);
-  Add(m_totLabel);
+  Add(*m_totLabel);
   
   m_remainingLabel= new CFLabel(TEXT("remaining:"), 120, 17);
   m_remainingLabel->SetVisible(TRUE);
-  Add(m_remainingLabel);
+  Add(*m_remainingLabel);
   
   m_statLabel = new CFLabel(TEXT("status: ready"), 120, 17);
   m_statLabel->SetVisible(TRUE);
-  Add(m_statLabel);
+  Add(*m_statLabel);
 
   m_sizeLabel = new CFLabel(TEXT("size: "), 120, 17);
   m_sizeLabel->SetVisible(TRUE);
-  Add(m_sizeLabel);
+  Add(*m_sizeLabel);
 
   m_freeLabel = new CFLabel(TEXT("free: "), 120, 17);
   m_freeLabel->SetVisible(TRUE);
-  Add(m_freeLabel);
+  Add(*m_freeLabel);
 
 
   CFBitmap *cbDropArrowSR= new CFBitmap(m_hdc);
@@ -220,7 +225,7 @@ BOOL CFRecordPanel::Create()
   m_samplingRateList->AddItem(TEXT("rate: 22050 Hz"), TEXT("22050"));
   m_samplingRateList->AddItem(TEXT("rate: 44100 Hz"), TEXT("44100"));
   m_samplingRateList->SetVisible(TRUE);
-  m_samplingRateList->SetID(ID_ITEM_REC_RATE_SEL);
+  m_samplingRateList->SetId(ID_ITEM_REC_RATE_SEL);
   switch(m_waveFmt.nSamplesPerSec) {
     case 8000:
       m_samplingRateList->SetSelectedItem(0);
@@ -235,7 +240,7 @@ BOOL CFRecordPanel::Create()
       m_samplingRateList->SetSelectedItem(3);
       break;
   }
-  Add(m_samplingRateList);
+  Add(*m_samplingRateList);
 
   CFBitmap *cbDropArrowBD= new CFBitmap(m_hdc);
   if (!cbDropArrowBD->Load(IDB_DROP_ARROW)) return(FALSE);
@@ -247,7 +252,7 @@ BOOL CFRecordPanel::Create()
   m_bitDepthList->AddItem(TEXT("bits: 8"), TEXT("8"));
   m_bitDepthList->AddItem(TEXT("bits: 16"), TEXT("16"));
   m_bitDepthList->SetVisible(TRUE);
-  m_bitDepthList->SetID(ID_ITEM_REC_BITS_SEL);
+  m_bitDepthList->SetId(ID_ITEM_REC_BITS_SEL);
   switch(m_waveFmt.wBitsPerSample) {
     case 8:
       m_bitDepthList->SetSelectedItem(0);
@@ -256,7 +261,7 @@ BOOL CFRecordPanel::Create()
       m_bitDepthList->SetSelectedItem(1);
       break;
   }
-  Add(m_bitDepthList);
+  Add(*m_bitDepthList);
 
   CFBitmap *cbDropArrowC= new CFBitmap(m_hdc);
   if (!cbDropArrowC->Load(IDB_DROP_ARROW)) return(FALSE);
@@ -268,7 +273,7 @@ BOOL CFRecordPanel::Create()
   m_channelsList->AddItem(TEXT("channels: 1"), TEXT("1"));
   m_channelsList->AddItem(TEXT("channels: 2"), TEXT("2"));
   m_channelsList->SetVisible(TRUE);
-  m_channelsList->SetID(ID_ITEM_REC_CHAN_SEL);
+  m_channelsList->SetId(ID_ITEM_REC_CHAN_SEL);
   switch(m_waveFmt.nChannels) {
     case 1:
       m_channelsList->SetSelectedItem(0);
@@ -277,7 +282,7 @@ BOOL CFRecordPanel::Create()
       m_channelsList->SetSelectedItem(1);
       break;
   }
-  Add(m_channelsList);
+  Add(*m_channelsList);
   
   m_bCreated= TRUE;
   UpdatePos();
@@ -450,7 +455,7 @@ void CFRecordPanel::SetNextFileName()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFRecordPanel::DropListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry)
+bool CFRecordPanel::DropListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry)
 {
   LPTSTR szStop;
   switch(dwListID) {
@@ -486,7 +491,7 @@ BOOL CFRecordPanel::DropListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFRecordPanel::ButtonReleased(DWORD dwBtnID)
+bool CFRecordPanel::ButtonReleased(DWORD dwBtnID)
 {
   switch(dwBtnID) {
 
@@ -592,7 +597,7 @@ DWORD CFRecordPanel::GetFreeRecSpace()
 }
 
 //--------------------------------------------------------------------------------
-void CFRecordPanel::DirSelected(BOOL bSelected)
+void CFRecordPanel::DirSelected(bool bSelected)
 {
   // load file?
   if (bSelected) {
@@ -603,7 +608,7 @@ void CFRecordPanel::DirSelected(BOOL bSelected)
 }
 
 //--------------------------------------------------------------------------------
-void CFRecordPanel::SetLabelsVisible(BOOL bVisible)
+void CFRecordPanel::SetLabelsVisible(bool bVisible)
 {
   m_btnRec->SetVisible(bVisible);
   m_btnEdit->SetVisible(bVisible);

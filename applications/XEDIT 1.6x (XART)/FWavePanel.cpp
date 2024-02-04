@@ -4,7 +4,9 @@
 #include "stdafx.h"
 #include "FWavePanel.h"
 #include "Resource.h"
-#include "../FATE/FWaveIn.h"
+#include "../../framework/audio/FWaveIn.h"
+#include "math.h"
+#include <stdlib.h>
 
 // buffers for audio output
 #define MAX_BUFF   176400
@@ -198,14 +200,14 @@ CFWavePanel::~CFWavePanel()
   CFWaveOut::Finalize();  
   
   // delete markers
-  SAFE_RELEASE(m_inMarker);
-  SAFE_RELEASE(m_outMarker);
-  SAFE_RELEASE(m_posMarker);
+  SAFE_DELETE(m_inMarker);
+  SAFE_DELETE(m_outMarker);
+  SAFE_DELETE(m_posMarker);
   // delete bitmaps
-  SAFE_RELEASE(m_bmpWaveForm);
-  SAFE_RELEASE(m_bmpWaveWnd);
-  SAFE_RELEASE(m_bmpSaving);
-  SAFE_RELEASE(m_bmpLoading);
+  SAFE_DELETE(m_bmpWaveForm);
+  SAFE_DELETE(m_bmpWaveWnd);
+  SAFE_DELETE(m_bmpSaving);
+  SAFE_DELETE(m_bmpLoading);
   // delete buttons
   delete(m_btnRec);
   delete(m_btnPause);
@@ -228,14 +230,14 @@ CFWavePanel::~CFWavePanel()
   // delete panels
   delete(m_infoPanel);
   // delete zoomslider
-  SAFE_RELEASE(m_zoomSlider);
+  SAFE_DELETE(m_zoomSlider);
   // delete GDI stuff
   DeleteObject(m_hWavePen);
   DeleteObject(m_hFillBrush);  
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWavePanel::StylusDown(int xPos, int yPos)
+bool CFWavePanel::StylusDown(int xPos, int yPos)
 {
   if((CFWaveOut::IsPlaying())||(!m_wave.IsValid())) return (FALSE);  // if it is playing do nothing
   
@@ -329,7 +331,7 @@ BOOL CFWavePanel::StylusDown(int xPos, int yPos)
     
     // zoom area dragging operation
     m_app->StartDragMode(m_zoomSlider->GetImage(), xPos, 0);
-    LPDRAGGINGINFO lpdi= m_app->GetDragInfo();    
+    CFateApp::DRAGGINGINFO* lpdi = m_app->GetDragInfo();    
     
     // set flag to indicate that drag belongs to zoomarea
     lpdi->dwReserved1= 0xCAFE;
@@ -341,10 +343,10 @@ BOOL CFWavePanel::StylusDown(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWavePanel::StylusMove(int xPos, int yPos)
+bool CFWavePanel::StylusMove(int xPos, int yPos)
 {
   if (m_app->IsDragMode()) {
-    LPDRAGGINGINFO lpdi= m_app->GetDragInfo();    
+    CFateApp::DRAGGINGINFO* lpdi = m_app->GetDragInfo();    
 
     // zoom area drag?
     if (lpdi->dwReserved1 == 0xCAFE) {
@@ -361,13 +363,13 @@ BOOL CFWavePanel::StylusMove(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWavePanel::StylusUp(int xPos, int yPos)
+bool CFWavePanel::StylusUp(int xPos, int yPos)
 {
   if (m_app->IsDragMode()) {
-    LPDRAGGINGINFO lpdi= m_app->GetDragInfo();    
+    CFateApp::DRAGGINGINFO* lpdi= m_app->GetDragInfo();    
     if (lpdi->dwReserved1 == 0xCAFE) {
     
-      m_zoomSlider->SetPosX(lpdi->cbDrag->GetX());
+      m_zoomSlider->SetPosX(lpdi->pBmpDrag->GetX());
       lpdi->dwReserved1= 0;
       m_app->StopDragMode();
       
@@ -383,7 +385,7 @@ BOOL CFWavePanel::StylusUp(int xPos, int yPos)
       CFMarker *markerSwap;
       
       // which marker was dragged?
-      m_selMarker->SetPosX(lpdi->cbDrag->GetX());
+      m_selMarker->SetPosX(lpdi->pBmpDrag->GetX());
 
       // swap markers?
       if ( (m_inMarker->GetBlockPos() > m_outMarker->GetBlockPos()) && m_inMarker->IsSet() && m_outMarker->IsSet()) {
@@ -540,11 +542,14 @@ BOOL CFWavePanel::Create()
   m_pApp= (CFWaveCutApp*)m_pParent;
 
   // create wave window
-  m_bmpWaveWnd= new CFBitmap(m_hdc);
+  //m_bmpWaveWnd= new CFBitmap(m_hdc); TODO
+  m_bmpWaveWnd= new CFBitmap();
+
   if (!m_bmpWaveWnd->Load(IDB_WAVEPANEL)) return(FALSE);
   
   // create bitmap for waveform
-  m_bmpWaveForm= new CFBitmap(m_hdc);
+  //m_bmpWaveForm= new CFBitmap(m_hdc);  // TODO
+  m_bmpWaveForm= new CFBitmap();
   if (!m_bmpWaveForm->Create(m_bmpWaveWnd->GetWidth(), m_bmpWaveWnd->GetHeight() - 14)) 
     return(FALSE);
   m_bmpWaveForm->SolidFill(RGB(51, 102, 153));
@@ -556,18 +561,18 @@ BOOL CFWavePanel::Create()
   if (!m_bmpLoading->Load(IDB_LOADING)) return(FALSE);
 
   // create markers
-  CFBitmap *bmpMarker1= new CFBitmap(m_bmpWaveForm->GetDestDC());  
-  CFBitmap *bmpMarker2= new CFBitmap(m_bmpWaveForm->GetDestDC());  
+  CFBitmap *bmpMarker1= new CFBitmap(*m_bmpWaveForm);  
+  CFBitmap *bmpMarker2= new CFBitmap(*m_bmpWaveForm);  
   if (!bmpMarker1->Load(IDB_AREAMARKER)) return(FALSE);
   if (!bmpMarker2->Load(IDB_AREAMARKER)) return(FALSE);
   if (!m_inMarker->Create(bmpMarker1)) return(FALSE);  
   if (!m_outMarker->Create(bmpMarker2)) return(FALSE);
-  CFBitmap *bmpMarker3= new CFBitmap(m_bmpWaveForm->GetDestDC());  
+  CFBitmap *bmpMarker3= new CFBitmap(*m_bmpWaveForm);  
   if (!bmpMarker3->Load(IDB_POSMARKER)) return(FALSE);
   if (!m_posMarker->Create(bmpMarker3)) return(FALSE);
 
   //create zoom bar
-  CFBitmap *m_bmpZoomPat = new CFBitmap(m_bmpWaveForm->GetDestDC());
+  CFBitmap *m_bmpZoomPat = new CFBitmap(*m_bmpWaveForm);
   if (!m_bmpZoomPat->Load(IDB_ZOOMBAR)) return(FALSE);
   if (!m_zoomSlider->Create(m_bmpZoomPat)) return(FALSE);
 
@@ -575,7 +580,7 @@ BOOL CFWavePanel::Create()
   CFBitmap *bmpInfo= new CFBitmap(m_hdc);
   if (!bmpInfo->Load(IDB_XARTINFO)) return(FALSE);
   m_infoPanel= new CFInfoPanel();
-  Add(m_infoPanel);
+  Add(*m_infoPanel);
   m_infoPanel->Create(bmpInfo);
   m_infoPanel->SetVisible(FALSE);
 
@@ -586,9 +591,9 @@ BOOL CFWavePanel::Create()
   CFBitmap *bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_REC_P)) return(FALSE);
   m_btnRec= new CFButton(bmpDef, bmpPress);
-  m_btnRec->SetID(ID_BTN_WAVE_REC);
+  m_btnRec->SetId(ID_BTN_WAVE_REC);
   m_btnRec->SetVisible(TRUE);
-  Add(m_btnRec);
+  Add(*m_btnRec);
 
   // Pause button
   bmpDef= new CFBitmap(m_hdc);
@@ -596,9 +601,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_PAUSE_P)) return(FALSE);
   m_btnPause= new CFButton(bmpDef, bmpPress);
-  m_btnPause->SetID(ID_BTN_WAVE_PAUSE);
+  m_btnPause->SetId(ID_BTN_WAVE_PAUSE);
   m_btnPause->SetVisible(TRUE);
-  Add(m_btnPause);
+  Add(*m_btnPause);
   
   // Play button
   bmpDef= new CFBitmap(m_hdc);
@@ -606,9 +611,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_PLAY_P)) return(FALSE);
   m_btnPlay= new CFButton(bmpDef, bmpPress);
-  m_btnPlay->SetID(ID_BTN_WAVE_PLAY);
+  m_btnPlay->SetId(ID_BTN_WAVE_PLAY);
   m_btnPlay->SetVisible(TRUE);
-  Add(m_btnPlay);
+  Add(*m_btnPlay);
   
   // Stop button
   bmpDef= new CFBitmap(m_hdc);
@@ -616,9 +621,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_STOP_P)) return(FALSE);
   m_btnStop= new CFButton(bmpDef, bmpPress);
-  m_btnStop->SetID(ID_BTN_WAVE_STOP);
+  m_btnStop->SetId(ID_BTN_WAVE_STOP);
   m_btnStop->SetVisible(TRUE);
-  Add(m_btnStop);
+  Add(*m_btnStop);
   
   // MarkIn button
   bmpDef= new CFBitmap(m_hdc);
@@ -626,9 +631,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_MARKIN_P)) return(FALSE);
   m_btnMarkIn= new CFButton(bmpDef, bmpPress);
-  m_btnMarkIn->SetID(ID_BTN_WAVE_MARKIN);
+  m_btnMarkIn->SetId(ID_BTN_WAVE_MARKIN);
   m_btnMarkIn->SetVisible(TRUE);
-  Add(m_btnMarkIn);
+  Add(*m_btnMarkIn);
   
   // MarkOut button
   bmpDef= new CFBitmap(m_hdc);
@@ -636,9 +641,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_MARKOUT_P)) return(FALSE);
   m_btnMarkOut= new CFButton(bmpDef, bmpPress);
-  m_btnMarkOut->SetID(ID_BTN_WAVE_MARKOUT);
+  m_btnMarkOut->SetId(ID_BTN_WAVE_MARKOUT);
   m_btnMarkOut->SetVisible(TRUE);
-  Add(m_btnMarkOut);
+  Add(*m_btnMarkOut);
   
   /*
   // -100 button
@@ -647,7 +652,7 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_M100_P)) return(FALSE);
   m_btnM100= new CFButton(bmpDef, bmpPress);
-  m_btnM100->SetID(ID_BTN_WAVE_M100);
+  m_btnM100->SetId(ID_BTN_WAVE_M100);
   m_btnM100->SetVisible(TRUE);
   Add(m_btnM100);
   
@@ -657,7 +662,7 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_M10_P)) return(FALSE);
   m_btnM10= new CFButton(bmpDef, bmpPress);
-  m_btnM10->SetID(ID_BTN_WAVE_M10);
+  m_btnM10->SetId(ID_BTN_WAVE_M10);
   m_btnM10->SetVisible(TRUE);
   Add(m_btnM10);
   
@@ -667,7 +672,7 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_M1_P)) return(FALSE);
   m_btnM1= new CFButton(bmpDef, bmpPress);
-  m_btnM1->SetID(ID_BTN_WAVE_M1);
+  m_btnM1->SetId(ID_BTN_WAVE_M1);
   m_btnM1->SetVisible(TRUE);
   Add(m_btnM1);
   
@@ -677,7 +682,7 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_P1_P)) return(FALSE);
   m_btnP1= new CFButton(bmpDef, bmpPress);
-  m_btnP1->SetID(ID_BTN_WAVE_P1);
+  m_btnP1->SetId(ID_BTN_WAVE_P1);
   m_btnP1->SetVisible(TRUE);
   Add(m_btnP1);
   
@@ -687,7 +692,7 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_P10_P)) return(FALSE);
   m_btnP10= new CFButton(bmpDef, bmpPress);
-  m_btnP10->SetID(ID_BTN_WAVE_P10);
+  m_btnP10->SetId(ID_BTN_WAVE_P10);
   m_btnP10->SetVisible(TRUE);
   Add(m_btnP10);
   
@@ -697,7 +702,7 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_P100_P)) return(FALSE);
   m_btnP100= new CFButton(bmpDef, bmpPress);
-  m_btnP100->SetID(ID_BTN_WAVE_P100);
+  m_btnP100->SetId(ID_BTN_WAVE_P100);
   m_btnP100->SetVisible(TRUE);
   Add(m_btnP100);
   */
@@ -708,9 +713,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_PLAYFROM_P)) return(FALSE);
   m_btnPlayFrom= new CFButton(bmpDef, bmpPress);
-  m_btnPlayFrom->SetID(ID_BTN_WAVE_PLAYFROM);
+  m_btnPlayFrom->SetId(ID_BTN_WAVE_PLAYFROM);
   m_btnPlayFrom->SetVisible(TRUE);
-  Add(m_btnPlayFrom);
+  Add(*m_btnPlayFrom);
   
   // PlayTill button
   bmpDef= new CFBitmap(m_hdc);
@@ -718,9 +723,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_PLAYTILL_P)) return(FALSE);
   m_btnPlayTill= new CFButton(bmpDef, bmpPress);
-  m_btnPlayTill->SetID(ID_BTN_WAVE_PLAYTILL);
+  m_btnPlayTill->SetId(ID_BTN_WAVE_PLAYTILL);
   m_btnPlayTill->SetVisible(TRUE);
-  Add(m_btnPlayTill);
+  Add(*m_btnPlayTill);
   
   // PlayInside button
   bmpDef= new CFBitmap(m_hdc);
@@ -728,9 +733,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_PLAYIN_P)) return(FALSE);
   m_btnPlayIn= new CFButton(bmpDef, bmpPress);
-  m_btnPlayIn->SetID(ID_BTN_WAVE_PLAYIN);
+  m_btnPlayIn->SetId(ID_BTN_WAVE_PLAYIN);
   m_btnPlayIn->SetVisible(TRUE);
-  Add(m_btnPlayIn);
+  Add(*m_btnPlayIn);
   
   // PlayOutSide button
   bmpDef= new CFBitmap(m_hdc);
@@ -738,9 +743,9 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_PLAYOUT_P)) return(FALSE);
   m_btnPlayOut= new CFButton(bmpDef, bmpPress);
-  m_btnPlayOut->SetID(ID_BTN_WAVE_PLAYOUT);
+  m_btnPlayOut->SetId(ID_BTN_WAVE_PLAYOUT);
   m_btnPlayOut->SetVisible(TRUE);
-  Add(m_btnPlayOut);  
+  Add(*m_btnPlayOut);  
 
   // YOUK button
   bmpDef= new CFBitmap(m_hdc);
@@ -748,17 +753,17 @@ BOOL CFWavePanel::Create()
   bmpPress= new CFBitmap(m_hdc);
   if (!bmpPress->Load(IDB_BUTTON_XART)) return(FALSE);
   m_btnYouk= new CFButton(bmpDef, bmpPress);
-  m_btnYouk->SetID(ID_BTN_WAVE_YOUK);
+  m_btnYouk->SetId(ID_BTN_WAVE_YOUK);
   m_btnYouk->SetVisible(TRUE);
-  Add(m_btnYouk);  
+  Add(*m_btnYouk);  
 
   // add labels
-  Add(m_posLabel);
-  Add(m_inLabel);
-  Add(m_outLabel);
-  Add(m_totLabel);
-  Add(m_selLabel);
-  Add(m_unselLabel);
+  Add(*m_posLabel);
+  Add(*m_inLabel);
+  Add(*m_outLabel);
+  Add(*m_totLabel);
+  Add(*m_selLabel);
+  Add(*m_unselLabel);
   m_bCreated= TRUE;
   UpdatePos();
   return(TRUE);
@@ -1068,13 +1073,13 @@ void CFWavePanel::UpdateWaveLabels()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWavePanel::ButtonPressed(DWORD dwBtnID)
+bool CFWavePanel::ButtonPressed(DWORD dwBtnID)
 {
   return(FALSE);  // event not handled
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFWavePanel::ButtonReleased(DWORD dwBtnID)
+bool CFWavePanel::ButtonReleased(DWORD dwBtnID)
 {
   //some local variables
   DWORD dwPos, dwInPos, dwOutPos, dwTill, dwFrom, dwCount, dwSize;

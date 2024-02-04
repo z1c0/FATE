@@ -3,6 +3,7 @@
 # ** DO NOT EDIT **
 
 # TARGTYPE "Win32 (WCE ARM) Static Library" 0x8504
+# TARGTYPE "Win32 (WCE ARMV4) Static Library" 0xa304
 
 CFG=FATE - Win32 (WCE ARM) Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
@@ -19,6 +20,8 @@ CFG=FATE - Win32 (WCE ARM) Debug
 !MESSAGE 
 !MESSAGE "FATE - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Static Library")
 !MESSAGE "FATE - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Static Library")
+!MESSAGE "FATE - Win32 (WCE ARMV4) Debug" (based on "Win32 (WCE ARMV4) Static Library")
+!MESSAGE "FATE - Win32 (WCE ARMV4) Release" (based on "Win32 (WCE ARMV4) Static Library")
 !MESSAGE 
 
 # Begin Project
@@ -26,7 +29,6 @@ CFG=FATE - Win32 (WCE ARM) Debug
 # PROP Scc_ProjName ""
 # PROP Scc_LocalPath ""
 # PROP ATL_Project 2
-CPP=clarm.exe
 
 !IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
 
@@ -44,15 +46,16 @@ CPP=clarm.exe
 # PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
 # PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /Oxs /M$(CECrtMT) /c
-# ADD CPP /nologo /W3 /O2 /I "include" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Oxs /M$(CECrtMT) /c
-# SUBTRACT CPP /YX /Yc /Yu
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /I "include" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Oxs /M$(CECrtMT) /c
+# SUBTRACT CPP /YX /Yc /Yu
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
 
@@ -70,12 +73,65 @@ BSC32=bscmake.exe
 # PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
 # PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /M$(CECrtMTDebug) /c
-# ADD CPP /nologo /W3 /Zi /Od /I "include" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /FR /M$(CECrtMTDebug) /c
-# SUBTRACT CPP /YX /Yc /Yu
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
 # ADD LIB32 /nologo /out:"lib\WIN32_WCE\FATEDbg.lib"
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "include" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /FR /M$(CECrtMTDebug) /c
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMV4Dbg"
+# PROP BASE Intermediate_Dir "ARMV4Dbg"
+# PROP BASE CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "ARMV4Dbg"
+# PROP Intermediate_Dir "ARMV4Dbg"
+# PROP CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /GX- /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /GX- /Zi /Od /I "C:\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4" /D "DEBUG" /D "_WIN32" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMV4Rel"
+# PROP BASE Intermediate_Dir "ARMV4Rel"
+# PROP BASE CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "ARMV4Rel"
+# PROP Intermediate_Dir "ARMV4Rel"
+# PROP CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /GX- /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /O2 /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /GX- /I "C:\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4" /D "NDEBUG" /D "_WIN32" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /O2 /M$(CECrtMT) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
@@ -86,6 +142,8 @@ BSC32=bscmake.exe
 
 # Name "FATE - Win32 (WCE ARM) Release"
 # Name "FATE - Win32 (WCE ARM) Debug"
+# Name "FATE - Win32 (WCE ARMV4) Debug"
+# Name "FATE - Win32 (WCE ARMV4) Release"
 # Begin Group "base"
 
 # PROP Default_Filter ""
@@ -93,13 +151,16 @@ BSC32=bscmake.exe
 
 SOURCE=.\base\FATE_WIN32_WCE.cpp
 DEP_CPP_FATE_=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
+	".\base\FBitmap_PalmOS.h"\
 	".\base\FBitmap_WIN32.h"\
 	".\base\FFile_WIN32.h"\
-	".\base\FLinkedList.h"\
-	".\base\FPoint.h"\
 	".\base\FSystem.h"\
 	".\base\FSystem_WIN32.h"\
 	".\base\FSystem_WIN32_WCE.h"\
@@ -116,24 +177,38 @@ DEP_CPP_FATE_=\
 	".\comm\FInetAddr_WIN32.h"\
 	".\comm\FUDPSocket_WIN32.h"\
 	".\comm\IFSocket_WIN32.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	".\util\FLinkedList.h"\
+	".\util\FPoint.h"\
 	
 NODEP_CPP_FATE_=\
-	".\base\FBitmap_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
 	".\base\FSystem_PalmOS.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\base\FateApp.cpp
 DEP_CPP_FATEA=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
+	".\base\FBitmap_PalmOS.h"\
 	".\base\FBitmap_WIN32.h"\
-	".\base\FLinkedList.h"\
 	".\base\FSystem.h"\
 	".\base\FSystem_WIN32.h"\
 	".\base\FSystem_WIN32_WCE.h"\
@@ -146,25 +221,36 @@ DEP_CPP_FATEA=\
 	".\base\IFItemListListener.h"\
 	".\base\IFMenuListener.h"\
 	".\base\IFSliderListener.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
 	".\comm\FInetAddr_WIN32.h"\
 	".\comm\FServer.h"\
 	".\comm\FSocket.h"\
 	".\comm\FSocket_WIN32.h"\
 	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
 	".\comm\IFSocket_WIN32.h"\
 	".\gui\FLabel.h"\
 	".\gui\FMsgPanel.h"\
 	".\gui\FPanel.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	".\util\FLinkedList.h"\
 	
 NODEP_CPP_FATEA=\
-	".\base\FBitmap_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
 	".\base\FSystem_PalmOS.h"\
 	".\comm\FSocket_PalmOS.h"\
-	".\comm\IFSocket_PalmOS.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -182,12 +268,27 @@ SOURCE=.\base\FBitmap.h
 
 SOURCE=.\base\FBitmap_WIN32.cpp
 DEP_CPP_FBITM=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap_WIN32.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
 	
+NODEP_CPP_FBITM=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -201,12 +302,27 @@ SOURCE=.\base\FFile.h
 
 SOURCE=.\base\FFile_WIN32.cpp
 DEP_CPP_FFILE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FFile_WIN32.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
 	
+NODEP_CPP_FFILE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -228,13 +344,28 @@ SOURCE=.\base\FSystem.h
 
 SOURCE=.\base\FSystem_WIN32_WCE.cpp
 DEP_CPP_FSYST=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap_WIN32.h"\
 	".\base\FSystem_WIN32_WCE.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
 	
+NODEP_CPP_FSYST=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -248,11 +379,15 @@ SOURCE=.\base\IFateComponent.h
 
 SOURCE=.\base\IFateContainer.cpp
 DEP_CPP_IFATE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
+	".\base\FBitmap_PalmOS.h"\
 	".\base\FBitmap_WIN32.h"\
-	".\base\FLinkedList.h"\
 	".\base\FSystem.h"\
 	".\base\FSystem_WIN32.h"\
 	".\base\FSystem_WIN32_WCE.h"\
@@ -266,14 +401,23 @@ DEP_CPP_IFATE=\
 	".\base\IFMenuListener.h"\
 	".\base\IFSliderListener.h"\
 	".\gui\FTextField.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	".\util\FLinkedList.h"\
 	
 NODEP_CPP_IFATE=\
-	".\base\FBitmap_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
 	".\base\FSystem_PalmOS.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -325,6 +469,17 @@ DEP_CPP_FCOMP=\
 NODEP_CPP_FCOMP=\
 	".\comm\FComPort_PalmOS.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -338,18 +493,31 @@ SOURCE=.\comm\FInetAddr_WIN32.h
 
 SOURCE=.\comm\FServer.cpp
 DEP_CPP_FSERV=\
-	".\base\FLinkedList.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
 	".\comm\FInetAddr_WIN32.h"\
 	".\comm\FServer.h"\
 	".\comm\FSocket.h"\
 	".\comm\FSocket_WIN32.h"\
 	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
 	".\comm\IFSocket_WIN32.h"\
+	".\util\FLinkedList.h"\
 	
 NODEP_CPP_FSERV=\
 	".\comm\FSocket_PalmOS.h"\
-	".\comm\IFSocket_PalmOS.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -363,14 +531,25 @@ SOURCE=.\comm\FSocket.h
 
 SOURCE=.\comm\FSocket_WIN32.cpp
 DEP_CPP_FSOCK=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
 	".\comm\FInetAddr_WIN32.h"\
 	".\comm\FSocket_WIN32.h"\
 	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
 	".\comm\IFSocket_WIN32.h"\
 	
-NODEP_CPP_FSOCK=\
-	".\comm\IFSocket_PalmOS.h"\
-	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -388,6 +567,17 @@ DEP_CPP_FUDPS=\
 	".\comm\FUDPSocket_WIN32.h"\
 	".\comm\IFSocket_WIN32.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -401,13 +591,24 @@ SOURCE=.\comm\IFSocket.h
 
 SOURCE=.\comm\IFSocket_WIN32.cpp
 DEP_CPP_IFSOC=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
 	".\comm\FInetAddr_WIN32.h"\
 	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
 	".\comm\IFSocket_WIN32.h"\
 	
-NODEP_CPP_IFSOC=\
-	".\comm\IFSocket_PalmOS.h"\
-	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -421,11 +622,15 @@ SOURCE=.\comm\IFSocket_WIN32.h
 
 SOURCE=.\gui\FButton.cpp
 DEP_CPP_FBUTT=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
+	".\base\FBitmap_PalmOS.h"\
 	".\base\FBitmap_WIN32.h"\
-	".\base\FLinkedList.h"\
 	".\base\FSystem.h"\
 	".\base\FSystem_WIN32.h"\
 	".\base\FSystem_WIN32_WCE.h"\
@@ -439,14 +644,23 @@ DEP_CPP_FBUTT=\
 	".\base\IFMenuListener.h"\
 	".\base\IFSliderListener.h"\
 	".\gui\FButton.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	".\util\FLinkedList.h"\
 	
 NODEP_CPP_FBUTT=\
-	".\base\FBitmap_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
 	".\base\FSystem_PalmOS.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -456,22 +670,35 @@ SOURCE=.\gui\FButton.h
 
 SOURCE=.\gui\FLabel.cpp
 DEP_CPP_FLABE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
+	".\base\FBitmap_PalmOS.h"\
 	".\base\FBitmap_WIN32.h"\
 	".\base\FSystem.h"\
 	".\base\FSystem_WIN32.h"\
 	".\base\FSystem_WIN32_WCE.h"\
 	".\base\IFateComponent.h"\
 	".\gui\FLabel.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
 	
 NODEP_CPP_FLABE=\
-	".\base\FBitmap_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
 	".\base\FSystem_PalmOS.h"\
 	
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 

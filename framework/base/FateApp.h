@@ -69,6 +69,7 @@ public:
     int iOrigY;
     void *pReserved1;    // additional user purpose data
     void *pReserved2;    // additional user purpose data
+    DWORD dwReserved1;
   };
 
 	CFateApp(EFateDrawMode DrawMode = DM_PORTRAIT) FATE_SECTION;

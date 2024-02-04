@@ -23,7 +23,7 @@ public:
   
   void SetDestBitmap(const CFBitmap& pBmp);  
 
-  //HDC GetSourceDC() { return(m_hSourceDC); };
+  HDC GetSourceDC() { return(m_hSourceDC); };
   //HDC GetDestDC() { return(m_hDestDC); };
   
   bool SolidFill(const COLORREF colFill);

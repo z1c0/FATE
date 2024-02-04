@@ -16,11 +16,12 @@ CFInfoPanel::~CFInfoPanel()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFInfoPanel::StylusDown(int xPos, int yPos)
+bool CFInfoPanel::StylusDown(int xPos, int yPos)
 {
   if (m_app->GetCaptureComp() == this) {
     m_app->ReleaseCaptureComp();
-    InvalidateRect(m_hWnd, NULL, FALSE);
+    // TODO
+    //InvalidateRect(m_hWnd, NULL, FALSE);
     return(TRUE);
   }
   return(FALSE);

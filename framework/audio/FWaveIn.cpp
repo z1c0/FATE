@@ -1,7 +1,7 @@
 // FWaveIn.cpp: implementation of the CFWaveIn class.
 //////////////////////////////////////////////////////////////////////
 #include "FWaveIn.h"
-#include "FateApp.h"
+#include "../base/FateApp.h"
 
 
 //------------------------------------------------------------------------------

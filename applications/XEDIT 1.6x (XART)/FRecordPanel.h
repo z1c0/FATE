@@ -7,8 +7,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
-
 
 //--------------------------------------------------------------------------------
 #define MIN_SPACE_FREE 204800 // minimum free space on file system while recording
@@ -20,9 +18,9 @@ class CFRecordPanel : public CFPanel
 friend void RecordCallbackFunc(char *pData, DWORD dwSize, LPVOID pvUserData);
 public:
 	DWORD GetFreeRecSpace();
-	virtual BOOL ButtonPressed(DWORD dwBtnID) { return(FALSE); };
-  virtual BOOL ButtonReleased(DWORD dwBtnID); 
-	virtual BOOL DropListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry);
+	virtual bool ButtonPressed(DWORD dwBtnID) { return(FALSE); };
+  virtual bool ButtonReleased(DWORD dwBtnID); 
+	virtual bool DropListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
   CFRecordPanel(LPCTSTR pFilePath);
 	virtual ~CFRecordPanel();  
   void SetNextFileName();
@@ -40,9 +38,9 @@ public:
   BOOL StopRecording();  
   BOOL IsSaved() { return m_bSaved; };
 	void UpdateRecordLabels();
-  void DirSelected(BOOL bSelected);
+  void DirSelected(bool bSelected);
 private:
-	void SetLabelsVisible(BOOL bVisible);
+	void SetLabelsVisible(bool bVisible);
   void UpdatePos();
   CFButton *m_btnRec;
   CFButton *m_btnEdit;

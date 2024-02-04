@@ -9,8 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
-
 //--------------------------------------------------------------------------------
 class CFLoadPanel : public CFPanel  
 {
@@ -18,9 +16,9 @@ public:
 	CFLoadPanel(LPCTSTR pFilePath);
 	virtual ~CFLoadPanel();
   void Refresh();
-  virtual BOOL ButtonPressed(DWORD dwBtnID);
-	virtual BOOL ButtonReleased(DWORD dwBtnID);
-	virtual BOOL ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry);
+  virtual bool ButtonPressed(DWORD dwBtnID);
+	virtual bool ButtonReleased(DWORD dwBtnID);
+	virtual bool ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
   BOOL Create();
   void SetFilePath(LPCTSTR pFilePath);
   virtual void SetX(int iPosX); 

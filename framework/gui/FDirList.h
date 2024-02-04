@@ -10,7 +10,7 @@
 #endif // _MSC_VER > 1000
 
 #include "FItemList.h"
-
+#include "../base/FateTypeDefs.h"
 
 //------------------------------------------------------------------------------
 class CFDirList : public CFItemList  
@@ -18,14 +18,14 @@ class CFDirList : public CFItemList
 public:
 	CFDirList(int iMaxVisItems, int iItemWidth, CFBitmap *bmpUpArrow, CFBitmap *bmpDownArrow);
   virtual ~CFDirList();  
-  virtual void SetDC(HDC hdc);
+  virtual void SetSystem(CFSystem *pSystem);
   void Refresh() { SetCurrDir(m_szCurrDir);};	
   BOOL SetCurrDir(LPTSTR pCurrDir);
   LPTSTR GetCurrDir() { return (LPTSTR)&m_szCurrDir; };  
 
 private:
 
-  virtual void ItemSelected(CFItemList::ITEMLISTENTRY *pEntry);
+  virtual void ItemSelected(ITEMLISTENTRY *pEntry);
 
   BOOL IsDirectory(LPCTSTR pDir);  
   virtual void DrawItems();  
