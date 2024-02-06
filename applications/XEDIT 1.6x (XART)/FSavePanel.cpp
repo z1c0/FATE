@@ -38,11 +38,9 @@ CFSavePanel::Create()
   m_fileToSaveLabel->SetVisible(TRUE);
   
   // load images for waveList
-  //CFBitmap *cbUpArrow= new CFBitmap(m_hdc); // TODO
-  CFBitmap *cbUpArrow= new CFBitmap();
+  CFBitmap *cbUpArrow= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbUpArrow->Load(IDB_ARROWUP)) return(FALSE);
-  //CFBitmap *cbDownArrow= new CFBitmap(m_hdc);  // TODO
-  CFBitmap *cbDownArrow= new CFBitmap();
+  CFBitmap *cbDownArrow= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbDownArrow->Load(IDB_ARROWDOWN)) return(FALSE);
   
   // create the item listbox

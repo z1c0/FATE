@@ -74,8 +74,7 @@ bool CFWaveCutApp::InitFateApp()
   // disable suspend so the application won't freeze
   //EnableSuspend(FALSE); // TODO
 
-  //m_bmpTitle = new CFBitmap(m_hdc); TODO
-  m_bmpTitle = new CFBitmap();
+  m_bmpTitle = new CFBitmap(*m_pSystem->GetDoubleBuffer());
 #ifdef _XEDIT_DEMO  
   if (!m_bmpTitle->Load(IDB_TITLE_TRIAL)) return(FALSE);
 #else 
@@ -96,11 +95,9 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->SetVisible(TRUE);
   
   // create "load" button
-  //CFBitmap *bmpDef= new CFBitmap(m_hdc); TODO
-  CFBitmap *bmpDef= new CFBitmap();
+  CFBitmap *bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_LOAD)) return(FALSE);
-  //CFBitmap *bmpPress= new CFBitmap(m_hdc); TODO
-  CFBitmap *bmpPress= new CFBitmap();
+  CFBitmap *bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_LOAD_P)) return(FALSE);
   m_btnLoad= new CFButton(bmpDef, bmpPress);
   m_btnLoad->SetId(ID_BTN_APP_OPEN);
@@ -108,19 +105,19 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnLoad);
   
   // create "save" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_SAVE)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_SAVE_P)) return(FALSE);
-  m_btnSave= new CFButton(bmpDef, bmpPress);;
+  m_btnSave= new CFButton(bmpDef, bmpPress);
   m_btnSave->SetId(ID_BTN_APP_SAVE);
   m_btnSave->SetVisible(TRUE);
   m_buttonPanel->Add(*m_btnSave);
   
   // create "undo" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_UNDO)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_UNDO_P)) return(FALSE);
   m_btnUndo= new CFButton(bmpDef, bmpPress);
   m_btnUndo->SetId(ID_BTN_APP_UNDO);
@@ -128,9 +125,9 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnUndo);
   
   // create "redo "button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_REDO)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_REDO_P)) return(FALSE);
   m_btnRedo= new CFButton(bmpDef, bmpPress);
   m_btnRedo->SetId(ID_BTN_APP_REDO);
@@ -138,9 +135,9 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnRedo);
   
   // create "cutout" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_CUTOUT)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_CUTOUT_P)) return(FALSE);
   m_btnCutOut= new CFButton(bmpDef, bmpPress);
   m_btnCutOut->SetId(ID_BTN_APP_CUTOUT);
@@ -148,9 +145,9 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnCutOut);
   
   // create "cutin" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_CUTIN)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_CUTIN_P)) return(FALSE);
   m_btnCutIn= new CFButton(bmpDef, bmpPress);
   m_btnCutIn->SetId(ID_BTN_APP_CUTIN);
@@ -158,9 +155,9 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnCutIn);
   
   // create "zoomin" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_ZOOMIN)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_ZOOMIN_P)) return(FALSE);
   m_btnZoomIn= new CFButton(bmpDef, bmpPress);
   m_btnZoomIn->SetId(ID_BTN_APP_ZOOMIN);
@@ -168,9 +165,9 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnZoomIn);
   
   // create "zoomout" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_ZOOMOUT)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_ZOOMOUT_P)) return(FALSE);
   m_btnZoomOut= new CFButton(bmpDef, bmpPress);
   m_btnZoomOut->SetId(ID_BTN_APP_ZOOMOUT);
@@ -178,9 +175,9 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnZoomOut);
   
   // create "info" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_INFO)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_INFO_P)) return(FALSE);
   m_btnInfo= new CFButton(bmpDef, bmpPress);
   m_btnInfo->SetId(ID_BTN_APP_INFO);
@@ -188,7 +185,7 @@ bool CFWaveCutApp::InitFateApp()
   m_buttonPanel->Add(*m_btnInfo);
 
   // create "quit" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_QUIT)) return(FALSE);
   m_btnQuit= new CFButton(bmpDef);
   m_btnQuit->SetId(ID_BTN_APP_QUIT);
@@ -236,23 +233,23 @@ bool CFWaveCutApp::InitFateApp()
   m_savePanel->SetVisible(FALSE);
   
   // create level bar
-  m_bmpLevel= new CFBitmap(m_hdc);
+  m_bmpLevel= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpLevel->Load(IDB_LEVEL)) return(FALSE);
 
   // create mask
-  m_bmpMask= new CFBitmap(m_hdc);
+  m_bmpMask= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpMask->Load(IDB_MASK)) return(FALSE);
 
   // create bitmap for correcting title whem volume changes
-  m_bmpCheat= new CFBitmap(m_hdc);
+  m_bmpCheat= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpCheat->Load(IDB_CHEAT)) return(FALSE);
 
   // create volume bar
-  m_bmpVol= new CFBitmap(m_hdc);
+  m_bmpVol= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpVol->Load(IDB_VOL)) return(FALSE);
 
   // create volume slide
-  m_bmpSlide= new CFBitmap(m_hdc);
+  m_bmpSlide= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpSlide->Load(IDB_SLIDE)) return(FALSE);
 
   UpdatePos();
@@ -479,13 +476,13 @@ bool CFWaveCutApp::SerialOK()
   // get serial number from library
   hMod= LoadLibrary(TEXT("xedit.dll"));
   if (!hMod) {
-    MessageBox(m_hWnd, TEXT("Library xedit.dll not found!"), TEXT(""), MB_OK);    
+    MessageBox(NULL, TEXT("Library xedit.dll not found!"), TEXT(""), MB_OK);    
     return(FALSE);
   } 
 
   Get= (GetFunc)GetProcAddress(hMod, TEXT("?Get@@YAHPAPAD@Z"));
   if (!Get) {
-    MessageBox(m_hWnd, TEXT("Library xedit.dll is not valid!"), TEXT(""), MB_OK);    
+    MessageBox(NULL, TEXT("Library xedit.dll is not valid!"), TEXT(""), MB_OK);    
     FreeLibrary(hMod);
     return(FALSE);
   }
@@ -495,7 +492,7 @@ bool CFWaveCutApp::SerialOK()
 
   for (i=0; i<strlen(szCode); i++) {
     if (szCode[i] != pDLLSN[i]) {
-      MessageBox(m_hWnd, TEXT("Illegal copy of xEdit!"), TEXT(""), MB_OK);
+      MessageBox(NULL, TEXT("Illegal copy of xEdit!"), TEXT(""), MB_OK);
       free(pDLLSN);
       return(FALSE);
     }

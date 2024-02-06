@@ -8,9 +8,9 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include <windows.h>
 #include <mmsystem.h>
 #include <mmreg.h>
-#include <windows.h>
 
 #ifndef WAVE_FORMAT_PCM
 #define WAVE_FORMAT_PCM  0x0001

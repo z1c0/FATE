@@ -9,9 +9,9 @@
 #endif // _MSC_VER > 1000
 
 
+#include <windows.h>
 #include <mmsystem.h>
 #include <mmreg.h>
-#include <windows.h>
 #include "FSampleList.h"
 
 

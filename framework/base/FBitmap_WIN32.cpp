@@ -531,7 +531,6 @@ COLORREF CFBitmap::SetColor(COLORREF col)
     if (m_hSourceDC) {
       if (m_hBrushOld) SelectObject(m_hSourceDC, m_hPenOld);
       m_hPenOld = (HPEN)SelectObject(m_hSourceDC, m_hPen);
-      ::SetTextColor(m_hSourceDC, m_colForeground);
     }
   }
 
@@ -541,7 +540,9 @@ COLORREF CFBitmap::SetColor(COLORREF col)
 //------------------------------------------------------------------------------
 COLORREF CFBitmap::SetTextColor(COLORREF col)
 {
-  return SetColor(col);
+  COLORREF colOld = ::GetTextColor(m_hSourceDC);
+ ::SetTextColor(m_hSourceDC, col);
+  return colOld;
 }
 
 //------------------------------------------------------------------------------

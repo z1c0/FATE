@@ -137,11 +137,9 @@ BOOL CFRecordPanel::Create()
   
   // CREATE BUTTONS
   // Rec button
-  //CFBitmap *bmpDef= new CFBitmap(m_hdc); TODO
-  CFBitmap *bmpDef= new CFBitmap();
+  CFBitmap *bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_BIGREC)) return(FALSE);
-  //CFBitmap *bmpPress= new CFBitmap(m_hdc);  // TODO
-  CFBitmap *bmpPress= new CFBitmap();
+  CFBitmap *bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_BIGREC_P)) return(FALSE);  
   m_btnRec= new CFButton(bmpDef, bmpPress);
   m_btnRec->SetId(ID_BTN_REC_REC);
@@ -149,11 +147,9 @@ BOOL CFRecordPanel::Create()
   m_btnRec->SetVisible(TRUE);
   
   // Pause button
-  //bmpDef= new CFBitmap(m_hdc); TODO
-  bmpDef = new CFBitmap();
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_BIGPAUSE)) return(FALSE);
-  //bmpPress= new CFBitmap(m_hdc);  // TODO
-  bmpPress= new CFBitmap();
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_BIGPAUSE_P)) return(FALSE);  
   m_btnPause= new CFButton(bmpDef, bmpPress);
   m_btnPause->SetId(ID_BTN_REC_PAUSE);
@@ -161,9 +157,9 @@ BOOL CFRecordPanel::Create()
   m_btnPause->SetVisible(FALSE);
   
   // Edit button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_BIGEDIT)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_BIGEDIT_P)) return(FALSE);  
   m_btnEdit= new CFButton(bmpDef, bmpPress);
   m_btnEdit->SetId(ID_BTN_REC_EDIT);
@@ -171,11 +167,11 @@ BOOL CFRecordPanel::Create()
   m_btnEdit->SetVisible(TRUE);
 
   // create "dir" button
-  bmpDef= new CFBitmap(m_hdc);
+  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_DIR)) return(FALSE);
-  bmpPress= new CFBitmap(m_hdc);
+  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_DIR_P)) return(FALSE);
-  m_btnDir= new CFButton(bmpDef, bmpPress);;
+  m_btnDir= new CFButton(bmpDef, bmpPress);
   m_btnDir->SetId(ID_BTN_APP_DIR);
   m_btnDir->SetVisible(TRUE);
   Add(*m_btnDir);
@@ -213,11 +209,11 @@ BOOL CFRecordPanel::Create()
   Add(*m_freeLabel);
 
 
-  CFBitmap *cbDropArrowSR= new CFBitmap(m_hdc);
+  CFBitmap *cbDropArrowSR= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbDropArrowSR->Load(IDB_DROP_ARROW)) return(FALSE);
-  CFBitmap *cbUpArrowSR= new CFBitmap(m_hdc);
+  CFBitmap *cbUpArrowSR= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbUpArrowSR->Load(IDB_DROP_ARROWUP)) return(FALSE);
-  CFBitmap *cbDownArrowSR= new CFBitmap(m_hdc);
+  CFBitmap *cbDownArrowSR= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbDownArrowSR->Load(IDB_DROP_ARROWDOWN)) return(FALSE);
   m_samplingRateList = new CFDropList(4, 98, cbDropArrowSR, cbUpArrowSR, cbDownArrowSR);
   m_samplingRateList->AddItem(TEXT("rate: 8000  Hz"), TEXT("8000"));
@@ -242,11 +238,11 @@ BOOL CFRecordPanel::Create()
   }
   Add(*m_samplingRateList);
 
-  CFBitmap *cbDropArrowBD= new CFBitmap(m_hdc);
+  CFBitmap *cbDropArrowBD= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbDropArrowBD->Load(IDB_DROP_ARROW)) return(FALSE);
-  CFBitmap *cbUpArrowBD= new CFBitmap(m_hdc);
+  CFBitmap *cbUpArrowBD= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbUpArrowBD->Load(IDB_DROP_ARROWUP)) return(FALSE);
-  CFBitmap *cbDownArrowBD= new CFBitmap(m_hdc);
+  CFBitmap *cbDownArrowBD= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbDownArrowBD->Load(IDB_DROP_ARROWDOWN)) return(FALSE);
   m_bitDepthList = new CFDropList(2, 98, cbDropArrowBD, cbUpArrowBD, cbDownArrowBD);
   m_bitDepthList->AddItem(TEXT("bits: 8"), TEXT("8"));
@@ -263,11 +259,11 @@ BOOL CFRecordPanel::Create()
   }
   Add(*m_bitDepthList);
 
-  CFBitmap *cbDropArrowC= new CFBitmap(m_hdc);
+  CFBitmap *cbDropArrowC= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbDropArrowC->Load(IDB_DROP_ARROW)) return(FALSE);
-  CFBitmap *cbUpArrowC= new CFBitmap(m_hdc);
+  CFBitmap *cbUpArrowC= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbUpArrowC->Load(IDB_DROP_ARROWUP)) return(FALSE);
-  CFBitmap *cbDownArrowC= new CFBitmap(m_hdc);
+  CFBitmap *cbDownArrowC= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!cbDownArrowC->Load(IDB_DROP_ARROWDOWN)) return(FALSE);
   m_channelsList = new CFDropList(2, 98, cbDropArrowC, cbUpArrowC, cbDownArrowC);
   m_channelsList->AddItem(TEXT("channels: 1"), TEXT("1"));

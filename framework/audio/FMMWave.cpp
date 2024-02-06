@@ -100,9 +100,14 @@ BOOL CFMMWave::Load(LPCTSTR pszFileName)
   // clear the wave
   Clear();
 
+#ifdef _WIN32
 #ifdef _WIN32_WCE
   m_hFileToMap= CreateFileForMapping(pszFileName, GENERIC_READ|GENERIC_WRITE, FILE_SHARE_READ,
                               NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_RANDOM_ACCESS, 0);
+#else
+  m_hFileToMap = CreateFile(pszFileName, GENERIC_READ|GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING, NULL);
+#endif
+
   dwSize= GetFileSize(m_hFileToMap, NULL);
     
   if (m_hFileToMap != INVALID_HANDLE_VALUE) {
