@@ -26,7 +26,7 @@ static char THIS_FILE[] = __FILE__;
 #define FILE_MARK_FLOPPY   '>'
 #define FILE_MARK_HD       '|'
 
-const char* g_szHome= "D:";
+const char* g_szHome= "C:";
 
 //--------------------------------------------------------------------------------
 // CPPTRCv2Dlg dialog

@@ -37,21 +37,21 @@ CPPTRC::CPPTRC() : CFateApp()
 //--------------------------------------------------------------------------------
 CPPTRC::~CPPTRC()
 {
-  SAFE_RELEASE(m_bmpTitle);
-  SAFE_RELEASE(m_btnClose);
-  SAFE_RELEASE(m_panelPPT);
-  SAFE_RELEASE(m_panelFiles);
-  SAFE_RELEASE(m_addrPPT);
-  SAFE_RELEASE(m_pSockRecv);
+  SAFE_DELETE(m_bmpTitle);
+  SAFE_DELETE(m_btnClose);
+  SAFE_DELETE(m_panelPPT);
+  SAFE_DELETE(m_panelFiles);
+  SAFE_DELETE(m_addrPPT);
+  SAFE_DELETE(m_pSockRecv);
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::InitFateApp()
+bool CPPTRC::InitFateApp()
 {
   TCHAR szPath[1024];
 
   // disable automatic suspension of app
-  EnableSuspend(FALSE);
+  //EnableSuspend(FALSE); TODO
   
   // parse config file for IP configuration
   _tcscpy(szPath, m_app->GetAppPath());
@@ -69,50 +69,50 @@ BOOL CPPTRC::InitFateApp()
   m_pSockRecv->Listen();
 
   // create title bar
-  m_bmpTitle= new CFBitmap(m_hdc);
+  m_bmpTitle= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpTitle->Load(IDB_TITLE)) return(FALSE);
 
   // create close button
-  CFBitmap *bmpClose= new CFBitmap(m_hdc);
+  CFBitmap *bmpClose= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpClose->Load(IDB_SKIP)) return(FALSE);
-  CFBitmap *bmpCloseDis= new CFBitmap(m_hdc);
+  CFBitmap *bmpCloseDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpCloseDis->Load(IDB_SKIP_DIS)) return(FALSE);
   m_btnClose= new CFButton(bmpClose, NULL, bmpCloseDis);
   m_btnClose->SetX(m_bmpTitle->GetRight() - m_btnClose->GetWidth() - 3);
   m_btnClose->SetY(3);
   m_btnClose->SetVisible(TRUE);
-  m_btnClose->SetID(ID_BTN_QUITAPP);
-  Add(m_btnClose);
+  m_btnClose->SetId(ID_BTN_QUITAPP);
+  Add(*m_btnClose);
 
   // create PPT panel
   m_panelPPT= new CFPPTPanel();
-  Add(m_panelPPT);
+  Add(*m_panelPPT);
   if (!m_panelPPT->Create()) return(FALSE);
   m_panelPPT->SetY(m_bmpTitle->GetBottom());
   m_panelPPT->SetVisible(FALSE);
 
   // create panel for chosing files
   m_panelFiles= new CFFilePanel();
-  Add(m_panelFiles);
+  Add(*m_panelFiles);
   if (!m_panelFiles->Create()) return(FALSE);
 
   m_panelFiles->SetY(m_bmpTitle->GetBottom());
   m_panelFiles->SetVisible(TRUE);
   
   // init a timer for polling the receive socket
-  SetTimer(m_hWnd, POLL_TIMER, 10, NULL);
+  SetTimer(m_pSystem->GetHWND(), POLL_TIMER, 10, NULL);
 
   return(TRUE);
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::ActivateFateApp()
+bool CPPTRC::ActivateFateApp()
 { 
   return(TRUE);
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::CloseFateApp()
+bool CPPTRC::CloseFateApp()
 {
   return(TRUE);
 }
@@ -127,31 +127,31 @@ void CPPTRC::Draw()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::StylusDown(int xPos, int yPos)
+bool CPPTRC::StylusDown(int xPos, int yPos)
 {
   return(FALSE);  // event not handled
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::StylusMove(int xPos, int yPos)
+bool CPPTRC::StylusMove(int xPos, int yPos)
 {
   return(FALSE);  // event not handled
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::StylusUp(int xPos, int yPos)
+bool CPPTRC::StylusUp(int xPos, int yPos)
 {
   return(FALSE);  // event not handled
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::KeyDown(int vkKey)
+bool CPPTRC::KeyDown(int vkKey)
 {
   return(FALSE);  // event not handled
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::KeyUp(int vkKey)
+bool CPPTRC::KeyUp(int vkKey)
 {
   return(FALSE);  // event not handled
 }
@@ -190,7 +190,7 @@ BOOL CPPTRC::OpenPresentation()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::ButtonReleased(DWORD dwBtnID)
+bool CPPTRC::ButtonReleased(DWORD dwBtnID)
 {
   switch(dwBtnID) {
     case ID_BTN_QUITAPP:
@@ -232,10 +232,10 @@ void CPPTRC::DisplayIntro()
   // default bitmap
   _tcscpy(szFullPath, szPath);
   _tcscat(szFullPath, TEXT("intro.bmp"));
-  bmpStart= new CFBitmap(m_hdc);
+  bmpStart= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpStart->Load(szFullPath);
   for (int i=0; i<11; i++) {
-    bmpAnim[i]= new CFBitmap(m_hdc);
+    bmpAnim[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     _tcscpy(szFullPath, szPath);
 		_tcscat(szFullPath, TEXT("frame"));
 		_itot(i, szBuff, 10);
@@ -326,7 +326,7 @@ BOOL CPPTRC::ReadConfigFile(LPCTSTR pszFileName)
 // Used for error messages during initialization phase
 void CPPTRC::Error(LPCTSTR pszErrMsg)
 {
-  MessageBox(m_hWnd, pszErrMsg, TEXT("Error"), MB_OK);
+  MessageBox(NULL, pszErrMsg, TEXT("Error"), MB_OK);
 }
 
 //--------------------------------------------------------------------------------
@@ -453,7 +453,7 @@ BOOL CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
         // get extension of file
         pszExt= _tcsrchr(szTemp2, '.');
         if ((pszExt)&&(((!_tcsicmp(pszExt, TEXT(".ppt")))||(!_tcsicmp(pszExt, TEXT(".pps")))))) {
-          CFBitmap *bmpPPT= new CFBitmap(m_hdc);
+          CFBitmap *bmpPPT= new CFBitmap(*m_pSystem->GetDoubleBuffer());
           bmpPPT->Load(IDB_PPT_ICON);
           m_panelFiles->AddItem(bmpPPT, (_tcsrchr(szTemp2, '\\') + 1), szTemp2);
 
@@ -461,28 +461,28 @@ BOOL CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
           CFBitmap *bmp= NULL;
           switch(pszTemp[strlen(pszTemp) - 1]) {
             case FILE_MARK_DIR:
-              bmp= new CFBitmap(m_hdc);
+              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_FOLDER_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, (_tcsrchr(szTemp2, '\\') + 1), TEXT("?"));
               break;
 
             case FILE_MARK_FLOPPY:
-              bmp= new CFBitmap(m_hdc);
+              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_FLOPPY_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, szTemp2, TEXT("?"));
               break;
 
             case FILE_MARK_CDROM:
-              bmp= new CFBitmap(m_hdc);
+              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_CDROM_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, szTemp2, TEXT("?"));
               break;
 
             case FILE_MARK_HD:
-              bmp= new CFBitmap(m_hdc);
+              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_HD_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, szTemp2, TEXT("?"));
@@ -516,9 +516,9 @@ BOOL CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CPPTRC::ExtraEventHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+bool CPPTRC::ExtraEventHandler(unsigned long eventId, void *pParam)
 {
-  if (wParam == POLL_TIMER) {
+  if (eventId == WM_TIMER) { //POLL_TIMER) { TODO timer
     // check for incoming data on socket
     CFSocket sock;
     int iRet;

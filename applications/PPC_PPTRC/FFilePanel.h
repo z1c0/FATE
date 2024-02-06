@@ -21,19 +21,19 @@ public:
   virtual void Draw();
   virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); };
   virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); };
-  virtual BOOL StylusDown(int xPos, int yPos);
+  virtual bool StylusDown(int xPos, int yPos);
   BOOL Create();
-  BOOL ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry);
+  bool ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
   BOOL AddItem(CFBitmap *bmpPic, TCHAR *pszItem, TCHAR *pszAddInfo) 
   { 
     return(m_ItemList->AddPicItem(bmpPic, pszItem, pszAddInfo)); 
   };
   void ClearItems() { m_ItemList->ClearItems(); };
   TCHAR* GetFilePath() { return(m_pszFullPath); };
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
+  virtual bool ButtonReleased(DWORD dwBtnID);
   void ClearLabel() 
   { 
-    SAFE_RELEASE(m_pszFullPath);
+    SAFE_DELETE(m_pszFullPath);
     m_fileLabel->SetText(TEXT("")); 
   };
 private:

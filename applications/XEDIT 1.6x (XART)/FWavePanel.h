@@ -101,8 +101,6 @@ private:
   CFMarker *m_selMarker;  
   CFZoomSlider *m_zoomSlider;
   enum ACTIONS m_actionLast;
-  HPEN m_hWavePen;
-  HBRUSH m_hFillBrush;
   COLORREF m_colWaveBack;
   BOOL m_bFormChanged;  
   BOOL m_bJump;

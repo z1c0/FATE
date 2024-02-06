@@ -24,13 +24,13 @@ CFFilePanel::CFFilePanel() : CFPanel()
 //--------------------------------------------------------------------------------
 CFFilePanel::~CFFilePanel()
 {
-  SAFE_RELEASE(m_ItemList);
-  SAFE_RELEASE(m_btnLoad);
-  SAFE_RELEASE(m_btnRefresh);
-  SAFE_RELEASE(m_btnDirUp);
-  SAFE_RELEASE(m_btnHome);
-  SAFE_RELEASE(m_fileLabel);
-  SAFE_RELEASE(m_pszFullPath);
+  SAFE_DELETE(m_ItemList);
+  SAFE_DELETE(m_btnLoad);
+  SAFE_DELETE(m_btnRefresh);
+  SAFE_DELETE(m_btnDirUp);
+  SAFE_DELETE(m_btnHome);
+  SAFE_DELETE(m_fileLabel);
+  SAFE_DELETE(m_pszFullPath);
 }
 
 //--------------------------------------------------------------------------------
@@ -42,60 +42,60 @@ BOOL CFFilePanel::Create()
   // create the item list
   CFBitmap *bmpUp;
   CFBitmap *bmpDown;
-  bmpUp= new CFBitmap(m_hdc);
-  bmpDown= new CFBitmap(m_hdc);
+  bmpUp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDown= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpDown->Load(IDB_DOWN_SCROLL)) return(FALSE);
   if (!bmpUp->Load(IDB_UP_SCROLL)) return(FALSE);
   m_ItemList= new CFItemList(m_iMaxItems, m_app->GetWidth() - m_iListIndent * 2 - bmpDown->GetWidth(), 
                              bmpUp, bmpDown);
-  Add(m_ItemList);
+  Add(*m_ItemList);
   m_ItemList->SetVisible(TRUE);
   m_ItemList->SetId(ID_LIST_PPT);   
 
   // create button for loading PPT presentations
-  CFBitmap *bmpA= new CFBitmap(m_hdc);
-  CFBitmap *bmpB= new CFBitmap(m_hdc);
+  CFBitmap *bmpA= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpB= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpA->Load(IDB_BUTTON_LOAD)) return(FALSE);
   if (!bmpB->Load(IDB_BUTTON_LOAD_P)) return(FALSE);
   m_btnLoad= new CFButton(bmpA, bmpB);
   m_btnLoad->SetVisible(TRUE);
   m_btnLoad->SetEnabled(FALSE);
   m_btnLoad->SetId(ID_BTN_LOAD);
-  Add(m_btnLoad);
+  Add(*m_btnLoad);
   
   // create button for back-navigation in file system
-  CFBitmap *bmp1= new CFBitmap(m_hdc);
-  CFBitmap *bmp2= new CFBitmap(m_hdc);
+  CFBitmap *bmp1= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp2= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmp1->Load(IDB_BUTTON_DIR_UP)) return(FALSE);
   if (!bmp2->Load(IDB_BUTTON_DIR_UP_P)) return(FALSE);
   m_btnDirUp= new CFButton(bmp1, bmp2);
   m_btnDirUp->SetVisible(TRUE);
   m_btnDirUp->SetId(ID_BTN_DIR_UP);
-  Add(m_btnDirUp);
+  Add(*m_btnDirUp);
   
   // create button for refreshing the list of PPT presentations
-  CFBitmap *bmp3= new CFBitmap(m_hdc);
-  CFBitmap *bmp4= new CFBitmap(m_hdc);
+  CFBitmap *bmp3= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp4= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmp3->Load(IDB_BUTTON_REFRESH)) return(FALSE);
   if (!bmp4->Load(IDB_BUTTON_REFRESH_P)) return(FALSE);
   m_btnRefresh= new CFButton(bmp3,bmp4);
-  Add(m_btnRefresh);
+  Add(*m_btnRefresh);
   m_btnRefresh->SetVisible(TRUE);
   m_btnRefresh->SetId(ID_BTN_REFRESH);
 
   // create button for navigating to home directory
-  CFBitmap *bmp5= new CFBitmap(m_hdc);
-  CFBitmap *bmp6= new CFBitmap(m_hdc);
+  CFBitmap *bmp5= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp6= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmp5->Load(IDB_BUTTON_HOME)) return(FALSE);
   if (!bmp6->Load(IDB_BUTTON_HOME_P)) return(FALSE);
   m_btnHome= new CFButton(bmp5,bmp6);
-  Add(m_btnHome);
+  Add(*m_btnHome);
   m_btnHome->SetVisible(TRUE);
   m_btnHome->SetId(ID_BTN_HOME);
 
   // create label for showing file information
   m_fileLabel= new CFLabel(220, 20);
-  Add(m_fileLabel);
+  Add(*m_fileLabel);
   m_btnLoad->SetVisible(TRUE);
   
   UpdatePos();
@@ -110,7 +110,7 @@ void CFFilePanel::Draw()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFFilePanel::StylusDown(int xPos, int yPos)
+bool CFFilePanel::StylusDown(int xPos, int yPos)
 {
   return(FALSE);
 }
@@ -118,7 +118,7 @@ BOOL CFFilePanel::StylusDown(int xPos, int yPos)
 //--------------------------------------------------------------------------------
 void CFFilePanel::UpdatePos()
 {
-  if (m_hdc) {
+  if (m_pSystem) {
     m_ItemList->SetX(m_iListIndent);
     m_ItemList->SetY(m_iPosY + 10);
 
@@ -152,7 +152,7 @@ BOOL CFFilePanel::FillItemListFromServer(char *pszDir)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFFilePanel::ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry)
+bool CFFilePanel::ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry)
 { 
   // was a file or a directory chosen?
   if (!_tcscmp(pEntry->pszAddInfo, TEXT("?"))) {
@@ -177,7 +177,7 @@ BOOL CFFilePanel::ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFFilePanel::ButtonReleased(DWORD dwBtnID)
+bool CFFilePanel::ButtonReleased(DWORD dwBtnID)
 {
   switch(dwBtnID) {
     case ID_BTN_REFRESH:

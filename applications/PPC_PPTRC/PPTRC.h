@@ -25,22 +25,22 @@ class CPPTRC : public CFateApp
 public:
 	CPPTRC();
 	virtual ~CPPTRC();
-  virtual BOOL InitFateApp();
-	virtual BOOL ActivateFateApp();
-	virtual BOOL CloseFateApp();
-  virtual BOOL StylusDown(int xPos, int yPos);
-  virtual BOOL StylusMove(int xPos, int yPos);
-	virtual BOOL StylusUp(int xPos, int yPos);
-  virtual BOOL KeyDown(int vkKey);
-  virtual BOOL KeyUp(int vkKey);
+  virtual bool InitFateApp();
+	virtual bool ActivateFateApp();
+	virtual bool CloseFateApp();
+  virtual bool StylusDown(int xPos, int yPos);
+  virtual bool StylusMove(int xPos, int yPos);
+	virtual bool StylusUp(int xPos, int yPos);
+  virtual bool KeyDown(int vkKey);
+  virtual bool KeyUp(int vkKey);
   virtual void Draw();
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
+  virtual bool ButtonReleased(DWORD dwBtnID);
   void DisplayIntro();
   BOOL ReadConfigFile(LPCTSTR pszFileName);
   void Error(LPCTSTR pszErrMsg);
   BOOL SendToPPTHost(char *pMsg);
   BOOL ReceiveFromPPTHost(CFSocket *sock);
-  virtual BOOL ExtraEventHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+  virtual bool ExtraEventHandler(unsigned long ulEventID, void *pParam);
 private:
   BOOL ClosePresentation();
   BOOL OpenPresentation();

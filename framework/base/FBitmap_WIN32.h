@@ -2,9 +2,9 @@
 
 #include "FateTypeDefs.h"
 
-//------------------------------------------------------------------------------
 class CFBitmap  
 {  
+  friend class CFDC;
   friend class CFSystem;
 
 public:
@@ -22,8 +22,6 @@ public:
   bool Create(int iWidth, int iHeight);
   
   void SetDestBitmap(const CFBitmap& pBmp);  
-
-  HDC GetSourceDC() { return(m_hSourceDC); };  // TODO: remove
   
   bool SolidFill(const COLORREF colFill);
 	
@@ -113,5 +111,16 @@ private:
   HBRUSH m_hBrush;
   HPEN m_hPenOld;
   HBRUSH m_hBrushOld;
+};
+
+class CFDC
+{
+public:
+  CFDC(const CFBitmap& bmp) : m_hdc(bmp.m_hSourceDC) {}
+
+  HDC GetHDC() const { return m_hdc; }
+
+private:
+  HDC m_hdc;
 };
 

@@ -53,43 +53,44 @@ void CFFileList::DrawItems()
   // display list entries
   ITEMLISTENTRY *pAuxEntry= m_pEntries;
   int pos= 0, index= 0;  
+
+  CFDC dc(*m_bmpBack);
   
   while (pAuxEntry) {
     if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
+      COLORREF col = m_colBack;
+      COLORREF colBack = m_colBack;
+      COLORREF colText = m_colText;
+      UINT style = ILD_NORMAL;
+
       // item selected?
-      if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index)) {
-       
-        m_bmpBack->SetColor(m_colHiBack);
-        m_bmpBack->SetBackgroundColor(m_colHiBack);
-        m_bmpBack->SetTextColor(m_colHiText);
-        
-        itemRect.right+= 2 * m_iHorMargin - 1;
-        m_bmpBack->DrawFilledRect(itemRect);
-        itemRect.right-= 2 * m_iHorMargin - 1;
-        // redraw the items        
-        ExtTextOut(m_bmpBack->GetSourceDC(), posX + m_iHorMargin + 18, posY + m_iItemHeight * index + 1,
-                   ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
-        SHFILEINFO shfi;
-        HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), posX + m_iHorMargin, posY + m_iItemHeight * index + 1, ILD_BLEND50);
+      if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index))
+      {       
+        col = m_colHiBack;
+        colBack = m_colHiBack;
+        colText = m_colHiText;
+        style = ILD_BLEND50;
       }
-      else
-      {
-        m_bmpBack->SetColor(m_colBack);
-        m_bmpBack->SetBackgroundColor(m_colBack);
-        m_bmpBack->SetTextColor(m_colText);
+
+      m_bmpBack->SetColor(col);
+      m_bmpBack->SetBackgroundColor(colBack);
+      m_bmpBack->SetTextColor(colText);
+    
+      // clear old item
+      itemRect.right += 2 * m_iHorMargin - 1;
+      m_bmpBack->DrawFilledRect(itemRect);
+      itemRect.right -= 2 * m_iHorMargin - 1;
+
+      RECT textRect = itemRect;
+      textRect.left = posX + m_iHorMargin + 18;
+      textRect.top = posY + m_iItemHeight * index + 1;
+      m_bmpBack->DrawText(pAuxEntry->pszItem, textRect);
       
-        // clear old item
-        itemRect.right+= 2 * m_iHorMargin - 1;
-        m_bmpBack->DrawFilledRect(itemRect);
-        itemRect.right-= 2 * m_iHorMargin - 1;
-        // redraw the items
-        ExtTextOut(m_bmpBack->GetSourceDC(), posX + m_iHorMargin + 18, posY + m_iItemHeight * index + 1,
-                   ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
-        SHFILEINFO shfi;
-        HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), posX + m_iHorMargin, posY + m_iItemHeight * index + 1, ILD_NORMAL);
-      }
+      SHFILEINFO shfi;
+      HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
+
+      ::ImageList_Draw((HIMAGELIST)h, shfi.iIcon, dc.GetHDC(), posX + m_iHorMargin, posY + m_iItemHeight * index + 1, style);
+
       index++;
       itemRect.top+= m_iItemHeight;
       itemRect.bottom+= m_iItemHeight;

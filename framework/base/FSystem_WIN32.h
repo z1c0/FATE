@@ -24,15 +24,15 @@ public:
 
   bool ShutDownSystem();
 
-  int GetWidth() { return m_nWidth; };
-
-  int GetHeight() { return m_nHeight; };
+  int GetWidth() const { return m_nWidth; };
+  int GetHeight() const { return m_nHeight; };
+  HWND GetHWND() const { return m_hWnd; }
 
   static void GetPathToApplication(TCHAR *pszAppPath);
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);
 
-protected:
+private:
 
   CFBitmap *m_pDoubleBuffer;
   HWND m_hWnd;  

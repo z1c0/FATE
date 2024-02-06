@@ -21,10 +21,10 @@ public:
   virtual void Draw();
   virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); };
   virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); };
-  virtual BOOL StylusDown(int xPos, int yPos);
-  virtual BOOL KeyDown(int vkKey);
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
-  virtual BOOL DropListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry);
+  virtual bool StylusDown(int xPos, int yPos);
+  virtual bool KeyDown(int vkKey);
+  virtual bool ButtonReleased(DWORD dwBtnID);
+  virtual bool DropListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
   BOOL Create();
   BOOL StartPPT(char *pszFileName);
   BOOL ClosePPT();

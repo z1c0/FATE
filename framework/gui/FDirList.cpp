@@ -79,6 +79,8 @@ void CFDirList::DrawItems()
   // display list entries
   ITEMLISTENTRY *pAuxEntry= m_pEntries;
   int pos= 0, index= 0;  
+
+  CFDC dc(*m_bmpBack);
   
   while (pAuxEntry) {
     if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
@@ -93,12 +95,12 @@ void CFDirList::DrawItems()
         //FillRect(m_hdc, &itemRect, m_hBrushHiBack);
         m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
-        // redraw the items        
-        ExtTextOut(m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
+        // redraw the items       
+        ExtTextOut(dc.GetHDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
                    ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
         SHFILEINFO shfi;
         HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_BLEND50);
+        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, dc.GetHDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_BLEND50);
       } else {
         //SetBkColor(m_hdc, m_colBack);
         //SetTextColor(m_hdc, m_colText);
@@ -111,11 +113,11 @@ void CFDirList::DrawItems()
         m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
         // redraw the items
-        ExtTextOut(m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
+        ExtTextOut(dc.GetHDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
                    ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
         SHFILEINFO shfi;
         HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, m_bmpBack->GetSourceDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_NORMAL);
+        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, dc.GetHDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_NORMAL);
       }
       index++;
       itemRect.top+= m_iItemHeight;

@@ -151,9 +151,7 @@ CFWavePanel::CFWavePanel()
   m_bFormChanged= TRUE;
   m_bCreated= FALSE;
   m_bInfo = FALSE;
-  m_hFillBrush= CreateSolidBrush(RGB(255, 0, 0));
   m_colWaveBack= RGB(255, 255, 255);
-  m_hWavePen= CreatePen(PS_SOLID, 1, RGB(0, 0, 50));
   m_iWidth= 320;
   m_iHeight= 160;
   m_selMarker= NULL;  // currently no marker is selected
@@ -231,9 +229,6 @@ CFWavePanel::~CFWavePanel()
   delete(m_infoPanel);
   // delete zoomslider
   SAFE_DELETE(m_zoomSlider);
-  // delete GDI stuff
-  DeleteObject(m_hWavePen);
-  DeleteObject(m_hFillBrush);  
 }
 
 //--------------------------------------------------------------------------------
@@ -438,7 +433,6 @@ void CFWavePanel::Draw()
     SHORT sValue= 0;
     SHORT sMax = 0;
 
-    HPEN hOldPen;
     POINT *points;
 
   	int iTempY= 0;
@@ -477,7 +471,7 @@ void CFWavePanel::Draw()
     dwPointsToDraw*= 2;
     points= (POINT*)malloc(dwPointsToDraw * sizeof(POINT));      
 
-    hOldPen= (HPEN)SelectObject(m_bmpWaveForm->GetSourceDC(), m_hWavePen);
+    m_bmpWaveForm->SetColor(RGB(0, 0, 50));
     
     // iterate through wave, from section of sections in blocks of 
     // size dwStep, finding the max value.
@@ -503,16 +497,21 @@ void CFWavePanel::Draw()
     }   
 
     // draw the waveform
-    Polyline(m_bmpWaveForm->GetSourceDC(), points, dwPointsToDraw);	
+    m_bmpWaveForm->DrawPolygon(points, dwPointsToDraw);
 
+    m_bmpWaveForm->SetBackgroundColor(RGB(255, 0, 0));
+    m_bmpWaveForm->SetColor(RGB(255, 0, 0));
     if (dwZoomBlockStart == 0)
-      FillRect(m_bmpWaveForm->GetSourceDC(), &recStart, m_hFillBrush); 
+    {
+      m_bmpWaveForm->DrawFilledRect(recStart);
+    }
     if (dwZoomBlockEnd == m_wave.GetBlockCount())
-      FillRect(m_bmpWaveForm->GetSourceDC(), &recEnd, m_hFillBrush); 
+    {
+      m_bmpWaveForm->DrawFilledRect(recEnd);
+    }
         
     // release memory & cleanup
     free(points);
-    SelectObject(m_bmpWaveForm->GetSourceDC(), hOldPen);
     m_bFormChanged= FALSE;
   }
 
