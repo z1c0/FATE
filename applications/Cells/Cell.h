@@ -1,12 +1,4 @@
-// Cell.h: interface for the CCell class.
-//////////////////////////////////////////////////////////////////////
-#if !defined(AFX_CELL_H__0EDAD1B3_2550_458F_A23D_AB3B8B16B709__INCLUDED_)
-#define AFX_CELL_H__0EDAD1B3_2550_458F_A23D_AB3B8B16B709__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
-
 #include "../../framework/include/fate.h"
 
 //--------------------------------------------------------------------------------
@@ -16,7 +8,7 @@ public:
 	CCell();
 	virtual ~CCell();
   virtual bool Create(const CFBitmap& destbmp);
-  virtual void Move(int x, int y);  // TODO: ugly!!!
+  virtual void Move(int x, int y);
   virtual void Draw();
   void SetX(int iPosX) { m_iPosX= iPosX; };
   int GetX() { return(m_iPosX); };
@@ -36,4 +28,3 @@ protected:
   int m_iVec[2];
 };
 
-#endif // !defined(AFX_CELL_H__0EDAD1B3_2550_458F_A23D_AB3B8B16B709__INCLUDED_)

@@ -1,5 +1,4 @@
-#ifndef __FATE___H__
-#define __FATE___H__
+#pragma once
 
 #include "../base/FateTypeDefs.h"
 #include "../base/FateApp.h"
@@ -17,6 +16,7 @@
 #include "../gui/FDropList.h"
 
 #include "../comm/FSocket.h"
+#include "../comm/FUDPSocket.h"
 
 #include "../ext/gui_protocol.h"
 #include "../ext/FVEObjPanel.h"
@@ -25,9 +25,9 @@
 #include "../ext/FController.h"
 #include "../ext/FStartMenu.h"
 #include "../ext/FStartMenu.h"
+#include "../ext/FStartMenu.h"
+#include "../ext/FWidgetPanel.h"
 
 #include "../audio/FMMWave.h"
 #include "../audio/FWaveIn.h"
 #include "../audio/FWaveOut.h"
-
-#endif  // __FATE___H__

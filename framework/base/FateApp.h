@@ -70,6 +70,7 @@ public:
     void *pReserved1;    // additional user purpose data
     void *pReserved2;    // additional user purpose data
     DWORD dwReserved1;
+    DWORD dwReserved2;
   };
 
 	CFateApp(EFateDrawMode DrawMode = DM_PORTRAIT) FATE_SECTION;
@@ -93,6 +94,7 @@ public:
   virtual bool SliderChanged(unsigned long ulSliderID, int iVal) { return(false); };
   virtual bool Char(TCHAR chChar) { return(false); };
   virtual bool ClientConnect(class CFServer* pServer) { return(false); };
+  virtual bool Timer(unsigned long id) { return false; };
 
   virtual void SetSystem(CFSystem *pSystem) FATE_SECTION;
   virtual CFSystem* GetSystem() FATE_SECTION;
@@ -103,8 +105,6 @@ public:
 
   EFateDrawMode GetDrawMode() const { return m_DrawMode; };
   bool IsLandScapeMode() const { return ((m_DrawMode == DM_LANDSCAPE)||(m_DrawMode == DM_LANDSCAPE_FLIPPED)); };
-
-  virtual bool ExtraEventHandler(unsigned long ulEventID, void *pParam) { return(false); };
   
   void EnableFateLoop(bool bEnabled) { m_bFateLoopEnabled= bEnabled; };
   bool IsFateLoopEnabled() { return(m_bFateLoopEnabled); };
@@ -143,7 +143,7 @@ public:
   void AddServer(int iPort);
   inline bool IsListening() { return(m_bIsListening); };
   void CheckServers();
-  
+ 
   static CFateApp* GetApp() { return(m_pApp); };
 
 protected:

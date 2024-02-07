@@ -150,7 +150,52 @@ Package=<4>
 
 ###############################################################################
 
+Project: "VRENAsim25"=".\VRENA\VRena_2.5\VRENAsim25.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
 Project: "WAND"=".\WAND\WAND.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "WAND_vePanel"=".\WAND_vePanel\WAND_vePanel.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "WAND_widgets"=".\WAND_widgets\WAND_widgets.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -173,6 +218,9 @@ Package=<5>
 
 Package=<4>
 {{{
+    Begin Project Dependency
+    Project_Dep_Name FATEsim
+    End Project Dependency
 }}}
 
 ###############################################################################

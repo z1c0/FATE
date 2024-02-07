@@ -9,7 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
+#include "../../../framework/include/fate.h"
 
 class CFPPTPanel : public CFPanel  
 {
@@ -19,16 +19,17 @@ public:
   virtual void Draw();
   virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); };
   virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); };
-  virtual BOOL StylusDown(int xPos, int yPos);
-  virtual BOOL KeyDown(PdaKey key);
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
-  virtual BOOL DropListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry);
+  virtual bool StylusDown(int xPos, int yPos);
+  virtual bool KeyDown(PdaKey key);
+  virtual bool ButtonReleased(DWORD dwBtnID);
+  virtual bool DropListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
   BOOL Create();
   BOOL StartPPT(char *pszFileName);
   BOOL ClosePPT();
   void SetAddrPPT(CFInetAddr *addrPPT) { m_addrPPT= addrPPT; };
   void SetScreenID(int iScreenID) { m_iScreenID= iScreenID; };
   BOOL SendToPPTHost(char *pMsg);
+
 private:
   void NextSlide();
   void PrevSlide();

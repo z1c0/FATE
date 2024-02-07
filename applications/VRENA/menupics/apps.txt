@@ -1,0 +1,13 @@
+0  cray
+1  kogler
+2  vai
+3  vidaonau
+4  solar
+5  unreal unreal
+6  unreal novgorod
+7  foobillard
+8  lentos
+9  multimeag
+10 sinus
+11 vandalism
+12 wfl

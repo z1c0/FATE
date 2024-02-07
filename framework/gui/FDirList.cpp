@@ -1,7 +1,6 @@
 // FDirList.cpp: implementation of the CFDirList class.
 //////////////////////////////////////////////////////////////////////
 #include <windows.h>
-#include <commctrl.h>
 #include <tchar.h>
 #include "FDirList.h"
 #include "../base/FBitmap.h"
@@ -40,8 +39,6 @@ void CFDirList::SetSystem(CFSystem *pSystem)
   //m_iItemHeight= max(18, tm.tmHeight + tm.tmExternalLeading + m_iVerMargin);
   
   // create background bitmap
-  // TODO
-  // m_bmpBack->SetDestDC(m_hdc);
   m_bmpBack->Create(m_iItemWidth + 2 * m_iHorMargin + m_bmpUpArrow->GetWidth(), 
                    m_iItemHeight * m_iMaxVisItems);
   CreateBackGround();
@@ -71,53 +68,50 @@ void CFDirList::DrawItems()
 
   // rectangle in which an item is displayed
   RECT itemRect;
-  itemRect.left  = m_iPosX + 1;
-  itemRect.top   = m_iPosY + 1;
-  itemRect.right = m_iPosX + m_iItemWidth;
-  itemRect.bottom= m_iPosY + m_iItemHeight - 1;
+  int posX = 1;
+  int posY = 1;
+  itemRect.left  = posX + 1;
+  itemRect.top   = posY + 1;
+  itemRect.right = posX + m_iItemWidth;
+  itemRect.bottom= posY + m_iItemHeight - 1;
 
   // display list entries
   ITEMLISTENTRY *pAuxEntry= m_pEntries;
-  int pos= 0, index= 0;  
-
-  CFDC dc(*m_bmpBack);
-  
+  int pos= 0, index= 0;   
   while (pAuxEntry) {
     if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
       // item selected?
       if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index)) {      
-        //SetBkColor(m_hdc, m_colHiBack);
-        //SetTextColor(m_hdc, m_colHiText);
         m_bmpBack->SetBackgroundColor(m_colHiBack);
         m_bmpBack->SetTextColor(m_colHiText);
         
         itemRect.right+= 2 * m_iHorMargin - 1;
-        //FillRect(m_hdc, &itemRect, m_hBrushHiBack);
         m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
-        // redraw the items       
-        ExtTextOut(dc.GetHDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
-                   ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
-        SHFILEINFO shfi;
-        HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, dc.GetHDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_BLEND50);
-      } else {
-        //SetBkColor(m_hdc, m_colBack);
-        //SetTextColor(m_hdc, m_colText);
+
+        RECT textRect = itemRect;
+        textRect.left = posX + m_iHorMargin + 18;
+        textRect.top = posY + m_iItemHeight * index + 1;
+        m_bmpBack->DrawText(pAuxEntry->pszItem, textRect);
+
+        m_pSystem->DrawFileIcon(*m_bmpBack, pAuxEntry->pszAddInfo, posX + m_iHorMargin, posY + m_iItemHeight * index + 1, false);
+      }
+      else
+      {
         m_bmpBack->SetBackgroundColor(m_colHiBack);
         m_bmpBack->SetTextColor(m_colText);
       
         // clear old item
         itemRect.right+= 2 * m_iHorMargin - 1;
-        //FillRect(m_hdc, &itemRect, m_hBrushBack);
         m_bmpBack->DrawFilledRect(itemRect);
         itemRect.right-= 2 * m_iHorMargin - 1;
-        // redraw the items
-        ExtTextOut(dc.GetHDC(), m_iPosX + m_iHorMargin + 18, m_iPosY + m_iItemHeight * index + 1,
-                   ETO_CLIPPED, &itemRect, pAuxEntry->pszItem, _tcslen(pAuxEntry->pszItem), NULL);
-        SHFILEINFO shfi;
-        HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-        ImageList_Draw((HIMAGELIST)h, shfi.iIcon, dc.GetHDC(), m_iPosX + m_iHorMargin, m_iPosY + m_iItemHeight * index + 1, ILD_NORMAL);
+
+        RECT textRect = itemRect;
+        textRect.left = posX + m_iHorMargin + 18;
+        textRect.top = posY + m_iItemHeight * index + 1;
+        m_bmpBack->DrawText(pAuxEntry->pszItem, textRect);
+
+        m_pSystem->DrawFileIcon(*m_bmpBack, pAuxEntry->pszAddInfo, posX + m_iHorMargin, posY + m_iItemHeight * index + 1, true);
       }
       index++;
       itemRect.top+= m_iItemHeight;

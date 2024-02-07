@@ -80,56 +80,56 @@ BOOL CFVRPanel::Create()
   _tcscat(szPath, TEXT("menupics\\"));
   
   // title
-  m_bmpTitle= new CFBitmap(m_hdc);
+  m_bmpTitle= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpTitle->Load(IDB_VR_TITLE)) return(FALSE);
   
   // tabs
-  m_bmpTab[0]= new CFBitmap(m_hdc);
+  m_bmpTab[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpTab[0]->Load(IDB_LI_UP)) return(FALSE);
   
-  m_bmpTab[1]= new CFBitmap(m_hdc);
+  m_bmpTab[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpTab[1]->Load(IDB_MI_UP)) return(FALSE);
   
-  m_bmpTab[2]= new CFBitmap(m_hdc);
+  m_bmpTab[2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpTab[2]->Load(IDB_RE_UP)) return(FALSE);  
   
   // close button
-  CFBitmap *bmpClose= new CFBitmap(m_hdc);
+  CFBitmap *bmpClose= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpClose->Load(IDB_SKIP_SMALL)) return(FALSE);
   m_btnClose= new CFButton(bmpClose);
   m_btnClose->SetVisible(TRUE);
-  m_btnClose->SetID(ID_BTN_CLOSEVR);
-  Add(m_btnClose);
+  m_btnClose->SetId(ID_BTN_CLOSEVR);
+  Add(*m_btnClose);
 
   // left arrow button
-  CFBitmap *bmpLeft= new CFBitmap(m_hdc);
+  CFBitmap *bmpLeft= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpLeft->Load(IDB_LINKS)) return(FALSE);
-  CFBitmap *bmpLeftPr= new CFBitmap(m_hdc);
+  CFBitmap *bmpLeftPr= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpLeftPr->Load(IDB_LINKS_PR)) return(FALSE);
-  CFBitmap *bmpLeftDis= new CFBitmap(m_hdc);
+  CFBitmap *bmpLeftDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpLeftDis->Load(IDB_LINKS_END)) return(FALSE);  
   m_btnLeft= new CFButton(bmpLeft, bmpLeftPr, bmpLeftDis);
   m_btnLeft->SetVisible(TRUE);
   m_btnLeft->SetEnabled(FALSE);
-  m_btnLeft->SetID(ID_BTN_LEFT);
+  m_btnLeft->SetId(ID_BTN_LEFT);
   m_btnLeft->SetTransparency(RGB(51, 102, 0));
-  Add(m_btnLeft);
+  Add(*m_btnLeft);
 
   // right arrow button
-  CFBitmap *bmpRight= new CFBitmap(m_hdc);
+  CFBitmap *bmpRight= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpRight->Load(IDB_RECHTS)) return(FALSE);
-  CFBitmap *bmpRightPr= new CFBitmap(m_hdc);
+  CFBitmap *bmpRightPr= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpRightPr->Load(IDB_RECHTS_PR)) return(FALSE);
-  CFBitmap *bmpRightDis= new CFBitmap(m_hdc);
+  CFBitmap *bmpRightDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpRightDis->Load(IDB_RECHTS_END)) return(FALSE);  
   m_btnRight= new CFButton(bmpRight, bmpRightPr, bmpRightDis);
   m_btnRight->SetVisible(TRUE);
-  m_btnRight->SetID(ID_BTN_RIGHT);
+  m_btnRight->SetId(ID_BTN_RIGHT);
   m_btnRight->SetTransparency(RGB(51, 102, 0));
-  Add(m_btnRight);
+  Add(*m_btnRight);
 
   // reset
-  m_bmpReset= new CFBitmap(m_hdc);
+  m_bmpReset= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpReset->Load(IDB_RESET)) return(FALSE);
 
   // retrieve number of applications to display
@@ -142,9 +142,9 @@ BOOL CFVRPanel::Create()
   m_bmpPics = new CFBitmap*[m_iNrOfApps];
   
   // add icon and image for ARS-BOX app
-  m_bmpIcons[m_iNrOfApps - 1]= new CFBitmap(m_hdc);
+  m_bmpIcons[m_iNrOfApps - 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpIcons[m_iNrOfApps - 1]->Load(IDB_ARSBOX_ICON)) return(FALSE);
-	m_bmpPics[m_iNrOfApps - 1]= new CFBitmap(m_hdc);
+	m_bmpPics[m_iNrOfApps - 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpPics[m_iNrOfApps - 1]->Load(IDB_ARSBOX_PIC)) return(FALSE);
 
   // load images
@@ -155,7 +155,7 @@ BOOL CFVRPanel::Create()
 		_itot(i, szBuff, 10);
 		_tcscat(szFullPath, szBuff);
 		_tcscat(szFullPath, TEXT(".bmp"));
-		m_bmpIcons[i]= new CFBitmap(m_hdc);    
+		m_bmpIcons[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());    
   	if (!m_bmpIcons[i]->Load(szFullPath)) return(FALSE);
 
 		// load pictures
@@ -164,7 +164,7 @@ BOOL CFVRPanel::Create()
 		_itot(i, szBuff, 10);
 		_tcscat(szFullPath, szBuff);
 		_tcscat(szFullPath, TEXT(".bmp"));
-		m_bmpPics[i]= new CFBitmap(m_hdc);
+		m_bmpPics[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpPics[i]->Load(szFullPath)) return(FALSE);
 	}  
   
@@ -172,7 +172,7 @@ BOOL CFVRPanel::Create()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRPanel::StylusDown(int xPos, int yPos)
+bool CFVRPanel::StylusDown(int xPos, int yPos)
 {
   if (PointInRect(&m_rectTab[0], xPos, yPos)) {
     m_iTab= 0;
@@ -208,7 +208,7 @@ BOOL CFVRPanel::StylusDown(int xPos, int yPos)
 //--------------------------------------------------------------------------------
 void CFVRPanel::UpdatePos()
 {
-  if (m_hdc) {
+  if (m_pSystem) {
     int iPosY;
 
     m_bmpTitle->SetX(m_iPosX);
@@ -247,7 +247,7 @@ void CFVRPanel::UpdatePos()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRPanel::PointInRect(const RECT *rect, int iPosX, int iPosY)
+bool CFVRPanel::PointInRect(const RECT *rect, int iPosX, int iPosY)
 {
   return((iPosX >= rect->left)&&(iPosX <= rect->right)&&
          (iPosY >= rect->top)&&(iPosY <= rect->bottom));
@@ -281,7 +281,7 @@ int CFVRPanel::GetNumberOfApps()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRPanel::ButtonReleased(DWORD dwBtnID)
+bool CFVRPanel::ButtonReleased(DWORD dwBtnID)
 {
   switch(dwBtnID) {
     case ID_BTN_LEFT:

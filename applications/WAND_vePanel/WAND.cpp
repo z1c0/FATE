@@ -50,27 +50,25 @@ bool CWAND::InitFateApp()
 /// Event handling method for buttons.
 bool CWAND::ButtonReleased(DWORD dwBtnID)
 {
-  // Check for ID.
-  // TODO
-  if (dwBtnID == 555) {
-      {
-        CFSocket sock;
-        LPCTSTR pszCapt= "BUTTON1";
-        GUI_PACKET pack;
-        pack.uiCmd = WIDGET_ADD;
-        pack.uiKind = WIDGET_BUTTON;
-        pack.uiID= 12;
-        pack.uiLen= strlen(pszCapt) + 1;
-        bool bRet= 0;
-        int i= 0;
-        
-        bRet= sock.Create();
-        bRet= sock.Connect("127.0.0.1", 1234);
-        i= sock.Send((char*)&pack, sizeof(GUI_PACKET));
-        i= sock.Send(pszCapt, strlen(pszCapt) + 1);
-        sock.Close();
-      }
-    return(TRUE);
+  // TODO: Check for ID.
+  if (dwBtnID == 555)
+  {
+      CFSocket sock;
+      LPCTSTR pszCapt= "BUTTON1";
+      GUI_PACKET pack;
+      pack.uiCmd = WIDGET_ADD;
+      pack.uiKind = WIDGET_BUTTON;
+      pack.uiID= 12;
+      pack.uiLen= strlen(pszCapt) + 1;
+      bool bRet= 0;
+      int i= 0;
+      
+      bRet= sock.Create();
+      bRet= sock.Connect("127.0.0.1", 1234);
+      i= sock.Send((char*)&pack, sizeof(GUI_PACKET));
+      i= sock.Send(pszCapt, strlen(pszCapt) + 1);
+      sock.Close();
+      return(TRUE);
   }
 
   return(FALSE);

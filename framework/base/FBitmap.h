@@ -1,5 +1,7 @@
+#pragma once
+
 #ifdef _WIN32
-  #include "FBitmap_WIN32.h"
+  #include "WIN32/FBitmap.h"
 #else
-  #include "FBitmap_PalmOS.h"
+  #include "PalmOS/FBitmap.h"
 #endif

@@ -1,11 +1,13 @@
+#pragma once
+
 #ifdef _WIN32
 
 #ifdef _WIN32_WCE
-  #include "FSystem_WIN32_WCE.h"
+  #include "WIN32_WCE/FSystem.h"
 #else
-  #include "FSystem_WIN32.h"
+  #include "WIN32/FSystem.h"
 #endif
 
 #else
-  #include "FSystem_PalmOS.h"
+  #include "PalmOS/FSystem.h"
 #endif

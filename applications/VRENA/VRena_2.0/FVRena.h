@@ -9,7 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
+#include "../../../framework/include/fate.h"
 #include "FVRPanel.h"
 #include "FPPTPanel.h"
 #include "FScreens.h"
@@ -31,33 +31,33 @@ class CFVRena : public CFateApp
 public:
 	CFVRena();
 	virtual ~CFVRena();
-  virtual BOOL InitFateApp();
-	virtual BOOL ActivateFateApp();
-	virtual BOOL CloseFateApp();
-  virtual BOOL StylusDown(int xPos, int yPos);
-  virtual BOOL StylusMove(int xPos, int yPos);
-  virtual BOOL StylusUp(int xPos, int yPos) { return(FALSE); };
-  virtual BOOL KeyDown(PdaKey key);
-  virtual BOOL KeyUp(PdaKey key) { return(FALSE); };
+  virtual bool InitFateApp();
+	virtual bool ActivateFateApp();
+	virtual bool CloseFateApp();
+  virtual bool StylusDown(int xPos, int yPos);
+  virtual bool StylusMove(int xPos, int yPos);
+  virtual bool StylusUp(int xPos, int yPos) { return(FALSE); };
+  virtual bool KeyDown(PdaKey key);
+  virtual bool KeyUp(PdaKey key) { return(FALSE); };
   virtual void Draw();
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
-  virtual BOOL ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry);
-  virtual BOOL DropListExpanded(DWORD dwListID);
-  virtual BOOL DropListCollapsed(DWORD dwListID);
+  virtual bool ButtonReleased(DWORD dwBtnID);
+  virtual bool ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
+  virtual bool DropListExpanded(DWORD dwListID);
+  virtual bool DropListCollapsed(DWORD dwListID);
+  virtual bool Timer(unsigned long id);
   BOOL AddItem(int iNr, TCHAR *pszItem, TCHAR *pszAddInfo);
   int GetMediaType() { return(m_iMediaType); };
   void SetMediaType(int iMediaType) { m_iMediaType= iMediaType; };
   BOOL SendToMovieHost(int iScreen, char *pMsg);
   BOOL SendToMatrixHost(char *pMsg);
-  void ActivateControls(BOOL bActivate) { m_panelCtls->SetVisible(bActivate); };
-  void EnableController(BOOL bEnabled) { m_cont->SetEnabled(bEnabled); };
+  void ActivateControls(bool bActivate) { m_panelCtls->SetVisible(bActivate); };
+  void EnableController(bool bEnabled) { m_cont->SetEnabled(bEnabled); };
   void ShowVR() { m_panelCtls->SetVisible(FALSE); m_panelVR->SetVisible(TRUE); };
   BOOL SendCaveMenuChange(int iNr);
   BOOL SendTrackerReset();
   BOOL ModelLoad(char *pszModel);
   BOOL ModelRotate(int iAxis, int  iAngle);
   BOOL ModelSize(float fSize);
-  virtual BOOL ExtraEventHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
   CFInetAddr* GetModelAddr() { return(m_addrModel[0]); };
 private:
   void DisplayIntro();

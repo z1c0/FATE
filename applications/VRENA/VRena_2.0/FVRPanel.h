@@ -9,7 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
+#include "../../../framework/include/fate.h"
 
 class CFVRena;
 
@@ -21,11 +21,12 @@ public:
   virtual void Draw();
   virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); };
   virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); };
-  virtual BOOL StylusDown(int xPos, int yPos);
+  virtual bool StylusDown(int xPos, int yPos);
   BOOL Create();
+
 private:
-  BOOL ButtonReleased(DWORD dwBtnID);
-  BOOL PointInRect(const RECT *rect, int iPosX, int iPosY);
+  bool ButtonReleased(DWORD dwBtnID);
+  bool PointInRect(const RECT *rect, int iPosX, int iPosY);
   void UpdatePos();
   void DrawIcons();
   int GetNumberOfApps();

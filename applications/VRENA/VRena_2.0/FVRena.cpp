@@ -85,67 +85,67 @@ CFVRena::~CFVRena()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::InitFateApp()
+bool CFVRena::InitFateApp()
 {
   TCHAR szPath[1024];
 
   // disable automatic suspension of app
-  EnableSuspend(FALSE);
+  m_pSystem->EnableSuspend(false);
   
   // set path for bitmaps
   _tcscpy(szPath, m_app->GetAppPath());
 
   // create title bar
-  m_bmpTitle= new CFBitmap(m_hdc);
+  m_bmpTitle= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpTitle->Load(IDB_TITLE)) return(FALSE);
   
   // create bitmaps for switching tabs
   // PPT
-  m_bmpPPT[0]= new CFBitmap(m_hdc);
+  m_bmpPPT[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpPPT[0]->Load(IDB_BUTTON_PPT)) return(FALSE);
   m_bmpPPT[0]->SetX(1);  
   m_bmpPPT[0]->SetY(m_app->GetHeight() - m_bmpPPT[0]->GetHeight());  
-  m_bmpPPT[1]= new CFBitmap(m_hdc);
+  m_bmpPPT[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpPPT[1]->Load(IDB_BUTTON_PPT_P)) return(FALSE);
   m_bmpPPT[1]->SetX(m_bmpPPT[1]->GetX());  
   m_bmpPPT[1]->SetY(m_bmpPPT[0]->GetY());  
   
   // VIDEO
-  m_bmpVideo[0]= new CFBitmap(m_hdc);
+  m_bmpVideo[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpVideo[0]->Load(IDB_BUTTON_VIDEO)) return(FALSE);
   m_bmpVideo[0]->SetX(m_bmpPPT[0]->GetRight() + 1);
   m_bmpVideo[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmpVideo[1]= new CFBitmap(m_hdc);
+  m_bmpVideo[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpVideo[1]->Load(IDB_BUTTON_VIDEO_P)) return(FALSE);
   m_bmpVideo[1]->SetX(m_bmpVideo[0]->GetX());
   m_bmpVideo[1]->SetY(m_bmpPPT[0]->GetY());  
   
   // PIC
-  m_bmpPic[0]= new CFBitmap(m_hdc);  
+  m_bmpPic[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());  
   if (!m_bmpPic[0]->Load(IDB_BUTTON_PICS)) return(FALSE);
   m_bmpPic[0]->SetX(m_bmpVideo[1]->GetRight() + 1);
   m_bmpPic[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmpPic[1]= new CFBitmap(m_hdc);
+  m_bmpPic[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpPic[1]->Load(IDB_BUTTON_PICS_P)) return(FALSE);
   m_bmpPic[1]->SetX(m_bmpPic[0]->GetX());
   m_bmpPic[1]->SetY(m_bmpPPT[0]->GetY());  
   
   // 3D
-  m_bmp3D[0]= new CFBitmap(m_hdc);  
+  m_bmp3D[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());  
   if (!m_bmp3D[0]->Load(IDB_BUTTON_3D)) return(FALSE);
   m_bmp3D[0]->SetX(m_bmpPic[1]->GetRight() + 1);
   m_bmp3D[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmp3D[1]= new CFBitmap(m_hdc);
+  m_bmp3D[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmp3D[1]->Load(IDB_BUTTON_3D_P)) return(FALSE);
   m_bmp3D[1]->SetX(m_bmp3D[0]->GetX());
   m_bmp3D[1]->SetY(m_bmpPPT[0]->GetY());  
  
   // VR
-  m_bmpVR[0]= new CFBitmap(m_hdc);
+  m_bmpVR[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpVR[0]->Load(IDB_BUTTON_VR)) return(FALSE);
   m_bmpVR[0]->SetX(m_bmp3D[1]->GetRight() + 1);
   m_bmpVR[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmpVR[1]= new CFBitmap(m_hdc);
+  m_bmpVR[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpVR[1]->Load(IDB_BUTTON_VR_P)) return(FALSE);
   m_bmpVR[1]->SetX(m_bmpVR[0]->GetX());
   m_bmpVR[1]->SetY(m_bmpPPT[0]->GetY());  
@@ -153,26 +153,26 @@ BOOL CFVRena::InitFateApp()
   // create a panel for logical aggregation of controls
   m_panelCtls= new CFPanel();
   m_panelCtls->SetVisible(TRUE);
-  Add(m_panelCtls);
+  Add(*m_panelCtls);
 
   // create close button
-  CFBitmap *bmpClose= new CFBitmap(m_hdc);
+  CFBitmap *bmpClose= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpClose->Load(IDB_SKIP)) return(FALSE);
-  CFBitmap *bmpCloseDis= new CFBitmap(m_hdc);
+  CFBitmap *bmpCloseDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!bmpCloseDis->Load(IDB_SKIP_DIS)) return(FALSE);
   m_btnClose= new CFButton(bmpClose, NULL, bmpCloseDis);
   m_btnClose->SetX(m_bmpTitle->GetRight() - m_btnClose->GetWidth() - 3);
   m_btnClose->SetY(3);
   m_btnClose->SetVisible(TRUE);
-  m_btnClose->SetID(ID_BTN_QUITAPP);
-  m_panelCtls->Add(m_btnClose);
+  m_btnClose->SetId(ID_BTN_QUITAPP);
+  m_panelCtls->Add(*m_btnClose);
 
   // create the item lists
   CFBitmap *aBmpUp[4];
   CFBitmap *aBmpDown[4];
   for (int i=0; i<4; i++) {
-    aBmpUp[i]= new CFBitmap(m_hdc);
-    aBmpDown[i]= new CFBitmap(m_hdc);
+    aBmpUp[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    aBmpDown[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!aBmpDown[i]->Load(IDB_DOWN_SCROLL)) return(FALSE);
     if (!aBmpUp[i]->Load(IDB_UP_SCROLL)) return(FALSE);
     m_aItemLists[i]= new CFItemList(m_iMaxItems, GetWidth() - m_iListIndent * 2 - aBmpDown[i]->GetWidth(), 
@@ -180,32 +180,33 @@ BOOL CFVRena::InitFateApp()
     m_aItemLists[i]->SetVisible(FALSE);
     m_aItemLists[i]->SetX(m_iListIndent);
     m_aItemLists[i]->SetY(m_bmpTitle->GetBottom() + 10);
-    m_panelCtls->Add(m_aItemLists[i]);
+    m_panelCtls->Add(*m_aItemLists[i]);
   }
   
   // assign IDs
   m_aItemLists[0]->SetVisible(TRUE);
-  m_aItemLists[0]->SetID(ID_LIST_PPT);   
-  m_aItemLists[1]->SetID(ID_LIST_VIDEO);
-  m_aItemLists[2]->SetID(ID_LIST_PICS);
-  m_aItemLists[3]->SetID(ID_LIST_EXT);
+  m_aItemLists[0]->SetId(ID_LIST_PPT);   
+  m_aItemLists[1]->SetId(ID_LIST_VIDEO);
+  m_aItemLists[2]->SetId(ID_LIST_PICS);
+  m_aItemLists[3]->SetId(ID_LIST_EXT);
   // start with PPT list
   m_aItemLists[0]->SetVisible(TRUE);
   
   // create drag'n' drop bitmap
-  m_bmpDrag= new CFBitmap(m_hdc);
+  m_bmpDrag= new CFBitmap(*m_pSystem->GetDoubleBuffer());
 
   // create VR panel
   m_panelVR= new CFVRPanel();
-  Add(m_panelVR);
+  Add(*m_panelVR);
   if (!m_panelVR->Create()) return(FALSE);
   m_panelVR->SetY(m_bmpTitle->GetBottom());
   m_panelVR->SetVisible(FALSE);
 
   // create PPT panels
-  for (i=0; i<3; i++) {
+  for (i=0; i<3; i++)
+  {
     m_panelPPT[i]= new CFPPTPanel();
-    Add(m_panelPPT[i]);
+    Add(*m_panelPPT[i]);
     if (!m_panelPPT[i]->Create()) return(FALSE);
     m_panelPPT[i]->SetY(m_bmpTitle->GetBottom());
     m_panelPPT[i]->SetVisible(FALSE);
@@ -214,7 +215,7 @@ BOOL CFVRena::InitFateApp()
   
   // add the screens control
   m_screens= new CFScreens(m_panelPPT);
-  m_panelCtls->Add(m_screens);
+  m_panelCtls->Add(*m_screens);
   if (!m_screens->Create()) return(FALSE);
   m_screens->SetY(214);
   m_screens->SetVisible(TRUE);
@@ -228,19 +229,19 @@ BOOL CFVRena::InitFateApp()
   if (!ReadConfigFile(szPath)) return(FALSE);
 
   // add controller
-  Add(m_cont);
+  Add(*m_cont);
   m_cont->SetEnabled(TRUE);
   m_cont->StartSending(200);
 
   // create info label
   m_labelInfo= new CFLabel(TEXT(" Connecting to servers ..."), 200, 40);
-  Add(m_labelInfo);
+  Add(*m_labelInfo);
   m_labelInfo->SetX(20);
   m_labelInfo->SetY(70);  
   
   // create time label
   m_labelTime= new CFLabel(50, 20);
-  Add(m_labelTime);
+  Add(*m_labelTime);
   m_labelTime->SetVisible(TRUE);
   m_labelTime->SetColText(RGB(255, 255, 255));
   m_labelTime->SetColBorder(RGB(51, 102, 153));
@@ -248,19 +249,19 @@ BOOL CFVRena::InitFateApp()
   m_labelTime->SetX(160);
   m_labelTime->SetY(4);  
 
-  SetTimer(m_hWnd, 0xCAFE, 500, NULL);
+  m_pSystem->AddTimer(0xCAFE, 500);
   
   return(TRUE);
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::ActivateFateApp()
+bool CFVRena::ActivateFateApp()
 { 
   return(TRUE);
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::CloseFateApp()
+bool CFVRena::CloseFateApp()
 {
   return(TRUE);
 }
@@ -302,7 +303,7 @@ void CFVRena::Draw()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::StylusDown(int xPos, int yPos)
+bool CFVRena::StylusDown(int xPos, int yPos)
 {
   // just save coordinates for possible drag operation
   m_iOldX= xPos;
@@ -415,7 +416,7 @@ BOOL CFVRena::StylusDown(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::StylusMove(int xPos, int yPos)
+bool CFVRena::StylusMove(int xPos, int yPos)
 {
   if (m_bDragMode) {
     DoDrag(xPos, yPos);
@@ -425,7 +426,7 @@ BOOL CFVRena::StylusMove(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::KeyDown(PdaKey key)
+bool CFVRena::KeyDown(PdaKey key)
 {
   if (key ==  KeyFour) {  // BUTTON 4
     // reset signal for tracker
@@ -506,7 +507,7 @@ BOOL CFVRena::KeyDown(PdaKey key)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::ButtonReleased(DWORD dwBtnID)
+bool CFVRena::ButtonReleased(DWORD dwBtnID)
 {
   switch(dwBtnID) {
     case ID_BTN_QUITAPP:
@@ -547,7 +548,7 @@ BOOL CFVRena::ButtonReleased(DWORD dwBtnID)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::DropListExpanded(DWORD dwListID)
+bool CFVRena::DropListExpanded(DWORD dwListID)
 {
   if (dwListID == ID_DROPLIST) {
     m_bDropListEx= TRUE;
@@ -557,7 +558,7 @@ BOOL CFVRena::DropListExpanded(DWORD dwListID)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::DropListCollapsed(DWORD dwListID)
+bool CFVRena::DropListCollapsed(DWORD dwListID)
 {
   if (dwListID == ID_DROPLIST) {
     m_bDropListEx= FALSE;
@@ -573,49 +574,49 @@ void CFVRena::DisplayIntro()
   CFBitmap *bmpStart;
   CFBitmap *bmpAnim[11];
   
-  bmpStart= new CFBitmap(m_hdc);
+  bmpStart= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpStart->Load(IDB_INTRO);
-  bmpAnim[ 0]= new CFBitmap(m_hdc);
+  bmpAnim[ 0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 0]->Load(IDB_FRAME0);
   bmpAnim[ 0]->SetX(75); 
   bmpAnim[ 0]->SetY(35);
-  bmpAnim[ 1]= new CFBitmap(m_hdc);
+  bmpAnim[ 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 1]->Load(IDB_FRAME1);
   bmpAnim[ 1]->SetX(75); 
   bmpAnim[ 1]->SetY(35);
-  bmpAnim[ 2]= new CFBitmap(m_hdc);
+  bmpAnim[ 2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 2]->Load(IDB_FRAME2);
   bmpAnim[ 2]->SetX(75); 
   bmpAnim[ 2]->SetY(35);
-  bmpAnim[ 3]= new CFBitmap(m_hdc);
+  bmpAnim[ 3]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 3]->Load(IDB_FRAME3);
   bmpAnim[ 3]->SetX(75); 
   bmpAnim[ 3]->SetY(35);
-  bmpAnim[ 4]= new CFBitmap(m_hdc);
+  bmpAnim[ 4]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 4]->Load(IDB_FRAME4);
   bmpAnim[ 4]->SetX(75); 
   bmpAnim[ 4]->SetY(35);
-  bmpAnim[ 5]= new CFBitmap(m_hdc);
+  bmpAnim[ 5]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 5]->Load(IDB_FRAME5);
   bmpAnim[ 5]->SetX(75); 
   bmpAnim[ 5]->SetY(35);
-  bmpAnim[ 6]= new CFBitmap(m_hdc);
+  bmpAnim[ 6]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 6]->Load(IDB_FRAME6);
   bmpAnim[ 6]->SetX(75); 
   bmpAnim[ 6]->SetY(35);
-  bmpAnim[ 7]= new CFBitmap(m_hdc);
+  bmpAnim[ 7]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 7]->Load(IDB_FRAME7);
   bmpAnim[ 7]->SetX(75); 
   bmpAnim[ 7]->SetY(35);
-  bmpAnim[ 8]= new CFBitmap(m_hdc);
+  bmpAnim[ 8]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 8]->Load(IDB_FRAME8);
   bmpAnim[ 8]->SetX(75); 
   bmpAnim[ 8]->SetY(35);
-  bmpAnim[ 9]= new CFBitmap(m_hdc);
+  bmpAnim[ 9]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[ 9]->Load(IDB_FRAME9);
   bmpAnim[ 9]->SetX(75); 
   bmpAnim[ 9]->SetY(35);
-  bmpAnim[10]= new CFBitmap(m_hdc);
+  bmpAnim[10]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   bmpAnim[10]->Load(IDB_FRAME10);
   bmpAnim[10]->SetX(75); 
   bmpAnim[10]->SetY(35);
@@ -763,15 +764,15 @@ BOOL CFVRena::ReadConfigFile(LPCTSTR pszFileName)
 /// Used for error messages during initialization phase
 void CFVRena::Error(LPCTSTR pszErrMsg)
 {
-  MessageBox(m_hWnd, pszErrMsg, TEXT("Error"), MB_OK);
+  m_pSystem->ShowError(pszErrMsg);
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry)
+bool CFVRena::ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry)
 {  
-  LPDRAGGINGINFO pDI;
+  CFateApp::DRAGGINGINFO* pDI;
   RECT rect;
-  int iPos= pEntry->dwIndex - m_aItemLists[m_iMediaType]->GetItemPos();
+  int iPos= pEntry->ulIndex - m_aItemLists[m_iMediaType]->GetItemPos();
   int iPosX, iPosY;
   int iWidth = m_aItemLists[0]->GetItemWidth();
   int iHeight= m_aItemLists[0]->GetItemHeight();
@@ -787,15 +788,14 @@ BOOL CFVRena::ItemListSelected(DWORD dwListID, LPITEMLISTENTRY pEntry)
   m_bmpDrag->SetY(iPosY);
   rect.left= 0; rect.top= 0;
   rect.right= iWidth; rect.bottom= iHeight;
-  SetTextColor(m_bmpDrag->GetSourceDC(), RGB(255, 255, 255));
-  SetBkColor(m_bmpDrag->GetSourceDC(), RGB(255, 0, 0));
-  DrawText(m_bmpDrag->GetSourceDC(), pEntry->pszItem, _tcslen(pEntry->pszItem), &rect, 
-           DT_SINGLELINE|DT_LEFT|DT_VCENTER);
+  m_bmpDrag->SetTextColor(RGB(255, 255, 255));
+  m_bmpDrag->SetBackgroundColor(RGB(255, 0, 0));
+  m_bmpDrag->DrawText(pEntry->pszItem, rect);
   
   // start drag and drop operation
   StartDragMode(m_bmpDrag, m_iOldX, m_iOldY);
   pDI= m_app->GetDragInfo();
-  pDI->strDesc= pEntry->pszAddInfo;
+  pDI->pszDesc= pEntry->pszAddInfo;
 
   return(TRUE);
 }
@@ -949,21 +949,17 @@ BOOL CFVRena::AddItem(int iNr, TCHAR *pszItem, TCHAR *pszAddInfo)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFVRena::ExtraEventHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+bool CFVRena::Timer(unsigned long id)
 {
-  if (message == WM_TIMER) {
-    // clock timer
-    if (wParam == 0xCAFE) {
-      TCHAR szTime[32];
+  if (id == 0xCAFE)
+  {
+    TCHAR szTime[32];
 
-      GetLocalTime(&m_time);
-      _stprintf(szTime, TEXT("%02d:%02d"), m_time.wHour, m_time.wMinute);
-      m_labelTime->SetText(szTime);
+    GetLocalTime(&m_time);
+    _stprintf(szTime, TEXT("%02d:%02d"), m_time.wHour, m_time.wMinute);
+    m_labelTime->SetText(szTime);
 
-      return(TRUE);
-    }
-    return(FALSE);
+    return(TRUE);
   }
-
   return(FALSE);
 }

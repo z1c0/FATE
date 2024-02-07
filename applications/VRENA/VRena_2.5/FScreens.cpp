@@ -80,71 +80,71 @@ void CFScreens::Draw()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFScreens::Create()
+bool CFScreens::Create()
 {
   // cast pointer to application object
   m_theApp= (CFVRena*)m_app;
   m_app->SetTransparency(0);
 
   // load background bitmap
-  m_bmpBack= new CFBitmap(m_hdc);
+  m_bmpBack= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpBack->Load(IDB_SCREENS_BACK)) return(FALSE);
   
   // load bitmaps for screens
   // NB: Depends on the screens that are actually used! (1-3)  
   if (m_iNrOfScreensUsed == 1) {
-    m_bmpScreens[0][0]= new CFBitmap(m_hdc);
+    m_bmpScreens[0][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][0]->Load(IDB_BLANC_MID)) return(FALSE);
 
-    m_bmpScreens[0][1]= new CFBitmap(m_hdc);
+    m_bmpScreens[0][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][1]->Load(IDB_ACTIVE_MID)) return(FALSE);
 
-    m_bmpScreens[0][2]= new CFBitmap(m_hdc);
+    m_bmpScreens[0][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][2]->Load(IDB_SET_MID)) return(FALSE);
 
     // rest are dummies
-    m_bmpScreens[1][0]= new CFBitmap(m_hdc);
-    m_bmpScreens[1][1]= new CFBitmap(m_hdc);
-    m_bmpScreens[1][2]= new CFBitmap(m_hdc);
-    m_bmpScreens[2][0]= new CFBitmap(m_hdc);
-    m_bmpScreens[2][1]= new CFBitmap(m_hdc);
-    m_bmpScreens[2][2]= new CFBitmap(m_hdc);
+    m_bmpScreens[1][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
 
   } else if (m_iNrOfScreensUsed == 3) {
-    m_bmpScreens[0][0]= new CFBitmap(m_hdc);
+    m_bmpScreens[0][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][0]->Load(IDB_BLANC_LEFT)) return(FALSE);
 
-    m_bmpScreens[0][1]= new CFBitmap(m_hdc);
+    m_bmpScreens[0][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][1]->Load(IDB_ACTIVE_LEFT)) return(FALSE);
 
-    m_bmpScreens[0][2]= new CFBitmap(m_hdc);
+    m_bmpScreens[0][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][2]->Load(IDB_SET_LEFT)) return(FALSE);
 
-    m_bmpScreens[1][0]= new CFBitmap(m_hdc);
+    m_bmpScreens[1][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[1][0]->Load(IDB_BLANC_MID)) return(FALSE);
 
-    m_bmpScreens[1][1]= new CFBitmap(m_hdc);
+    m_bmpScreens[1][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[1][1]->Load(IDB_ACTIVE_MID)) return(FALSE);
 
-    m_bmpScreens[1][2]= new CFBitmap(m_hdc);
+    m_bmpScreens[1][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[1][2]->Load(IDB_SET_MID)) return(FALSE);
 
-    m_bmpScreens[2][0]= new CFBitmap(m_hdc);
+    m_bmpScreens[2][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[2][0]->Load(IDB_BLANC_RIGHT)) return(FALSE);
 
-    m_bmpScreens[2][1]= new CFBitmap(m_hdc);
+    m_bmpScreens[2][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[2][1]->Load(IDB_ACTIVE_RIGHT)) return(FALSE);
 
-    m_bmpScreens[2][2]= new CFBitmap(m_hdc);
+    m_bmpScreens[2][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[2][2]->Load(IDB_SET_RIGHT)) return(FALSE);  
   }
   
   // play button for videos
-  m_bmpPlay= new CFBitmap(m_hdc);
+  m_bmpPlay= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpPlay->Load(IDB_PLAY)) return(FALSE);
   
   // pause button for videos
-  m_bmpPause= new CFBitmap(m_hdc);
+  m_bmpPause= new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpPause->Load(IDB_PAUSE)) return(FALSE);
 
   m_bCreated= TRUE;
@@ -153,9 +153,9 @@ BOOL CFScreens::Create()
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFScreens::StylusDown(int xPos, int yPos)
+bool CFScreens::StylusDown(int xPos, int yPos)
 {
-  LPDRAGGINGINFO pDI;
+  CFateApp::DRAGGINGINFO* pDI;
 
   // drag into one of the screens
   if ((m_bmpScreens[0][0]->PointInside(xPos, yPos))&&(m_iStates[0] != VRENA_INACTIVE)) {
@@ -184,10 +184,10 @@ BOOL CFScreens::StylusDown(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFScreens::StylusMove(int xPos, int yPos)
+bool CFScreens::StylusMove(int xPos, int yPos)
 {
   if (m_app->IsDragMode()) {
-    LPDRAGGINGINFO pDI= m_app->GetDragInfo();
+    CFateApp::DRAGGINGINFO* pDI= m_app->GetDragInfo();
     if ((abs(pDI->iOrigX + pDI->iOffsX - xPos) > 5)||(abs(pDI->iOrigY + pDI->iOffsY - yPos) > 5))
       m_app->DoDrag(xPos, yPos);
     return(TRUE);
@@ -197,10 +197,10 @@ BOOL CFScreens::StylusMove(int xPos, int yPos)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFScreens::StylusUp(int xPos, int yPos)
+bool CFScreens::StylusUp(int xPos, int yPos)
 {
   if (m_app->IsDragMode()) {
-    LPDRAGGINGINFO pDI= m_app->GetDragInfo();
+    CFateApp::DRAGGINGINFO* pDI= m_app->GetDragInfo();
     
     // quit drag anyway
     m_app->StopDragMode();
@@ -216,18 +216,18 @@ BOOL CFScreens::StylusUp(int xPos, int yPos)
       }
 
       pDI->dwReserved1= 0;      
-      pDI->cbDrag->SetX(pDI->iOrigX);
-      pDI->cbDrag->SetY(pDI->iOrigY);
+      pDI->pBmpDrag->SetX(pDI->iOrigX);
+      pDI->pBmpDrag->SetY(pDI->iOrigY);
       Draw();
-      pDI->cbDrag->SaveUnder();
+      pDI->pBmpDrag->SaveUnder();
     
     } else {
       char szFile[MAX_PATH];
       // convert textual information to ASCII string
 #ifdef _WIN32_WCE
-      wcstombs(szFile, pDI->strDesc, _tcsclen(pDI->strDesc) + 1);
+      wcstombs(szFile, pDI->pszDesc, _tcsclen(pDI->pszDesc) + 1);
 #else
-      strcpy(szFile, pDI->strDesc);
+      strcpy(szFile, pDI->pszDesc);
 #endif
 
       // drag into one of the screens

@@ -51,7 +51,7 @@ public:
   bool Intersects(int left, int top, int widht, int height)
   {
     // TODO
-    return true;
+    return false;
   }
 
 private:

@@ -1,7 +1,4 @@
-// FFileList.cpp: implementation of the CFFileList class.
-//////////////////////////////////////////////////////////////////////
 #include <windows.h>
-#include <commctrl.h>
 #include "FFileList.h"
 #include "../base/FateTypeDefs.h"
 #include "../base/FateApp.h"
@@ -39,10 +36,6 @@ void CFFileList::DrawItems()
 
   // rectangle in which an item is displayed
   RECT itemRect;
-  //itemRect.left  = m_iPosX + 1;
-  //itemRect.top   = m_iPosY + 1;
-  //itemRect.right = m_iPosX + m_iItemWidth;
-  //itemRect.bottom= m_iPosY + m_iItemHeight - 1;
   int posX = 1;
   int posY = 1;
   itemRect.left  = posX + 1;
@@ -52,16 +45,14 @@ void CFFileList::DrawItems()
 
   // display list entries
   ITEMLISTENTRY *pAuxEntry= m_pEntries;
-  int pos= 0, index= 0;  
-
-  CFDC dc(*m_bmpBack);
-  
+  int pos= 0, index= 0;
+ 
   while (pAuxEntry) {
     if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
       COLORREF col = m_colBack;
       COLORREF colBack = m_colBack;
       COLORREF colText = m_colText;
-      UINT style = ILD_NORMAL;
+      bool normal = true;
 
       // item selected?
       if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index))
@@ -69,7 +60,7 @@ void CFFileList::DrawItems()
         col = m_colHiBack;
         colBack = m_colHiBack;
         colText = m_colHiText;
-        style = ILD_BLEND50;
+        normal = false;
       }
 
       m_bmpBack->SetColor(col);
@@ -86,10 +77,7 @@ void CFFileList::DrawItems()
       textRect.top = posY + m_iItemHeight * index + 1;
       m_bmpBack->DrawText(pAuxEntry->pszItem, textRect);
       
-      SHFILEINFO shfi;
-      HANDLE h= (HANDLE)SHGetFileInfo(pAuxEntry->pszAddInfo, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
-
-      ::ImageList_Draw((HIMAGELIST)h, shfi.iIcon, dc.GetHDC(), posX + m_iHorMargin, posY + m_iItemHeight * index + 1, style);
+      m_pSystem->DrawFileIcon(*m_bmpBack, pAuxEntry->pszAddInfo, posX + m_iHorMargin, posY + m_iItemHeight * index + 1, normal);
 
       index++;
       itemRect.top+= m_iItemHeight;

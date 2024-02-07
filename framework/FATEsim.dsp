@@ -87,7 +87,7 @@ LIB32=link.exe -lib
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\base\FATE_WIN32.cpp
+SOURCE=.\base\WIN32\FATE.cpp
 # End Source File
 # Begin Source File
 
@@ -103,15 +103,19 @@ SOURCE=.\base\FateTypeDefs.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\base\WIN32\FBitmap.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\base\FBitmap.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\FBitmap_WIN32.cpp
+SOURCE=.\base\WIN32\FBitmap.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\FBitmap_WIN32.h
+SOURCE=.\base\WIN32\FFile.cpp
 # End Source File
 # Begin Source File
 
@@ -119,11 +123,7 @@ SOURCE=.\base\FFile.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\FFile_WIN32.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\FFile_WIN32.h
+SOURCE=.\base\WIN32\FFile.h
 # End Source File
 # Begin Source File
 
@@ -135,15 +135,15 @@ SOURCE=.\base\FPoint.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\base\WIN32\FSystem.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\base\FSystem.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\FSystem_WIN32.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\FSystem_WIN32.h
+SOURCE=.\base\WIN32\FSystem.h
 # End Source File
 # Begin Source File
 
@@ -196,6 +196,14 @@ SOURCE=.\comm\FComPort.h
 # Begin Source File
 
 SOURCE=.\comm\FInetAddr_WIN32.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FMsgServerProxy.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FMsgServerProxy.h
 # End Source File
 # Begin Source File
 
@@ -293,6 +301,38 @@ SOURCE=.\gui\FMsgPanel.h
 
 SOURCE=.\gui\FPanel.h
 # End Source File
+# Begin Source File
+
+SOURCE=.\gui\FProgressBar.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FProgressBar.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FSlider.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FSlider.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FTextField.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FTextField.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FToggleButton.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FToggleButton.h
+# End Source File
 # End Group
 # Begin Group "include"
 
@@ -351,6 +391,14 @@ SOURCE=.\ext\FOffscreenRenderer.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\ext\FRemoteButton.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FRemoteButton.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\ext\FStartMenu.cpp
 # End Source File
 # Begin Source File
@@ -388,6 +436,30 @@ SOURCE=.\ext\FVEObjPanel.cpp
 # Begin Source File
 
 SOURCE=.\ext\FVEObjPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetMgr.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetMgr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetPanel.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\gui_protocol.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\IFRemoteWidget.h
 # End Source File
 # Begin Source File
 

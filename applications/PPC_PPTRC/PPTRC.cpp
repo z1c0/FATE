@@ -51,7 +51,7 @@ bool CPPTRC::InitFateApp()
   TCHAR szPath[1024];
 
   // disable automatic suspension of app
-  //EnableSuspend(FALSE); TODO
+  m_pSystem->EnableSuspend(FALSE);
   
   // parse config file for IP configuration
   _tcscpy(szPath, m_app->GetAppPath());
@@ -100,7 +100,7 @@ bool CPPTRC::InitFateApp()
   m_panelFiles->SetVisible(TRUE);
   
   // init a timer for polling the receive socket
-  SetTimer(m_pSystem->GetHWND(), POLL_TIMER, 10, NULL);
+  m_pSystem->AddTimer(POLL_TIMER, 10);
 
   return(TRUE);
 }
@@ -516,9 +516,10 @@ BOOL CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
 }
 
 //--------------------------------------------------------------------------------
-bool CPPTRC::ExtraEventHandler(unsigned long eventId, void *pParam)
+bool CPPTRC::Timer(unsigned long id)
 {
-  if (eventId == WM_TIMER) { //POLL_TIMER) { TODO timer
+  if (id == POLL_TIMER)
+  {
     // check for incoming data on socket
     CFSocket sock;
     int iRet;

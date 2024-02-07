@@ -32,7 +32,7 @@ CFWaveCutApp::CFWaveCutApp() : CFateApp(DM_LANDSCAPE_FLIPPED)
 //--------------------------------------------------------------------------------
 CFWaveCutApp::~CFWaveCutApp()
 {
-  //EnableSuspend(TRUE); // TODO
+  m_pSystem->EnableSuspend(false);
 
   delete(m_bmpTitle);
   delete(m_bmpVol);
@@ -72,7 +72,7 @@ bool CFWaveCutApp::InitFateApp()
 #endif
 
   // disable suspend so the application won't freeze
-  //EnableSuspend(FALSE); // TODO
+  m_pSystem->EnableSuspend(FALSE);
 
   m_bmpTitle = new CFBitmap(*m_pSystem->GetDoubleBuffer());
 #ifdef _XEDIT_DEMO  
@@ -288,11 +288,9 @@ void CFWaveCutApp::Draw()
 //--------------------------------------------------------------------------------
 bool CFWaveCutApp::StylusDown(int xPos, int yPos)
 {
-  // TODO: remove later!
-  //if (m_bmpTitle->PointInside(xPos, yPos)) SaveDoubleBuffer(TEXT("\\screenshot.bmp"));
-
   // volume slider tapped?
-  if (m_bmpSlide->PointInside(xPos, yPos) && !m_bMoveSlide) {
+  if (m_bmpSlide->PointInside(xPos, yPos) && !m_bMoveSlide)
+  {
     m_bMoveSlide= TRUE;
     return(TRUE);
   }

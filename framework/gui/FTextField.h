@@ -1,8 +1,7 @@
-#ifndef __FTEXTFIELD__H__
-#define __FTEXTFIELD__H__
+#pragma once
 
-#include "IFateComponent.h"
-#include "IFCharListener.h"
+#include "../base/IFateComponent.h"
+#include "../base/IFCharListener.h"
 
 //------------------------------------------------------------------------------
 class CFBitmap;
@@ -25,7 +24,7 @@ public:
   virtual bool KeyUp(PdaKey key)   { return(false); }  // event not handled
   virtual bool Char(TCHAR chChar);
   virtual void Draw();
-  virtual void SetDC(HDC hdc);
+  virtual void SetSystem(CFSystem* pSystem);
   virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); };
   virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); };
   
@@ -50,4 +49,3 @@ protected:
   HBRUSH m_hBrushBack;
 };
 
-#endif  // __FTEXTFIELD__H__

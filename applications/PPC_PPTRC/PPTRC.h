@@ -35,12 +35,13 @@ public:
   virtual bool KeyUp(int vkKey);
   virtual void Draw();
   virtual bool ButtonReleased(DWORD dwBtnID);
+  virtual bool Timer(unsigned long id);
   void DisplayIntro();
   BOOL ReadConfigFile(LPCTSTR pszFileName);
   void Error(LPCTSTR pszErrMsg);
   BOOL SendToPPTHost(char *pMsg);
   BOOL ReceiveFromPPTHost(CFSocket *sock);
-  virtual bool ExtraEventHandler(unsigned long ulEventID, void *pParam);
+
 private:
   BOOL ClosePresentation();
   BOOL OpenPresentation();

@@ -20,8 +20,7 @@ bool CFInfoPanel::StylusDown(int xPos, int yPos)
 {
   if (m_app->GetCaptureComp() == this) {
     m_app->ReleaseCaptureComp();
-    // TODO
-    //InvalidateRect(m_hWnd, NULL, FALSE);
+    m_pSystem->ForceRedraw();
     return(TRUE);
   }
   return(FALSE);

@@ -9,7 +9,7 @@
 #endif // _MSC_VER > 1000
 
 
-#include "../FATE/stdafx.h"
+#include "../../framework/include/fate.h"
 
 //--------------------------------------------------------------------------------
 class CWAND : public CFateApp  
@@ -17,8 +17,8 @@ class CWAND : public CFateApp
 public:
 	CWAND();
 	virtual ~CWAND();
-  virtual BOOL InitFateApp();
-  virtual BOOL ButtonReleased(DWORD dwBtnID);
+  virtual bool InitFateApp();
+  virtual bool ButtonReleased(DWORD dwBtnID);
 private:
   CFButton *m_btnQuit;
   CFController *m_pCont;

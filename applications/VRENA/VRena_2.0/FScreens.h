@@ -9,7 +9,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "../FATE/stdafx.h"
+#include "../../../framework/include/fate.h"
 #include "FPPTPanel.h"
 
 #define VRENA_INACTIVE   0x0    // screen is inactive
@@ -26,12 +26,12 @@ public:
   virtual void Draw();
   virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); };
   virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); };
-  virtual BOOL StylusDown(int xPos, int yPos);
-  virtual BOOL StylusMove(int xPos, int yPos);
-  virtual BOOL StylusUp(int xPos, int yPos);
-  virtual BOOL KeyDown(PdaKey key) { return(FALSE); };
-  virtual BOOL KeyUp(PdaKey key) { return(FALSE); };
-  BOOL Create();
+  virtual bool StylusDown(int xPos, int yPos);
+  virtual bool StylusMove(int xPos, int yPos);
+  virtual bool StylusUp(int xPos, int yPos);
+  virtual bool KeyDown(PdaKey key) { return(FALSE); };
+  virtual bool KeyUp(PdaKey key) { return(FALSE); };
+  bool Create();
   int GetActiveScreen() { return(m_iActiveScreen); };
   BOOL StartVR();
   BOOL CloseMovie(int iScreen);
