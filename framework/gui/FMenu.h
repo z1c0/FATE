@@ -1,5 +1,4 @@
-#ifndef __FMENU__H__
-#define __FMENU__H__
+#pragma once
 
 #include "../base/IFateComponent.h"
 
@@ -62,4 +61,3 @@ private:
   bool m_bSubMenuOpen;
 };
 
-#endif  // __FMENU__H__

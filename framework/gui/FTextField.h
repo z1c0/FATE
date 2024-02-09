@@ -31,8 +31,7 @@ public:
   void SetText(TCHAR *pszText);
   TCHAR* GetText() { return(m_pszText); };
 
-protected:
-
+private:
   bool CreateBitmap();
   void Init();
   void Cleanup();
@@ -45,7 +44,5 @@ protected:
   COLORREF m_colBack;
   COLORREF m_colBorder;
   COLORREF m_colText;
-  HPEN m_hPenBorder;
-  HBRUSH m_hBrushBack;
 };
 

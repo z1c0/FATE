@@ -104,16 +104,22 @@ bool CFMenu::StylusDown(int xPos, int yPos)
   while (pTemp) {
     if (pTemp->pBmp->PointInside(xPos, yPos)) {
       // is the menu already opened?
-      if (m_pCurrOpen) {
+      if (m_pCurrOpen)
+      {
         // the same menu was tapped
-        if (m_pCurrOpen == pTemp) {
+        if (m_pCurrOpen == pTemp)
+        {
           CloseMenu();
-        } else {
+        }
+        else
+        {
           m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, (void*)MAKELPARAM(pTemp->iPosHor, pTemp->iPosVer));
           CloseMenu();
           OpenMenu(pTemp);
         }
-      } else {
+      }
+      else
+      {
         m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, (void*)MAKELPARAM(pTemp->iPosHor, pTemp->iPosVer));
         OpenMenu(pTemp);
       }

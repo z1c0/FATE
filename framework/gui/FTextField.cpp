@@ -38,9 +38,6 @@ void CFTextField::Init()
   m_colBack  = RGB(255, 255, 255);
   m_colBorder= RGB(0, 0, 0);
   m_colText  = RGB(0, 0, 0);
-
-  m_hPenBorder= CreatePen(PS_SOLID, 1, m_colBorder);
-  m_hBrushBack= CreateSolidBrush(m_colBack);
 }
 
 //--------------------------------------------------------------------------------
@@ -48,33 +45,31 @@ void CFTextField::Cleanup()
 {
   SAFE_DELETE(m_pszText);
   SAFE_DELETE(m_bmpImg);
-  DeleteObject(m_hPenBorder);
-  DeleteObject(m_hBrushBack);
 }
 
 //--------------------------------------------------------------------------------
 void CFTextField::Draw()
 {
-  if (m_bmpImg) m_bmpImg->Blit();
+  if (m_bmpImg)
+  {
+    m_bmpImg->Blit();
+  }
 }
 
 //--------------------------------------------------------------------------------
 void CFTextField::DrawBitmap()
 {
   // draw background
-  HPEN hOldPen= (HPEN)SelectObject(m_bmpImg->GetSourceDC(), m_hPenBorder);
-  HBRUSH hOldBrush= (HBRUSH)SelectObject(m_bmpImg->GetSourceDC(), m_hBrushBack);
-  Rectangle(m_bmpImg->GetSourceDC(), 0, 0, m_iWidth, m_iHeight);
-  SelectObject(m_bmpImg->GetSourceDC(), hOldPen);
-  SelectObject(m_bmpImg->GetSourceDC(), hOldBrush);
+  m_bmpImg->SetColor(m_colBorder);
+  m_bmpImg->SetBackgroundColor(m_colBack);
+  m_bmpImg->DrawFilledRect(0, 0, m_iWidth, m_iHeight);
   
   // draw text
-  if (m_pszText) {
-    SetBkColor(m_bmpImg->GetSourceDC(), m_colBack);
-    SetTextColor(m_bmpImg->GetSourceDC(), m_colText);
-    DrawText(m_bmpImg->GetSourceDC(), m_pszText, _tcslen(m_pszText), &m_rect, 
-             DT_SINGLELINE|DT_LEFT|DT_VCENTER);
-  }
+  if (m_pszText)
+  {
+    m_bmpImg->SetTextColor(m_colText);
+    m_bmpImg->DrawText(m_pszText, m_rect); 
+ }
 }
 
 //--------------------------------------------------------------------------------
@@ -91,18 +86,19 @@ bool CFTextField::CreateBitmap()
   m_rect.top= 2; m_rect.left= 2;
   m_rect.bottom= m_iHeight - 2; m_rect.right= m_iWidth - 2;
 
-  if ((!m_iWidth)||(!m_iHeight)) {
+  if (!m_iWidth || !m_iHeight)
+  {
     // at least text must be specified
     if (!m_pszText) return(false);
 
-    DrawText(m_hdc, m_pszText, _tcslen(m_pszText), &m_rect, DT_CALCRECT);
+    m_bmpImg->CalcRectForText(m_pszText, m_rect);
     m_iWidth = m_rect.right - m_rect.left - 2;
     m_iHeight= m_rect.bottom - m_rect.top - 2;
   }
   
   // safe-release old bitmap
   SAFE_DELETE(m_bmpImg);
-  m_bmpImg= new CFBitmap(m_hdc);
+  m_bmpImg = new CFBitmap(*m_pSystem->GetDoubleBuffer());
   if (!m_bmpImg->Create(m_iWidth, m_iHeight)) return(false);
   m_bmpImg->SetX(m_iPosX);
   m_bmpImg->SetY(m_iPosY);

@@ -1,14 +1,10 @@
 #include "Demo.h"
 
-//--------------------------------------------------------------------------------
 CFateApp* CreateFateApp()
 {
   return(new CDemo());
 }
 
-
-
-//--------------------------------------------------------------------------------
 CDemo::CDemo() : CFateApp()
 {
   m_menu = NULL;
@@ -17,7 +13,6 @@ CDemo::CDemo() : CFateApp()
   m_pVEPanel = NULL;
 }
 
-//--------------------------------------------------------------------------------
 CDemo::~CDemo()
 {
   if (m_menu) delete(m_menu);
@@ -26,16 +21,14 @@ CDemo::~CDemo()
   if (m_pVEPanel) delete(m_pVEPanel);
 }
 
-//--------------------------------------------------------------------------------
 void CDemo::Draw()
 {
   ClearScreen(RGB(0, 225, 50));
 }
 
-//--------------------------------------------------------------------------------
 bool CDemo::InitFateApp()
 {
-  m_menu= new CFMenu();
+  m_menu = new CFMenu();
   m_menu->AddEntry(TEXT("File"));
   m_menu->AddEntry(TEXT("Edit"));
   m_menu->AddEntry(TEXT("View"));
@@ -80,3 +73,7 @@ bool CDemo::InitFateApp()
   return true;
 }
 
+bool CDemo::MenuSelected(unsigned long ulMenuID, int iSelMain, int iSelSub)
+{
+  return false;
+}

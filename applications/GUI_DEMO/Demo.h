@@ -1,9 +1,7 @@
-#ifndef __DEMO__H__
-#define __DEMO__H__
+#pragma once
 
 #include "../../framework/include/fate.h"
 
-//--------------------------------------------------------------------------------
 class CDemo : public CFateApp  
 {
 public:
@@ -11,6 +9,7 @@ public:
 	virtual ~CDemo();
   virtual void Draw();
   virtual bool InitFateApp();
+  virtual bool MenuSelected(unsigned long ulMenuID, int iSelMain, int iSelSub);
 
 private:
   
@@ -20,4 +19,3 @@ private:
   CFVEObjPanel *m_pVEPanel;
 };
 
-#endif  // __DEMO__H__

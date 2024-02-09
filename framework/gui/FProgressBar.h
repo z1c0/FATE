@@ -29,9 +29,6 @@ private:
   COLORREF m_colBorder;
   COLORREF m_colBack;
   COLORREF m_colFront;
-  HBRUSH m_hBrushBack;
-  HBRUSH m_hBrushFront;
-  HPEN m_hPenBorder;
   int m_iBorderWidth;
   int m_iProgPerc;
   int m_iProgGraph;

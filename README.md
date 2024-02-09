@@ -33,8 +33,8 @@ This application was only developed for the screenshots in [thesis](https://wolf
 
 ### liquor
 
-I remember that one day, when I was bored, I decided to implement the Austria card game [Schnapes](https://en.wikipedia.org/wiki/Schnapsen)
-using my framework. The I got distracted by something else and never finished it.
+I remember that one day, when I was bored, I decided to implement the Austrian card game [Schnapsen](https://en.wikipedia.org/wiki/Schnapsen)
+using my framework. Then I got distracted by something else and never finished it.
 
 ![liquor](images/liquor.png)
 
@@ -56,13 +56,10 @@ Yet another demo application, for the "offscreen rendering control" provided by 
 This was actually a really cool application that I developed for the [Ars Electronic Futurelab](https://ars.electronica.art/futurelab/).
 It allowed you to control a PowerPoint presentation from your PocketPC. You even got slide thumbnails sent to the device.
 
-**TODO**:
-* Unfortunately, this app currently does not compile.
-
 ### SimpleTest
 
 Another test app. This one I created specifically when I decided to implement the **PalmOS** port.
-Spoiler alert: I did not get very far.
+Spoiler alert: that port did not get very far.
 
 ![SimpleTest](images/simpletest.png)
 
@@ -76,34 +73,16 @@ The snake can shoot missiles though.
 ### VRena_2.0 / VRena_2.5
 
 This was the first and main showcase of my framework.
-You could use the PocketPC to control a virtual environment, do a picture slideshows, control Microsoft Powerpoint (was later became the standalone **PPC_PPTRC**).
-
-**TODO**:
-* Neither of these versions compiles at the moment.
-* Also, without the server software it's rather useless.
+You could use the PocketPC to control a virtual environment, do picture slideshows, control Microsoft Powerpoint (what later became the standalone **PPC_PPTRC**).
 
 ### WAND
 
 The actual *Wand* was a hardware device for interaction with VR environments.
-This demo application showcased one of the frameworks main features where a Pocket PC acts as such a Wand.
+This suite of demo applications showcased one of the framework's main features where a Pocket PC acts as such a Wand device.
 
 ### WAND_vePanel
 
-**TODO**
-* Add to workspace
-* Make compile
-
-**TODO**:
-* Does not compile.
-
 ### WAND_widgets
-
-**TODO**
-* Add to workspace
-* Make compile
-
-**TODO**:
-* Does not compile.
 
 ### XEDIT
 
@@ -112,9 +91,6 @@ It would turn your PocketPC into a mobile recording studio. You could record and
 perform cutting operations on the recorded `.wav` file.
 It implemented a custom memory manager to make maximum use of the available memory.
 We even sold a couple of licences back then.
-
-**TODO**:
-* I really need to make this one compile.
 
 
 

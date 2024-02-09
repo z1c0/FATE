@@ -15,9 +15,6 @@ CFProgressBar::CFProgressBar(int iWidth, int iHeight) : IFateComponent()
   m_colBack  = RGB(255, 255, 255);
   m_colBorder= RGB(125, 125, 125);
   m_colFront = RGB(255, 0, 0);
-  m_hPenBorder = CreatePen(PS_SOLID, m_iBorderWidth, m_colBorder);
-  m_hBrushBack = CreateSolidBrush(m_colBack);
-  m_hBrushFront= CreateSolidBrush(m_colFront);  
 }
 
 //--------------------------------------------------------------------------------
@@ -40,17 +37,14 @@ void CFProgressBar::DrawOffScreen()
 {
   if (!m_pSystem) return;  
  
-  HBRUSH hOldBrush;
-  HPEN hOldPen= (HPEN)SelectObject(m_bmpBuff->GetSourceDC(), m_hPenBorder);
   // draw progess
-  hOldBrush= (HBRUSH)SelectObject(m_bmpBuff->GetSourceDC(), m_hBrushFront);
-  Rectangle(m_bmpBuff->GetSourceDC(), 1, 1, m_iProgGraph - 1, m_iHeight - 1);
-  SelectObject(m_bmpBuff->GetSourceDC(), hOldBrush);
+  m_bmpBuff->SetColor(m_colBorder);
+  m_bmpBuff->SetBackgroundColor(m_colFront);
+  m_bmpBuff->DrawFilledRect(1, 1, m_iProgGraph - 1, m_iHeight - 1);
+
   // draw background
-  hOldBrush= (HBRUSH)SelectObject(m_bmpBuff->GetSourceDC(), m_hBrushBack);
-  Rectangle(m_bmpBuff->GetSourceDC(), m_iProgGraph - 1, 1, m_iWidth - 1, m_iHeight - 1);
-  SelectObject(m_bmpBuff->GetSourceDC(), hOldBrush);
-  SelectObject(m_bmpBuff->GetSourceDC(), hOldPen);  
+  m_bmpBuff->SetBackgroundColor(m_colBack);
+  m_bmpBuff->DrawFilledRect(m_iProgGraph - 1, 1, m_iWidth - 1, m_iHeight - 1);
 }
 
 //-------------------------------------------------------------------------------- 
