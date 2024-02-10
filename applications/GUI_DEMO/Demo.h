@@ -9,13 +9,19 @@ public:
 	virtual ~CDemo();
   virtual void Draw();
   virtual bool InitFateApp();
-  virtual bool MenuSelected(unsigned long ulMenuID, int iSelMain, int iSelSub);
+  virtual bool MenuItemSelected(unsigned long ulMenuID, unsigned int id);
+  virtual bool ButtonReleased(unsigned long ulBtnID);
 
-private:
-  
-  CFMenu *m_menu;
-  CFItemList *m_itemlist;
-  CFDropList *m_droplist;
-  CFVEObjPanel *m_pVEPanel;
+private:  
+  CFButton* m_btns;
+  CFPanel* m_panels;
+  CFMenu m_menu;
+  CFDropList m_dropList;
+  CFItemList m_itemList;
+  CFDirList m_dirList;
+  CFVEObjPanel m_vePanel;
+  CFLabel m_label;
+  CFProgressBar m_progressBar;
+  CFFileList m_fileList;
 };
 

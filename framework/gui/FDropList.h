@@ -1,9 +1,7 @@
-#ifndef __FDROPLIST__H__
-#define __FDROPLIST__H__
+#pragma once
 
 #include "FItemList.h"
 
-//--------------------------------------------------------------------------------
 class CFDropList : public CFItemList
 {
 public:
@@ -15,11 +13,11 @@ public:
 	virtual bool StylusMove(int xPos, int yPos);
 	virtual bool StylusUp(int xPos, int yPos);
 	virtual void Draw();
+  virtual void SetSystem(CFSystem *pSystem);
+  void SetX(int x) { m_iPosX = x; UpdatePos(); }
+  void SetY(int y) { m_iPosY = y; UpdatePos(); }
   
   void SetDropEnabled(bool bValue){ m_bDropEnabled = bValue;}
-  virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); }
-  virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); }
-  virtual void SetSystem(CFSystem *pSystem);
   bool SetSelectedItem(int iNr);
 
 private:
@@ -27,7 +25,7 @@ private:
   void DrawSelItem(LPCTSTR pSel);
   virtual void ItemSelected(ITEMLISTENTRY *pEntry);
 	
-  virtual bool CreateBackGround();
+  bool CreateBackGround();
   void UpdatePos();
   
   CFBitmap *m_bmpDropArrow;
@@ -38,8 +36,6 @@ private:
   bool m_bDropState;
   bool m_bDropEnabled;
   
-  RECT m_rectSel;
   LPCTSTR m_pszSelItem;
 };
 
-#endif  // __FDROPLIST__H__

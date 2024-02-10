@@ -7,13 +7,13 @@
 CFMenu::CFMenu()
 {
   // inits
-  m_iVerSpace= 2;  // space around menu text
-  m_iHorSpace= 3;
-  m_iMainNr= -1;
-  m_pItems= NULL;
-  m_pCurrOpen= NULL;
-  m_bCreated= false;
-  m_bSubMenuOpen= false;
+  m_iVerSpace = 2;  // space around menu text
+  m_iHorSpace = 3;
+  m_pItems = NULL;
+  m_pCurrOpen = NULL;
+  m_bCreated = false;
+  m_bSubMenuOpen = false;
+  m_itemCount = 0;
 
   // default values for colors
   m_colText  = RGB(255, 255, 255);
@@ -113,14 +113,12 @@ bool CFMenu::StylusDown(int xPos, int yPos)
         }
         else
         {
-          m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, (void*)MAKELPARAM(pTemp->iPosHor, pTemp->iPosVer));
           CloseMenu();
           OpenMenu(pTemp);
         }
       }
       else
       {
-        m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, (void*)MAKELPARAM(pTemp->iPosHor, pTemp->iPosVer));
         OpenMenu(pTemp);
       }
       return(true);
@@ -129,11 +127,14 @@ bool CFMenu::StylusDown(int xPos, int yPos)
   }  
   
   // was a sub-menu clicked?
-  if (m_pCurrOpen) {
+  if (m_pCurrOpen)
+  {
     pTemp= m_pCurrOpen->pDown;
-    while(pTemp) {
-      if (pTemp->pBmp->PointInside(xPos, yPos)) {
-        m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, (void*)MAKELPARAM(pTemp->iPosHor, pTemp->iPosVer));
+    while(pTemp)
+    {
+      if (pTemp->pBmp->PointInside(xPos, yPos))
+      {
+        m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, (void*)pTemp->id);
         m_bSubMenuOpen= true;
         return(true);
       }
@@ -157,44 +158,49 @@ bool CFMenu::StylusUp(int xPos, int yPos)
   return(false); // event not handled
 }
 
-//--------------------------------------------------------------------------------
 bool CFMenu::AddEntry(LPCTSTR pText)
 {
   // create new menu-entry
-  MENUITEM *pEntry= new MENUITEM;
+  MENUITEM *pEntry = new MENUITEM;
   if (!pEntry) return(false);
   pEntry->pText= pText;
   pEntry->bEnabled= true;
   pEntry->pNext= NULL;
   pEntry->pDown= NULL;
-  pEntry->iPosVer= 0;
-  pEntry->iPosHor= ++m_iMainNr;
+  pEntry->id = 0;
    
   // enqueue
-  if (!m_pItems) {
-    m_pItems= pEntry;
-  } else {
-    MENUITEM *pTemp= m_pItems;
-    
-    while(pTemp->pNext) {      
+  if (!m_pItems)
+  {
+    m_pItems = pEntry;
+  }
+  else
+  {
+    MENUITEM *pTemp= m_pItems;    
+    while(pTemp->pNext)
+    {      
       pTemp= pTemp->pNext;
     }
     pTemp->pNext= pEntry;
   }
-  return(true);
+
+  m_itemCount++;
+
+  return true;
 }
 
 //--------------------------------------------------------------------------------
 /// Adds a sub-menu-entry for an existing main-menu-entry. "iPos" is the 0-based
 /// index of the main-menu-entry, which must be valid.
 /// If "iPos" is an invalid index, false is returned.
-bool CFMenu::AddSubEntry(LPCTSTR pText, int iPos)
+bool CFMenu::AddSubEntry(LPCTSTR pText, int pos, unsigned int id)
 {
-  if ((iPos >= 0)&&(iPos <= m_iMainNr)) {
+  if (pos >= 0 && pos < m_itemCount)
+  {
     // go to main-entry specified by iPos
     int i= 0;
     MENUITEM *pTemp= m_pItems;    
-    while(i++ < iPos) pTemp= pTemp->pNext;
+    while(i++ < pos) pTemp= pTemp->pNext;
 
     // create new menu-entry
     MENUITEM *pEntry= new MENUITEM;
@@ -204,25 +210,25 @@ bool CFMenu::AddSubEntry(LPCTSTR pText, int iPos)
     pEntry->pNext= NULL;
     pEntry->pDown= NULL;
     pEntry->pUp= NULL;
-    pEntry->iPosHor= iPos;
-    pEntry->iPosVer= 1;
+    pEntry->id = id;
     
     // enqueue
-    if (!pTemp->pDown) {
+    if (!pTemp->pDown)
+    {
       pTemp->pDown= pEntry;
-    } else {
-      MENUITEM *pTempDown= pTemp->pDown;
-      pEntry->iPosVer++;
-    
-      while(pTempDown->pDown) {      
+    }
+    else
+    {
+      MENUITEM *pTempDown= pTemp->pDown;   
+      while(pTempDown->pDown)
+      {      
         pTempDown= pTempDown->pDown;
-        pEntry->iPosVer++;
       }
       pEntry->pUp= pTempDown;
       pTempDown->pDown= pEntry;
     }  
   }
-  return(false);
+  return false;
 }
 
 //--------------------------------------------------------------------------------
@@ -233,9 +239,11 @@ bool CFMenu::ClearEntries()
   MENUITEM *pTemp, *pOld, *pDown;
 
   pTemp= m_pItems;
-  while(pTemp) {
+  while(pTemp)
+  {
     pDown= pTemp->pDown;
-    while(pDown) {
+    while(pDown)
+    {
       pOld= pDown;
       pDown= pDown->pDown;
       delete(pOld->pBmp);
@@ -249,10 +257,10 @@ bool CFMenu::ClearEntries()
   }
 
   m_pItems= NULL;
-  m_bCreated= false;  
-  m_iMainNr= -1;
+  m_bCreated = false;  
+  m_itemCount = 0;
   
-  return(true);  
+  return true;  
 }
 
 //--------------------------------------------------------------------------------

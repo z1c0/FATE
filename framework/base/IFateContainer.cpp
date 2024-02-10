@@ -487,7 +487,7 @@ bool IFateContainer::ButtonReleaseNotify(unsigned long ulBtnID)
 /// function is called.
 /// For registered listeners derived from "IFateContainer" again their
 /// MenuSelectNotify-function is called.
-bool IFateContainer::MenuSelectNotify(unsigned long ulMenuID, int iSelMain, int iSelSub)
+bool IFateContainer::MenuItemSelectNotify(unsigned long ulMenuID, unsigned int id)
 {
   CFListIterator<IFateContainer*> *pContIt;
   CFListIterator<IFMenuListener*> *pMenuIt;
@@ -496,20 +496,27 @@ bool IFateContainer::MenuSelectNotify(unsigned long ulMenuID, int iSelMain, int 
   
   // first iterate through registered containers
   pContIt= m_pContList->GetIterator();
-  while(pContIt->HasMore()) {
+  while(pContIt->HasMore())
+  {
     pCont= pContIt->GetData();
     // containers have to notify their registrees again
-    if (pCont->MenuSelectNotify(ulMenuID, iSelMain, iSelSub)) return(true);
-    if (pCont->MenuSelected(ulMenuID, iSelMain, iSelSub)) return(true);
-    
+    if (pCont->MenuItemSelectNotify(ulMenuID, id))
+    {
+      return true;
+    }
+    if (pCont->MenuItemSelected(ulMenuID, id))
+    {
+      return true;
+    }    
     pContIt->Next();
   }
   
   // now iterate through listeners
   pMenuIt= m_pMenuList->GetIterator();
-  while(pMenuIt->HasMore()) {
+  while(pMenuIt->HasMore())
+  {
     pMenuLst= pMenuIt->GetData();
-    if (pMenuLst->MenuSelected(ulMenuID, iSelMain, iSelSub)) return(true);
+    if (pMenuLst->MenuItemSelected(ulMenuID, id)) return(true);
 
     pMenuIt->Next();
   }

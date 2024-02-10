@@ -8,11 +8,11 @@ CFDropList::CFDropList(int iMaxVisItems, int iItemWidth, CFBitmap *bmpDropArrow,
                      CFBitmap *bmpUpArrow, CFBitmap *bmpDownArrow) :
                      CFItemList(iMaxVisItems, iItemWidth, bmpUpArrow, bmpDownArrow)
 {
-  m_bmpDropArrow= bmpDropArrow;
-  m_bDropState= false;
-  m_bDropEnabled= true;
-  m_bmpTop= new CFBitmap();
-  m_pszSelItem= NULL;
+  m_bmpDropArrow = bmpDropArrow;
+  m_bDropState = false;
+  m_bDropEnabled = true;
+  m_bmpTop = new CFBitmap();
+  m_pszSelItem = NULL;
 }
 
 //--------------------------------------------------------------------------------
@@ -29,15 +29,18 @@ bool CFDropList::StylusDown(int xPos, int yPos)
     return(false);
  
   // expand / collapse droplist?
-  if (m_bmpDropArrow->PointInside(xPos, yPos)) {
+  if (m_bmpDropArrow->PointInside(xPos, yPos))
+  {
     m_bDropState= !m_bDropState;
-    if (m_bDropState) {
+    if (m_bDropState)
+    {
       m_app->m_pSysCapt= this;
       m_bmpBack->SaveUnder();
       Draw();
-      m_pSystem->QueueEvent(WM_DROPLISTEXPAND, m_ulID, NULL);
-    
-    } else {
+      m_pSystem->QueueEvent(WM_DROPLISTEXPAND, m_ulID, NULL);    
+    }
+    else
+    {
       if (m_app->m_pSysCapt == this) m_app->m_pSysCapt= NULL;
       m_bmpBack->RestoreUnder();
       m_pSystem->QueueEvent(WM_DROPLISTCOLLAPSE, m_ulID, NULL);
@@ -81,7 +84,8 @@ void CFDropList::SetSystem(CFSystem *pSystem)
   
   m_bmpTop->SetDestBitmap(*(m_pSystem->GetDoubleBuffer()));
   // If no bitmap wase specified, it is created.
-  if (!m_bmpDropArrow) {
+  if (!m_bmpDropArrow)
+  {
     m_bmpDropArrow = new CFBitmap();
     m_bmpDropArrow->operator=(m_bmpDownArrow);
     m_bmpDropArrow->SetDestBitmap(*(m_pSystem->GetDoubleBuffer()));
@@ -89,6 +93,7 @@ void CFDropList::SetSystem(CFSystem *pSystem)
   m_bmpTop->Create(m_bmpBack->GetWidth(), m_bmpDropArrow->GetHeight());
 
   CreateBackGround();
+
   UpdatePos();
 }
 
@@ -96,18 +101,22 @@ void CFDropList::SetSystem(CFSystem *pSystem)
 void CFDropList::Draw()
 {
   LPCTSTR pSel= TEXT(" ");
-  if ((!m_pszSelItem)&&(m_pEntries)&&(m_pEntries->pszItem)) {
+  if ((!m_pszSelItem)&&(m_pEntries)&&(m_pEntries->pszItem))
+  {
     pSel = m_pEntries->pszItem;
   }
-  else if ((m_pszSelItem)&&(!m_pEntries)) {
+  else if ((m_pszSelItem)&&(!m_pEntries))
+  {
     pSel= TEXT(" ");
   }
-  else {
+  else
+  {
     pSel = m_pszSelItem;
   }
   DrawSelItem(pSel);
   
-  if (m_bDropState) {  
+  if (m_bDropState)
+  {  
     // List is dropped down.
     CFItemList::Draw();
   }
@@ -116,7 +125,8 @@ void CFDropList::Draw()
 //--------------------------------------------------------------------------------
 void CFDropList::DrawSelItem(LPCTSTR pSel)
 {  
-  if (!pSel) {
+  if (!pSel)
+  {
     pSel = TEXT(" ");
   }
   m_pszSelItem = pSel;  
@@ -124,8 +134,13 @@ void CFDropList::DrawSelItem(LPCTSTR pSel)
   m_bmpTop->SetBackgroundColor(m_colBack);
   m_bmpTop->SetColor(m_colBorder);
   m_bmpTop->DrawFilledRect(0, 0, m_bmpTop->GetWidth(), m_bmpTop->GetHeight());
-  // Draw selected items.
-  m_bmpTop->DrawText(pSel, m_rectSel);
+  // Draw selected item.
+  RECT rect;
+  rect.left= 1;
+  rect.top= 1;
+  rect.right = m_iItemWidth - 2;
+  rect.bottom= m_bmpTop->GetHeight() - 2;
+  m_bmpTop->DrawText(pSel, rect);
   m_bmpTop->Blit();
   m_bmpDropArrow->Blit();
 }
@@ -133,29 +148,14 @@ void CFDropList::DrawSelItem(LPCTSTR pSel)
 //--------------------------------------------------------------------------------
 void CFDropList::UpdatePos()
 {
-  if (m_pSystem) {
+  if (m_pSystem)
+  {
     m_bmpTop->SetX(m_iPosX);
     m_bmpTop->SetY(m_iPosY);
     m_bmpDropArrow->SetX(m_bmpTop->GetRight() - m_bmpDropArrow->GetWidth());
     m_bmpDropArrow->SetY(m_iPosY);
 
-    m_bmpBack->SetX(m_iPosX);
-    m_bmpBack->SetY(m_bmpTop->GetBottom());
-    m_bmpUpArrow->SetX(m_bmpBack->GetRight() - m_bmpUpArrow->GetWidth() - 1);
-    m_bmpUpArrow->SetY(m_bmpBack->GetY());
-    m_bmpDownArrow->SetX(m_bmpBack->GetRight() - m_bmpUpArrow->GetWidth());
-    m_bmpDownArrow->SetY(m_bmpBack->GetY() + m_bmpBack->GetHeight() -  m_bmpDownArrow->GetHeight());
-
-    m_iSliderPos = m_bmpUpArrow->GetBottom();
-    m_rScrollBar.left= m_bmpUpArrow->GetX();
-    m_rScrollBar.top= m_bmpUpArrow->GetBottom();
-    m_rScrollBar.right= m_bmpUpArrow->GetRight();
-    m_rScrollBar.bottom= m_bmpDownArrow->GetY();
-
-    m_rectSel.left= 0;
-    m_rectSel.top= 0;
-    m_rectSel.right= m_iItemWidth;
-    m_rectSel.bottom= m_bmpTop->GetHeight() - 2;
+    CFItemList::UpdatePos(m_bmpTop->GetHeight());
   } 
 }
 
@@ -176,19 +176,20 @@ void CFDropList::ItemSelected(ITEMLISTENTRY *pEntry)
 /// If color-settings have changed the background is adapted in this method.
 bool CFDropList::CreateBackGround()
 {
-  if (!CFItemList::CreateBackGround()) {
+  if (!CFItemList::CreateBackGround())
+  {
     return false;
   }
   
   // Safety check if bitmap is valid.
-  if (m_bmpTop->IsValid()) {
+  if (m_bmpTop->IsValid())
+  {
     // Set colors appropriately
     m_bmpTop->SetBackgroundColor(m_colBack);
     m_bmpTop->SetColor(m_colText);
     m_bmpTop->SetTextColor(m_colText);
     // Draw the rectangle for selected item.
-    m_bmpTop->DrawFilledRect(m_bmpTop->GetX(), m_bmpTop->GetY(),
-                       m_bmpTop->GetRight(), m_bmpTop->GetBottom());
+    m_bmpTop->DrawFilledRect(m_bmpTop->GetX(), m_bmpTop->GetY(), m_bmpTop->GetRight(), m_bmpTop->GetBottom());
     return true;
   }
   return false;

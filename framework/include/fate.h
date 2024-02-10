@@ -14,6 +14,7 @@
 #include "../gui/FFileList.h"
 #include "../gui/FDirList.h"
 #include "../gui/FDropList.h"
+#include "../gui/FProgressBar.h"
 
 #include "../comm/FSocket.h"
 #include "../comm/FUDPSocket.h"

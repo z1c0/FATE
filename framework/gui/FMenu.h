@@ -15,8 +15,7 @@ public:
     LPCTSTR pText;
     CFBitmap *pBmp;
     bool bEnabled;
-    int iPosHor;
-    int iPosVer;
+    unsigned int id;
     struct MENUITEM *pNext;
     struct MENUITEM *pDown;
     struct MENUITEM *pUp;
@@ -34,7 +33,7 @@ public:
   virtual void SetY(int iPosX) {};  // Implemented empty. Menu is always placed at 0/0.
   
   bool AddEntry(LPCTSTR pText);
-  bool AddSubEntry(LPCTSTR pText, int iPos);
+  bool AddSubEntry(LPCTSTR pText, int pos, unsigned int id);
   bool ClearEntries();
 
 private:
@@ -47,11 +46,11 @@ private:
   int GetMaxWidth(MENUITEM *pItem);
   CFBitmap *CreateMenuBmp(LPCTSTR pText, int iWidth= -1);
 
-  int m_iMainNr;
   int m_iVerSpace;
   int m_iHorSpace;
   
   MENUITEM *m_pItems;
+  int m_itemCount;
   int m_iItemHeight;
   COLORREF m_colText;
   COLORREF m_colBorder;

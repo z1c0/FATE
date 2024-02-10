@@ -1,7 +1,5 @@
-#ifndef __IFBUTTONLISTENER__H__
-#define __IFBUTTONLISTENER__H__
+#pragma once 
 
-//------------------------------------------------------------------------------
 class IFButtonListener
 {
 public:
@@ -9,4 +7,4 @@ public:
   virtual bool ButtonReleased(unsigned long ulBtnID)= 0;
 };
 
-#endif // __IFBUTTONLISTENER__H__
+

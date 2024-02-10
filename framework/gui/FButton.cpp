@@ -150,10 +150,8 @@ bool CFButton::StylusUp(int xPos, int yPos)
 {
   if (m_app->m_pSysCapt == this) {
     m_bPressed= false;
-    m_app->m_pSysCapt= NULL;
-    
-    //Sleep(m_dwDelay);
-    
+    m_app->m_pSysCapt= NULL;    
+   
     // transparency set?
     if (m_bTrans) {
       m_pBmpDefault->TransBlit(m_colTrans);

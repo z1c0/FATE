@@ -56,6 +56,10 @@ Yet another demo application, for the "offscreen rendering control" provided by 
 This was actually a really cool application that I developed for the [Ars Electronic Futurelab](https://ars.electronica.art/futurelab/).
 It allowed you to control a PowerPoint presentation from your PocketPC. You even got slide thumbnails sent to the device.
 
+You need to start the [server application](etc/PPTRCv2) and it still works like a charm.
+
+![PPC_PPTRC](images/pptrc.png)
+
 ### SimpleTest
 
 Another test app. This one I created specifically when I decided to implement the **PalmOS** port.

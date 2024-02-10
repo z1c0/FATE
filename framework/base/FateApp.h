@@ -1,5 +1,4 @@
-#ifndef __FATEAPP__H__
-#define __FATEAPP__H__
+#pragma once
 
 #include "IFateContainer.h"
 #include "FBitmap.h"
@@ -86,7 +85,7 @@ public:
   // UI event handling methods are implemented empty
   virtual bool ButtonPressed(unsigned long ulBtnID) { return(false); };
   virtual bool ButtonReleased(unsigned long ulBtnID) { return(false); };
-  virtual bool MenuSelected(unsigned long ulMenuID, int iSelMain, int iSelSub) { return(false); };
+  virtual bool MenuItemSelected(unsigned long ulMenuID, unsigned int id) { return false; };
   virtual bool ItemListSelected(unsigned long ulListID, ITEMLISTENTRY *pEntry) { return(false); };
   virtual bool DropListExpanded(unsigned long ulListID) { return(false); };
   virtual bool DropListSelected(unsigned long ulListID, ITEMLISTENTRY *pEntry) { return(false); };
@@ -144,7 +143,7 @@ public:
   inline bool IsListening() { return(m_bIsListening); };
   void CheckServers();
  
-  static CFateApp* GetApp() { return(m_pApp); };
+  static CFateApp* GetApp() { return m_pApp; };
 
 protected:
 
@@ -173,4 +172,3 @@ private:
   CFLinkedList<CFServer*> m_ListServers;
 };
 
-#endif  // __FATEAPP__H__

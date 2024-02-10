@@ -29,8 +29,6 @@ private:
   COLORREF m_colBorder;
   COLORREF m_colBack;
   COLORREF m_colFront;
-  int m_iBorderWidth;
   int m_iProgPerc;
-  int m_iProgGraph;
 };
 

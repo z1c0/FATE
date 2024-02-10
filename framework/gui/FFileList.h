@@ -1,15 +1,10 @@
-#ifndef __FFILELIST__H__
-#define __FFILELIST__H__
+#pragma once
 
 #include "../base/FateTypeDefs.h"
 #include "FItemList.h"
 
-
-//--------------------------------------------------------------------------------
 #define IL_DIRFLAG    0x03
 
-
-//------------------------------------------------------------------------------
 class CFFileList : public CFItemList
 {
 public:
@@ -29,15 +24,13 @@ public:
   void RemoveFilters();
 
 private:
+  virtual void BeforeDrawItems();
+  virtual void ItemSelected(ITEMLISTENTRY* pEntry);
 
-  virtual void ItemSelected(ITEMLISTENTRY *pEntry);
-  BOOL IsDirectory(LPCTSTR pDir);
-  virtual void DrawItems();
-  BOOL ReadDir();
+  bool IsDirectory(LPCTSTR pDir) const;
+  bool ReadDir();
   TCHAR m_szCurrDir[MAX_PATH];
-  BOOL m_bDirRead;
-  FILEFILTER *m_pFilters;
-  FILEFILTER *m_pLastFilter;
+  bool m_bDirRead;
+  FILEFILTER* m_pFilters;
+  FILEFILTER* m_pLastFilter;
 };
-
-#endif  // __FFILELIST__H__

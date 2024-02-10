@@ -20,24 +20,20 @@ CFItemList::CFItemList(int iMaxVisItems, int iItemWidth,
   m_saveEntry.pszAddInfo= (TCHAR*)malloc(MAX_PATH * sizeof(TCHAR));
   m_saveEntry.pNext= NULL;
   
-  // inits
   m_iItemCount= 0;
   m_iItemPos= 0;
-  m_pLast= m_pEntries= NULL;
+  m_pLast= m_pEntries = NULL;
   m_iMaxVisItems= iMaxVisItems;
-  m_iItemWidth= iItemWidth;
-  m_iVerMargin= 3;
-  m_iHorMargin= 3;
-  m_iSelItem= -1;
-
-  m_bmpUpArrow= bmpUpArrow;
-  m_bmpDownArrow= bmpDownArrow;
-  m_bmpBack= new CFBitmap();
-  m_bmpSlider= NULL;  
-  
-  // set positions
+  m_iItemWidth = iItemWidth;
+  m_iSelItem = -1;
+  m_isFileList = false;
   m_iPosX= 0; 
   m_iPosY= 0;
+
+  m_bmpUpArrow = bmpUpArrow;
+  m_bmpDownArrow = bmpDownArrow;
+  m_bmpBack = new CFBitmap();
+  m_bmpSlider = NULL;    
 }
 
 //--------------------------------------------------------------------------------
@@ -54,7 +50,8 @@ CFItemList::~CFItemList()
   // delete itemstructures  
   ITEMLISTENTRY *pTempEntry, *pOldEntry;
   pTempEntry= m_pEntries;
-  while(pTempEntry) {
+  while(pTempEntry)
+  {
     pOldEntry= pTempEntry;
     pTempEntry= pTempEntry->pNext;
     SAFE_DELETE(pOldEntry->pszItem);
@@ -70,43 +67,44 @@ CFItemList::~CFItemList()
 void CFItemList::SetSystem(CFSystem *pSystem)
 {
   m_pSystem = pSystem;
-  CFBitmap *pTmp = m_pSystem->GetDoubleBuffer();
    
   // Depending on height, calculate number of possible items.
   RECT rect = {0};
   CFBitmap::CalcRectForText(TEXT("W"), rect);
-  m_iItemHeight = max(18, (rect.bottom - rect.top) + m_iVerMargin);
+  m_iItemHeight = max(18, (rect.bottom - rect.top));
   
-  // if now bitmaps were specified, they are created
-  if (!m_bmpUpArrow) {
+  // if no bitmaps were specified, they are created
+  if (!m_bmpUpArrow)
+  {
     POINT points[4];
     const int iWidth = 5;
 
-    m_bmpUpArrow = new CFBitmap(*pTmp);
+    m_bmpUpArrow = new CFBitmap(*m_pSystem->GetDoubleBuffer());
     m_bmpUpArrow->Create(DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
     m_bmpUpArrow->SolidFill(RGB(200, 200, 200));
     
-    points[0].x= m_bmpUpArrow->GetX() + iWidth;
-    points[0].y= m_bmpUpArrow->GetBottom() - iWidth;
-    points[1].x= m_bmpUpArrow->GetRight() - iWidth;
-    points[1].y= m_bmpUpArrow->GetBottom() - iWidth;
-    points[2].x= m_bmpUpArrow->GetWidth() / 2;
-    points[2].y= m_bmpUpArrow->GetY() + iWidth;
-    points[3].x= m_bmpUpArrow->GetX() + iWidth;
-    points[3].y= m_bmpUpArrow->GetBottom() - iWidth;
+    points[0].x = m_bmpUpArrow->GetX() + iWidth;
+    points[0].y = m_bmpUpArrow->GetBottom() - iWidth;
+    points[1].x = m_bmpUpArrow->GetRight() - iWidth;
+    points[1].y = m_bmpUpArrow->GetBottom() - iWidth;
+    points[2].x = m_bmpUpArrow->GetWidth() / 2;
+    points[2].y = m_bmpUpArrow->GetY() + iWidth;
+    points[3].x = m_bmpUpArrow->GetX() + iWidth;
+    points[3].y = m_bmpUpArrow->GetBottom() - iWidth;
 
     m_bmpUpArrow->SetColor(RGB(0, 0, 0));
     m_bmpUpArrow->SetBackgroundColor(RGB(200, 200, 200));
-    m_bmpUpArrow->DrawFilledRect(1, 1, DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
+    m_bmpUpArrow->DrawFilledRect(0, 0, DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
 
     m_bmpUpArrow->SetBackgroundColor(RGB(0, 0, 0));
     m_bmpUpArrow->DrawPolygon(points, 4);
   }
-  if (!m_bmpDownArrow) {
+  if (!m_bmpDownArrow)
+  {
     POINT points[4];
     const int iWidth= 5;
 
-    m_bmpDownArrow = new CFBitmap(*pTmp);
+    m_bmpDownArrow = new CFBitmap(*m_pSystem->GetDoubleBuffer());
     m_bmpDownArrow->Create(DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
     m_bmpDownArrow->SolidFill(RGB(200, 200, 200));
 
@@ -121,25 +119,26 @@ void CFItemList::SetSystem(CFSystem *pSystem)
 
     m_bmpDownArrow->SetColor(RGB(0, 0, 0));
     m_bmpDownArrow->SetBackgroundColor(RGB(200, 200, 200));
-    m_bmpDownArrow->DrawFilledRect(1, 1, DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
+    m_bmpDownArrow->DrawFilledRect(0, 0, DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
 
     m_bmpDownArrow->SetBackgroundColor(RGB(0, 0, 0));
     m_bmpDownArrow->DrawPolygon(points, 4);
   }
 
   // Create background bitmap.
-  m_bmpBack->SetDestBitmap(*pTmp);
-  m_bmpBack->Create(m_iItemWidth + 2 * m_iHorMargin + m_bmpUpArrow->GetWidth(), 
-                    m_iItemHeight * m_iMaxVisItems);
+  m_bmpBack->SetDestBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpBack->Create(m_iItemWidth + m_bmpUpArrow->GetWidth(), m_iItemHeight * m_iMaxVisItems + 1);
   m_iWidth = m_bmpBack->GetWidth();
-  m_iHeight= m_bmpBack->GetHeight();
+  m_iHeight = m_bmpBack->GetHeight();
+  
   CreateBackGround();
 
   // calculate remaining space of scrollbar
-  m_iScrollBarHeight= m_bmpBack->GetHeight() - m_bmpUpArrow->GetHeight() - m_bmpDownArrow->GetHeight();    
+  m_iScrollBarHeight = m_bmpBack->GetHeight() - m_bmpUpArrow->GetHeight() - m_bmpDownArrow->GetHeight();    
   
   // calculate step width for scrollbar-slider
-  if (m_iItemCount > 0) {
+  if (m_iItemCount > 0)
+  {
     m_iSliderStep= (m_iScrollBarHeight / m_iItemCount); 
   }
   
@@ -157,7 +156,7 @@ bool CFItemList::RemoveItem(int index)
 bool CFItemList::AddPicItem(CFBitmap *bmpPic, LPCTSTR pszItem, LPCTSTR pszAddInfo /* = NULL */)
 {
   // allocate memory
-  ITEMLISTENTRY *pTempEntry= new ITEMLISTENTRY;
+  ITEMLISTENTRY *pTempEntry = new ITEMLISTENTRY;
   if (!pTempEntry) return(false);
 
   // zero-init the structure
@@ -168,22 +167,28 @@ bool CFItemList::AddPicItem(CFBitmap *bmpPic, LPCTSTR pszItem, LPCTSTR pszAddInf
   _tcscpy(pTempEntry->pszItem, pszItem);
   
   // if additional information was specified
-  if (pszAddInfo) {
+  if (pszAddInfo)
+  {
     pTempEntry->pszAddInfo= (TCHAR*)malloc((_tcslen(pszAddInfo) + 1)*sizeof(TCHAR));
     if (!pTempEntry->pszAddInfo) return(false);
     _tcscpy(pTempEntry->pszAddInfo, pszAddInfo);
-  } else {
-    pTempEntry->pszAddInfo= NULL;
+  }
+  else
+  {
+    pTempEntry->pszAddInfo = NULL;
   }
 
   // if picture was specified?
-  pTempEntry->pBmp= bmpPic;
+  pTempEntry->pBmp = bmpPic;
   
-  pTempEntry->pNext= NULL;
+  pTempEntry->pNext = NULL;
   // enqueue
-  if (m_pEntries == NULL) {
+  if (m_pEntries == NULL)
+  {
     m_pLast= m_pEntries= pTempEntry;
-  } else {
+  }
+  else
+  {
     m_pLast->pNext= pTempEntry;
     m_pLast= m_pLast->pNext;
   }
@@ -196,12 +201,13 @@ bool CFItemList::AddPicItem(CFBitmap *bmpPic, LPCTSTR pszItem, LPCTSTR pszAddInf
   m_iSliderStep= (m_iScrollBarHeight / m_iItemCount); 
 
   // slider bitmap also changes so delete and create a new one on demand
-  if (m_bmpSlider) {
+  if (m_bmpSlider)
+  {
     delete(m_bmpSlider);
-    m_bmpSlider= NULL;
+    m_bmpSlider = NULL;
   }
 
-  return(true);
+  return true;
 }
 
 //--------------------------------------------------------------------------------
@@ -210,14 +216,16 @@ bool CFItemList::ClearItems()
   m_iItemCount= 0;
   m_iItemPos= 0;
   m_iSelItem= -1;
-  if (m_pSystem) {
+  if (m_pSystem)
+  {
     m_iSliderPos = m_bmpUpArrow->GetBottom();
   }
 
   // delete itemstructures  
   ITEMLISTENTRY *pTempEntry, *pOldEntry;
   pTempEntry= m_pEntries;
-  while(pTempEntry) {
+  while(pTempEntry)
+  {
     pOldEntry= pTempEntry;
     pTempEntry= pTempEntry->pNext;
     SAFE_DELETE(pOldEntry->pszItem);
@@ -312,8 +320,8 @@ bool CFItemList::StylusMove(int xPos, int yPos)
 //--------------------------------------------------------------------------------
 void CFItemList::Draw()
 {
-  int iSliderHeight= 0;
-  
+  int iSliderHeight = 0;
+
   DrawItems();
 
   m_bmpBack->Blit();
@@ -321,20 +329,24 @@ void CFItemList::Draw()
   m_bmpDownArrow->Blit();
 
   // Check if we have to create slider new (when size has changed!)
-  if (!m_bmpSlider) {
+  if (!m_bmpSlider)
+  {
     // calculate height of slider
-    if (m_iItemCount < m_iMaxVisItems) {
+    if (m_iItemCount < m_iMaxVisItems)
+    {
       iSliderHeight = m_iScrollBarHeight;
-    } else {
+    }
+    else
+    {
       iSliderHeight = max(2, (m_iScrollBarHeight * m_iMaxVisItems) / m_iItemCount);
     }
 
     m_bmpSlider = new CFBitmap(*(m_pSystem->GetDoubleBuffer()));
-    m_bmpSlider->Create(m_bmpUpArrow->GetWidth() + 1, iSliderHeight);    
+    m_bmpSlider->Create(m_bmpUpArrow->GetWidth(), iSliderHeight);    
    
     m_bmpSlider->SetColor(m_colBorder);
     m_bmpSlider->SetBackgroundColor(m_colSlide);
-    m_bmpSlider->DrawFilledRect(0, 0, m_bmpUpArrow->GetWidth() + 1, iSliderHeight);
+    m_bmpSlider->DrawFilledRect(0, 0, m_bmpUpArrow->GetWidth(), iSliderHeight);
    
     m_bmpSlider->SetX(m_bmpUpArrow->GetX());
   }
@@ -346,56 +358,76 @@ void CFItemList::Draw()
 //--------------------------------------------------------------------------------
 void CFItemList::DrawItems()
 {
-  int iPosY = 0;
-  int iPicSpace= 0;
+  BeforeDrawItems();
+
+  // Clear background/items.
+  m_bmpBack->SetColor(m_colBack);
+  m_bmpBack->SetBackgroundColor(m_colBack);
+  m_bmpBack->DrawFilledRect(1, 1, m_bmpBack->GetWidth() - m_bmpUpArrow->GetWidth() - 1, m_bmpBack->GetHeight() - 2);
+
+  int iPicSpace = 0;
   // rectangle in which an item is displayed
   RECT itemRect;
-  itemRect.top   = iPosY + 1;
-  itemRect.right = m_iPosX + m_iItemWidth;
-  itemRect.bottom= iPosY + m_iItemHeight - 1;
+  itemRect.top   = 1;
+  itemRect.right = m_iItemWidth;
+  itemRect.bottom= m_iItemHeight;
 
   // display list entries
-  ITEMLISTENTRY *pAuxEntry= m_pEntries;
+  ITEMLISTENTRY *pAuxEntry = m_pEntries;
   int pos = 0;
   int index = 0;  
   
-  while (pAuxEntry) {
-    if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
-      // Image specified?
-      if (pAuxEntry->pBmp) {
-        pAuxEntry->pBmp->SetX(m_iPosX + 1);
-        pAuxEntry->pBmp->SetY(iPosY + m_iItemHeight * index + 1);
-        pAuxEntry->pBmp->Blit();
-        iPicSpace= 17;
-      } else {
-        iPicSpace= 1;
+  while (pAuxEntry)
+  {
+    if (pos >= m_iItemPos && pos < (m_iItemPos + m_iMaxVisItems))
+    {
+      // Draw Icon/Image?
+      if (m_isFileList || pAuxEntry->pBmp)
+      {
+        if (pAuxEntry->pBmp != NULL)
+        {
+          pAuxEntry->pBmp->SetDestBitmap(*m_bmpBack);
+          pAuxEntry->pBmp->SetX(1);
+          pAuxEntry->pBmp->SetY(1 + m_iItemHeight * index);
+          pAuxEntry->pBmp->Blit();
+        }
+        iPicSpace = 17;
       }
-      itemRect.left = m_iPosX + iPicSpace;
+      else
+      {
+        iPicSpace = 1;
+      }
+      itemRect.left = iPicSpace;
+
+      COLORREF colBack = m_colBack;
+      COLORREF colText = m_colText;
+      bool normal = true;
+
       // Item selected?
-      if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index)) {      
-        m_bmpBack->SetColor(m_colHiBack);
-        m_bmpBack->SetBackgroundColor(m_colHiBack);
-        itemRect.right += 2 * m_iHorMargin - 1;
-        m_bmpBack->DrawFilledRect(itemRect);
-        itemRect.right -= 2 * m_iHorMargin - 1;
-        // Redraw the items.
-        m_bmpBack->SetTextColor(m_colHiText);       
-        m_bmpBack->DrawText(pAuxEntry->pszItem, itemRect);
-    
-      } else {
-        m_bmpBack->SetColor(m_colBack);
-        m_bmpBack->SetBackgroundColor(m_colBack);
-        // Clear old item.
-        itemRect.right += 2 * m_iHorMargin - 1;
-        m_bmpBack->DrawFilledRect(itemRect);
-        itemRect.right -= 2 * m_iHorMargin - 1;
-        // Redraw the items.
-        m_bmpBack->SetTextColor(m_colText);             
-        m_bmpBack->DrawText(pAuxEntry->pszItem, itemRect);
+      if (m_iSelItem != -1 && m_iSelItem - m_iItemPos == index)
+      {
+        colBack = m_colHiBack;
+        colText = m_colHiText;
+        normal = false;
       }
+
+      m_bmpBack->SetColor(colBack);
+      m_bmpBack->SetBackgroundColor(colBack);
+      m_bmpBack->DrawFilledRect(itemRect);
+
+      m_bmpBack->SetTextColor(colText);             
+      RECT textRect = itemRect;
+      textRect.left += 2;
+      m_bmpBack->DrawText(pAuxEntry->pszItem, textRect);
+
+      if (m_isFileList)
+      {
+        m_pSystem->DrawFileIcon(*m_bmpBack, pAuxEntry->pszAddInfo, 1, m_iItemHeight * index + 1, normal);
+      }
+
       index++;
-      itemRect.top+= m_iItemHeight;
-      itemRect.bottom+= m_iItemHeight;
+      itemRect.top += m_iItemHeight;
+      itemRect.bottom += m_iItemHeight;
     }
     pos++;
     pAuxEntry= pAuxEntry->pNext;
@@ -403,15 +435,16 @@ void CFItemList::DrawItems()
 }
 
 //--------------------------------------------------------------------------------
-void CFItemList::UpdatePos()
+void CFItemList::UpdatePos(int offsetY /* = 0 */)
 {
-  if (m_pSystem) {
+  if (m_pSystem)
+  {
     m_bmpBack->SetX(m_iPosX);
-    m_bmpBack->SetY(m_iPosY);
-    m_bmpUpArrow->SetX(m_bmpBack->GetRight() - m_bmpUpArrow->GetWidth() - 1);
+    m_bmpBack->SetY(m_iPosY + offsetY);
+    m_bmpUpArrow->SetX(m_bmpBack->GetRight() - m_bmpUpArrow->GetWidth());
     m_bmpUpArrow->SetY(m_bmpBack->GetY());
     m_bmpDownArrow->SetX(m_bmpUpArrow->GetX());
-    m_bmpDownArrow->SetY(m_bmpBack->GetY() + m_bmpBack->GetHeight() -  m_bmpDownArrow->GetHeight() - 1);
+    m_bmpDownArrow->SetY(m_bmpBack->GetY() + m_bmpBack->GetHeight() -  m_bmpDownArrow->GetHeight());
 
     m_iSliderPos= m_bmpUpArrow->GetBottom();
     m_rScrollBar.left= m_bmpUpArrow->GetX();
@@ -459,7 +492,8 @@ void CFItemList::MoveDown()
     m_bmpSlider->SetY(m_iSliderPos);
     m_bmpSlider->SaveUnder();      
     m_bmpSlider->Blit();
-    if ((m_iSelItem != -1)&&(m_iSelItem < m_iItemPos)) {
+    if ((m_iSelItem != -1)&&(m_iSelItem < m_iItemPos))
+    {
       m_iSelItem = m_iItemPos;
     }
     Draw();
@@ -471,15 +505,14 @@ void CFItemList::MoveDown()
 bool CFItemList::CreateBackGround()
 {
   // Safety check if bitmap is valid.
-  if (m_bmpBack->IsValid()) {
-    // Set colors appropriately
+  if (m_bmpBack->IsValid())
+  {
     m_bmpBack->SetBackgroundColor(m_colBack);
     m_bmpBack->SetColor(m_colBorder);
     // Draw the main rectangle.
     m_bmpBack->DrawFilledRect(0, 0, m_bmpBack->GetWidth(), m_bmpBack->GetHeight());
     // Draw rectangle for scrollbar.
-    m_bmpBack->DrawFilledRect(m_bmpBack->GetRight() - m_bmpUpArrow->GetWidth() - 1, 
-                        0, m_bmpBack->GetWidth(), m_bmpBack->GetHeight());
+    m_bmpBack->DrawFilledRect(m_bmpBack->GetWidth() - m_bmpUpArrow->GetWidth(), 0, m_bmpUpArrow->GetWidth(), m_bmpBack->GetHeight());
     return true;
   }
   return false;

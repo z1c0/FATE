@@ -7,84 +7,33 @@
 
 //--------------------------------------------------------------------------------
 CFFileList::CFFileList(int iMaxVisItems, int iItemWidth, CFBitmap *cbUpArrow, CFBitmap *cbDownArrow) :
-            CFItemList(iMaxVisItems, iItemWidth, cbUpArrow, cbDownArrow)
+  CFItemList(iMaxVisItems, iItemWidth, cbUpArrow, cbDownArrow)
 {
-  _tcscpy(m_szCurrDir, TEXT("\\"));
-  m_bDirRead= FALSE;
-  m_pFilters= NULL;
-  m_pLast= NULL;
+  CFSystem::GetPathToApplication(m_szCurrDir);
+  m_bDirRead = FALSE;
+  m_pFilters = NULL;
+  m_isFileList = true;
 }
 
 //--------------------------------------------------------------------------------
 CFFileList::~CFFileList()
 {
   // filter cleanup?
-  if (m_pFilters) RemoveFilters();
+  if (m_pFilters)
+  {
+    RemoveFilters();
+  }
 }
 
 //--------------------------------------------------------------------------------
-/// Sets current directory for file-choser. If directory cannot be found FALSE is
-/// returned and change is not done.
-void CFFileList::DrawItems()
+void CFFileList::BeforeDrawItems()
 {
   // have directory contents been read?
-  if (!m_bDirRead) {
+  if (!m_bDirRead)
+  {
     ClearItems();
     ReadDir();
     m_bDirRead= TRUE;
-  }
-
-  // rectangle in which an item is displayed
-  RECT itemRect;
-  int posX = 1;
-  int posY = 1;
-  itemRect.left  = posX + 1;
-  itemRect.top   = posY + 1;
-  itemRect.right = posX + m_iItemWidth;
-  itemRect.bottom= posY + m_iItemHeight - 1;
-
-  // display list entries
-  ITEMLISTENTRY *pAuxEntry= m_pEntries;
-  int pos= 0, index= 0;
- 
-  while (pAuxEntry) {
-    if ((pos >= m_iItemPos)&&(pos < (m_iItemPos + m_iMaxVisItems))) {
-      COLORREF col = m_colBack;
-      COLORREF colBack = m_colBack;
-      COLORREF colText = m_colText;
-      bool normal = true;
-
-      // item selected?
-      if ((m_iSelItem != -1)&&(m_iSelItem - m_iItemPos == index))
-      {       
-        col = m_colHiBack;
-        colBack = m_colHiBack;
-        colText = m_colHiText;
-        normal = false;
-      }
-
-      m_bmpBack->SetColor(col);
-      m_bmpBack->SetBackgroundColor(colBack);
-      m_bmpBack->SetTextColor(colText);
-    
-      // clear old item
-      itemRect.right += 2 * m_iHorMargin - 1;
-      m_bmpBack->DrawFilledRect(itemRect);
-      itemRect.right -= 2 * m_iHorMargin - 1;
-
-      RECT textRect = itemRect;
-      textRect.left = posX + m_iHorMargin + 18;
-      textRect.top = posY + m_iItemHeight * index + 1;
-      m_bmpBack->DrawText(pAuxEntry->pszItem, textRect);
-      
-      m_pSystem->DrawFileIcon(*m_bmpBack, pAuxEntry->pszAddInfo, posX + m_iHorMargin, posY + m_iItemHeight * index + 1, normal);
-
-      index++;
-      itemRect.top+= m_iItemHeight;
-      itemRect.bottom+= m_iItemHeight;
-    }
-    pos++;
-    pAuxEntry= pAuxEntry->pNext;
   }
 }
 
@@ -121,7 +70,7 @@ BOOL CFFileList::SetCurrDir(LPCTSTR pszDir)
 }
 
 //--------------------------------------------------------------------------------
-BOOL CFFileList::ReadDir()
+bool CFFileList::ReadDir()
 {
   WIN32_FIND_DATA ffd;
   HANDLE hFile;
@@ -138,29 +87,38 @@ BOOL CFFileList::ReadDir()
   hFile= FindFirstFile(szFilePath, &ffd);
   if (hFile == INVALID_HANDLE_VALUE) return(FALSE);
   
-  do {
+  do
+  {
     // create full qualified path of file
     _tcscpy(szFullPath, m_szCurrDir);
     _tcscat(szFullPath, ffd.cFileName);
     
     // exclude current and parent directory
-    if (ffd.cFileName[0] != '.') {
+    if (ffd.cFileName[0] != '.')
+    {
       // any filters specified?
-      if ((!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))&&(m_pFilters)) {
+      if ((!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))&&(m_pFilters))
+      {
         int iStrLen;
         FILEFILTER *pTemp= m_pFilters;
 
-        while (pTemp) {
+        while (pTemp)
+        {
           iStrLen= _tcslen(ffd.cFileName);
-          if ((iStrLen >= 4)&&(!_tcscmp(&ffd.cFileName[iStrLen - 4], pTemp->pszFilter)))        
+          if ((iStrLen >= 4)&&(!_tcscmp(&ffd.cFileName[iStrLen - 4], pTemp->pszFilter)))
+          {
             AddItem(ffd.cFileName, szFullPath);
+          }
           pTemp= pTemp->pNext;
         }
-      } else {
+      } else
+      {
         AddItem(ffd.cFileName, szFullPath);
       }
     }
-  } while(FindNextFile(hFile, &ffd));
+  }
+  while(FindNextFile(hFile, &ffd));
+  
   FindClose(hFile);
 
   return(TRUE);
@@ -171,22 +129,25 @@ BOOL CFFileList::ReadDir()
 void CFFileList::ItemSelected(ITEMLISTENTRY *pEntry)
 {
   // move to selected directory
-  if (SetCurrDir(pEntry->pszAddInfo)) {
+  if (SetCurrDir(pEntry->pszAddInfo))
+  {
     pEntry->ulUser= IL_DIRFLAG;  // mark it as directory
     m_pSystem->QueueEvent(WM_ITEMLISTSELECT, m_ulID, (void*)pEntry);
     Draw();
   
-  } else {
+  }
+  else
+  {
     CFItemList::ItemSelected(pEntry);
   }
 }
 
 //--------------------------------------------------------------------------------
 /// Checks whether the specified directory name is really one.
-BOOL CFFileList::IsDirectory(LPCTSTR pDir)
+bool CFFileList::IsDirectory(LPCTSTR pDir) const
 {
   DWORD dwAttr= GetFileAttributes(pDir);
-  return((dwAttr != (DWORD)-1)&&(dwAttr & FILE_ATTRIBUTE_DIRECTORY));
+  return (dwAttr != (DWORD)-1) && (dwAttr & FILE_ATTRIBUTE_DIRECTORY);
 }
 
 //--------------------------------------------------------------------------------
@@ -206,7 +167,8 @@ BOOL CFFileList::SetFilters(LPTSTR pFilterStr)
    
     pToken= _tcstok(pszCopy, pDel);
     // while there are tokens, add file filters
-    while(pToken) {
+    while(pToken)
+    {
       // filter valid?
       if ((_tcslen(pToken) >= 2)&&(pToken[0] == '.')) {
         // add filter
@@ -216,9 +178,12 @@ BOOL CFFileList::SetFilters(LPTSTR pFilterStr)
         _tcscpy(pTemp->pszFilter, pToken);
         pTemp->pNext= NULL;
         // enqueue
-        if (!m_pFilters) {
+        if (!m_pFilters)
+        {
           m_pLastFilter= m_pFilters= pTemp;
-        } else {
+        }
+        else
+        {
           m_pLastFilter->pNext= pTemp;
           m_pLastFilter= m_pLastFilter->pNext;
         }
@@ -237,10 +202,10 @@ BOOL CFFileList::SetFilters(LPTSTR pFilterStr)
 void CFFileList::RemoveFilters()
 {
   // clear file-filter datatstructure
-  FILEFILTER *pTemp, *pOld;
-  pTemp= m_pFilters;
-  while(pTemp) {
-    pOld= pTemp;
+  FILEFILTER* pTemp = m_pFilters;
+  while (pTemp)
+  {
+    FILEFILTER* pOld = pTemp;
     pTemp= pTemp->pNext;
     delete(pOld->pszFilter);
     delete(pOld);

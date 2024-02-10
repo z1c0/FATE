@@ -1,9 +1,7 @@
-#ifndef __FPANEL__h__
-#define __FPANEL__h__
+#pragma once
 
 #include "../base/IFateContainer.h"
 
-//------------------------------------------------------------------------------
 class CFPanel : public IFateContainer  
 {
 public:
@@ -22,7 +20,7 @@ public:
   virtual bool ButtonPressed(unsigned long ulBtnID) { return(false); };
   virtual bool ButtonReleased(unsigned long ulBtnID) { return(false); };
   
-  virtual bool MenuSelected(unsigned long ulMenuID, int iSelMain, int iSelSub) { return(false); };
+  virtual bool MenuItemSelected(unsigned long ulMenuID, unsigned int id) { return false; };
   
   virtual bool ItemListSelected(unsigned long ulListID, ITEMLISTENTRY *pEntry) { return(false); };
   
@@ -37,4 +35,4 @@ public:
   virtual bool ClientConnect(class CFServer* pServer) { return(false); };
 };
 
-#endif  // __FPANEL__h__
+

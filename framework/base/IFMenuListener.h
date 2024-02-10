@@ -1,11 +1,9 @@
-#ifndef __IFMENULISTENER__H__
-#define __IFMENULISTENER__H__
+#pragma once
 
-//------------------------------------------------------------------------------
 class IFMenuListener 
 {
 public:
-  virtual bool MenuSelected(unsigned long ulMenuID, int iSelMain, int iSelSub)= 0;
+  virtual bool MenuItemSelected(unsigned long ulMenuID, unsigned int id)= 0;
 };
 
-#endif  // __IFMENULISTENER__H__
+

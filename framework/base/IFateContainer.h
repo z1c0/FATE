@@ -41,7 +41,7 @@ public:
   bool ButtonPressNotify(unsigned long ulBtnID) FATE_SECTION;
   bool ButtonReleaseNotify(unsigned long ulBtnID) FATE_SECTION;
   
-  bool MenuSelectNotify(unsigned long ulMenuID, int iSelMain, int iSelSub) FATE_SECTION;
+  bool MenuItemSelectNotify(unsigned long ulMenuID, unsigned int id) FATE_SECTION;
   
   bool ItemListSelectNotify(unsigned long ulListID, ITEMLISTENTRY *pEntry) FATE_SECTION;  
   
