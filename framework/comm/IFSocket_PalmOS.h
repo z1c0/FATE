@@ -1,9 +1,7 @@
-#ifndef __IFSOCKET_PALMOS__H__
-#define __IFSOCKET_PALMOS__H__
+#pragma once
 
 #include <PalmOS.h>
 #include "FInetAddr.h"
-
 
 //--------------------------------------------------------------------------------
 /// Socket constants.
@@ -58,4 +56,3 @@ protected:
   static UInt16 m_uiLibRefNum;
 };
 
-#endif // __IFSOCKET_PALMOS__H__

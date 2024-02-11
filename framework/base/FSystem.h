@@ -1,13 +1,10 @@
 #pragma once
 
-#ifdef _WIN32
-
-#ifdef _WIN32_WCE
+#if defined(_WIN32_WCE)
   #include "WIN32_WCE/FSystem.h"
-#else
+#elif defined (_WIN32)
   #include "WIN32/FSystem.h"
-#endif
-
 #else
+  #error "PalmOS"
   #include "PalmOS/FSystem.h"
 #endif

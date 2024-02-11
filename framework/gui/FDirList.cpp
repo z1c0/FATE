@@ -83,7 +83,7 @@ bool CFDirList::ReadDir()
     _tcscpy(szFullPath, m_szCurrDir);
     _tcscat(szFullPath, TEXT("\\"));
     _tcscat(szFullPath, ffd.cFileName);
-    if (IsDirectory(szFullPath) && _tcscmp(ffd.cFileName, ".") != 0 && _tcscmp(ffd.cFileName, "..") != 0)
+    if (IsDirectory(szFullPath) && _tcscmp(ffd.cFileName, TEXT(".")) != 0 && _tcscmp(ffd.cFileName, TEXT("..")) != 0)
     {
       AddItem(ffd.cFileName, szFullPath);
     }

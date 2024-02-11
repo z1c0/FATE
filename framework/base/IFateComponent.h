@@ -1,5 +1,4 @@
-#ifndef __IFATECOMPONENT__H__
-#define __IFATECOMPONENT__H__
+#pragma once
 
 #include "FSystem.h"
 
@@ -135,4 +134,3 @@ protected:
 };
 
 
-#endif  // __IFATECOMPONENT__H__

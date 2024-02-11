@@ -32,7 +32,7 @@ CFWaveCutApp::CFWaveCutApp() : CFateApp(DM_LANDSCAPE_FLIPPED)
 //--------------------------------------------------------------------------------
 CFWaveCutApp::~CFWaveCutApp()
 {
-  m_pSystem->EnableSuspend(false);
+  m_pSystem->EnableSuspend(true);
 
   delete(m_bmpTitle);
   delete(m_bmpVol);
@@ -72,7 +72,7 @@ bool CFWaveCutApp::InitFateApp()
 #endif
 
   // disable suspend so the application won't freeze
-  m_pSystem->EnableSuspend(FALSE);
+  m_pSystem->EnableSuspend(false);
 
   m_bmpTitle = new CFBitmap(*m_pSystem->GetDoubleBuffer());
 #ifdef _XEDIT_DEMO  
@@ -402,6 +402,8 @@ void CFWaveCutApp::ResetLevel()
 //--------------------------------------------------------------------------------
 bool CFWaveCutApp::SerialOK()
 {
+  return true;  // TODO
+
   HMODULE hMod;
   PROCESS_INFORMATION pi;
   HANDLE hFile;

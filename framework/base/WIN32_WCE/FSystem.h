@@ -1,7 +1,6 @@
-#ifndef __FSYSTEM_WIN32_WCE_H__
-#define __FSYSTEM_WIN32_WCE_H__
+#pragma once
 
-#include "FateTypeDefs.h"
+#include "../FateTypeDefs.h"
 
 class CFBitmap;
 
@@ -11,34 +10,30 @@ class CFSystem
 
 public:
 
-  CFSystem(HWND hWnd, int nWidth, int nHeight);
+  CFSystem(HWND hWnd, int nWidth, int nHeight, EFateDrawMode drawMode);
   virtual ~CFSystem();
 
-  CFBitmap* GetDoubleBuffer();
-  
+  int GetWidth() const { return m_nWidth; }
+  int GetHeight() const { return m_nHeight; }
+  void DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
+  CFBitmap* GetDoubleBuffer();  
   void RenderDoubleBuffer();
-
-  void ForceRedraw();
-  
+  void ForceRedraw();  
   void QueueEvent(int iEventID, int iComponentID, void *pCustomData);
-
+  void AddTimer(unsigned long id, int interval);
   bool ShutDownSystem();
-
-  int GetWidth() { return m_nWidth; };
-
-  int GetHeight() { return m_nHeight; };
+  bool EnableSuspend(bool suspend);
 
   static void GetPathToApplication(TCHAR *pszAppPath);
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);
 
-protected:
-  
+private:  
   void DrawPortraitFlipped();
   void DrawLandScape();
   void DrawLandScapeFlipped();
 
-  EFateDrawMode m_DrawMode;
+  EFateDrawMode m_drawMode;
   CFBitmap *m_pDoubleBuffer;
   HWND m_hWnd;  
   HDC m_hdc;
@@ -46,6 +41,5 @@ protected:
   int m_nHeight;
 };
 
-#endif  // __FSYSTEM_WIN32_WCE_H__
 
 

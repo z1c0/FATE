@@ -2,7 +2,7 @@
 #define __FBITMAPPALMOS__H__
 
 #include <PalmOS.h>
-#include "FateTypeDefs.h"
+#include "../baseFateTypeDefs.h"
 
 //TODO: alot
 

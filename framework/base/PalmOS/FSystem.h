@@ -1,8 +1,6 @@
-#ifndef __FSYSTEMCE_H__
-#define __FSYSTEMCE_H__
+#pragma once
 
-#include "FSystem.h"
-#include "FateApp.h"
+#include "../../base/FateApp.h"
 
 //------------------------------------------------------------------------------
 #define PALMOS_REPAINT  (firstUserEvent + 1)
@@ -45,4 +43,3 @@ protected:
 
 };
 
-#endif  // __FSYSTEMCE_H__

@@ -1,12 +1,12 @@
-#include "FateTypeDefs.h"
-#include "FateApp.h"
-#include "FSystem_WIN32_WCE.h"
-#include "FBitmap_WIN32.h"
-#include "FFile_WIN32.h"
-#include "../util/FPoint.h"
-#include "../comm/FComPort_WIN32.h"
-#include "../comm/FUDPSocket_WIN32.h"
-#include "../util/FLinkedList.h"
+#include "../FateTypeDefs.h"
+#include "../FateApp.h"
+#include "../FSystem.h"
+#include "../FBitmap.h"
+#include "../FFile.h"
+#include "../../util/FPoint.h"
+#include "../../comm/FComPort_WIN32.h"
+#include "../../comm/FUDPSocket_WIN32.h"
+#include "../../util/FLinkedList.h"
 
 
 //--------------------------------------------------------------------------------
@@ -16,8 +16,8 @@ CFUDPSocket *g_sockDebug= NULL;
 CFInetAddr  *g_addrDebug= NULL;
 CFComPort   *g_COM= NULL;
 bool g_bInitOK= true;
-int g_iScreenW= GetSystemMetrics(SM_CXSCREEN);
-int g_iScreenH= GetSystemMetrics(SM_CYSCREEN);
+int g_iScreenW = GetSystemMetrics(SM_CXSCREEN);
+int g_iScreenH = GetSystemMetrics(SM_CYSCREEN);
 
 //--------------------------------------------------------------------------------
 // This method has to be implemented by the actual application.
@@ -92,7 +92,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
   switch (message) {
     case WM_CREATE:
-      g_pApp->SetSystem(new CFSystem(hWnd, g_pApp->GetWidth(), g_pApp->GetHeight()));
+      g_pApp->SetSystem(new CFSystem(hWnd, g_pApp->GetWidth(), g_pApp->GetHeight(), g_pApp->GetDrawMode()));
       g_pApp->Init();
       if (!g_pApp->InitFateApp()) 
       {
@@ -110,7 +110,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       if(wParam == WA_INACTIVE)
         SHFullScreen(hWnd, SHFS_SHOWSTARTICON|SHFS_SHOWTASKBAR|SHFS_SHOWSIPBUTTON);
       else
-		    SHFullScreen(hWnd, SHFS_HIDESTARTICON|SHFS_HIDETASKBAR|SHFS_HIDESIPBUTTON);
+		SHFullScreen(hWnd, SHFS_HIDESTARTICON|SHFS_HIDETASKBAR|SHFS_HIDESIPBUTTON);
       g_pApp->ActivateFateApp();
       break;
 
@@ -124,7 +124,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       EndPaint(hWnd, &ps);
     	break;
 
-		case WM_LBUTTONDOWN:
+     case WM_LBUTTONDOWN:
       iPosX= LOWORD(lParam); iPosY= HIWORD(lParam);
 
       // if app is not in normal draw mode, transformation of coordinates is required
@@ -146,14 +146,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
           break;
 
         case DM_LANDSCAPE_FLIPPED:
-          iSwap= iPosY;
-          iPosY= iPosX;
-          iPosX= g_iScreenW - iSwap;
+          iSwap = iPosY;
+          iPosY = iPosX;
+          iPosX=  g_iScreenH - iSwap;
           break;
       }
 
       // send WM_LBUTTONDOWN event to registered components if application does not handle it
-	    if (!g_pApp->StylusDown(iPosX, iPosY)) {
+	  if (!g_pApp->StylusDown(iPosX, iPosY))
+	  {
         g_pApp->StylusDownNotify(iPosX, iPosY);
       }
   	  break;
@@ -369,8 +370,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_MENUSELECTION:        
       // send WM_MENUSELECTION event to registered components if application does not handle it
-      if (!g_pApp->MenuSelected((DWORD)wParam, LOWORD(lParam), HIWORD(lParam)))
-        g_pApp->MenuSelectNotify((DWORD)wParam, LOWORD(lParam), HIWORD(lParam));
+      if (!g_pApp->MenuItemSelected((DWORD)wParam, (DWORD)lParam))
+	  {
+        g_pApp->MenuItemSelectNotify((DWORD)wParam, (DWORD)lParam);
+	  }
       break;    
    
     case WM_ITEMLISTSELECT: 
@@ -408,16 +411,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       break;
 
     case WM_DESTROY:
-		  g_pApp->CloseFateApp();
+	  g_pApp->CloseFateApp();
       // close GAPI
-      //GXCloseInput();
-      //GXCloseDisplay();            
+      GXCloseInput();
+      GXCloseDisplay();            
       PostQuitMessage(0);
-		  break;
+	  break;
+
+    case WM_TIMER:
+		g_pApp->Timer(static_cast<unsigned long>(wParam));
+		break;
 
     default:
-      if (g_pApp->ExtraEventHandler(message, (void*)wParam)) return(0);
-		  return(DefWindowProc(hWnd, message, wParam, lParam));
+	  return DefWindowProc(hWnd, message, wParam, lParam);
 
   }
   return(0);
@@ -448,7 +454,7 @@ ATOM RegisterWndClass(HINSTANCE hInstance, LPTSTR szWindowClass)
 //  PURPOSE: Saves instance handle and creates main window
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-  //GXDisplayProperties gxDisplay;
+  GXDisplayProperties gxDisplay;
   TCHAR	*szTitle      = TEXT("FateApp");       // the title bar text
 	TCHAR	*szWindowClass= TEXT("FateAppClass");  // the window class name
 
@@ -476,19 +482,17 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
   if (!hWnd) return FALSE;  
   
   // retrieve display properties
-  /*
-	gxDisplay = GXGetDisplayProperties();
-	// make sure 16-bit color is available
+  gxDisplay = GXGetDisplayProperties();
+  // make sure 16-bit color is available
 	if ((gxDisplay.cBPP != 16)||(!(gxDisplay.ffFormat|kfDirect565)))
   {
     MessageBox(hWnd, TEXT("Full 16-bit color display is required!"), TEXT(""), MB_OK);
 		GXCloseDisplay();
 		return(FALSE);
 	}
-  */
-  
+    
   // initialize the GAPI display for fullscreen mode
-  //GXOpenDisplay(hWnd, GX_FULLSCREEN);
+  GXOpenDisplay(hWnd, GX_FULLSCREEN);
   SHFullScreen(hWnd, SHFS_HIDESTARTICON|SHFS_HIDETASKBAR|SHFS_HIDESIPBUTTON);
   
   // set up buttons for exclusive control

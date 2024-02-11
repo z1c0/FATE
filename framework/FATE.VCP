@@ -46,16 +46,16 @@ CFG=FATE - Win32 (WCE ARM) Debug
 # PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
 # PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
 # PROP Target_Dir ""
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
-LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo
-# ADD LIB32 /nologo
 CPP=clarm.exe
 # ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /Oxs /M$(CECrtMT) /c
 # ADD CPP /nologo /W3 /I "include" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Oxs /M$(CECrtMT) /c
 # SUBTRACT CPP /YX /Yc /Yu
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
 
@@ -73,16 +73,16 @@ CPP=clarm.exe
 # PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
 # PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
 # PROP Target_Dir ""
-BSC32=bscmake.exe
-# ADD BASE BSC32 /nologo
-# ADD BSC32 /nologo
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "C:\Windows CE Tools\wce300\Pocket PC 2002\include" /D "DEBUG" /D "_WIN32" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /FR /M$(CECrtMTDebug) /c
+# SUBTRACT CPP /YX /Yc /Yu
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
 # ADD LIB32 /nologo /out:"lib\WIN32_WCE\FATEDbg.lib"
-CPP=clarm.exe
-# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /Yu"stdafx.h" /M$(CECrtMTDebug) /c
-# ADD CPP /nologo /W3 /Zi /Od /I "include" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /FR /M$(CECrtMTDebug) /c
-# SUBTRACT CPP /YX /Yc /Yu
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
@@ -101,8 +101,8 @@ CPP=clarm.exe
 # PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
 # PROP Target_Dir ""
 CPP=clarm.exe
-# ADD BASE CPP /nologo /W3 /GX- /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
-# ADD CPP /nologo /W3 /GX- /Zi /Od /I "C:\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4" /D "DEBUG" /D "_WIN32" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "C:\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4" /D "DEBUG" /D "_WIN32" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
 # ADD LIB32 /nologo
@@ -127,8 +127,8 @@ BSC32=bscmake.exe
 # PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
 # PROP Target_Dir ""
 CPP=clarm.exe
-# ADD BASE CPP /nologo /W3 /GX- /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /O2 /M$(CECrtMT) /c
-# ADD CPP /nologo /W3 /GX- /I "C:\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4" /D "NDEBUG" /D "_WIN32" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /O2 /M$(CECrtMT) /c
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /O2 /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /I "C:\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4" /D "NDEBUG" /D "_WIN32" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /YX /O2 /M$(CECrtMT) /c
 LIB32=link.exe -lib
 # ADD BASE LIB32 /nologo
 # ADD LIB32 /nologo
@@ -149,21 +149,16 @@ BSC32=bscmake.exe
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\base\FATE_WIN32_WCE.cpp
+SOURCE=.\base\WIN32_WCE\FATE.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_FATE_=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
-	".\base\FBitmap_PalmOS.h"\
-	".\base\FBitmap_WIN32.h"\
-	".\base\FFile_WIN32.h"\
+	".\base\FFile.h"\
 	".\base\FSystem.h"\
-	".\base\FSystem_WIN32.h"\
-	".\base\FSystem_WIN32_WCE.h"\
 	".\base\IFateComponent.h"\
 	".\base\IFateContainer.h"\
 	".\base\IFButtonListener.h"\
@@ -173,6 +168,12 @@ DEP_CPP_FATE_=\
 	".\base\IFItemListListener.h"\
 	".\base\IFMenuListener.h"\
 	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FFile.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
 	".\comm\FComPort_WIN32.h"\
 	".\comm\FInetAddr_WIN32.h"\
 	".\comm\FUDPSocket_WIN32.h"\
@@ -181,37 +182,27 @@ DEP_CPP_FATE_=\
 	".\util\FPoint.h"\
 	
 NODEP_CPP_FATE_=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	".\base\FSystem_PalmOS.h"\
-	
-
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\FateApp.cpp
-DEP_CPP_FATEA=\
 	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
 	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
 	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
 	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateApp.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
+	".\base\PalmOS\PalmOS.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FATE_=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
-	".\base\FBitmap_PalmOS.h"\
-	".\base\FBitmap_WIN32.h"\
+	".\base\FFile.h"\
 	".\base\FSystem.h"\
-	".\base\FSystem_WIN32.h"\
-	".\base\FSystem_WIN32_WCE.h"\
 	".\base\IFateComponent.h"\
 	".\base\IFateContainer.h"\
 	".\base\IFButtonListener.h"\
@@ -221,6 +212,90 @@ DEP_CPP_FATEA=\
 	".\base\IFItemListListener.h"\
 	".\base\IFMenuListener.h"\
 	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FFile.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FComPort_WIN32.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\util\FLinkedList.h"\
+	".\util\FPoint.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FATE_=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FFile.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FFile.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FComPort_WIN32.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\util\FLinkedList.h"\
+	".\util\FPoint.h"\
+	
+NODEP_CPP_FATE_=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateApp.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
+	".\base\PalmOS\PalmOS.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FateApp.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FATEA=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
 	".\comm\FInetAddr.h"\
 	".\comm\FInetAddr_PalmOS.h"\
 	".\comm\FInetAddr_WIN32.h"\
@@ -236,18 +311,100 @@ DEP_CPP_FATEA=\
 	".\util\FLinkedList.h"\
 	
 NODEP_CPP_FATEA=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
 	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	".\base\FSystem_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\comm\FSocket_PalmOS.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FATEA=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\gui\FLabel.h"\
+	".\gui\FMsgPanel.h"\
+	".\gui\FPanel.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FATEA=\
+	".\comm\FSocket_PalmOS.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FATEA=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\gui\FLabel.h"\
+	".\gui\FMsgPanel.h"\
+	".\gui\FPanel.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FATEA=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\comm\FSocket_PalmOS.h"\
+	
 
 !ENDIF 
 
@@ -262,71 +419,58 @@ SOURCE=.\base\FateTypeDefs.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\base\WIN32\FBitmap.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FBITM=\
+	".\base\FateTypeDefs.h"\
+	".\base\WIN32\FBitmap.h"\
+	
+NODEP_CPP_FBITM=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FBITM=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\WIN32\FBitmap.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FBITM=\
+	".\base\FateTypeDefs.h"\
+	".\base\WIN32\FBitmap.h"\
+	
+NODEP_CPP_FBITM=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\base\FBitmap.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\FBitmap_WIN32.cpp
-DEP_CPP_FBITM=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
-	".\base\FateTypeDefs.h"\
-	".\base\FBitmap_WIN32.h"\
-	
-NODEP_CPP_FBITM=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	
-
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\FBitmap_WIN32.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\base\FFile.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\FFile_WIN32.cpp
-DEP_CPP_FFILE=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
-	".\base\FateTypeDefs.h"\
-	".\base\FFile_WIN32.h"\
-	
-NODEP_CPP_FFILE=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	
-
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
-
-!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\FFile_WIN32.h
 # End Source File
 # Begin Source File
 
@@ -338,38 +482,68 @@ SOURCE=.\base\FPoint.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\FSystem.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\FSystem_WIN32_WCE.cpp
-DEP_CPP_FSYST=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
-	".\base\FateTypeDefs.h"\
-	".\base\FBitmap_WIN32.h"\
-	".\base\FSystem_WIN32_WCE.h"\
-	
-NODEP_CPP_FSYST=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	
+SOURCE=.\base\WIN32_WCE\FSystem.cpp
 
 !IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
 
+DEP_CPP_FSYST=\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	
+NODEP_CPP_FSYST=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
+	
+
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FSYST=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FSYST=\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	
+NODEP_CPP_FSYST=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
+	
 
 !ENDIF 
 
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\FSystem_WIN32_WCE.h
+SOURCE=.\base\FSystem.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\WIN32_WCE\FSystem.h
 # End Source File
 # Begin Source File
 
@@ -378,19 +552,14 @@ SOURCE=.\base\IFateComponent.h
 # Begin Source File
 
 SOURCE=.\base\IFateContainer.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_IFATE=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
-	".\base\FBitmap_PalmOS.h"\
-	".\base\FBitmap_WIN32.h"\
 	".\base\FSystem.h"\
-	".\base\FSystem_WIN32.h"\
-	".\base\FSystem_WIN32_WCE.h"\
 	".\base\IFateComponent.h"\
 	".\base\IFateContainer.h"\
 	".\base\IFButtonListener.h"\
@@ -400,21 +569,82 @@ DEP_CPP_IFATE=\
 	".\base\IFItemListListener.h"\
 	".\base\IFMenuListener.h"\
 	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
 	".\gui\FTextField.h"\
 	".\util\FLinkedList.h"\
 	
 NODEP_CPP_IFATE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
 	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	".\base\FSystem_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_IFATE=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FTextField.h"\
+	".\util\FLinkedList.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_IFATE=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FTextField.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_IFATE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	
 
 !ENDIF 
 
@@ -462,6 +692,9 @@ SOURCE=.\comm\FComPort.h
 # Begin Source File
 
 SOURCE=.\comm\FComPort_WIN32.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_FCOMP=\
 	".\comm\FComPort.h"\
 	".\comm\FComPort_WIN32.h"\
@@ -470,13 +703,27 @@ NODEP_CPP_FCOMP=\
 	".\comm\FComPort_PalmOS.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FCOMP=\
+	".\comm\FComPort.h"\
+	".\comm\FComPort_WIN32.h"\
+	
+NODEP_CPP_FCOMP=\
+	".\comm\FComPort_PalmOS.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FCOMP=\
+	".\comm\FComPort.h"\
+	".\comm\FComPort_WIN32.h"\
+	
+NODEP_CPP_FCOMP=\
+	".\comm\FComPort_PalmOS.h"\
+	
 
 !ENDIF 
 
@@ -492,6 +739,9 @@ SOURCE=.\comm\FInetAddr_WIN32.h
 # Begin Source File
 
 SOURCE=.\comm\FServer.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_FSERV=\
 	".\comm\FInetAddr.h"\
 	".\comm\FInetAddr_PalmOS.h"\
@@ -508,13 +758,43 @@ NODEP_CPP_FSERV=\
 	".\comm\FSocket_PalmOS.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FSERV=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FSERV=\
+	".\comm\FSocket_PalmOS.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FSERV=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FSERV=\
+	".\comm\FSocket_PalmOS.h"\
+	
 
 !ENDIF 
 
@@ -530,6 +810,9 @@ SOURCE=.\comm\FSocket.h
 # Begin Source File
 
 SOURCE=.\comm\FSocket_WIN32.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_FSOCK=\
 	".\comm\FInetAddr.h"\
 	".\comm\FInetAddr_PalmOS.h"\
@@ -540,13 +823,31 @@ DEP_CPP_FSOCK=\
 	".\comm\IFSocket_WIN32.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FSOCK=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FSOCK=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
 
 !ENDIF 
 
@@ -562,19 +863,32 @@ SOURCE=.\comm\FUDPSocket.h
 # Begin Source File
 
 SOURCE=.\comm\FUDPSocket_WIN32.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_FUDPS=\
 	".\comm\FInetAddr_WIN32.h"\
 	".\comm\FUDPSocket_WIN32.h"\
 	".\comm\IFSocket_WIN32.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FUDPS=\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FUDPS=\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
 
 !ENDIF 
 
@@ -590,6 +904,9 @@ SOURCE=.\comm\IFSocket.h
 # Begin Source File
 
 SOURCE=.\comm\IFSocket_WIN32.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_IFSOC=\
 	".\comm\FInetAddr.h"\
 	".\comm\FInetAddr_PalmOS.h"\
@@ -599,13 +916,29 @@ DEP_CPP_IFSOC=\
 	".\comm\IFSocket_WIN32.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_IFSOC=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_IFSOC=\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	
 
 !ENDIF 
 
@@ -621,19 +954,14 @@ SOURCE=.\comm\IFSocket_WIN32.h
 # Begin Source File
 
 SOURCE=.\gui\FButton.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
 DEP_CPP_FBUTT=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
 	".\base\FateApp.h"\
 	".\base\FateTypeDefs.h"\
 	".\base\FBitmap.h"\
-	".\base\FBitmap_PalmOS.h"\
-	".\base\FBitmap_WIN32.h"\
 	".\base\FSystem.h"\
-	".\base\FSystem_WIN32.h"\
-	".\base\FSystem_WIN32_WCE.h"\
 	".\base\IFateComponent.h"\
 	".\base\IFateContainer.h"\
 	".\base\IFButtonListener.h"\
@@ -643,21 +971,86 @@ DEP_CPP_FBUTT=\
 	".\base\IFItemListListener.h"\
 	".\base\IFMenuListener.h"\
 	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
 	".\gui\FButton.h"\
 	".\util\FLinkedList.h"\
 	
 NODEP_CPP_FBUTT=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
 	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	".\base\FSystem_PalmOS.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateApp.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
 	
 
-!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
-
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FBUTT=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FButton.h"\
+	".\util\FLinkedList.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FBUTT=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FButton.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FBUTT=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateApp.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
+	
 
 !ENDIF 
 
@@ -668,30 +1061,64 @@ SOURCE=.\gui\FButton.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\gui\FLabel.cpp
-DEP_CPP_FLABE=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
-	".\base\FateTypeDefs.h"\
-	".\base\FBitmap.h"\
-	".\base\FBitmap_PalmOS.h"\
-	".\base\FBitmap_WIN32.h"\
-	".\base\FSystem.h"\
-	".\base\FSystem_WIN32.h"\
-	".\base\FSystem_WIN32_WCE.h"\
-	".\base\IFateComponent.h"\
-	".\gui\FLabel.h"\
-	
-NODEP_CPP_FLABE=\
-	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
-	".\base\FSystem_PalmOS.h"\
-	
+SOURCE=.\gui\FDirList.cpp
 
 !IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
 
+DEP_CPP_FDIRL=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FDirList.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FDIRL=\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FDIRL=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FDirList.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
 
 !ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
 
@@ -702,7 +1129,357 @@ NODEP_CPP_FLABE=\
 # End Source File
 # Begin Source File
 
+SOURCE=.\gui\FDropList.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FDROP=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FDropList.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FDROP=\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FDROP=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FDropList.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FFileList.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FFILE=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FFileList.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FFILE=\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FFILE=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FFileList.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FItemList.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FITEM=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FITEM=\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FITEM=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FItemList.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FLabel.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FLABE=\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FLabel.h"\
+	
+NODEP_CPP_FLABE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateApp.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FLABE=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FLabel.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+DEP_CPP_FLABE=\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\PalmOS\FBitmap.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FLabel.h"\
+	
+NODEP_CPP_FLABE=\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\aygshell.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\gx.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\sipapi.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\vibrate.h"\
+	"..\..\..\..\Program Files\Windows CE Tools\wce420\POCKET PC 2003\Include\Armv4\winuserm.h"\
+	".\base\PalmOS\FateApp.h"\
+	".\base\PalmOS\FateTypeDefs.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\gui\FLabel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\gui\FMenu.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FMENU=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FMenu.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FMENU=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FMenu.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
@@ -714,12 +1491,1149 @@ SOURCE=.\gui\FPanel.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\gui\FProgressBar.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FPROG=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FProgressBar.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FPROG=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\gui\FProgressBar.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\gui\FTextField.h
 # End Source File
 # End Group
 # Begin Group "include"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\include\fate.h
+# End Source File
+# End Group
+# Begin Group "audio"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\audio\FMMWave.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FMMWA=\
+	".\audio\FMMWave.h"\
+	".\audio\FSampleList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FMMWA=\
+	".\audio\FMMWave.h"\
+	".\audio\FSampleList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FMMWave.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FSampleList.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FSAMP=\
+	".\audio\FSampleList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FSAMP=\
+	".\audio\FSampleList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FSampleList.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWave.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FWAVE=\
+	".\audio\FWave.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FWAVE=\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FWAVE=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\audio\FWave.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWave.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveIn.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FWAVEI=\
+	".\audio\FWave.h"\
+	".\audio\FWaveIn.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FWAVEI=\
+	".\ipapi.h"\
+	".\ygshell.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FWAVEI=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\audio\FWave.h"\
+	".\audio\FWaveIn.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveIn.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveOut.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FWAVEO=\
+	".\audio\FMMWave.h"\
+	".\audio\FSampleList.h"\
+	".\audio\FWave.h"\
+	".\audio\FWaveOut.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FWAVEO=\
+	".\audio\FMMWave.h"\
+	".\audio\FSampleList.h"\
+	".\audio\FWave.h"\
+	".\audio\FWaveOut.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\audio\FWaveOut.h
+# End Source File
+# End Group
+# Begin Group "ext"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\ext\FController.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FCONT=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket.h"\
+	".\comm\FUDPSocket_PalmOS.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FController.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FCONT=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket.h"\
+	".\comm\FUDPSocket_PalmOS.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FController.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FController.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FNaviMap.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FNAVI=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FNaviMap.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FNAVI=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FNaviMap.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FNaviMap.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FOffscreenRenderer.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FOFFS=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket.h"\
+	".\comm\FUDPSocket_PalmOS.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FOffscreenRenderer.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FOFFS=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FUDPSocket.h"\
+	".\comm\FUDPSocket_PalmOS.h"\
+	".\comm\FUDPSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FOffscreenRenderer.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FOffscreenRenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FRemoteButton.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FREMO=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FRemoteButton.h"\
+	".\ext\IFRemoteWidget.h"\
+	".\gui\FButton.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FREMO=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FRemoteButton.h"\
+	".\ext\IFRemoteWidget.h"\
+	".\gui\FButton.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FRemoteButton.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FStartMenu.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FSTAR=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FStartMenu.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FSTAR=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FStartMenu.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FStartMenu.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObj.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FVEOB=\
+	".\base\FateTypeDefs.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\ext\FVEObj.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\FVEObjManager.h"\
+	".\ext\ve_protocol.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FVEOB=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateTypeDefs.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\ext\FVEObj.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\FVEObjManager.h"\
+	".\ext\ve_protocol.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObj.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObjAttr.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FVEOBJ=\
+	".\base\FateTypeDefs.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\ve_protocol.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FVEOBJ=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateTypeDefs.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\ve_protocol.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObjAttr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObjManager.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FVEOBJM=\
+	".\base\FateTypeDefs.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FVEObj.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\FVEObjManager.h"\
+	".\ext\ve_protocol.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_FVEOBJM=\
+	".\comm\FSocket_PalmOS.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FVEOBJM=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateTypeDefs.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FVEObj.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\FVEObjManager.h"\
+	".\ext\ve_protocol.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FVEOBJM=\
+	".\comm\FSocket_PalmOS.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObjManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObjPanel.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FVEOBJP=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\ext\FVEObj.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\FVEObjManager.h"\
+	".\ext\FVEObjPanel.h"\
+	".\ext\ve_protocol.h"\
+	".\gui\FButton.h"\
+	".\gui\FDropList.h"\
+	".\gui\FItemList.h"\
+	".\gui\FLabel.h"\
+	".\gui\FPanel.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FVEOBJP=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\ext\FVEObj.h"\
+	".\ext\FVEObjAttr.h"\
+	".\ext\FVEObjManager.h"\
+	".\ext\FVEObjPanel.h"\
+	".\ext\ve_protocol.h"\
+	".\gui\FButton.h"\
+	".\gui\FDropList.h"\
+	".\gui\FItemList.h"\
+	".\gui\FLabel.h"\
+	".\gui\FPanel.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FVEObjPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetMgr.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FWIDG=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FRemoteButton.h"\
+	".\ext\FWidgetMgr.h"\
+	".\ext\gui_protocol.h"\
+	".\ext\IFRemoteWidget.h"\
+	".\gui\FButton.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_FWIDG=\
+	".\comm\FSocket_PalmOS.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FWIDG=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\comm\FInetAddr.h"\
+	".\comm\FInetAddr_PalmOS.h"\
+	".\comm\FInetAddr_WIN32.h"\
+	".\comm\FServer.h"\
+	".\comm\FSocket.h"\
+	".\comm\FSocket_WIN32.h"\
+	".\comm\IFSocket.h"\
+	".\comm\IFSocket_PalmOS.h"\
+	".\comm\IFSocket_WIN32.h"\
+	".\ext\FRemoteButton.h"\
+	".\ext\FWidgetMgr.h"\
+	".\ext\gui_protocol.h"\
+	".\ext\IFRemoteWidget.h"\
+	".\gui\FButton.h"\
+	".\util\FLinkedList.h"\
+	
+NODEP_CPP_FWIDG=\
+	".\comm\FSocket_PalmOS.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetMgr.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetPanel.cpp
+
+!IF  "$(CFG)" == "FATE - Win32 (WCE ARM) Release"
+
+DEP_CPP_FWIDGE=\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FRemoteButton.h"\
+	".\ext\FWidgetMgr.h"\
+	".\ext\FWidgetPanel.h"\
+	".\ext\IFRemoteWidget.h"\
+	".\gui\FButton.h"\
+	".\gui\FPanel.h"\
+	".\util\FLinkedList.h"\
+	{$(INCLUDE)}"aygshell.h"\
+	{$(INCLUDE)}"sipapi.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARM) Debug"
+
+DEP_CPP_FWIDGE=\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	".\base\FateApp.h"\
+	".\base\FateTypeDefs.h"\
+	".\base\FBitmap.h"\
+	".\base\FSystem.h"\
+	".\base\IFateComponent.h"\
+	".\base\IFateContainer.h"\
+	".\base\IFButtonListener.h"\
+	".\base\IFCharListener.h"\
+	".\base\IFConnectionListener.h"\
+	".\base\IFDropListListener.h"\
+	".\base\IFItemListListener.h"\
+	".\base\IFMenuListener.h"\
+	".\base\IFSliderListener.h"\
+	".\base\PalmOS\FSystem.h"\
+	".\base\WIN32\FBitmap.h"\
+	".\base\WIN32\FSystem.h"\
+	".\base\WIN32_WCE\FSystem.h"\
+	".\ext\FRemoteButton.h"\
+	".\ext\FWidgetMgr.h"\
+	".\ext\FWidgetPanel.h"\
+	".\ext\IFRemoteWidget.h"\
+	".\gui\FButton.h"\
+	".\gui\FPanel.h"\
+	".\util\FLinkedList.h"\
+	
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Debug"
+
+!ELSEIF  "$(CFG)" == "FATE - Win32 (WCE ARMV4) Release"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\FWidgetPanel.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\gui_protocol.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\IFRemoteWidget.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\ext\ve_protocol.h
+# End Source File
+# End Group
+# Begin Group "util"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\util\FLinkedList.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\util\FPoint.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\util\FRect.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\util\FTicker.h
+# End Source File
 # End Group
 # End Target
 # End Project

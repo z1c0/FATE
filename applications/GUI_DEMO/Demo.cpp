@@ -37,8 +37,8 @@ bool CDemo::InitFateApp()
 {
   for (int i = 0; i < NR_OF_PANELS; i++)
   {
-    char str[10];
-    _itoa(i + 1, str, 10);
+    TCHAR str[10];
+    _itot(i + 1, str, 10);
 
     m_btns[i].SetCaption(str);
     m_btns[i].SetId(i);
@@ -101,7 +101,7 @@ bool CDemo::InitFateApp()
   // Panel 4
   m_label.SetX(20);
   m_label.SetY(60);
-  m_label.SetText("Hello World!");
+  m_label.SetText(TEXT("Hello World!"));
   m_panels[4].Add(m_label);
   m_progressBar.SetX(20);
   m_progressBar.SetY(120);

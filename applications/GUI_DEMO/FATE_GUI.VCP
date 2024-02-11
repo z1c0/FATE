@@ -84,7 +84,7 @@ RSC=rc.exe
 # ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "UNICODE" /d "_UNICODE" /d "DEBUG" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /r
 CPP=clarm.exe
 # ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
-# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "C:\Windows CE Tools\wce300\Pocket PC 2002\include" /D "DEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "UNICODE" /D "_UNICODE" /YX /M$(CECrtMTDebug) /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
@@ -93,7 +93,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 commctrl.lib coredll.lib aygshell.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
-# ADD LINK32 commctrl.lib coredll.lib aygshell.lib gx.lib winsock.lib ../FATE/ArmDbg/FATEDbg.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib aygshell.lib gx.lib winsock.lib ../../framework/lib/WIN32_WCE/FATEDbg.lib /nologo /base:"0x00010000" /stack:0x10000,0x1000 /entry:"WinMainCRTStartup" /debug /nodefaultlib:"$(CENoDefaultLib)" /libpath:"C:\Windows CE Tools\wce300\Pocket PC 2002\lib\arm" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
 
 !ELSEIF  "$(CFG)" == "FATE_GUI - Win32 (WCE x86) Release"
 
@@ -178,236 +178,256 @@ SOURCE=.\Demo.cpp
 
 DEP_CPP_DEMO_=\
 	".\Demo.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FateApp.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FBitmap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FController.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDirList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDropList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FFileList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FInetAddr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FItemList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLabel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.cpp"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMMWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgServerProxy.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FNaviMap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FProgressBar.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FRemoteButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSampleList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FServer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSlider.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FStartMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FTextField.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FToggleButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FUDPSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObj.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjAttr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjManager.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveIn.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveOut.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetMgr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateComponent.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateContainer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFButtonListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFCharListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFConnectionListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFDropListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFItemListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFMenuListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFRemoteWidget.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSliderListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\stdafx.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\ve_protocol.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_DEMO_=\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FateApp.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FBitmap.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FController.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDirList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDropList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FFileList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FInetAddr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FItemList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLabel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.cpp"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMenu.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMMWave.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgServerProxy.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FNaviMap.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FProgressBar.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FRemoteButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSampleList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FServer.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSlider.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FStartMenu.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FTextField.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FToggleButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FUDPSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObj.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjAttr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjManager.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWave.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveIn.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveOut.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetMgr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateComponent.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateContainer.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFButtonListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFCharListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFConnectionListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFDropListListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFItemListListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFMenuListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFRemoteWidget.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSliderListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\stdafx.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\ve_protocol.h"\
+	".\ipapi.h"\
+	".\x.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "FATE_GUI - Win32 (WCE ARM) Debug"
 
 DEP_CPP_DEMO_=\
+	"..\..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\aygshell.h"\
+	"..\..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\gx.h"\
+	"..\..\..\..\..\Windows CE Tools\wce300\Pocket PC 2002\include\sipapi.h"\
+	"..\..\framework\audio\FMMWave.h"\
+	"..\..\framework\audio\FSampleList.h"\
+	"..\..\framework\audio\FWave.h"\
+	"..\..\framework\audio\FWaveIn.h"\
+	"..\..\framework\audio\FWaveOut.h"\
+	"..\..\framework\base\FateApp.h"\
+	"..\..\framework\base\FateTypeDefs.h"\
+	"..\..\framework\base\FBitmap.h"\
+	"..\..\framework\base\FFile.h"\
+	"..\..\framework\base\FSystem.h"\
+	"..\..\framework\base\IFateComponent.h"\
+	"..\..\framework\base\IFateContainer.h"\
+	"..\..\framework\base\IFButtonListener.h"\
+	"..\..\framework\base\IFCharListener.h"\
+	"..\..\framework\base\IFConnectionListener.h"\
+	"..\..\framework\base\IFDropListListener.h"\
+	"..\..\framework\base\IFItemListListener.h"\
+	"..\..\framework\base\IFMenuListener.h"\
+	"..\..\framework\base\IFSliderListener.h"\
+	"..\..\framework\base\PalmOS\FSystem.h"\
+	"..\..\framework\base\WIN32\FBitmap.h"\
+	"..\..\framework\base\WIN32\FFile.h"\
+	"..\..\framework\base\WIN32\FSystem.h"\
+	"..\..\framework\base\WIN32_WCE\FSystem.h"\
+	"..\..\framework\comm\FInetAddr.h"\
+	"..\..\framework\comm\FInetAddr_PalmOS.h"\
+	"..\..\framework\comm\FInetAddr_WIN32.h"\
+	"..\..\framework\comm\FSocket.h"\
+	"..\..\framework\comm\FSocket_WIN32.h"\
+	"..\..\framework\comm\FUDPSocket.h"\
+	"..\..\framework\comm\FUDPSocket_PalmOS.h"\
+	"..\..\framework\comm\FUDPSocket_WIN32.h"\
+	"..\..\framework\comm\IFSocket.h"\
+	"..\..\framework\comm\IFSocket_PalmOS.h"\
+	"..\..\framework\comm\IFSocket_WIN32.h"\
+	"..\..\framework\ext\FController.h"\
+	"..\..\framework\ext\FNaviMap.h"\
+	"..\..\framework\ext\FOffscreenRenderer.h"\
+	"..\..\framework\ext\FStartMenu.h"\
+	"..\..\framework\ext\FVEObj.h"\
+	"..\..\framework\ext\FVEObjAttr.h"\
+	"..\..\framework\ext\FVEObjManager.h"\
+	"..\..\framework\ext\FVEObjPanel.h"\
+	"..\..\framework\ext\FWidgetMgr.h"\
+	"..\..\framework\ext\FWidgetPanel.h"\
+	"..\..\framework\ext\gui_protocol.h"\
+	"..\..\framework\ext\ve_protocol.h"\
+	"..\..\framework\gui\FButton.h"\
+	"..\..\framework\gui\FDirList.h"\
+	"..\..\framework\gui\FDropList.h"\
+	"..\..\framework\gui\FFileList.h"\
+	"..\..\framework\gui\FItemList.h"\
+	"..\..\framework\gui\FLabel.h"\
+	"..\..\framework\gui\FMenu.h"\
+	"..\..\framework\gui\FPanel.h"\
+	"..\..\framework\gui\FProgressBar.h"\
+	"..\..\framework\include\fate.h"\
+	"..\..\framework\util\FLinkedList.h"\
+	"..\..\framework\util\FPoint.h"\
+	"..\..\framework\util\FRect.h"\
+	"..\..\framework\util\FTicker.h"\
 	".\Demo.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FateApp.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FBitmap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FController.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDirList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDropList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FFileList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FInetAddr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FItemList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLabel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.cpp"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMMWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgServerProxy.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FNaviMap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FProgressBar.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FRemoteButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSampleList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FServer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSlider.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FStartMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FTextField.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FToggleButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FUDPSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObj.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjAttr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjManager.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveIn.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveOut.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetMgr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateComponent.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateContainer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFButtonListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFCharListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFConnectionListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFDropListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFItemListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFMenuListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFRemoteWidget.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSliderListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\stdafx.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\ve_protocol.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_DEMO_=\
+	"..\..\framework\comm\FSocket_PalmOS.h"\
 	
 
 !ELSEIF  "$(CFG)" == "FATE_GUI - Win32 (WCE x86) Release"
 
 DEP_CPP_DEMO_=\
 	".\Demo.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FateApp.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FBitmap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FController.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDirList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDropList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FFileList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FInetAddr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FItemList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLabel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.cpp"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMMWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgServerProxy.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FNaviMap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FProgressBar.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FRemoteButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSampleList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FServer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSlider.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FStartMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FTextField.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FToggleButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FUDPSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObj.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjAttr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjManager.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveIn.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveOut.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetMgr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateComponent.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateContainer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFButtonListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFCharListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFConnectionListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFDropListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFItemListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFMenuListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFRemoteWidget.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSliderListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\stdafx.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\ve_protocol.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_DEMO_=\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FateApp.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FBitmap.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FController.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDirList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDropList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FFileList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FInetAddr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FItemList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLabel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.cpp"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMenu.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMMWave.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgServerProxy.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FNaviMap.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FProgressBar.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FRemoteButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSampleList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FServer.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSlider.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FStartMenu.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FTextField.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FToggleButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FUDPSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObj.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjAttr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjManager.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWave.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveIn.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveOut.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetMgr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateComponent.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateContainer.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFButtonListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFCharListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFConnectionListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFDropListListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFItemListListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFMenuListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFRemoteWidget.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSliderListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\stdafx.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\ve_protocol.h"\
+	".\ipapi.h"\
+	".\x.h"\
+	".\ygshell.h"\
 	
 
 !ELSEIF  "$(CFG)" == "FATE_GUI - Win32 (WCE x86) Debug"
 
 DEP_CPP_DEMO_=\
 	".\Demo.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FateApp.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FBitmap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FController.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDirList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDropList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FFileList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FInetAddr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FItemList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLabel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.cpp"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMMWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgServerProxy.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FNaviMap.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FProgressBar.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FRemoteButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSampleList.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FServer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSlider.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FStartMenu.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FTextField.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FToggleButton.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FUDPSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObj.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjAttr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjManager.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWave.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveIn.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveOut.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetMgr.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetPanel.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateComponent.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateContainer.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFButtonListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFCharListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFConnectionListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFDropListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFItemListListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFMenuListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFRemoteWidget.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSliderListener.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSocket.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\stdafx.h"\
-	"\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\ve_protocol.h"\
-	{$(INCLUDE)}"aygshell.h"\
-	{$(INCLUDE)}"gx.h"\
-	{$(INCLUDE)}"sipapi.h"\
+	
+NODEP_CPP_DEMO_=\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FateApp.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FBitmap.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FController.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDirList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FDropList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FFileList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FInetAddr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FItemList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLabel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.cpp"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FLinkedList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMenu.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMMWave.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FMsgServerProxy.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FNaviMap.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FProgressBar.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FRemoteButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSampleList.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FServer.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSlider.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FStartMenu.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FTextField.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FToggleButton.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FUDPSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObj.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjAttr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjManager.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FVEObjPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWave.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveIn.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWaveOut.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetMgr.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\FWidgetPanel.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateComponent.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFateContainer.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFButtonListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFCharListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFConnectionListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFDropListListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFItemListListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFMenuListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFRemoteWidget.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSliderListener.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\IFSocket.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\stdafx.h"\
+	"..\..\..\..\..\wolfgangzi\(My_Documents)\Wolfgang - Projekte\FATE\ve_protocol.h"\
+	".\ipapi.h"\
+	".\x.h"\
+	".\ygshell.h"\
 	
 
 !ENDIF 

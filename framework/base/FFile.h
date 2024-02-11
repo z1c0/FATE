@@ -1,7 +1,7 @@
 #pragma once
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN32_WCE)
   #include "WIN32/FFile.h"
 #else
-  #include "PalmOS/PalmOS.h"
+  #error "PalmOS"
 #endif
