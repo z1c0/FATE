@@ -1,10 +1,28 @@
 # FATE
 
+To build and run this software, I used:
+
+* A Windows XP virtual machine
+* Microsoft Visual Studio 6.0
+* Microsoft eMbedded Visual Tools 3.0
+* Windows Mobile SDK 2002
+* Metroworks CodeWarrior
+
+[Internet Archive](https://archive.org) proved really valuable here.
+
 ## The Framework
 
-<https://wolfgang-ziegler.com/repo/writing/thesis.pdf>
+*FATE* (Framework for Advanced Techniques of Interaction in Virtual Environments) is a framework that I developed while
+working at [Ars Electronica Futurelab](https://ars.electronica.art/futurelab/) back in the day.
+It also become the topic of my [master thesis](https://wolfgang-ziegler.com/repo/writing/thesis.pdf).
+
+For more background on the framwork, its applications and why I brought this back to life 20 years later, you
+can read this [blog post](https://ars.electronica.art/futurelab/de/).
 
 ## Applications
+
+The main intention of *FATE* to provide building blocks and patterns for building applications to nagivate virtual environments.
+However, it also worked nicely as a general-purpose application framework for Pocket PCs.
 
 ### Cells
 
@@ -63,9 +81,15 @@ You need to start the [server application](etc/PPTRCv2) and it still works like 
 ### SimpleTest
 
 Another test app. This one I created specifically when I decided to implement the **PalmOS** port.
-Spoiler alert: that port did not get very far.
+That port did not not go very far, but the prototype works.
+
+The Windows version.
 
 ![SimpleTest](images/simpletest.png)
+
+The Palm OS version.
+
+![SimpleTest running on Palm OS](images/simpletest_palmos.jpg)
 
 ### Snake
 
@@ -79,22 +103,31 @@ The snake can shoot missiles though.
 This was the first and main showcase of my framework.
 You could use the PocketPC to control a virtual environment, do picture slideshows, control Microsoft Powerpoint (what later became the standalone **PPC_PPTRC**).
 
+![VREna](images/vrena.png)
+
 ### WAND
 
 The actual *Wand* was a hardware device for interaction with VR environments.
 This suite of demo applications showcased one of the framework's main features where a Pocket PC acts as such a Wand device.
 
-### WAND_vePanel
+* WAND
+* WAND_vePanel
+* WAND_widgets
 
-### WAND_widgets
+Without the required VR server components, these applications are hardly impressive.
 
-### XEDIT
+![WAND_vePanel](images/wand_vepanel.png)
+
+### X-EDIT
 
 This application was actually really great and I'm still proud of it today.
 It would turn your PocketPC into a mobile recording studio. You could record and replay audio and even
-perform cutting operations on the recorded `.wav` file.
-It implemented a custom memory manager to make maximum use of the available memory.
+perform cutting operations on the recorded `.wav` files.
+It also implemented a custom memory manager to make maximum use of the available memory.
 We even sold a couple of licences back then.
 
+![X-EDIT](images/xedit.png)
 
+X-EDIT running on a Compaq iPaq
 
+![X-EDIT](images/xedit-ipaq.jpg)
