@@ -1,6 +1,6 @@
 #pragma once
 
-#include <PalmOS.h>
+#include "../base/FateTypeDefs.h"
 #include "FInetAddr.h"
 
 //--------------------------------------------------------------------------------

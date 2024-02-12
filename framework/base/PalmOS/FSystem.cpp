@@ -1,30 +1,31 @@
-#include "FSystemPalmOS.h"
-
+#include "FSystem.h"
+#include "FBitmap.h"
 
 //------------------------------------------------------------------------------
-CFSystemPalmOS::CFSystemPalmOS(int iWidth, int iHeight)
+CFSystem::CFSystem(int iWidth, int iHeight)
 {
   m_iWidth = iWidth;
-  m_iHeight= iHeight;  
+  m_iHeight = iHeight;  
 
-  m_pDoubleBuffer= new CFBitmap();
+  m_pDoubleBuffer = new CFBitmap();
   m_pDoubleBuffer->Create(m_iWidth, m_iHeight);
   m_pDoubleBuffer->SolidFill(0);  // BLACK
 }
 
 //------------------------------------------------------------------------------
-CFSystemPalmOS::~CFSystemPalmOS()
+CFSystem::~CFSystem()
 {
+  delete m_pDoubleBuffer;
 }
 
 //------------------------------------------------------------------------------
-void CFSystemPalmOS::RenderDoubleBuffer()
+void CFSystem::RenderDoubleBuffer()
 {
   m_pDoubleBuffer->Blit();
 }
 
 //------------------------------------------------------------------------------
-void CFSystemPalmOS::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
+void CFSystem::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
 {
   FateEventType event;
   
@@ -36,7 +37,7 @@ void CFSystemPalmOS::QueueEvent(int iEventID, int iComponentID, void *pCustomDat
 }
 
 //------------------------------------------------------------------------------
-bool CFSystemPalmOS::ShutDownSystem()
+bool CFSystem::ShutDownSystem()
 {
   EventType event;
   MemSet(&event, sizeof(EventType), 0);
@@ -48,11 +49,17 @@ bool CFSystemPalmOS::ShutDownSystem()
 }
 
 //------------------------------------------------------------------------------
-void CFSystemPalmOS::ForceRedraw()
+void CFSystem::ForceRedraw()
 {
   EventType event;
   MemSet(&event, sizeof(EventType), 0);
   event.eType= (eventsEnum)PALMOS_REPAINT;
   
   EvtAddEventToQueue(&event);
+}
+
+//--------------------------------------------------------------------------------
+void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
+{
+  // TODO
 }

@@ -1,12 +1,10 @@
 #pragma once
 
 #include "../base/FateTypeDefs.h"
+#include "../base/FBitmap.h"
 #include "../base/FateApp.h"
 #include "../base/FFile.h"
 
-#include "../util/FPoint.h"
-#include "../util/FRect.h"
-#include "../util/FTicker.h"
 
 #include "../gui/FButton.h"
 #include "../gui/FMenu.h"
@@ -18,6 +16,12 @@
 
 #include "../comm/FSocket.h"
 #include "../comm/FUDPSocket.h"
+
+#ifndef _PALM_OS
+
+#include "../util/FPoint.h"
+#include "../util/FRect.h"
+#include "../util/FTicker.h"
 
 #include "../ext/gui_protocol.h"
 #include "../ext/FVEObjPanel.h"
@@ -32,3 +36,5 @@
 #include "../audio/FMMWave.h"
 #include "../audio/FWaveIn.h"
 #include "../audio/FWaveOut.h"
+
+#endif

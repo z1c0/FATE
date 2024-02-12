@@ -1,11 +1,9 @@
 #pragma once
 
-#include "../../base/FateApp.h"
+#include "../FateTypeDefs.h"
 
-//------------------------------------------------------------------------------
 #define PALMOS_REPAINT  (firstUserEvent + 1)
 
-//------------------------------------------------------------------------------
 struct FateEventType
 {
   eventsEnum eType;
@@ -24,22 +22,25 @@ struct FateEventType
   } data;
 };
 
-//------------------------------------------------------------------------------
-class CFSystemPalmOS : public CFSystem
+class CFSystem
 {
 public:
-  CFSystemPalmOS(int iWidth, int iHeight) FATE_SECTION;
-  virtual ~CFSystemPalmOS() FATE_SECTION;
+  CFSystem(int iWidth, int iHeight);
+  virtual ~CFSystem();
 
-  virtual void RenderDoubleBuffer() FATE_SECTION;
-
-  virtual void ForceRedraw() FATE_SECTION;
-
-  virtual void QueueEvent(int iEventID, int iComponentID, void *pCustomData) FATE_SECTION;
-
-  virtual bool ShutDownSystem() FATE_SECTION;
+  void RenderDoubleBuffer();
+  void ForceRedraw();
+  void QueueEvent(int iEventID, int iComponentID, void *pCustomData);
+  bool ShutDownSystem();
+  int GetWidth() const { return m_iWidth; }
+  int GetHeight() const { return m_iHeight; }
+  CFBitmap* GetDoubleBuffer() { return m_pDoubleBuffer; }
   
-protected:
-
+  static void GetPathToApplication(TCHAR *pszAppPath);
+  
+private:
+  CFBitmap* m_pDoubleBuffer;
+  int m_iWidth;
+  int m_iHeight;
 };
 

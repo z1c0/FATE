@@ -1,10 +1,7 @@
-#ifndef __UDPSOCKET__WIN32__
-#define __UDPSOCKET__WIN32__
+#pragma once
 
 #include "IFSocket.h"
 
-//--------------------------------------------------------------------------------
-/// Implementation of a UDP socket.
 class CFUDPSocket : public IFSocket  
 {
 public:
@@ -36,4 +33,3 @@ protected:
   CFInetAddr* m_pAddrRemote;
 };
 
-#endif // __UDPSOCKET__WIN32__

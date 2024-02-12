@@ -1,5 +1,4 @@
-#ifndef __IFATECONTAINER__H__
-#define __IFATECONTAINER__H__
+#pragma once
 
 #include "../util/FLinkedList.h"
 #include "IFateComponent.h"
@@ -11,7 +10,6 @@
 #include "IFCharListener.h"
 #include "IFConnectionListener.h"
 
-
 //--------------------------------------------------------------------------------
 class IFateContainer : public IFateComponent, public IFButtonListener, 
                        public IFMenuListener, public IFItemListListener, 
@@ -19,51 +17,50 @@ class IFateContainer : public IFateComponent, public IFButtonListener,
                        public IFCharListener, public IFConnectionListener
 {
 public:
-  IFateContainer() FATE_SECTION;
-	virtual ~IFateContainer() FATE_SECTION;
-  bool Add(IFateComponent& comp) FATE_SECTION;
-  bool Add(IFateContainer& cont) FATE_SECTION;
-  bool AddButtonListener(IFButtonListener *pBtnLst) FATE_SECTION;
-  bool AddMenuListener(IFMenuListener *pMenuLst) FATE_SECTION;
-  bool AddItemListListener(IFItemListListener *pItemListLst) FATE_SECTION;
-  bool AddDropListListener(IFDropListListener *pDropListLst) FATE_SECTION;
-  bool AddSliderListener(IFSliderListener *pSliderLst) FATE_SECTION;
-  bool AddCharListener(IFCharListener& charlistener) FATE_SECTION;
-  bool AddConnectionListener(IFConnectionListener *pConnLst) FATE_SECTION;
+  IFateContainer();
+	virtual ~IFateContainer();
+  bool Add(IFateComponent& comp);
+  bool Add(IFateContainer& cont);
+  bool AddButtonListener(IFButtonListener *pBtnLst);
+  bool AddMenuListener(IFMenuListener *pMenuLst);
+  bool AddItemListListener(IFItemListListener *pItemListLst);
+  bool AddDropListListener(IFDropListListener *pDropListLst);
+  bool AddSliderListener(IFSliderListener *pSliderLst);
+  bool AddCharListener(IFCharListener& charlistener);
+  bool AddConnectionListener(IFConnectionListener *pConnLst);
 	
-  bool StylusDownNotify(int xPos, int yPos) FATE_SECTION;
-	bool StylusMoveNotify(int xPos, int yPos) FATE_SECTION;
-	bool StylusUpNotify(int xPos, int yPos) FATE_SECTION;
+  bool StylusDownNotify(int xPos, int yPos);
+	bool StylusMoveNotify(int xPos, int yPos);
+	bool StylusUpNotify(int xPos, int yPos);
   
-  bool KeyDownNotify(PdaKey key) FATE_SECTION;
-  bool KeyUpNotify(PdaKey key) FATE_SECTION;
+  bool KeyDownNotify(PdaKey key);
+  bool KeyUpNotify(PdaKey key);
   
-  bool ButtonPressNotify(unsigned long ulBtnID) FATE_SECTION;
-  bool ButtonReleaseNotify(unsigned long ulBtnID) FATE_SECTION;
+  bool ButtonPressNotify(unsigned long ulBtnID);
+  bool ButtonReleaseNotify(unsigned long ulBtnID);
   
-  bool MenuItemSelectNotify(unsigned long ulMenuID, unsigned int id) FATE_SECTION;
+  bool MenuItemSelectNotify(unsigned long ulMenuID, unsigned int id);
   
-  bool ItemListSelectNotify(unsigned long ulListID, ITEMLISTENTRY *pEntry) FATE_SECTION;  
+  bool ItemListSelectNotify(unsigned long ulListID, ITEMLISTENTRY *pEntry);  
   
-  bool DropListExpandNotify(unsigned long ulListID) FATE_SECTION;
-  bool DropListSelectNotify(unsigned long ulListID, ITEMLISTENTRY *pEntry) FATE_SECTION; 
-  bool DropListCollapseNotify(unsigned long ulListID) FATE_SECTION;
+  bool DropListExpandNotify(unsigned long ulListID);
+  bool DropListSelectNotify(unsigned long ulListID, ITEMLISTENTRY *pEntry); 
+  bool DropListCollapseNotify(unsigned long ulListID);
   
-  bool SliderChangeNotify(unsigned long ulSliderID, int iVal) FATE_SECTION;
+  bool SliderChangeNotify(unsigned long ulSliderID, int iVal);
   
-  bool CharNotify(TCHAR chChar) FATE_SECTION;
+  bool CharNotify(TCHAR chChar);
   
-  bool ClientConnectNotify(CFServer *pServer) FATE_SECTION;
+  bool ClientConnectNotify(CFServer *pServer);
   
-  void ClearComponents() FATE_SECTION;  
-  bool Remove(IFateComponent *pComp) FATE_SECTION;
+  void ClearComponents();  
+  bool Remove(IFateComponent *pComp);
   
-  void DrawNotify() FATE_SECTION;
+  void DrawNotify();
   
-  IFateComponent* FindCompByID(unsigned long ulID) FATE_SECTION;
+  IFateComponent* FindCompByID(unsigned long ulID);
 
 protected:
-
   CFLinkedList<IFateComponent*>       *m_pCompList;
   CFLinkedList<IFateContainer*>       *m_pContList;
   CFLinkedList<IFButtonListener*>     *m_pBtnList;
@@ -75,4 +72,3 @@ protected:
   CFLinkedList<IFConnectionListener*> *m_pConnList;
 };
 
-#endif  // __IFATECONTAINER__H__

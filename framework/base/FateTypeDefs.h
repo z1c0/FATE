@@ -1,12 +1,10 @@
-#ifndef __FATETYPEDEFS__H__
-#define __FATETYPEDEFS__H__
+#pragma once
 
 #ifdef _WIN32
   #include <windows.h>
   #include <winsock.h>
   #include <stdio.h>
   #include <TCHAR.h>  
-  #define FATE_SECTION  // just for compatibility
 
 #ifdef _WIN32_WCE
   #include <aygshell.h>
@@ -17,26 +15,33 @@
 
 #define _PALM_OS
  
+  #include <PalmOS.h>
+  #include <unix_stdarg.h>
+
+//
 // PalmOS specfic
-#ifndef FATE_SECTION
-  #define FATE_SECTION __attribute__ ((section ("sect_FW"))) 
-#endif
+//
+
+#define max(a, b)  (((a) > (b)) ? (a) : (b)) 
 
 //------------------------------------------------------------------------------
 /// String functions
 #define TEXT
+typedef char* LPTSTR;
 typedef const char* LPCTSTR;
 typedef char TCHAR;
+typedef unsigned long DWORD;
 
 #define _tcscmp StrCompare
 #define _tcslen StrLen
 #define _tcscpy StrCopy
-
+#define sprintf StrPrintF
+#define strlen StrLen
+#define memcpy MemMove
 
 //------------------------------------------------------------------------------
 /// RGB
 
-//#define RGB(r, g ,b) ((unsigned long)(((unsigned char)(r)|((unsigned short)(g)<<8))|(((unsigned long)(unsigned char)(b))<<16))) 
 #define RGB(r, g, b) (unsigned short)((((unsigned char)(r)&0xF8)<<8)|(((unsigned char)(g)&0xFC)<<3)|(((unsigned char)(b)&0xF8)>>3))
 typedef unsigned long COLORREF;
 
@@ -50,9 +55,6 @@ typedef unsigned long COLORREF;
 
 #define MAX_PATH 256
 
-typedef void* HDC;
-
-
 struct RECT
 {
   int left;
@@ -60,9 +62,6 @@ struct RECT
   int right;
   int bottom;
 };
-
-typedef void* HPEN;
-typedef void* HBRUSH;
 
 #endif  
 
@@ -95,5 +94,3 @@ enum EFateDrawMode
 // Macro for safe memory release.
 #define SAFE_DELETE(p)  { if (p) { delete(p); (p)= NULL; } }
 
-
-#endif  // __FATETYPEDEFS__H__

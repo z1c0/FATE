@@ -1,7 +1,5 @@
-#ifndef __FBUTTON__H__
-#define __FBUTTON__H__
+#pragma once
 
-//#include "../base/FateTypeDefs.h"
 #include "../base/IFateComponent.h"
 #include "../base/FBitmap.h"
 
@@ -11,26 +9,26 @@ class CFButton : public IFateComponent
 {
 public:
 
-  CFButton() FATE_SECTION;
-	CFButton(CFBitmap *pBmpDefault, CFBitmap *pBmpPress= NULL, CFBitmap *pBmpDisabled= NULL) FATE_SECTION;
-  CFButton(LPCTSTR pCaption, int iWidth, int iHeight) FATE_SECTION;
-  CFButton(LPCTSTR pCaption) FATE_SECTION;
+  CFButton();
+	CFButton(CFBitmap *pBmpDefault, CFBitmap *pBmpPress= NULL, CFBitmap *pBmpDisabled= NULL);
+  CFButton(LPCTSTR pCaption, int iWidth, int iHeight);
+  CFButton(LPCTSTR pCaption);
 	
-  virtual ~CFButton() FATE_SECTION;
+  virtual ~CFButton();
 
-  virtual bool StylusDown(int xPos, int yPos) FATE_SECTION;
-	virtual bool StylusUp(int xPos, int yPos) FATE_SECTION;
+  virtual bool StylusDown(int xPos, int yPos);
+	virtual bool StylusUp(int xPos, int yPos);
   
-  virtual void Draw() FATE_SECTION;
+  virtual void Draw();
   
-  virtual void SetSystem(CFSystem *pSystem) FATE_SECTION;
+  virtual void SetSystem(CFSystem *pSystem);
   
-  virtual void SetX(int iPosX) FATE_SECTION;
-  virtual void SetY(int iPosY) FATE_SECTION;
+  virtual void SetX(int iPosX);
+  virtual void SetY(int iPosY);
 
-  virtual void SetCaption(LPCTSTR pCaption) FATE_SECTION;
+  virtual void SetCaption(LPCTSTR pCaption);
   
-  virtual void SetEnabled(bool bEnabled) FATE_SECTION;
+  virtual void SetEnabled(bool bEnabled);
   
   void SetTransparency(COLORREF colTrans) { m_colTrans= colTrans; m_bTrans= true; };
   
@@ -38,8 +36,8 @@ public:
 
 protected:
 
-  void InitTextButton(LPCTSTR pCaption, int iWidth, int iHeight) FATE_SECTION;
-  bool CreateButton() FATE_SECTION;
+  void InitTextButton(LPCTSTR pCaption, int iWidth, int iHeight);
+  bool CreateButton();
 
   CFBitmap *m_pBmpDefault;
   CFBitmap *m_pBmpPress;
@@ -67,4 +65,4 @@ protected:
   bool m_bPressed;
 };
 
-#endif // __FBUTTON__H__
+

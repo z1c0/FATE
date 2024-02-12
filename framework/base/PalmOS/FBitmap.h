@@ -1,37 +1,30 @@
-#ifndef __FBITMAPPALMOS__H__
-#define __FBITMAPPALMOS__H__
+#pragma once
 
-#include <PalmOS.h>
-#include "../baseFateTypeDefs.h"
+#include "../base/FateTypeDefs.h"
 
 //TODO: alot
 
-//------------------------------------------------------------------------------
 class CFBitmap  
 {
 public:
 	
-  CFBitmap() FATE_SECTION;
-	CFBitmap(CFBitmap *pBmp) FATE_SECTION;
-	~CFBitmap() FATE_SECTION;
+  CFBitmap();
+  CFBitmap(CFBitmap *pBmp);
+  ~CFBitmap();
   
-  void Init() FATE_SECTION;
+  void Init();
   
-  void CleanUp() FATE_SECTION;
+  void CleanUp();
   
-  bool Create(int iWidth, int iHeight) FATE_SECTION;
+  bool Create(int iWidth, int iHeight);
 
-  void SetDestBitmap(CFBitmap *pBmp);
-  /*
-  HDC GetSourceDC() { return(m_hSourceDC); };
-  HDC GetDestDC() { return(m_hDestDC); };
-  */
+  void SetDestBitmap(const CFBitmap& bmp);
   
-  bool SolidFill(const COLORREF colFill) FATE_SECTION;
+  bool SolidFill(const COLORREF colFill);
 	
   bool Load(TCHAR* pszFileName);
   bool Load(unsigned long ulResourceID);
-	bool Load(char *pszData, unsigned long ulSize);
+  bool Load(char *pszData, unsigned long ulSize);
   
   int GetX() { return(m_iPosX); };
   void SetX(int iPosX) { m_iPosX= iPosX; };
@@ -44,22 +37,16 @@ public:
   int GetRight() { return(m_iPosX + m_iWidth); };
   int GetBottom() { return(m_iPosY + m_iHeight); };
   
-  bool Blit() FATE_SECTION;
+  bool Blit();
   bool Blit(int iWidth, int iHeight);
   bool ClipBlit(int iWidth, int iHeight);
   bool StretchBlit(int iWidth, int iHeight);
   bool TransBlit(COLORREF colTrans);
 
-  /*
-  bool CreateSaveDC(HDC hdc= NULL);
-  bool SaveUnder(HDC hdc);
-  bool RestoreUnder(HDC hdc);
-  */
-
   bool SaveUnder() { return(false); };
   bool RestoreUnder() { return(false); };
 
-  bool SetBits(unsigned char *pBits, int iSize) FATE_SECTION;
+  bool SetBits(unsigned char *pBits, int iSize);
   char* GetBits() { return(m_pBits); };
   
   bool PointInside(int iPosX, int iPosY)
@@ -75,18 +62,18 @@ public:
 
   //------------------------------------------------------------------------------
   /// Drawing operations on Bitmap
-  static bool CalcRectForText(TCHAR *pszText, RECT *pRect);
+  static bool CalcRectForText(const TCHAR *pszText, RECT& rect);
 
-  COLORREF SetBackgroundColor(COLORREF col) FATE_SECTION;
-  COLORREF SetColor(COLORREF col) FATE_SECTION;
-  COLORREF SetTextColor(COLORREF col) FATE_SECTION;
+  COLORREF SetBackgroundColor(COLORREF col);
+  COLORREF SetColor(COLORREF col);
+  COLORREF SetTextColor(COLORREF col);
 
-  bool DrawText(TCHAR *pszText, RECT *pRect) FATE_SECTION;
-  bool DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight) FATE_SECTION;
-  bool DrawFilledRect(RECT *pRect) FATE_SECTION;
+  bool DrawText(const TCHAR *pszText, RECT& rect);
+  bool DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight);
+  bool DrawFilledRect(RECT *pRect);
 
-  bool DrawFrameRect(int iLeft, int iTop, int iWidth, int iHeight) FATE_SECTION;
-  bool DrawFrameRect(RECT *pRect) FATE_SECTION;
+  bool DrawFrameRect(int iLeft, int iTop, int iWidth, int iHeight);
+  bool DrawFrameRect(RECT *pRect);
 
 private:
   
@@ -114,4 +101,3 @@ private:
   int m_iBorderWith;
 };
 
-#endif //  __FBITMAPPALMOS__H__

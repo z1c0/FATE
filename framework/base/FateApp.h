@@ -72,10 +72,10 @@ public:
     DWORD dwReserved2;
   };
 
-	CFateApp(EFateDrawMode DrawMode = DM_PORTRAIT) FATE_SECTION;
-	virtual ~CFateApp() FATE_SECTION;
+	CFateApp(EFateDrawMode DrawMode = DM_PORTRAIT);
+	virtual ~CFateApp();
 
-  bool Init() FATE_SECTION;
+  bool Init();
   
   // Methods that can be overridden by subclasses.
   virtual bool InitFateApp()     { return(true); };
@@ -95,12 +95,12 @@ public:
   virtual bool ClientConnect(class CFServer* pServer) { return(false); };
   virtual bool Timer(unsigned long id) { return false; };
 
-  virtual void SetSystem(CFSystem *pSystem) FATE_SECTION;
-  virtual CFSystem* GetSystem() FATE_SECTION;
+  virtual void SetSystem(CFSystem *pSystem);
+  virtual CFSystem* GetSystem();
   
   virtual void Idle() {};  // Supposed to be overridden.
   
-  void DrawDoubleBuffer() FATE_SECTION;
+  void DrawDoubleBuffer();
 
   EFateDrawMode GetDrawMode() const { return m_DrawMode; };
   bool IsLandScapeMode() const { return ((m_DrawMode == DM_LANDSCAPE)||(m_DrawMode == DM_LANDSCAPE_FLIPPED)); };
@@ -124,20 +124,20 @@ public:
   
   TCHAR* GetAppPath() { return(m_szAppPath); };
   
-  bool ClearScreen(COLORREF colClear= RGB(255, 255, 255)) FATE_SECTION;
+  bool ClearScreen(COLORREF colClear= RGB(255, 255, 255));
   
   unsigned long GetNextID() { return m_ulNextID++; };
   
   void SetDrawMode(EFateDrawMode DrawMode) { m_DrawMode = DrawMode; };
   
-  void Message(LPCTSTR pszMsg) FATE_SECTION;
+  void Message(LPCTSTR pszMsg);
   
   void SetTransparency(COLORREF colTrans) { m_colTrans= colTrans; };
   void NoTransparency() { m_colTrans= COL_NO_TRANSPARENCY; };
   
-  bool Exit() FATE_SECTION;
+  bool Exit();
   
-  bool SaveDoubleBuffer(LPCTSTR pszFileName) FATE_SECTION;
+  bool SaveDoubleBuffer(LPCTSTR pszFileName);
   
   void AddServer(int iPort);
   inline bool IsListening() { return(m_bIsListening); };

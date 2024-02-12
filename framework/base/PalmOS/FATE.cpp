@@ -1,10 +1,8 @@
-#include <PalmOS.h>
-#include <unix_stdarg.h>
-#include "FateApp.h"
 #include "FateTypeDefs.h"
+#include "FateApp.h"
 #include "FInetAddr.h"
 #include "FUDPSocket.h"
-#include "FSystemPalmOS.h"
+#include "FSystem.h"
 
 
 //--------------------------------------------------------------------------------
@@ -61,7 +59,7 @@ static bool StartApplication()
 
   // instantiate application object
   g_pApp= CreateFateApp();
-  g_pApp->SetSystem(new CFSystemPalmOS(uiWidth, uiHeight));
+  g_pApp->SetSystem(new CFSystem(uiWidth, uiHeight));
   g_pApp->Init();
   g_pApp->InitFateApp();
 

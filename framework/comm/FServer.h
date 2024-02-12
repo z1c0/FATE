@@ -1,5 +1,4 @@
-#ifndef __FSERVER__H__
-#define __FSERVER__H__
+#pragma once
 
 #include "../util/FLinkedList.h"
 #include "FSocket.h"
@@ -24,10 +23,9 @@ public:
   /// Get pointer to corresponding client socket number  i 
   CFSocket* GetClient(int i) { return(m_clientList.Get(i)); };
 
-private:
-  
+private:  
   /// List of all accepted clients.
   CFLinkedList<CFSocket*> m_clientList;
 };
 
-#endif  // __FSERVER__H__
+

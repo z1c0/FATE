@@ -1,7 +1,4 @@
-// FBitmap_PalmOS.cpp: implementation of the CFBitmap class.
-//////////////////////////////////////////////////////////////////////
-#include "FateApp.h"
-#include "FBitmap_PalmOS.h"
+#include "FBitmap.h"
 
 //--------------------------------------------------------------------------------
 CFBitmap::CFBitmap()
@@ -48,9 +45,9 @@ void CFBitmap::Init()
 }
 
 //------------------------------------------------------------------------------
-void CFBitmap::SetDestBitmap(CFBitmap *pBmp)
+void CFBitmap::SetDestBitmap(const CFBitmap& bmp)
 {
-  m_hWinDst= pBmp->m_hWinSrc;
+  m_hWinDst = bmp.m_hWinSrc;
 }
 
 
@@ -167,12 +164,11 @@ COLORREF CFBitmap::SetTextColor(COLORREF col)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::CalcRectForText(TCHAR *pszText, RECT *pRect)
+bool CFBitmap::CalcRectForText(const TCHAR *pszText, RECT& rect)
 {
-  pRect->bottom= pRect->top + FntCharHeight();
-  pRect->right= pRect->left + FntCharsWidth(pszText, StrLen(pszText));  
-  
-  return(true);
+  rect.bottom = rect.top + FntCharHeight();
+  rect.right = rect.left + FntCharsWidth(pszText, StrLen(pszText));  
+  return true;
 }
 
 //------------------------------------------------------------------------------
@@ -217,25 +213,26 @@ bool CFBitmap::DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::DrawText(TCHAR *pszText, RECT *pRect)
+bool CFBitmap::DrawText(const TCHAR *pszText, RECT& rect)
 {
-  if (m_hWinSrc) {
-    WinHandle hPrevWin= WinSetDrawWindow(m_hWinSrc);
+  if (m_hWinSrc)
+  {
+    WinHandle hPrevWin = WinSetDrawWindow(m_hWinSrc);
 
     // set text color
     RGBColorType col;
-    col.r= GetRValue(m_colText);
-    col.g= GetGValue(m_colText);
-    col.b= GetBValue(m_colText);    
+    col.r = GetRValue(m_colText);
+    col.g = GetGValue(m_colText);
+    col.b = GetBValue(m_colText);    
     WinSetTextColorRGB(&col, NULL);    
 
     // set background color
-    col.r= GetRValue(m_colBackground);
-    col.g= GetGValue(m_colBackground);
-    col.b= GetBValue(m_colBackground);
+    col.r = GetRValue(m_colBackground);
+    col.g = GetGValue(m_colBackground);
+    col.b = GetBValue(m_colBackground);
     WinSetBackColorRGB(&col, NULL);
    
-    WinDrawChars(pszText, StrLen(pszText), pRect->left, pRect->top);
+    WinDrawChars(pszText, StrLen(pszText), rect.left, rect.top);
 
     WinSetDrawWindow(hPrevWin);
 

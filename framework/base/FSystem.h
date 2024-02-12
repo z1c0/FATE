@@ -5,6 +5,5 @@
 #elif defined (_WIN32)
   #include "WIN32/FSystem.h"
 #else
-  #error "PalmOS"
   #include "PalmOS/FSystem.h"
 #endif
