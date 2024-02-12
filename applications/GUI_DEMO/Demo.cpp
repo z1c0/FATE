@@ -46,7 +46,7 @@ bool CDemo::InitFateApp()
     m_btns[i].SetY(300);
     Add(m_btns[i]);
 
-    m_panels[i].SetVisible(i == 2);
+    m_panels[i].SetVisible(i == 4);
     Add(m_panels[i]);
   }
 
@@ -101,7 +101,7 @@ bool CDemo::InitFateApp()
   // Panel 4
   m_label.SetX(20);
   m_label.SetY(60);
-  m_label.SetText(TEXT("Hello World!"));
+  m_label.SetText(GetFateVersion().GetLongString());
   m_panels[4].Add(m_label);
   m_progressBar.SetX(20);
   m_progressBar.SetY(120);

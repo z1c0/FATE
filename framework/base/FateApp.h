@@ -2,6 +2,7 @@
 
 #include "IFateContainer.h"
 #include "FBitmap.h"
+#include "../FateVersion.h"
 
 class CFServer;
 class CFMsgPanel;
@@ -76,6 +77,7 @@ public:
 	virtual ~CFateApp();
 
   bool Init();
+  const CFateVersion& GetFateVersion() const { return m_fateVersion; }
   
   // Methods that can be overridden by subclasses.
   virtual bool InitFateApp()     { return(true); };
@@ -157,18 +159,15 @@ protected:
 
   CFBitmap *m_pDblBuffer;
 
-private:
-	
+private:	
   static CFateApp *m_pApp;
   
-  EFateDrawMode m_DrawMode;
-  
-  IFateComponent *m_pCapt;    
-
+  CFateVersion m_fateVersion;
+  EFateDrawMode m_DrawMode;  
+  IFateComponent *m_pCapt;
   TCHAR m_szAppPath[MAX_PATH];
   COLORREF m_colTrans;
   bool m_bIsListening;
-
   CFLinkedList<CFServer*> m_ListServers;
 };
 

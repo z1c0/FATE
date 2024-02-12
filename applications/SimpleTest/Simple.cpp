@@ -76,7 +76,7 @@ bool CSimple::ButtonReleased(unsigned long ulBtnID)
 bool CSimple::KeyDown(PdaKey key)
 {
   char szMsg[32];
-  sprintf(szMsg, "Key: %d", key);
+  _stprintf(szMsg, "Key: %d", key);
   Message(szMsg);
 
   return(true);

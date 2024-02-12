@@ -35,7 +35,7 @@ typedef unsigned long DWORD;
 #define _tcscmp StrCompare
 #define _tcslen StrLen
 #define _tcscpy StrCopy
-#define sprintf StrPrintF
+#define _stprintf StrPrintF
 #define strlen StrLen
 #define memcpy MemMove
 

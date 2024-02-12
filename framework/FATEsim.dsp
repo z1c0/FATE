@@ -510,5 +510,9 @@ SOURCE=.\audio\FWaveOut.cpp
 SOURCE=.\audio\FWaveOut.h
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=.\FateVersion.h
+# End Source File
 # End Target
 # End Project
