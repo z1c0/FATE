@@ -6,7 +6,7 @@ To build and run this software, I used:
 * Microsoft Visual Studio 6.0
 * Microsoft eMbedded Visual Tools 3.0
 * Windows Mobile SDK 2002
-* Metroworks CodeWarrior
+* MetroWorks CodeWarrior
 
 [Internet Archive](https://archive.org) proved really valuable here.
 
@@ -14,14 +14,14 @@ To build and run this software, I used:
 
 *FATE* (Framework for Advanced Techniques of Interaction in Virtual Environments) is a framework that I developed while
 working at [Ars Electronica Futurelab](https://ars.electronica.art/futurelab/) back in the day.
-It also become the topic of my [master thesis](https://wolfgang-ziegler.com/repo/writing/thesis.pdf).
+It also became the topic of my [master's thesis](https://wolfgang-ziegler.com/repo/writing/thesis.pdf).
 
-For more background on the framwork, its applications and why I brought this back to life 20 years later, you
+For more background on the framework, its applications and why I brought this back to life 20 years later, you
 can read this [blog post](https://ars.electronica.art/futurelab/de/).
 
 ## Applications
 
-The main intention of *FATE* to provide building blocks and patterns for building applications to nagivate virtual environments.
+The main intention of *FATE* was to provide building blocks and patterns for creating applications to navigate virtual environments.
 However, it also worked nicely as a general-purpose application framework for Pocket PCs.
 
 ### Cells
@@ -45,13 +45,13 @@ This tool would retrieve a device's unique ID that could then be used to generat
 
 ### GUI_DEMO
 
-This application was only developed for the screenshots in [thesis](https://wolfgang-ziegler.com/repo/writing/thesis.pdf).
+This application was only developed for the screenshots in my [thesis](https://wolfgang-ziegler.com/repo/writing/thesis.pdf).
 
 ![GUI_DEMO](images/guidemo.png)
 
 ### liquor
 
-I remember that one day, when I was bored, I decided to implement the Austrian card game [Schnapsen](https://en.wikipedia.org/wiki/Schnapsen)
+I remember that one day when I was bored, I decided to implement the Austrian card game [Schnapsen](https://en.wikipedia.org/wiki/Schnapsen)
 using my framework. Then I got distracted by something else and never finished it.
 
 ![liquor](images/liquor.png)
@@ -81,7 +81,7 @@ You need to start the [server application](etc/PPTRCv2) and it still works like 
 ### SimpleTest
 
 Another test app. This one I created specifically when I decided to implement the **PalmOS** port.
-That port did not not go very far, but the prototype works.
+That port did not go very far, but the prototype works.
 
 The Windows version.
 
@@ -101,7 +101,8 @@ The snake can shoot missiles though.
 ### VRena_2.0 / VRena_2.5
 
 This was the first and main showcase of my framework.
-You could use the PocketPC to control a virtual environment, do picture slideshows, control Microsoft Powerpoint (what later became the standalone **PPC_PPTRC**).
+You could use the PocketPC to control a virtual environment, do picture slideshows, and control
+Microsoft PowerPoint (what later became the standalone **PPC_PPTRC**).
 
 ![VREna](images/vrena.png)
 
@@ -124,10 +125,10 @@ This application was actually really great and I'm still proud of it today.
 It would turn your PocketPC into a mobile recording studio. You could record and replay audio and even
 perform cutting operations on the recorded `.wav` files.
 It also implemented a custom memory manager to make maximum use of the available memory.
-We even sold a couple of licences back then.
+We even sold a couple of licenses back then.
 
 ![X-EDIT](images/xedit.png)
 
 X-EDIT running on a Compaq iPaq
 
-![X-EDIT](images/xedit-ipaq.jpg)
+![X-EDIT](images/xedit_ipaq.jpg)
