@@ -1,7 +1,7 @@
 #include "../base/FateTypeDefs.h"
 #include "../base/FBitmap.h"
 #include "../base/FateApp.h"
-#include "FItemlist.h"
+#include "FItemList.h"
 
 
 //--------------------------------------------------------------------------------
@@ -67,11 +67,11 @@ CFItemList::~CFItemList()
 void CFItemList::SetSystem(CFSystem *pSystem)
 {
   m_pSystem = pSystem;
-   
+  
   // Depending on height, calculate number of possible items.
-  RECT rect = {0};
+  RECT rect = {};
   CFBitmap::CalcRectForText(TEXT("W"), rect);
-  m_iItemHeight = max(18, (rect.bottom - rect.top));
+  m_iItemHeight = _max(18, (rect.bottom - rect.top));
   
   // if no bitmaps were specified, they are created
   if (!m_bmpUpArrow)
@@ -79,7 +79,7 @@ void CFItemList::SetSystem(CFSystem *pSystem)
     POINT points[4];
     const int iWidth = 5;
 
-    m_bmpUpArrow = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpUpArrow = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpUpArrow->Create(DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
     m_bmpUpArrow->SolidFill(RGB(200, 200, 200));
     
@@ -104,7 +104,7 @@ void CFItemList::SetSystem(CFSystem *pSystem)
     POINT points[4];
     const int iWidth= 5;
 
-    m_bmpDownArrow = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpDownArrow = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpDownArrow->Create(DEFAULT_ARROW_DIM, DEFAULT_ARROW_DIM);
     m_bmpDownArrow->SolidFill(RGB(200, 200, 200));
 
@@ -126,7 +126,7 @@ void CFItemList::SetSystem(CFSystem *pSystem)
   }
 
   // Create background bitmap.
-  m_bmpBack->SetDestBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpBack->SetDestBitmap(m_pSystem->GetDoubleBuffer());
   m_bmpBack->Create(m_iItemWidth + m_bmpUpArrow->GetWidth(), m_iItemHeight * m_iMaxVisItems + 1);
   m_iWidth = m_bmpBack->GetWidth();
   m_iHeight = m_bmpBack->GetHeight();
@@ -142,7 +142,7 @@ void CFItemList::SetSystem(CFSystem *pSystem)
     m_iSliderStep= (m_iScrollBarHeight / m_iItemCount); 
   }
   
-  UpdatePos();  
+  UpdatePos();
 }
 
 
@@ -338,16 +338,16 @@ void CFItemList::Draw()
     }
     else
     {
-      iSliderHeight = max(2, (m_iScrollBarHeight * m_iMaxVisItems) / m_iItemCount);
+      iSliderHeight = _max(2, (m_iScrollBarHeight * m_iMaxVisItems) / m_iItemCount);
     }
 
-    m_bmpSlider = new CFBitmap(*(m_pSystem->GetDoubleBuffer()));
-    m_bmpSlider->Create(m_bmpUpArrow->GetWidth(), iSliderHeight);    
-   
+    m_bmpSlider = new CFBitmap(m_pSystem->GetDoubleBuffer());
+    m_bmpSlider->Create(m_bmpUpArrow->GetWidth(), iSliderHeight);
+  
     m_bmpSlider->SetColor(m_colBorder);
     m_bmpSlider->SetBackgroundColor(m_colSlide);
     m_bmpSlider->DrawFilledRect(0, 0, m_bmpUpArrow->GetWidth(), iSliderHeight);
-   
+  
     m_bmpSlider->SetX(m_bmpUpArrow->GetX());
   }
   m_bmpSlider->SetY(m_iSliderPos);

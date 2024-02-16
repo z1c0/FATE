@@ -163,7 +163,7 @@ private:
   static CFateApp *m_pApp;
   
   CFateVersion m_fateVersion;
-  EFateDrawMode m_DrawMode;  
+  EFateDrawMode m_DrawMode;
   IFateComponent *m_pCapt;
   TCHAR m_szAppPath[MAX_PATH];
   COLORREF m_colTrans;

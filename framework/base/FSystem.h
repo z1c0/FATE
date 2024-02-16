@@ -1,9 +1,36 @@
 #pragma once
 
-#if defined(_WIN32_WCE)
-  #include "WIN32_WCE/FSystem.h"
-#elif defined (_WIN32)
-  #include "WIN32/FSystem.h"
-#else
-  #include "PalmOS/FSystem.h"
-#endif
+#include "FBitmap.h"
+
+class CFSystemImpl;
+
+class CFSystem
+{
+public:
+  CFSystem(CFSystemImpl* pImpl);
+  ~CFSystem();
+  
+  CFBitmap& GetDoubleBuffer();
+  void RenderDoubleBuffer();
+  void ForceRedraw();
+  void DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
+  void ShowError(const TCHAR* msg);  
+  void QueueEvent(int iEventID, int iComponentID, void *pCustomData);
+  bool ShutDownSystem();
+  int GetWidth() const { return m_nWidth; };
+  int GetHeight() const { return m_nHeight; };
+  void AddTimer(unsigned long id, int interval);  
+  bool EnableSuspend(bool suspend) { return false; }  
+
+  static void GetPathToApplication(TCHAR *pszAppPath);
+  static unsigned int GetTicks();
+  static int GetRandomNumber(int max);
+
+private:
+  CFSystemImpl* m_pImpl;
+  CFBitmap m_doubleBuffer;
+  int m_nWidth;
+  int m_nHeight;
+};
+
+

@@ -23,9 +23,6 @@ public:
   };
 	virtual ~IFSocket() { if ((m_hSocket)&&(m_hSocket != INVALID_SOCKET)) Close(); };
   virtual bool Create()= 0;
-  virtual bool Close();
-	virtual bool Bind(const CFInetAddr* pInetAddr);
-	virtual bool Bind(USHORT usPort);
   virtual int Send(const char* pBuff, const int iSize)= 0;
   virtual int Receive(char* pBuff, const int iSize)= 0;
   //--------------------------------------------------------------------------------
@@ -33,14 +30,8 @@ public:
   /// in seconds. The constant NO_TIMEOUT means, that operations will block.
   virtual void SetTimeout(DWORD dwTimeout) { m_dwTimeout= dwTimeout; };
   virtual operator SOCKET() { return(m_hSocket); };
-  bool IsReceiving();
   inline int GetListenPort() { return(m_iListenPort); };
   
-  //--------------------------------------------------------------------------------
-  // static IFSocket methods 
-  static bool InitSocketLibrary();  
-  static bool CleanupSocketLibrary();
-
 	static CFInetAddr GetHostByName(const char* pHostName, const USHORT usPort= 0);
 	static const char* GetHostByAddr(const CFInetAddr* pInetAddr);
 

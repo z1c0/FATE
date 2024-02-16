@@ -21,7 +21,7 @@ public:
   virtual void SetX(int iPosX);
   virtual void SetY(int iPosY);
   
-  void SetTransparency(COLORREF colTrans) { m_colTrans= colTrans; m_bTrans= TRUE; };
+  void SetTransparency(COLORREF colTrans) { m_colTrans= colTrans; m_bTrans= true; };
   int GetState() { return(m_bState1 ? 0 : 1); };
   void SetState(int iState);
 

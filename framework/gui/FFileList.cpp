@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include <windows.h>
 #include "FFileList.h"
 #include "../base/FateTypeDefs.h"
@@ -212,4 +214,4 @@ void CFFileList::RemoveFilters()
   }
 }
 
-
+#endif

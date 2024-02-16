@@ -4,10 +4,7 @@
 
 class CFBitmap  
 {  
-  friend class CFSystem;
-
 public:
-
 	CFBitmap();
 	CFBitmap(const CFBitmap& bmp);
 	~CFBitmap();

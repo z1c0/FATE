@@ -98,14 +98,17 @@ bool CFTextField::CreateBitmap()
   
   // safe-release old bitmap
   SAFE_DELETE(m_bmpImg);
-  m_bmpImg = new CFBitmap(*m_pSystem->GetDoubleBuffer());
-  if (!m_bmpImg->Create(m_iWidth, m_iHeight)) return(false);
+  m_bmpImg = new CFBitmap(m_pSystem->GetDoubleBuffer());
+  if (!m_bmpImg->Create(m_iWidth, m_iHeight))
+  {
+    return(false);
+  }
   m_bmpImg->SetX(m_iPosX);
   m_bmpImg->SetY(m_iPosY);
 
   DrawBitmap();
 
-  return(true);
+  return true;
 }
 
 //--------------------------------------------------------------------------------

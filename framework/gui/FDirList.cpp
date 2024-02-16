@@ -1,5 +1,6 @@
+#ifdef _WIN32
+
 #include <windows.h>
-#include <tchar.h>
 #include "FDirList.h"
 #include "../base/FBitmap.h"
 #include "../base/FateApp.h"
@@ -51,7 +52,7 @@ bool CFDirList::SetCurrDir(LPTSTR pCurrDir)
     m_bDirRead = TRUE;
   }
 
-  return true;;  
+  return true;
 }
 
 //--------------------------------------------------------------------------------
@@ -118,3 +119,4 @@ bool CFDirList::IsDirectory(LPCTSTR pDir) const
   return (dwAttr != (DWORD)-1) && (dwAttr & FILE_ATTRIBUTE_DIRECTORY);
 }
 
+#endif

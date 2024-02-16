@@ -19,8 +19,8 @@ public:
 	virtual ~CFFileList();
 
   void Refresh() { SetCurrDir(m_szCurrDir);};	
-  BOOL SetCurrDir(LPCTSTR pszDir);
-  BOOL SetFilters(LPTSTR pFilterStr);
+  bool SetCurrDir(LPCTSTR pszDir);
+  bool SetFilters(LPTSTR pFilterStr);
   void RemoveFilters();
 
 private:

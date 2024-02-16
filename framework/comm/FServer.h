@@ -3,16 +3,15 @@
 #include "../util/FLinkedList.h"
 #include "FSocket.h"
 
-
 //--------------------------------------------------------------------------------
 class CFServer : public CFSocket  
 {
 public:
 	CFServer();
 	virtual ~CFServer();
-  void Listen(int iPort) 
+  void Listen(int port) 
   {
-    Bind(iPort);
+    Bind(port);
     CFSocket::Listen();
   };
   int SendToClient(const char* pBuff, const int iSize, const int iClient);

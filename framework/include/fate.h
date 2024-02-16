@@ -17,7 +17,7 @@
 #include "../comm/FSocket.h"
 #include "../comm/FUDPSocket.h"
 
-#ifndef _PALM_OS
+#ifdef _WIN32
 
 #include "../util/FPoint.h"
 #include "../util/FRect.h"

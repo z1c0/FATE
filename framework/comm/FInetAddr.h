@@ -1,5 +1,12 @@
-#ifdef _WIN32
-  #include "FInetAddr_WIN32.h"
-#else
-  #include "FInetAddr_PalmOS.h"
-#endif
+#pragma once
+
+#include "../base/FateTypeDefs.h"
+
+class CFInetAddr
+{
+public:
+  CFInetAddr();
+  CFInetAddr(const char* ip, int port);
+
+private:
+};

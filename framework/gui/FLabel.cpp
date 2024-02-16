@@ -110,10 +110,12 @@ bool CFLabel::CreateBufferBitmap()
 
   // safe-release old bitmap
   SAFE_DELETE(m_pBmpImg);
-  CFBitmap *bmp = m_pSystem->GetDoubleBuffer();
-  m_pBmpImg = new CFBitmap(*bmp);
+  CFBitmap& bmp = m_pSystem->GetDoubleBuffer();
+  m_pBmpImg = new CFBitmap(bmp);
   if (!m_pBmpImg->Create(m_iWidth, m_iHeight)) 
+  {
     return(false);
+  }
 
   m_pBmpImg->SetX(m_iPosX);
   m_pBmpImg->SetY(m_iPosY);

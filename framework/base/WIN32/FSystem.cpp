@@ -88,10 +88,13 @@ void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
   GetModuleFileName(NULL, pszAppPath, MAX_PATH);
     
   pszDiff= _tcsrchr(pszAppPath, TEXT('\\'));
-  if (pszDiff) {
+  if (pszDiff)
+  {
     iPos= pszDiff - pszAppPath + 1;
     pszAppPath[iPos] = 0;
-  } else {
+  }
+  else
+  {
     pszAppPath[0]= 0;
   }
 }
