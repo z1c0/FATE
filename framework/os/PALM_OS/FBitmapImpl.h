@@ -2,27 +2,24 @@
 
 #include "../base/FateTypeDefs.h"
 
-//TODO: alot
-
-class CFBitmap  
+class CFBitmapImpl
 {
-public:
-	
-  CFBitmap();
-  CFBitmap(CFBitmap *pBmp);
-  ~CFBitmap();
+public:	
+  CFBitmapImpl();
+  ~CFBitmapImpl();
   
-  void Init();
+  void InitFrom(const CFBitmapImpl& other);
   
   void CleanUp();
   
   bool Create(int iWidth, int iHeight);
+  bool IsValid() const;
 
-  void SetDestBitmap(const CFBitmap& bmp);
+  void SetDestBitmap(const CFBitmapImpl& bmp);
   
   bool SolidFill(const COLORREF colFill);
 	
-  bool Load(TCHAR* pszFileName);
+  bool Load(const TCHAR* pszFileName);
   bool Load(unsigned long ulResourceID);
   bool Load(char *pszData, unsigned long ulSize);
   
@@ -39,30 +36,18 @@ public:
   
   bool Blit();
   bool Blit(int iWidth, int iHeight);
+  bool Blit(int srcx, int srcy, int srcw, int srch, int destx, int desty);
   bool ClipBlit(int iWidth, int iHeight);
   bool StretchBlit(int iWidth, int iHeight);
   bool TransBlit(COLORREF colTrans);
 
-  bool SaveUnder() { return(false); };
-  bool RestoreUnder() { return(false); };
+  bool SaveUnder(const CFBitmapImpl& bmp);
+  bool RestoreUnder(const CFBitmapImpl& bmp);
 
   bool SetBits(unsigned char *pBits, int iSize);
   char* GetBits() { return(m_pBits); };
   
-  bool PointInside(int iPosX, int iPosY)
-  { 
-    return(((iPosX >= m_iPosX)&&(iPosX <= m_iPosX + m_iWidth)&&
-           (iPosY >= m_iPosY)&&(iPosY <= m_iPosY + m_iHeight)));
-  };
-  CFBitmap &operator=(const CFBitmap &bmp);
-  CFBitmap *operator=(CFBitmap *pBmp);
-
   bool SaveToFile(const TCHAR *pszFileName);
-
-
-  //------------------------------------------------------------------------------
-  /// Drawing operations on Bitmap
-  static bool CalcRectForText(const TCHAR *pszText, RECT& rect);
 
   COLORREF SetBackgroundColor(COLORREF col);
   COLORREF SetColor(COLORREF col);
@@ -70,12 +55,15 @@ public:
 
   bool DrawText(const TCHAR *pszText, RECT& rect);
   bool DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight);
-  bool DrawFilledRect(RECT *pRect);
-
+  bool DrawFilledRect(const RECT& rect);
+  bool DrawPolygon(POINT *points, int count);
   bool DrawFrameRect(int iLeft, int iTop, int iWidth, int iHeight);
   bool DrawFrameRect(RECT *pRect);
 
+  static bool CalcRectForText(const TCHAR *pszText, RECT& rect);
+
 private:
+  void Init();
   
   WinHandle m_hWinSrc;
   WinHandle m_hWinDst;

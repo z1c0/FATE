@@ -52,6 +52,12 @@ bool CFBitmap::Load(const TCHAR* pszFileName)
 }
 
 //------------------------------------------------------------------------------
+bool CFBitmap::Load(char *pszData, unsigned long dwSize)
+{
+  return m_pImpl->Load(pszData, dwSize);
+}
+
+//------------------------------------------------------------------------------
 bool CFBitmap::Create(int width, int height)
 {
   return m_pImpl->Create(width, height);
@@ -67,6 +73,12 @@ void CFBitmap::SetDestBitmap(const CFBitmap& bmp)
 bool CFBitmap::IsValid() const
 {
   return m_pImpl->IsValid();
+}
+
+//------------------------------------------------------------------------------
+char* CFBitmap::GetBits()
+{
+  return m_pImpl->GetBits();
 }
 
 //------------------------------------------------------------------------------
@@ -102,7 +114,7 @@ int CFBitmap::GetWidth() const
 //------------------------------------------------------------------------------
 int CFBitmap::GetHeight() const
 {
-  return m_pImpl->GetWidth();
+  return m_pImpl->GetHeight();
 }
 
 //------------------------------------------------------------------------------
@@ -115,6 +127,12 @@ bool CFBitmap::Blit()
 bool CFBitmap::Blit(int srcx, int srcy, int srcw, int srch, int destx, int desty)
 {
   return m_pImpl->Blit(srcx, srcy, srcw, srch, destx, desty);
+}
+
+//------------------------------------------------------------------------------
+bool CFBitmap::StretchBlit(int width, int height)
+{
+  return m_pImpl->StretchBlit(width, height);
 }
 
 //------------------------------------------------------------------------------

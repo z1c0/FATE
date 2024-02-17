@@ -26,13 +26,15 @@ public:
   int Write(const char* pBuff, const int size);	
   bool GetRemoteAddr(CFInetAddr* pIntAddr);	
   bool GetInetAddr(CFInetAddr* pInetAddr);  
-  bool IsClientConnecting();
-  bool IsReceiving();
+  bool IsClientConnecting() const;
+  bool IsReceiving() const;
   int GetListenPort() const;
   void SetTimeout(DWORD dwTimeout);
 
   static bool InitSocketLibrary();
   static bool CleanupSocketLibrary();
+	static CFInetAddr* GetHostByName(const char* pHostName, int port = 0);
+	static const char* GetHostByAddr(const CFInetAddr* pInetAddr);
 
 private:
   CFSocketImpl* m_pImpl;

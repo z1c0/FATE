@@ -40,7 +40,7 @@ public:
   bool Blit(int iWidth, int iHeight);
   bool Blit(int srcx, int srcy, int srcw, int srch, int destx, int desty);
   bool ClipBlit(int iWidth, int iHeight);
-  bool StretchBlit(int iWidth, int iHeight);
+  bool StretchBlit(int width, int height);
   bool TransBlit(COLORREF colTrans);
   
   bool CreateSaveBitmap(const CFBitmap& pBmp);
@@ -51,7 +51,7 @@ public:
   bool RestoreUnder() { return RestoreUnder(*this); };
 
   bool SetBits(unsigned char *pBits, int iSize);
-  char* GetBits();
+  char* GetBits() ;
   
   bool PointInside(int iPosX, int iPosY) const
   { 

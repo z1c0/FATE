@@ -1,8 +1,8 @@
-#include "FSystem.h"
-#include "../FBitmap.h"
+#include "FSystemImpl.h"
+#include "../WIN32/FBitmapImpl.h"
 
 //------------------------------------------------------------------------------
-CFSystem::CFSystem(HWND hWnd, int nWidth, int nHeight,EFateDrawMode drawMode)
+CFSystemImpl::CFSystemImpl(HWND hWnd, int nWidth, int nHeight,EFateDrawMode drawMode)
 {
   m_hWnd = hWnd;
   if (drawMode == DM_LANDSCAPE || drawMode == DM_LANDSCAPE_FLIPPED)
@@ -16,21 +16,12 @@ CFSystem::CFSystem(HWND hWnd, int nWidth, int nHeight,EFateDrawMode drawMode)
   m_drawMode = drawMode;
 
   m_hdc = GetDC(hWnd);
-  m_pDoubleBuffer = new CFBitmap();
-  m_pDoubleBuffer->m_hDestDC = m_hdc;
-  m_pDoubleBuffer->Create(m_nWidth, m_nHeight);
-  m_pDoubleBuffer->SolidFill(0);
-
-  srand(GetTickCount());
+  ::srand(GetTickCount());
 }
 
 //------------------------------------------------------------------------------
-CFSystem::~CFSystem()
+CFSystemImpl::~CFSystemImpl()
 {
-  if (m_pDoubleBuffer)
-  {
-    delete m_pDoubleBuffer;
-  }
   if (m_hdc)
   {
     ::ReleaseDC(m_hWnd, m_hdc);
@@ -38,38 +29,43 @@ CFSystem::~CFSystem()
 }
 
 //------------------------------------------------------------------------------
-CFBitmap* CFSystem::GetDoubleBuffer()
+CFBitmapImpl* CFSystemImpl::CreateDoubleBuffer()
 {
-  return m_pDoubleBuffer;
+  CFBitmapImpl* pDoubleBuffer = new CFBitmapImpl();
+  pDoubleBuffer->m_hDestDC = m_hdc;
+  pDoubleBuffer->Create(m_nWidth, m_nHeight);
+  pDoubleBuffer->SolidFill(0);
+
+  return pDoubleBuffer;
 }
 
 //--------------------------------------------------------------------------------
-void CFSystem::RenderDoubleBuffer()
+void CFSystemImpl::RenderDoubleBuffer(CFBitmapImpl& doubleBuffer)
 {
   switch(m_drawMode)
   {
     case DM_PORTRAIT:
       // draw the double buffer to the screen in default (portrait) mode.
-      m_pDoubleBuffer->Blit();
+      doubleBuffer.Blit();
       break;
 
     case DM_PORTRAIT_FLIPPED:
-      DrawPortraitFlipped();
+      DrawPortraitFlipped(doubleBuffer);
       break;
 
     case DM_LANDSCAPE:
-      DrawLandScape();
+      DrawLandScape(doubleBuffer);
       break;
 
     case DM_LANDSCAPE_FLIPPED:
-      DrawLandScapeFlipped();
+      DrawLandScapeFlipped(doubleBuffer);
       break;
   }
 }
 
 //--------------------------------------------------------------------------------
 /// Draws the double buffer to the screen in flipped portrait mode.
-void CFSystem::DrawPortraitFlipped()
+void CFSystemImpl::DrawPortraitFlipped(CFBitmapImpl& doubleBuffer)
 { 
   GXDisplayProperties gxdp;
   unsigned short *pusBase;
@@ -77,7 +73,7 @@ void CFSystem::DrawPortraitFlipped()
   unsigned short usPixelCol;
   UINT i = m_nWidth * m_nHeight * 3 - 1;
   UINT iColRed, iColGreen, iColBlue;
-  char *pBits = m_pDoubleBuffer->GetBits();
+  char *pBits = doubleBuffer.GetBits();
     
   gxdp = GXGetDisplayProperties();
 
@@ -107,7 +103,7 @@ void CFSystem::DrawPortraitFlipped()
 
 //--------------------------------------------------------------------------------
 /// Draws the doublebuffer to screen in landscape mode.
-void CFSystem::DrawLandScape()
+void CFSystemImpl::DrawLandScape(CFBitmapImpl& doubleBuffer)
 {
   GXDisplayProperties gxdp;
   unsigned short *pusBase;
@@ -115,7 +111,7 @@ void CFSystem::DrawLandScape()
   unsigned short usPixelCol;
   UINT iColRed, iColGreen, iColBlue;
   UINT i= m_nWidth * m_nHeight * 3 - 1;
-  char *pBits= m_pDoubleBuffer->GetBits();
+  char *pBits = doubleBuffer.GetBits();
     
   gxdp= GXGetDisplayProperties();
 
@@ -143,7 +139,7 @@ void CFSystem::DrawLandScape()
 
 //--------------------------------------------------------------------------------
 /// Draws the doublebuffer to screen in flipped landscape mode.
-void CFSystem::DrawLandScapeFlipped()
+void CFSystemImpl::DrawLandScapeFlipped(CFBitmapImpl& doubleBuffer)
 { 
   GXDisplayProperties gxdp;
   unsigned short *pusBase;
@@ -151,7 +147,7 @@ void CFSystem::DrawLandScapeFlipped()
   unsigned short usPixelCol;
   UINT i= 0;
   UINT iColRed, iColGreen, iColBlue;
-  char *pBits= m_pDoubleBuffer->GetBits();
+  char *pBits = doubleBuffer.GetBits();
   
   gxdp = GXGetDisplayProperties();
 
@@ -180,13 +176,13 @@ void CFSystem::DrawLandScapeFlipped()
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
+void CFSystemImpl::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
 {
   PostMessage(m_hWnd, iEventID, iComponentID, (LPARAM)pCustomData);
 }
 
 //------------------------------------------------------------------------------
-bool CFSystem::ShutDownSystem()
+bool CFSystemImpl::ShutDownSystem()
 {
   DestroyWindow(m_hWnd);
 
@@ -194,26 +190,32 @@ bool CFSystem::ShutDownSystem()
 }
 
 //------------------------------------------------------------------------------
-bool CFSystem::EnableSuspend(bool suspend)
+bool CFSystemImpl::EnableSuspend(bool suspend)
 {
   // TODO
   return false;
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::ForceRedraw()
+void CFSystemImpl::ShowError(const TCHAR* msg)
+{
+  ::MessageBox(m_hWnd, msg, TEXT("Error"), MB_OK); 
+}
+
+//------------------------------------------------------------------------------
+void CFSystemImpl::ForceRedraw()
 {
   InvalidateRect(m_hWnd, NULL, FALSE);
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::AddTimer(unsigned long id, int interval)
+void CFSystemImpl::AddTimer(unsigned long id, int interval)
 {
   ::SetTimer(m_hWnd, id, interval, NULL);
 }
 
 //--------------------------------------------------------------------------------
-void CFSystem::DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int y, bool normal)
+void CFSystemImpl::DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal)
 {
   SHFILEINFO shfi;
   HANDLE h = (HANDLE)SHGetFileInfo(pszFilePath, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
@@ -221,7 +223,7 @@ void CFSystem::DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int 
 }
 
 //--------------------------------------------------------------------------------
-void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
+void CFSystemImpl::GetPathToApplication(TCHAR *pszAppPath)
 {
   TCHAR *pszDiff;
   int iPos;
@@ -237,13 +239,13 @@ void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
 }
 
 //--------------------------------------------------------------------------------
-unsigned int CFSystem::GetTicks()
+unsigned int CFSystemImpl::GetTicks()
 {
   return ::GetTickCount();
 }
 
 //--------------------------------------------------------------------------------
-int CFSystem::GetRandomNumber(int max)
+int CFSystemImpl::GetRandomNumber(int max)
 {
   return rand() % max;
 }

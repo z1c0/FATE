@@ -1,31 +1,30 @@
-#include "FSystem.h"
-#include "FBitmap.h"
+#include "FSystemImpl.h"
+#include "FBitmapImpl.h"
 
 //------------------------------------------------------------------------------
-CFSystem::CFSystem(int iWidth, int iHeight)
+CFSystemImpl::CFSystemImpl(int iWidth, int iHeight)
 {
   m_iWidth = iWidth;
   m_iHeight = iHeight;  
-
-  m_pDoubleBuffer = new CFBitmap();
-  m_pDoubleBuffer->Create(m_iWidth, m_iHeight);
-  m_pDoubleBuffer->SolidFill(0);  // BLACK
 }
 
 //------------------------------------------------------------------------------
-CFSystem::~CFSystem()
+CFBitmapImpl* CFSystemImpl::CreateDoubleBuffer()
 {
-  delete m_pDoubleBuffer;
+  CFBitmapImpl* pDoubleBuffer = new CFBitmapImpl();
+  pDoubleBuffer->Create(m_iWidth, m_iHeight);
+  pDoubleBuffer->SolidFill(0);  // BLACK
+  return pDoubleBuffer;
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::RenderDoubleBuffer()
+void CFSystemImpl::RenderDoubleBuffer(CFBitmapImpl& doubleBuffer)
 {
-  m_pDoubleBuffer->Blit();
+  doubleBuffer.Blit();
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
+void CFSystemImpl::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
 {
   FateEventType event;
   
@@ -37,7 +36,7 @@ void CFSystem::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
 }
 
 //------------------------------------------------------------------------------
-bool CFSystem::ShutDownSystem()
+bool CFSystemImpl::ShutDownSystem()
 {
   EventType event;
   MemSet(&event, sizeof(EventType), 0);
@@ -49,7 +48,7 @@ bool CFSystem::ShutDownSystem()
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::ForceRedraw()
+void CFSystemImpl::ForceRedraw()
 {
   EventType event;
   MemSet(&event, sizeof(EventType), 0);
@@ -59,7 +58,7 @@ void CFSystem::ForceRedraw()
 }
 
 //--------------------------------------------------------------------------------
-void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
+void CFSystemImpl::GetPathToApplication(TCHAR *pszAppPath)
 {
   // TODO
 }

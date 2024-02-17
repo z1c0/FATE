@@ -10,6 +10,7 @@ public:
   ~CFSystemImpl();
 
   CFBitmapImpl* CreateDoubleBuffer() const;  
+  void RenderDoubleBuffer(CFBitmapImpl& doubleBuffer);  
   void ForceRedraw();
   void DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
   void ShowError(const TCHAR* msg);  

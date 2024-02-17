@@ -1,47 +1,40 @@
-#ifndef __FINETADDR_PALMOS__H__
-#define __FINETADDR_PALMOS__H__
+#pragma once
 
+#include "../../base/FateTypeDefs.h"
 
-//--------------------------------------------------------------------------------
-class CFInetAddr
+class CFInetAddrImpl
 {
-  friend class IFSocket;
-  friend class CFUDPSocket;
-  friend class CSocket;
-
+  friend class CFSocketImpl;
+  friend class CFUDPSocketImpl;
+  
 public:
-  CFInetAddr() {};
+  CFInetAddrImpl() {};
   /*
   // constructors
-	CFInetAddr() { 
+	CFInetAddrImpl() { 
     memset(this, 0, sizeof(CFInetAddr));
     sin_family= AF_INET;
 		sin_port= 0;
 		sin_addr.s_addr= 0;
   }; 
-  CFInetAddr(const SOCKADDR& sockAddr) { memcpy(this, &sockAddr, sizeof(SOCKADDR)); };
+  CFInetAddrImpl(const SOCKADDR& sockAddr) { memcpy(this, &sockAddr, sizeof(SOCKADDR)); };
 	CFInetAddr(const SOCKADDR_IN& sin) { memcpy(this, &sin, sizeof(SOCKADDR_IN)); };
-  CFInetAddr(const ULONG ulAddr, const USHORT ushPort= 0) 
+  CFInetAddrImpl(const ULONG ulAddr, const USHORT ushPort= 0) 
   {  
     memset(this, 0, sizeof(CFInetAddr));
 	  sin_family= AF_INET;
 		sin_port= htons(ushPort);
 	  sin_addr.s_addr= htonl(ulAddr);
   };
-  CFInetAddr(const wchar_t* pStrIP, const USHORT usPort= 0) {  
-    char szStrIP[32];
-    
-    WideCharToMultiByte(CP_ACP, 0, pStrIP, wcslen(pStrIP) + 1, szStrIP, 32, 0, 0);
-    memset(this, 0, sizeof(CFInetAddr));
-	  sin_family= AF_INET;
-		sin_port= htons(usPort);
-		sin_addr.s_addr= inet_addr(szStrIP); 
-  }
   */
-  CFInetAddr(const char* pszStrIP, const unsigned short usPort= 0) 
+  CFInetAddrImpl(const wchar_t*, const int)
+  {  
+	  assert(false);
+  }
+  CFInetAddrImpl(const char* pszStrIP, const int port) 
   {  
     m_addr.family= netSocketAddrINET;
-    m_addr.port  = NetHToNS(usPort);
+    m_addr.port  = NetHToNS(port);
     m_addr.addr  = NetLibAddrAToIN(m_uiLibRefNum, pszStrIP);
   } 	
   /*
@@ -63,12 +56,9 @@ public:
   operator LPSOCKADDR_IN() { return (LPSOCKADDR_IN) this; }
   */
 
-private:
-  
+private: 
   NetSocketAddrINType m_addr;
 
   static UInt16 m_uiLibRefNum;
 };
 
-
-#endif  // __FINETADDR_PALMOS__H__

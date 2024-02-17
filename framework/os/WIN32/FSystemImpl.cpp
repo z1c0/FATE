@@ -33,6 +33,12 @@ CFBitmapImpl* CFSystemImpl::CreateDoubleBuffer() const
 }
 
 //------------------------------------------------------------------------------
+void CFSystemImpl::RenderDoubleBuffer(CFBitmapImpl& doubleBuffer)
+{
+  doubleBuffer.Blit();
+}
+
+//------------------------------------------------------------------------------
 void CFSystemImpl::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
 {
   ::PostMessage(m_hWnd, iEventID, iComponentID, (LPARAM)pCustomData);

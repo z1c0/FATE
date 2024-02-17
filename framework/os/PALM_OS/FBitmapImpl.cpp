@@ -1,27 +1,20 @@
-#include "FBitmap.h"
+#include "FBitmapImpl.h"
 
 //--------------------------------------------------------------------------------
-CFBitmap::CFBitmap()
+CFBitmapImpl::CFBitmapImpl()
 {
   Init();
   m_hWinDst= WinGetDrawWindow();
 }
 
 //--------------------------------------------------------------------------------
-CFBitmap::CFBitmap(CFBitmap *pBmp)
-{
-  Init();
-  m_hWinDst= pBmp->m_hWinSrc;
-}
-
-//--------------------------------------------------------------------------------
-CFBitmap::~CFBitmap()
+CFBitmapImpl::~CFBitmapImpl()
 {
   CleanUp();
 }
 
 //------------------------------------------------------------------------------
-void CFBitmap::CleanUp()
+void CFBitmapImpl::CleanUp()
 {
   if (m_pBmp) 
     BmpDelete(m_pBmp);
@@ -29,9 +22,12 @@ void CFBitmap::CleanUp()
     WinDeleteWindow(m_hWinSrc, false);
 }
 
+void CFBitmapImpl::InitFrom(const CFBitmapImpl& other)
+{
+}
 
 //--------------------------------------------------------------------------------
-void CFBitmap::Init()
+void CFBitmapImpl::Init()
 {
   m_pBmp   = NULL;
   m_hWinSrc= NULL;
@@ -45,14 +41,14 @@ void CFBitmap::Init()
 }
 
 //------------------------------------------------------------------------------
-void CFBitmap::SetDestBitmap(const CFBitmap& bmp)
+void CFBitmapImpl::SetDestBitmap(const CFBitmapImpl& bmp)
 {
   m_hWinDst = bmp.m_hWinSrc;
 }
 
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::Create(int iWidth, int iHeight)
+bool CFBitmapImpl::Create(int iWidth, int iHeight)
 {
   Err err;
   UInt16 uiErr= 0;
@@ -77,7 +73,7 @@ bool CFBitmap::Create(int iWidth, int iHeight)
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::SolidFill(const COLORREF colFill)
+bool CFBitmapImpl::SolidFill(const COLORREF colFill)
 {
   UInt16 *pPixel= (UInt16*)m_pBits;
   for (unsigned int i=0; i<m_iWidth*m_iHeight; i++) {    
@@ -87,7 +83,7 @@ bool CFBitmap::SolidFill(const COLORREF colFill)
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::Blit()
+bool CFBitmapImpl::Blit()
 {
   if (m_hWinDst) {
     WinHandle hPrevWin= WinSetDrawWindow(m_hWinDst);
@@ -99,42 +95,42 @@ bool CFBitmap::Blit()
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::Blit(int iWidth, int iHeight)
+bool CFBitmapImpl::Blit(int iWidth, int iHeight)
 {
   //TODO
   return(false);
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::ClipBlit(int iWidth, int iHeight)
+bool CFBitmapImpl::ClipBlit(int iWidth, int iHeight)
 {
   //TODO
   return(false);
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::StretchBlit(int iWidth, int iHeight)
+bool CFBitmapImpl::StretchBlit(int iWidth, int iHeight)
 {
   //TODO
   return(false);
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::TransBlit(COLORREF colTrans)
+bool CFBitmapImpl::TransBlit(COLORREF colTrans)
 {
   //TODO
   return(false);
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::SaveToFile(const TCHAR *pszFileName)
+bool CFBitmapImpl::SaveToFile(const TCHAR *pszFileName)
 {
   //TODO
   return(false);
 }
 
 //------------------------------------------------------------------------------
-COLORREF CFBitmap::SetColor(COLORREF col)
+COLORREF CFBitmapImpl::SetColor(COLORREF col)
 {
   COLORREF colRet= m_colForeground;
 
@@ -144,7 +140,7 @@ COLORREF CFBitmap::SetColor(COLORREF col)
 }
 
 //------------------------------------------------------------------------------
-COLORREF CFBitmap::SetBackgroundColor(COLORREF col)
+COLORREF CFBitmapImpl::SetBackgroundColor(COLORREF col)
 {
   COLORREF colRet= m_colBackground;
 
@@ -154,7 +150,7 @@ COLORREF CFBitmap::SetBackgroundColor(COLORREF col)
 }
 
 //------------------------------------------------------------------------------
-COLORREF CFBitmap::SetTextColor(COLORREF col)
+COLORREF CFBitmapImpl::SetTextColor(COLORREF col)
 {
   COLORREF colRet= m_colText;
 
@@ -164,7 +160,7 @@ COLORREF CFBitmap::SetTextColor(COLORREF col)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::CalcRectForText(const TCHAR *pszText, RECT& rect)
+bool CFBitmapImpl::CalcRectForText(const TCHAR *pszText, RECT& rect)
 {
   rect.bottom = rect.top + FntCharHeight();
   rect.right = rect.left + FntCharsWidth(pszText, StrLen(pszText));  
@@ -172,13 +168,7 @@ bool CFBitmap::CalcRectForText(const TCHAR *pszText, RECT& rect)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::DrawFilledRect(RECT *pRect)
-{
-  return(DrawFilledRect(pRect->left, pRect->top, pRect->right, pRect->bottom));
-}
-
-//------------------------------------------------------------------------------
-bool CFBitmap::DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight)
+bool CFBitmapImpl::DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight)
 {
   if (m_hWinSrc) {
     RectangleType rect;
@@ -213,7 +203,7 @@ bool CFBitmap::DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::DrawText(const TCHAR *pszText, RECT& rect)
+bool CFBitmapImpl::DrawText(const TCHAR *pszText, RECT& rect)
 {
   if (m_hWinSrc)
   {

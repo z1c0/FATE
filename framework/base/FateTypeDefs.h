@@ -5,7 +5,6 @@
   #include <winsock.h>
   #include <stdio.h>
   #include <TCHAR.h>  
-  #include <assert.h>
 
 #ifdef _WIN32_WCE
   #include <aygshell.h>
@@ -24,6 +23,8 @@ typedef unsigned long DWORD;
 typedef unsigned int UINT;
 
 #define MAX_PATH 250
+
+#define SOCKET_ERROR -1
 
 typedef unsigned long COLORREF;
 
@@ -62,14 +63,13 @@ struct RECT
 
 #define RGB(r, g, b) 0
 
-#define SOCKET_ERROR -1
-
 #else
 
 #define _PALM_OS
 
   #include <PalmOS.h>
   #include <unix_stdarg.h>
+  #include <assert.h>
 
 //
 // PalmOS specfic
@@ -103,6 +103,13 @@ struct RECT
 //
 // Common
 //
+
+// Socket constants.
+#define INVALID_SOCKET      -1
+#define SOCKET_TIMEOUT      SOCKET_ERROR - 1
+#define DEFAULT_TIMEOUT     5
+#define NO_TIMEOUT          0xFFFF
+
 class CFBitmap;
 
 struct ITEMLISTENTRY

@@ -14,7 +14,7 @@ CFComPortImpl::~CFComPortImpl()
 
 //-------------------------------------------------------------------------------- 
 /// Open specified COM port at specified baudrate.
-BOOL CFComPortImpl::Open(int iPort /* = 1 */, BaudRate brBaud /* = BD_9600 */)
+bool CFComPortImpl::Open(int iPort, BaudRate brBaud)
 {
   TCHAR szPort[8];
   wsprintf(szPort, TEXT("COM%d:"), iPort);
@@ -46,15 +46,18 @@ BOOL CFComPortImpl::Open(int iPort /* = 1 */, BaudRate brBaud /* = BD_9600 */)
   m_dcb.StopBits         = ONESTOPBIT;         // 0,1,2 = 1, 1.5, 2 
   
   // configure the port according to the specifications of the DCB structure.
-  return(SetCommState(m_hPort, &m_dcb));
+  return SetCommState(m_hPort, &m_dcb) == TRUE;
 }
 
 //-------------------------------------------------------------------------------- 
 /// Closes handle to COM port.
-BOOL CFComPortImpl::Close()
+bool CFComPortImpl::Close()
 {
-  if (m_hPort) return(CloseHandle(m_hPort));
-  return(FALSE);
+  if (m_hPort)
+  {
+    return CloseHandle(m_hPort) != 0;
+  }
+  return false;
 }
 
 //-------------------------------------------------------------------------------- 

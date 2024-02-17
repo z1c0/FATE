@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../FateTypeDefs.h"
+#include "../../base/FateTypeDefs.h"
+
+class CFBitmapImpl;
 
 #define PALMOS_REPAINT  (firstUserEvent + 1)
 
@@ -22,24 +24,27 @@ struct FateEventType
   } data;
 };
 
-class CFSystem
+class CFSystemImpl
 {
 public:
-  CFSystem(int iWidth, int iHeight);
-  virtual ~CFSystem();
+  CFSystemImpl(int iWidth, int iHeight);
 
-  void RenderDoubleBuffer();
+  void RenderDoubleBuffer(CFBitmapImpl& doubleBuffer);
   void ForceRedraw();
   void QueueEvent(int iEventID, int iComponentID, void *pCustomData);
   bool ShutDownSystem();
   int GetWidth() const { return m_iWidth; }
   int GetHeight() const { return m_iHeight; }
-  CFBitmap* GetDoubleBuffer() { return m_pDoubleBuffer; }
+  CFBitmapImpl* CreateDoubleBuffer();
+  void ShowError(const TCHAR* msg);
+  void DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
+  void AddTimer(unsigned long id, int interval);
   
   static void GetPathToApplication(TCHAR *pszAppPath);
+  static unsigned int GetTicks();
+  static int GetRandomNumber(int max);
   
 private:
-  CFBitmap* m_pDoubleBuffer;
   int m_iWidth;
   int m_iHeight;
 };

@@ -1,8 +1,9 @@
-#include "FSocket_PalmOS.h"
+#include "FSocketImpl.h"
 
+UInt16 CFInetAddrImpl::m_uiLibRefNum= 0;
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Create()
+bool CFSocketImpl::Create()
 {
   /*
   if (m_hSocket != INVALID_SOCKET) return(false);
@@ -14,7 +15,7 @@ bool CFSocket::Create()
 
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Listen()
+bool CFSocketImpl::Listen()
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(false);
@@ -24,7 +25,7 @@ bool CFSocket::Listen()
 }
 
 //--------------------------------------------------------------------------------
-int CFSocket::Accept(CFSocket& sConnect)
+int CFSocketImpl::Accept(CFSocketImpl& sConnect)
 {
   /*
   sockaddr_in addr;
@@ -48,7 +49,7 @@ int CFSocket::Accept(CFSocket& sConnect)
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Connect(const CFInetAddr* pInetAddr)
+bool CFSocketImpl::Connect(const CFInetAddrImpl* pInetAddr)
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(false);
@@ -58,7 +59,7 @@ bool CFSocket::Connect(const CFInetAddr* pInetAddr)
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Connect(char *pAddrStr, int iPort)
+bool CFSocketImpl::Connect(char *pAddrStr, int iPort)
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(false);
@@ -69,7 +70,7 @@ bool CFSocket::Connect(char *pAddrStr, int iPort)
 }
 
 //--------------------------------------------------------------------------------
-int CFSocket::Write(const char* pBuff, const int iSize)
+int CFSocketImpl::Write(const char* pBuff, const int iSize)
 {
   /*
 	int iBytesSent= 0;
@@ -95,7 +96,7 @@ int CFSocket::Write(const char* pBuff, const int iSize)
 /// Return values:
 /// SOCKET_TIMEOUT indicates timeout 
 /// SOCKET_ERROR in case of a problem.
-int CFSocket::Send(const char* pBuff, const int iSize)
+int CFSocketImpl::Send(const char* pBuff, const int iSize)
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(SOCKET_ERROR);
@@ -116,7 +117,7 @@ int CFSocket::Send(const char* pBuff, const int iSize)
 /// Return values:
 /// SOCKET_TIMEOUT indicates timeout 
 /// SOCKET_ERROR in case of a problem.
-int CFSocket::Receive(char* pBuff, const int iSize)
+int CFSocketImpl::Receive(char* pBuff, const int iSize)
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(SOCKET_ERROR);
@@ -135,7 +136,7 @@ int CFSocket::Receive(char* pBuff, const int iSize)
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::GetRemoteAddr(CFInetAddr* pInetAddr)
+bool CFSocketImpl::GetRemoteAddr(CFInetAddrImpl* pInetAddr)
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(false);
@@ -147,7 +148,7 @@ bool CFSocket::GetRemoteAddr(CFInetAddr* pInetAddr)
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::GetInetAddr(CFInetAddr* pInetAddr)
+bool CFSocketImpl::GetInetAddr(CFInetAddrImpl* pInetAddr)
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(false);
@@ -160,7 +161,7 @@ bool CFSocket::GetInetAddr(CFInetAddr* pInetAddr)
 
 //--------------------------------------------------------------------------------
 /// Is there a client who wants to connect?
-bool CFSocket::IsClientConnecting()
+bool CFSocketImpl::IsClientConnecting() const
 {
   /*
   if (m_hSocket == INVALID_SOCKET) return(false);
@@ -173,3 +174,22 @@ bool CFSocket::IsClientConnecting()
   return(false);
 }
 
+//--------------------------------------------------------------------------------
+/// Initializes the PalmOS socket library.
+bool CFSocketImpl::InitSocketLibrary()
+{
+  Err err;
+  UInt16 uiIfErrs;
+
+  err= SysLibFind("Net.lib", &CFInetAddrImpl::m_uiLibRefNum);
+  err= NetLibOpen(CFInetAddrImpl::m_uiLibRefNum, &uiIfErrs);
+
+  return(err == 0);
+}
+
+//--------------------------------------------------------------------------------
+/// De-initializes the Winsock library.
+bool CFSocketImpl::CleanupSocketLibrary()
+{
+  return(true);
+}

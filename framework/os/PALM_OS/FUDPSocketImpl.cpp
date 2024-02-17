@@ -1,21 +1,20 @@
-#include "FUDPSocket_PalmOS.h"
-
+#include "FUDPSocketImpl.h"
 
 //--------------------------------------------------------------------------------
 /// Creates a UDP socket.
-bool CFUDPSocket::Create()
+bool CFUDPSocketImpl::Create()
 {
   Err err;
 
   if (m_refSock != INVALID_SOCKET) return(false);
-  m_refSock= NetLibSocketOpen(m_uiLibRefNum, netSocketAddrINET, netSocketTypeDatagram,
+  m_refSock= NetLibSocketOpen(CFInetAddrImpl::m_uiLibRefNum, netSocketAddrINET, netSocketTypeDatagram,
                               netSocketProtoIPUDP, 0, &err);
   return(m_refSock != INVALID_SOCKET);
 }
 
 
 //--------------------------------------------------------------------------------
-int CFUDPSocket::Send(const char* pBuff, const int iSize)
+int CFUDPSocketImpl::Send(const char* pBuff, const int iSize)
 {
   /*
   if (m_pAddrRemote) {
@@ -27,7 +26,7 @@ int CFUDPSocket::Send(const char* pBuff, const int iSize)
 }
 
 //--------------------------------------------------------------------------------
-int CFUDPSocket::Receive(char* pBuff, const int iSize)
+int CFUDPSocketImpl::Receive(char* pBuff, const int iSize)
 {
   /*
   if (!m_pAddrRemote) {
@@ -42,7 +41,7 @@ int CFUDPSocket::Receive(char* pBuff, const int iSize)
 /// Receive UDP datagrams.
 /// Returns the number of bytes received, or SOCKET_TIMEOUT in case of a timeout
 /// or SOCKET_ERROR in case of a problem.
-int CFUDPSocket::Receive(char* pBuff, const int iSize, const CFInetAddr* pInetAddr)
+int CFUDPSocketImpl::Receive(char* pBuff, const int iSize, const CFInetAddrImpl* pInetAddr)
 {
   /*
   if (m_refSock == INVALID_SOCKET) return(SOCKET_ERROR);
@@ -65,19 +64,19 @@ int CFUDPSocket::Receive(char* pBuff, const int iSize, const CFInetAddr* pInetAd
 /// Return values:
 /// SOCKET_TIMEOUT indicates timeout 
 /// SOCKET_ERROR in case of a problem.
-int CFUDPSocket::Send(const char* pBuff, const int iSize, const CFInetAddr* pInetAddr)
+int CFUDPSocketImpl::Send(const char* pBuff, const int iSize, const CFInetAddrImpl* pInetAddr)
 {
   if (m_refSock == INVALID_SOCKET) return(SOCKET_ERROR);
 
   Err err;
   const NetSocketAddrINType *pAddr= &(pInetAddr->m_addr);
 
-	return(NetLibSend(m_uiLibRefNum, m_refSock, (void*)pBuff, iSize, 0, 
+	return(NetLibSend(CFInetAddrImpl::m_uiLibRefNum, m_refSock, (void*)pBuff, iSize, 0, 
                     (void*)pAddr, sizeof(pAddr), 0, &err));
 }
 
 //--------------------------------------------------------------------------------
-void CFUDPSocket::EnableBroadcast()
+void CFUDPSocketImpl::EnableBroadcast()
 {
   /*
   const char on= 1;
@@ -86,7 +85,7 @@ void CFUDPSocket::EnableBroadcast()
 }
 
 //------------------------------------------------------------------------------
-void CFUDPSocket::JoinMultiCastGroup(const char *pszGroupAddress)
+void CFUDPSocketImpl::JoinMultiCastGroup(const char *pszGroupAddress)
 {
   /*
   struct ip_mreq mreq= {0};

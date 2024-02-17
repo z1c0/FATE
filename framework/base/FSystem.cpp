@@ -44,9 +44,15 @@ bool CFSystem::ShutDownSystem()
 }
 
 //------------------------------------------------------------------------------
+void CFSystem::ShowError(const TCHAR* msg)
+{
+  m_pImpl->ShowError(msg);
+}
+
+//------------------------------------------------------------------------------
 void CFSystem::RenderDoubleBuffer()
 {
-  m_pDoubleBuffer->Blit();
+  m_pImpl->RenderDoubleBuffer(*m_pDoubleBuffer->m_pImpl);
 }
 
 //------------------------------------------------------------------------------
@@ -71,6 +77,12 @@ void CFSystem::DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int 
 void CFSystem::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
 {
   m_pImpl->QueueEvent(iEventID, iComponentID, pCustomData);
+}
+
+//------------------------------------------------------------------------------
+void CFSystem::AddTimer(unsigned long id, int interval)
+{
+  m_pImpl->AddTimer(id, interval);
 }
 
 //------------------------------------------------------------------------------

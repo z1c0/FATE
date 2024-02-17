@@ -531,6 +531,10 @@ SOURCE=.\os\WIN32\FFileImpl.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\os\WIN32\FInetAddrImpl.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\os\WIN32\FSocketImpl.cpp
 # End Source File
 # Begin Source File

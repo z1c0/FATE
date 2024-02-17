@@ -57,8 +57,8 @@ public:
 	virtual bool StylusMove(int xPos, int yPos) { return(false); }; 
 	virtual bool StylusUp(int xPos, int yPos) { return(false); }; 
   
-  virtual bool KeyDown(PdaKey key) { return(false); };
-  virtual bool KeyUp(PdaKey key) { return(false); };
+  virtual bool KeyDown(PdaKey) { return(false); };
+  virtual bool KeyUp(PdaKey) { return(false); };
   
   virtual void Draw() {};
   

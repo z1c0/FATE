@@ -1,5 +1,13 @@
 #include "FUDPSocketImpl.h"
 
+//--------------------------------------------------------------------------------
+CFUDPSocketImpl::CFUDPSocketImpl()
+{
+  m_pAddrRemote = NULL;
+  m_hSocket = INVALID_SOCKET; 
+  m_dwTimeout = DEFAULT_TIMEOUT; 
+  m_listenPort = -1;
+}
 
 //--------------------------------------------------------------------------------
 /// Creates a UDP socket.
@@ -10,6 +18,20 @@ bool CFUDPSocketImpl::Create()
   return(m_hSocket != INVALID_SOCKET);
 }
 
+//--------------------------------------------------------------------------------
+bool CFUDPSocketImpl::Bind(int port)
+{
+  if (m_hSocket == INVALID_SOCKET) return(false);
+  
+  m_listenPort = port;
+  sockaddr_in addr;
+  memset(&addr, 0, sizeof(sockaddr_in));
+  addr.sin_family = AF_INET;
+  addr.sin_port = htons(m_listenPort);
+  addr.sin_addr.s_addr = INADDR_ANY;
+
+	return(bind(m_hSocket, (LPSOCKADDR)&addr, sizeof(SOCKADDR)) != SOCKET_ERROR);
+}
 
 //--------------------------------------------------------------------------------
 int CFUDPSocketImpl::Send(const char* pBuff, const int iSize)
@@ -24,9 +46,10 @@ int CFUDPSocketImpl::Send(const char* pBuff, const int iSize)
 //--------------------------------------------------------------------------------
 int CFUDPSocketImpl::Receive(char* pBuff, const int iSize)
 {
-  if (!m_pAddrRemote) {
+  if (!m_pAddrRemote)
+  {
     // create a dummy address
-    m_pAddrRemote= new CFInetAddr();
+    m_pAddrRemote= new CFInetAddrImpl();
   }
   return(Receive(pBuff, iSize, m_pAddrRemote));
 }
@@ -35,7 +58,7 @@ int CFUDPSocketImpl::Receive(char* pBuff, const int iSize)
 /// Receive UDP datagrams.
 /// Returns the number of bytes received, or SOCKET_TIMEOUT in case of a timeout
 /// or SOCKET_ERROR in case of a problem.
-int CFUDPSocketImpl::Receive(char* pBuff, const int iSize, const CFInetAddr* pInetAddr)
+int CFUDPSocketImpl::Receive(char* pBuff, const int iSize, const CFInetAddrImpl* pInetAddr)
 {
   if (m_hSocket == INVALID_SOCKET) return(SOCKET_ERROR);
 
@@ -56,7 +79,7 @@ int CFUDPSocketImpl::Receive(char* pBuff, const int iSize, const CFInetAddr* pIn
 /// Return values:
 /// SOCKET_TIMEOUT indicates timeout 
 /// SOCKET_ERROR in case of a problem.
-int CFUDPSocketImpl::Send(const char* pBuff, const int iSize, const CFInetAddr* pInetAddr)
+int CFUDPSocketImpl::Send(const char* pBuff, const int iSize, const CFInetAddrImpl* pInetAddr)
 {
   if (m_hSocket == INVALID_SOCKET) return(SOCKET_ERROR);
 
@@ -86,4 +109,20 @@ void CFUDPSocketImpl::JoinMultiCastGroup(const char *pszGroupAddress)
   mreq.imr_multiaddr.s_addr= inet_addr(pszGroupAddress);
   mreq.imr_interface.s_addr= INADDR_ANY;
   setsockopt(m_hSocket, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char*)&mreq, sizeof(mreq));
+}
+
+//--------------------------------------------------------------------------------
+/// Is another socket sending currently to this one?
+bool CFUDPSocketImpl::IsReceiving() const
+{
+  if (m_hSocket == INVALID_SOCKET) 
+  {
+    return false;
+  }
+  else
+  {
+    FD_SET fd= {1, m_hSocket};
+    TIMEVAL tv= {0, 0};	
+    return(select(0, &fd, NULL, NULL, &tv) == 1);
+  }
 }

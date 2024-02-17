@@ -52,7 +52,7 @@ bool CFMsgServerProxy::ReadConfigData(char *pszData)
 	int iState= 0;
 
   cRead[1]     = 0;
-	szHostName[0]= 0;
+  szHostName[0]= 0;
   szHostAddr[0]= 0;
   szPort[0]    = 0;
 
@@ -74,9 +74,9 @@ bool CFMsgServerProxy::ReadConfigData(char *pszData)
           if ((cRead[0] == '\n')||(!cRead[0]))  // IP-settings complete
           {
             iState= 0;
-            if (!_tcscmp(szHostName, "VR"))
+            if (!strcmp(szHostName, "VR"))
             {
-              m_addrVR[m_iNodeCount++]= new CFInetAddr(szHostAddr, atoi(szPort));
+              m_addrVR[m_iNodeCount++] = new CFInetAddr(szHostAddr, atoi(szPort));
 
             }
             else

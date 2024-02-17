@@ -1,13 +1,13 @@
-#include "../FateTypeDefs.h"
-#include "../FateApp.h"
-#include "../FSystem.h"
-#include "../FBitmap.h"
-#include "../FFile.h"
+#include "../../base/FateTypeDefs.h"
+#include "../../base/FateApp.h"
+#include "../../base/FSystem.h"
+#include "../../base/FBitmap.h"
+#include "../../base/FFile.h"
 #include "../../util/FPoint.h"
-#include "../../comm/FComPort_WIN32.h"
-#include "../../comm/FUDPSocket_WIN32.h"
+#include "../../comm/FComPort.h"
+#include "../../comm/FUDPSocket.h"
 #include "../../util/FLinkedList.h"
-
+#include "FSystemImpl.h"
 
 //--------------------------------------------------------------------------------
 // globals
@@ -92,7 +92,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
   switch (message) {
     case WM_CREATE:
-      g_pApp->SetSystem(new CFSystem(hWnd, g_pApp->GetWidth(), g_pApp->GetHeight(), g_pApp->GetDrawMode()));
+      g_pApp->SetSystem(new CFSystem(new CFSystemImpl(hWnd, g_pApp->GetWidth(), g_pApp->GetHeight(), g_pApp->GetDrawMode())));
       g_pApp->Init();
       if (!g_pApp->InitFateApp()) 
       {

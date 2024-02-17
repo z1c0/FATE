@@ -1,10 +1,12 @@
 #pragma once
 
+#include "../../base/FateTypeDefs.h"
+
 class CFInetAddrImpl : public sockaddr_in
 {
 public:
 	CFInetAddrImpl() { 
-    memset(this, 0, sizeof(CFInetAddr));
+    memset(this, 0, sizeof(CFInetAddrImpl));
     sin_family= AF_INET;
 		sin_port= 0;
 		sin_addr.s_addr= 0;
@@ -12,7 +14,7 @@ public:
   CFInetAddrImpl(const SOCKADDR& sockAddr) { memcpy(this, &sockAddr, sizeof(SOCKADDR)); };
 	CFInetAddrImpl(const SOCKADDR_IN& sin) { memcpy(this, &sin, sizeof(SOCKADDR_IN)); };
   CFInetAddrImpl(const ULONG ulAddr, const USHORT ushPort= 0) {  
-    memset(this, 0, sizeof(CFInetAddr));
+    memset(this, 0, sizeof(CFInetAddrImpl));
 	  sin_family= AF_INET;
 		sin_port= htons(ushPort);
 	  sin_addr.s_addr= htonl(ulAddr);
@@ -21,13 +23,13 @@ public:
     char szStrIP[32];
     
     WideCharToMultiByte(CP_ACP, 0, pStrIP, wcslen(pStrIP) + 1, szStrIP, 32, 0, 0);
-    memset(this, 0, sizeof(CFInetAddr));
+    memset(this, 0, sizeof(CFInetAddrImpl));
 	  sin_family= AF_INET;
 		sin_port= htons(usPort);
 		sin_addr.s_addr= inet_addr(szStrIP); 
   }
   CFInetAddrImpl(const char* pStrIP, const USHORT usPort= 0) {  
-    memset(this, 0, sizeof(CFInetAddr));
+    memset(this, 0, sizeof(CFInetAddrImpl));
 	  sin_family= AF_INET;
 		sin_port= htons(usPort);
 		sin_addr.s_addr= inet_addr(pStrIP); 

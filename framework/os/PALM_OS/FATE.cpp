@@ -1,9 +1,8 @@
-#include "FateTypeDefs.h"
-#include "FateApp.h"
-#include "FInetAddr.h"
-#include "FUDPSocket.h"
-#include "FSystem.h"
-
+#include "../../base/FateTypeDefs.h"
+#include "../../base/FateApp.h"
+#include "../../comm/FUDPSocket.h"
+#include "../../base/FSystem.h"
+#include "FSystemImpl.h"
 
 //--------------------------------------------------------------------------------
 /// Global variables
@@ -59,7 +58,7 @@ static bool StartApplication()
 
   // instantiate application object
   g_pApp= CreateFateApp();
-  g_pApp->SetSystem(new CFSystem(uiWidth, uiHeight));
+  g_pApp->SetSystem(new CFSystem(new CFSystemImpl(uiWidth, uiHeight)));
   g_pApp->Init();
   g_pApp->InitFateApp();
 

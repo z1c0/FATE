@@ -5,7 +5,7 @@
 #elif defined (_LINUX)
   #include "../os/LINUX/FFileImpl.h"
 #elif defined (_PALM_OS)
-  #include "../os/PALM_OS/FFileImpl.h"
+  //#include "../os/PALM_OS/FFileImpl.h"
 #else
   #error "unknown OS"
 #endif

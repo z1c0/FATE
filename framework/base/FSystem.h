@@ -20,7 +20,7 @@ public:
   int GetWidth() const;
   int GetHeight() const;
   void AddTimer(unsigned long id, int interval);  
-  bool EnableSuspend(bool suspend) { return false; }  
+  bool EnableSuspend(bool suspend);
 
   static void GetPathToApplication(TCHAR *pszAppPath);
   static unsigned int GetTicks();

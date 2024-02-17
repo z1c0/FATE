@@ -9,3 +9,26 @@
 #else
   #error "unknown OS"
 #endif
+
+//------------------------------------------------------------------------------
+CFComPort::CFComPort() : m_pImpl(new CFComPortImpl())
+{
+}
+
+//------------------------------------------------------------------------------
+CFComPort::~CFComPort()
+{
+	delete m_pImpl;
+}
+
+//------------------------------------------------------------------------------
+bool CFComPort::Open(int iPort /* = 1 */, BaudRate brBaud /* = BD_9600 */)
+{
+  return m_pImpl->Open(iPort, brBaud);
+}
+
+//------------------------------------------------------------------------------
+int CFComPort::Write(const char *pszBuffer, int iBuffSize)
+{
+  return m_pImpl->Write(pszBuffer, iBuffSize);
+}

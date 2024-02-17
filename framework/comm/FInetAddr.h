@@ -2,19 +2,19 @@
 
 #include "../base/FateTypeDefs.h"
 
-//--------------------------------------------------------------------------------
-/// Socket constants.
-#define SOCKET_TIMEOUT      SOCKET_ERROR - 1
-#define DEFAULT_TIMEOUT     5
-#define NO_TIMEOUT          0xFFFF
-
 class CFInetAddrImpl;
 
 class CFInetAddr
 {
+  friend class CFSocket;
+  friend class CFUDPSocket;
+  
+  CFInetAddr(CFInetAddrImpl* pImpl) : m_pImpl(pImpl) {}
+
 public:
   CFInetAddr();
   CFInetAddr(const char* ip, int port);
+  CFInetAddr(const wchar_t* ip, int port);
   ~CFInetAddr();
 
 private:

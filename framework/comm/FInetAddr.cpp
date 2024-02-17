@@ -21,6 +21,12 @@ CFInetAddr::CFInetAddr(const char* ip, int port) : m_pImpl(new CFInetAddrImpl(ip
 }
 
 //------------------------------------------------------------------------------
+CFInetAddr::CFInetAddr(const wchar_t* ip, int port) : m_pImpl(new CFInetAddrImpl(ip, port))
+{
+}
+
+
+//------------------------------------------------------------------------------
 CFInetAddr::~CFInetAddr()
 {
   delete m_pImpl;
