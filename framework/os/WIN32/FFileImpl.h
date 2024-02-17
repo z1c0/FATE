@@ -1,14 +1,12 @@
 #pragma once
 
-#include "FateTypeDefs.h"
+#include "../../base/FateTypeDefs.h"
 
-class CFFileImpl;
-
-class CFFile
+class CFFileImpl
 {
 public:
-  CFFile(const TCHAR *pszFileName);
-  virtual ~CFFile();
+  CFFileImpl(const TCHAR *pszFileName);
+  ~CFFileImpl();
 
   bool IsValid() const;
   unsigned int GetSize() const;
@@ -16,5 +14,5 @@ public:
   bool ReadBytes(unsigned char*& bytes, unsigned int& count);
 
 private:
-  CFFileImpl* m_pImpl;
+  HANDLE m_handle;
 };

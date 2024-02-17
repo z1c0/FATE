@@ -69,7 +69,7 @@ void CFItemList::SetSystem(CFSystem *pSystem)
   m_pSystem = pSystem;
   
   // Depending on height, calculate number of possible items.
-  RECT rect = {};
+  RECT rect = {0, 0, 0, 0};
   CFBitmap::CalcRectForText(TEXT("W"), rect);
   m_iItemHeight = _max(18, (rect.bottom - rect.top));
   

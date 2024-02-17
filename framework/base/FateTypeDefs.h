@@ -5,6 +5,7 @@
   #include <winsock.h>
   #include <stdio.h>
   #include <TCHAR.h>  
+  #include <assert.h>
 
 #ifdef _WIN32_WCE
   #include <aygshell.h>
@@ -39,8 +40,6 @@ struct RECT
   int right;
   int bottom;
 };
-
-#define _max(a, b) (((a) > (b)) ? (a) : (b)) 
 
 #ifdef _LINUX
 
@@ -124,6 +123,8 @@ enum EFateDrawMode
   DM_LANDSCAPE,     
   DM_LANDSCAPE_FLIPPED
 };
+
+#define _max(a, b) (((a) > (b)) ? (a) : (b)) 
 
 // Macro for safe memory release.
 #define SAFE_DELETE(p)  { if (p) { delete(p); (p)= NULL; } }

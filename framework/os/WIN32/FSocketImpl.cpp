@@ -1,8 +1,8 @@
-#include "FSocket_WIN32.h"
+#include "FSocketImpl.h"
 
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Create()
+bool CFSocketImpl::Create()
 {
   if (m_hSocket != INVALID_SOCKET) return(false);
   m_hSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
@@ -11,21 +11,22 @@ bool CFSocket::Create()
 
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Listen()
+bool CFSocketImpl::Listen()
 {
   if (m_hSocket == INVALID_SOCKET) return(false);
 	return(listen(m_hSocket, 5) != SOCKET_ERROR);
 }
 
 //--------------------------------------------------------------------------------
-int CFSocket::Accept(CFSocket& sConnect)
+int CFSocketImpl::Accept(CFSocketImpl& sConnect)
 {
   sockaddr_in addr;
   int iSize;
   
   if (m_hSocket == INVALID_SOCKET) return(false);
   
-  if (m_dwTimeout != NO_TIMEOUT) {
+  if (m_dwTimeout != NO_TIMEOUT)
+  {
     FD_SET fd= {1, m_hSocket};
 	  TIMEVAL tv= {m_dwTimeout, 0};
 	  if(select(0, &fd, NULL, NULL, &tv) == 0) {
@@ -39,14 +40,14 @@ int CFSocket::Accept(CFSocket& sConnect)
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Connect(const CFInetAddr* pInetAddr)
+bool CFSocketImpl::Connect(const CFInetAddr* pInetAddr)
 {
   if (m_hSocket == INVALID_SOCKET) return(false);
 	return(connect(m_hSocket, (LPSOCKADDR)pInetAddr, sizeof(SOCKADDR)) != SOCKET_ERROR);
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::Connect(char *pAddrStr, USHORT usPort)
+bool CFSocketImpl::Connect(char *pAddrStr, USHORT usPort)
 {
   if (m_hSocket == INVALID_SOCKET) return(false);
   CFInetAddr addr(pAddrStr, usPort);
@@ -54,7 +55,7 @@ bool CFSocket::Connect(char *pAddrStr, USHORT usPort)
 }
 
 //--------------------------------------------------------------------------------
-int CFSocket::Write(const char* pBuff, const int iSize)
+int CFSocketImpl::Write(const char* pBuff, const int iSize)
 {
 	int iBytesSent= 0;
 	int iBytesTemp;
@@ -77,7 +78,7 @@ int CFSocket::Write(const char* pBuff, const int iSize)
 /// Return values:
 /// SOCKET_TIMEOUT indicates timeout 
 /// SOCKET_ERROR in case of a problem.
-int CFSocket::Send(const char* pBuff, const int iSize)
+int CFSocketImpl::Send(const char* pBuff, const int iSize)
 {
   if (m_hSocket == INVALID_SOCKET) return(SOCKET_ERROR);
   
@@ -95,7 +96,7 @@ int CFSocket::Send(const char* pBuff, const int iSize)
 /// Return values:
 /// SOCKET_TIMEOUT indicates timeout 
 /// SOCKET_ERROR in case of a problem.
-int CFSocket::Receive(char* pBuff, const int iSize)
+int CFSocketImpl::Receive(char* pBuff, const int iSize)
 {
   if (m_hSocket == INVALID_SOCKET) return(SOCKET_ERROR);
 
@@ -111,7 +112,7 @@ int CFSocket::Receive(char* pBuff, const int iSize)
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::GetRemoteAddr(CFInetAddr* pInetAddr)
+bool CFSocketImpl::GetRemoteAddr(CFInetAddr* pInetAddr)
 {
   if (m_hSocket == INVALID_SOCKET) return(false);
 	
@@ -120,7 +121,7 @@ bool CFSocket::GetRemoteAddr(CFInetAddr* pInetAddr)
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocket::GetInetAddr(CFInetAddr* pInetAddr)
+bool CFSocketImpl::GetInetAddr(CFInetAddr* pInetAddr)
 {
   if (m_hSocket == INVALID_SOCKET) return(false);
 	
@@ -130,7 +131,7 @@ bool CFSocket::GetInetAddr(CFInetAddr* pInetAddr)
 
 //--------------------------------------------------------------------------------
 /// Is there a client who wants to connect?
-bool CFSocket::IsClientConnecting()
+bool CFSocketImpl::IsClientConnecting()
 {
   if (m_hSocket == INVALID_SOCKET) return(false);
   else {
@@ -140,3 +141,19 @@ bool CFSocket::IsClientConnecting()
   }
 }
 
+
+//--------------------------------------------------------------------------------
+/* static */ bool CFSocketImpl::InitSocketLibrary()
+{
+  WORD vr;
+  WSADATA wsaData;
+  vr = MAKEWORD(1, 1);
+  return !::WSAStartup(vr, &wsaData);
+}
+
+//--------------------------------------------------------------------------------
+/* static */ bool CFSocketImpl::CleanupSocketLibrary()
+{
+  ::WSACleanup();
+  return true;
+}

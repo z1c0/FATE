@@ -1,28 +1,20 @@
 #pragma once
 
-#include "../FateTypeDefs.h"
+#include "../../base/FateTypeDefs.h"
+#include "FBitmapImpl.h"
 
-class CFBitmap;
-
-class CFSystem
+class CFSystemImpl
 {
 public:
+  CFSystemImpl(HWND hWnd, int nWidth, int nHeight);
+  ~CFSystemImpl();
 
-  CFSystem(HWND hWnd, int nWidth, int nHeight);
-  virtual ~CFSystem();
-
-  CFBitmap* GetDoubleBuffer();
-  
-  void RenderDoubleBuffer();
-
+  CFBitmapImpl* CreateDoubleBuffer() const;  
   void ForceRedraw();
-  void DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
-  void ShowError(const TCHAR* msg);
-  
+  void DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
+  void ShowError(const TCHAR* msg);  
   void QueueEvent(int iEventID, int iComponentID, void *pCustomData);
-
   bool ShutDownSystem();
-
   int GetWidth() const { return m_nWidth; };
   int GetHeight() const { return m_nHeight; };
   void AddTimer(unsigned long id, int interval);  
@@ -33,8 +25,6 @@ public:
   static int GetRandomNumber(int max);
 
 private:
-
-  CFBitmap *m_pDoubleBuffer;
   HWND m_hWnd;  
   HDC m_hdc;
   int m_nWidth;

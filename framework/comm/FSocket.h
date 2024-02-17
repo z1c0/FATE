@@ -28,6 +28,8 @@ public:
   bool GetInetAddr(CFInetAddr* pInetAddr);  
   bool IsClientConnecting();
   bool IsReceiving();
+  int GetListenPort() const;
+  void SetTimeout(DWORD dwTimeout);
 
   static bool InitSocketLibrary();
   static bool CleanupSocketLibrary();

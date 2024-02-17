@@ -1,6 +1,3 @@
-// FWavePanel.cpp: implementation of the CFWavePanel class.
-//////////////////////////////////////////////////////////////////////
-
 #include "stdafx.h"
 #include "FWavePanel.h"
 #include "Resource.h"
@@ -541,20 +538,20 @@ BOOL CFWavePanel::Create()
   m_pApp= (CFWaveCutApp*)m_pParent;
 
   // create wave window
-  m_bmpWaveWnd= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpWaveWnd= new CFBitmap(m_pSystem->GetDoubleBuffer());
 
   if (!m_bmpWaveWnd->Load(IDB_WAVEPANEL)) return(FALSE);
   
   // create bitmap for waveform
-  m_bmpWaveForm= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpWaveForm= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpWaveForm->Create(m_bmpWaveWnd->GetWidth(), m_bmpWaveWnd->GetHeight() - 14)) 
     return(FALSE);
   m_bmpWaveForm->SolidFill(RGB(51, 102, 153));
   
   // load and save bitmaps
-  m_bmpSaving= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpSaving= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpSaving->Load(IDB_SAVING)) return(FALSE);
-  m_bmpLoading= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpLoading= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpLoading->Load(IDB_LOADING)) return(FALSE);
 
   // create markers
@@ -574,7 +571,7 @@ BOOL CFWavePanel::Create()
   if (!m_zoomSlider->Create(m_bmpZoomPat)) return(FALSE);
 
   // create futurelab-info-insert 
-  CFBitmap *bmpInfo= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpInfo= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpInfo->Load(IDB_XARTINFO)) return(FALSE);
   m_infoPanel= new CFInfoPanel();
   Add(*m_infoPanel);
@@ -583,9 +580,9 @@ BOOL CFWavePanel::Create()
 
   // create and add buttons
   // Rec button
-  CFBitmap *bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_REC)) return(FALSE);
-  CFBitmap *bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_REC_P)) return(FALSE);
   m_btnRec= new CFButton(bmpDef, bmpPress);
   m_btnRec->SetId(ID_BTN_WAVE_REC);
@@ -593,9 +590,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnRec);
 
   // Pause button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_PAUSE)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_PAUSE_P)) return(FALSE);
   m_btnPause= new CFButton(bmpDef, bmpPress);
   m_btnPause->SetId(ID_BTN_WAVE_PAUSE);
@@ -603,9 +600,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnPause);
   
   // Play button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_PLAY)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_PLAY_P)) return(FALSE);
   m_btnPlay= new CFButton(bmpDef, bmpPress);
   m_btnPlay->SetId(ID_BTN_WAVE_PLAY);
@@ -613,9 +610,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnPlay);
   
   // Stop button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_STOP))  return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_STOP_P)) return(FALSE);
   m_btnStop= new CFButton(bmpDef, bmpPress);
   m_btnStop->SetId(ID_BTN_WAVE_STOP);
@@ -623,9 +620,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnStop);
   
   // MarkIn button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_MARKIN)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_MARKIN_P)) return(FALSE);
   m_btnMarkIn= new CFButton(bmpDef, bmpPress);
   m_btnMarkIn->SetId(ID_BTN_WAVE_MARKIN);
@@ -633,9 +630,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnMarkIn);
   
   // MarkOut button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_MARKOUT)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_MARKOUT_P)) return(FALSE);
   m_btnMarkOut= new CFButton(bmpDef, bmpPress);
   m_btnMarkOut->SetId(ID_BTN_WAVE_MARKOUT);
@@ -644,9 +641,9 @@ BOOL CFWavePanel::Create()
   
   /*
   // -100 button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_M100)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_M100_P)) return(FALSE);
   m_btnM100= new CFButton(bmpDef, bmpPress);
   m_btnM100->SetId(ID_BTN_WAVE_M100);
@@ -654,9 +651,9 @@ BOOL CFWavePanel::Create()
   Add(m_btnM100);
   
   // -10 button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_M10)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_M10_P)) return(FALSE);
   m_btnM10= new CFButton(bmpDef, bmpPress);
   m_btnM10->SetId(ID_BTN_WAVE_M10);
@@ -664,9 +661,9 @@ BOOL CFWavePanel::Create()
   Add(m_btnM10);
   
   // -1 button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_M1)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_M1_P)) return(FALSE);
   m_btnM1= new CFButton(bmpDef, bmpPress);
   m_btnM1->SetId(ID_BTN_WAVE_M1);
@@ -674,9 +671,9 @@ BOOL CFWavePanel::Create()
   Add(m_btnM1);
   
   // +1 button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_P1)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_P1_P)) return(FALSE);
   m_btnP1= new CFButton(bmpDef, bmpPress);
   m_btnP1->SetId(ID_BTN_WAVE_P1);
@@ -684,9 +681,9 @@ BOOL CFWavePanel::Create()
   Add(m_btnP1);
   
   // +10 button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_P10)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_P10_P)) return(FALSE);
   m_btnP10= new CFButton(bmpDef, bmpPress);
   m_btnP10->SetId(ID_BTN_WAVE_P10);
@@ -694,9 +691,9 @@ BOOL CFWavePanel::Create()
   Add(m_btnP10);
   
   // +100 button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_P100)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_P100_P)) return(FALSE);
   m_btnP100= new CFButton(bmpDef, bmpPress);
   m_btnP100->SetId(ID_BTN_WAVE_P100);
@@ -705,9 +702,9 @@ BOOL CFWavePanel::Create()
   */
   
   // PlayFrom button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_PLAYFROM)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_PLAYFROM_P)) return(FALSE);
   m_btnPlayFrom= new CFButton(bmpDef, bmpPress);
   m_btnPlayFrom->SetId(ID_BTN_WAVE_PLAYFROM);
@@ -715,9 +712,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnPlayFrom);
   
   // PlayTill button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_PLAYTILL)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_PLAYTILL_P)) return(FALSE);
   m_btnPlayTill= new CFButton(bmpDef, bmpPress);
   m_btnPlayTill->SetId(ID_BTN_WAVE_PLAYTILL);
@@ -725,9 +722,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnPlayTill);
   
   // PlayInside button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_PLAYIN)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_PLAYIN_P)) return(FALSE);
   m_btnPlayIn= new CFButton(bmpDef, bmpPress);
   m_btnPlayIn->SetId(ID_BTN_WAVE_PLAYIN);
@@ -735,9 +732,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnPlayIn);
   
   // PlayOutSide button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_PLAYOUT)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_PLAYOUT_P)) return(FALSE);
   m_btnPlayOut= new CFButton(bmpDef, bmpPress);
   m_btnPlayOut->SetId(ID_BTN_WAVE_PLAYOUT);
@@ -745,9 +742,9 @@ BOOL CFWavePanel::Create()
   Add(*m_btnPlayOut);  
 
   // YOUK button
-  bmpDef= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpDef= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDef->Load(IDB_BUTTON_XART)) return(FALSE);
-  bmpPress= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpPress= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPress->Load(IDB_BUTTON_XART)) return(FALSE);
   m_btnYouk= new CFButton(bmpDef, bmpPress);
   m_btnYouk->SetId(ID_BTN_WAVE_YOUK);

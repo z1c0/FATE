@@ -1,27 +1,27 @@
-#include "FBitmap.h"
+#include "FBitmapImpl.h"
 
 //--------------------------------------------------------------------------------
-CFBitmap::CFBitmap()
+CFBitmapImpl::CFBitmapImpl()
 {
   m_hDestDC = NULL;
   Init();
 }
 
 //--------------------------------------------------------------------------------
-CFBitmap::CFBitmap(const CFBitmap& destbmp)
-{
-  m_hDestDC = destbmp.m_hSourceDC;
-  Init();
-}
-
-//--------------------------------------------------------------------------------
-CFBitmap::~CFBitmap()
+CFBitmapImpl::~CFBitmapImpl()
 {
   CleanUp();
 }
 
 //--------------------------------------------------------------------------------
-void CFBitmap::Init()
+void CFBitmapImpl::InitFrom(CFBitmapImpl& other)
+{
+  m_hDestDC = other.m_hSourceDC;
+  Init();
+}
+
+//--------------------------------------------------------------------------------
+void CFBitmapImpl::Init()
 {
   m_hSourceDC    = NULL;
   m_hSaveDC      = NULL;
@@ -46,14 +46,14 @@ void CFBitmap::Init()
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::IsValid() const
+bool CFBitmapImpl::IsValid() const
 {
   return (m_hSourceDC != NULL);
 }
 
 //--------------------------------------------------------------------------------
 /// Releases all memory that is allocated by the bitmap
-void CFBitmap::CleanUp()
+void CFBitmapImpl::CleanUp()
 {
   // clean up of main device context
   if (m_hSourceDC) {
@@ -83,7 +83,7 @@ void CFBitmap::CleanUp()
 //--------------------------------------------------------------------------------
 /// Creates an new bitmap of specified dimensions.
 /// Previously allocated memory gets released automatically
-bool CFBitmap::Create(int iWidth, int iHeight)
+bool CFBitmapImpl::Create(int iWidth, int iHeight)
 {
   // cleanup necessary?
   if (m_hSourceDC)
@@ -128,14 +128,14 @@ bool CFBitmap::Create(int iWidth, int iHeight)
 }
 
 //------------------------------------------------------------------------------
-void CFBitmap::SetDestBitmap(const CFBitmap& bmp)
+void CFBitmapImpl::SetDestBitmap(const CFBitmapImpl& bmp)
 {
   m_hDestDC = bmp.m_hSourceDC;
 }
 
 //--------------------------------------------------------------------------------
 /// Fills the whole bitmap with the color specified by "colFill".
-bool CFBitmap::SolidFill(const COLORREF colFill)
+bool CFBitmapImpl::SolidFill(const COLORREF colFill)
 {
   if (m_hSourceDC)
   {
@@ -156,21 +156,21 @@ bool CFBitmap::SolidFill(const COLORREF colFill)
 
 //--------------------------------------------------------------------------------
 /// Blits the bitmap to its preset destination device context.
-bool CFBitmap::Blit()
+bool CFBitmapImpl::Blit()
 {
   return (BitBlt(m_hDestDC, m_iPosX, m_iPosY, m_iWidth, m_iHeight, m_hSourceDC, 0, 0, SRCCOPY) != 0); 
 }
 
 //--------------------------------------------------------------------------------
 /// Blits the bitmap to its preset destination device context.
-bool CFBitmap::Blit(int srcx, int srcy, int srcw, int srch, int destx, int desty)
+bool CFBitmapImpl::Blit(int srcx, int srcy, int srcw, int srch, int destx, int desty)
 {
   return (BitBlt(m_hDestDC, srcx, srcy, srcw, srch, m_hSourceDC, destx, desty, SRCCOPY) != 0); 
 }
 
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::ClipBlit(int iWidth, int iHeight) 
+bool CFBitmapImpl::ClipBlit(int iWidth, int iHeight) 
 {
   if ((m_iWidth < iWidth)||(m_iHeight < iHeight)) {
     if (StretchBlt(m_hDestDC, m_iPosX, m_iPosY, iWidth, iHeight, m_hSourceDC, 0, 0, m_iWidth, m_iHeight, SRCCOPY)) {
@@ -191,7 +191,7 @@ bool CFBitmap::ClipBlit(int iWidth, int iHeight)
 //--------------------------------------------------------------------------------
 /// Blits the bitmap to its preset destination device context, but at the
 /// maximum dimensions specified by "iWidth" and "iHeight".
-bool CFBitmap::Blit(int iWidth, int iHeight) 
+bool CFBitmapImpl::Blit(int iWidth, int iHeight) 
 {
   return(BitBlt(m_hDestDC, m_iPosX, m_iPosY, 
                 m_iWidth  > iWidth  ? iWidth  : m_iWidth, 
@@ -200,14 +200,14 @@ bool CFBitmap::Blit(int iWidth, int iHeight)
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::StretchBlit(int iWidth, int iHeight)
+bool CFBitmapImpl::StretchBlit(int iWidth, int iHeight)
 {
   return (StretchBlt(m_hDestDC, m_iPosX, m_iPosY, iWidth, iHeight, 
           m_hSourceDC, 0, 0, m_iWidth, m_iHeight, SRCCOPY) != 0);
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::TransBlit(COLORREF colTrans)
+bool CFBitmapImpl::TransBlit(COLORREF colTrans)
 {
 #ifdef _WIN32_WCE
   return (TransparentImage(m_hDestDC, m_iPosX, m_iPosY, m_iWidth, m_iHeight, 
@@ -220,7 +220,7 @@ bool CFBitmap::TransBlit(COLORREF colTrans)
 
 //--------------------------------------------------------------------------------
 /// Loads a bitmap from the specified file.
-bool CFBitmap::Load(LPTSTR szFileName)
+bool CFBitmapImpl::Load(const TCHAR* szFileName)
 {
   HANDLE hFile;
   DWORD dwSize;
@@ -259,7 +259,7 @@ bool CFBitmap::Load(LPTSTR szFileName)
 
 //--------------------------------------------------------------------------------
 /// Loads a bitmap from the specfied resource-identifier.
-bool CFBitmap::Load(int wResourceID)
+bool CFBitmapImpl::Load(int wResourceID)
 {
   HRSRC hResource;
   DWORD dwSize;
@@ -301,7 +301,7 @@ bool CFBitmap::Load(int wResourceID)
 
 //--------------------------------------------------------------------------------
 /// Loads a bitmap from a memory file.
-bool CFBitmap::Load(char *pszData, DWORD dwSize)
+bool CFBitmapImpl::Load(char *pszData, DWORD dwSize)
 {
   BITMAPFILEHEADER bmpfh;
   HBITMAP hBmp;
@@ -411,7 +411,7 @@ bool CFBitmap::Load(char *pszData, DWORD dwSize)
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::CreateSaveBitmap(const CFBitmap& bmp)
+bool CFBitmapImpl::CreateSaveBitmap(const CFBitmapImpl& bmp)
 {
   HDC hdc = bmp.m_hSourceDC;
 
@@ -432,7 +432,7 @@ bool CFBitmap::CreateSaveBitmap(const CFBitmap& bmp)
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::SaveUnder(const CFBitmap& bmp)
+bool CFBitmapImpl::SaveUnder(const CFBitmapImpl& bmp)
 {
   // Check if DC for saving was already created; if not, do so.
   if (!m_hSaveDC) {
@@ -447,7 +447,7 @@ bool CFBitmap::SaveUnder(const CFBitmap& bmp)
 }
 
 //--------------------------------------------------------------------------------
-bool CFBitmap::RestoreUnder(const CFBitmap& bmp)
+bool CFBitmapImpl::RestoreUnder(const CFBitmapImpl& bmp)
 {
   HDC hdc = bmp.m_hDestDC;
   if ((m_hSaveDC)&&(hdc)) {
@@ -457,10 +457,11 @@ bool CFBitmap::RestoreUnder(const CFBitmap& bmp)
 }
 
 //--------------------------------------------------------------------------------
-CFBitmap& CFBitmap::operator=(const CFBitmap &bmp)
+CFBitmapImpl& CFBitmapImpl::operator=(const CFBitmapImpl &bmp)
 {
   // Avoid self-assinging.
-  if (this == &bmp) {
+  if (this == &bmp)
+  {
     return *this;
   }
 
@@ -471,15 +472,8 @@ CFBitmap& CFBitmap::operator=(const CFBitmap &bmp)
   return *this;
 }
 
-//--------------------------------------------------------------------------------
-CFBitmap* CFBitmap::operator=(CFBitmap *bmp)
-{
-  *this= *bmp;
-  return(this);
-}
-
 //------------------------------------------------------------------------------
-bool CFBitmap::SetBits(unsigned char *pBits, int iSize)
+bool CFBitmapImpl::SetBits(unsigned char *pBits, int iSize)
 {
   if ((m_pBits)&&(m_iWidth * m_iHeight * 3 >= iSize)) {
     memcpy(m_pBits, pBits, iSize);
@@ -490,7 +484,7 @@ bool CFBitmap::SetBits(unsigned char *pBits, int iSize)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::SaveToFile(const TCHAR *pszFileName)
+bool CFBitmapImpl::SaveToFile(const TCHAR *pszFileName)
 {
   BITMAPINFOHEADER bmpih;
   BITMAPFILEHEADER bmpfh;
@@ -523,7 +517,7 @@ bool CFBitmap::SaveToFile(const TCHAR *pszFileName)
 
 
 //------------------------------------------------------------------------------
-COLORREF CFBitmap::SetColor(COLORREF col)
+COLORREF CFBitmapImpl::SetColor(COLORREF col)
 {
   COLORREF colRet= m_colForeground;
 
@@ -544,7 +538,7 @@ COLORREF CFBitmap::SetColor(COLORREF col)
 }
 
 //------------------------------------------------------------------------------
-COLORREF CFBitmap::SetTextColor(COLORREF col)
+COLORREF CFBitmapImpl::SetTextColor(COLORREF col)
 {
   COLORREF colOld = ::GetTextColor(m_hSourceDC);
  ::SetTextColor(m_hSourceDC, col);
@@ -552,7 +546,7 @@ COLORREF CFBitmap::SetTextColor(COLORREF col)
 }
 
 //------------------------------------------------------------------------------
-COLORREF CFBitmap::SetBackgroundColor(COLORREF col)
+COLORREF CFBitmapImpl::SetBackgroundColor(COLORREF col)
 {
   COLORREF colRet = m_colBackground;
 
@@ -574,7 +568,7 @@ COLORREF CFBitmap::SetBackgroundColor(COLORREF col)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::CalcRectForText(const TCHAR *pszText, RECT& rect)
+bool CFBitmapImpl::CalcRectForText(const TCHAR *pszText, RECT& rect)
 {
   HWND hWnd = ::GetDesktopWindow();
   HDC hdc = ::GetDC(hWnd);
@@ -584,25 +578,25 @@ bool CFBitmap::CalcRectForText(const TCHAR *pszText, RECT& rect)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::DrawText(const TCHAR *pszText, RECT& rect)
+bool CFBitmapImpl::DrawText(const TCHAR *pszText, RECT& rect)
 {
   return (::DrawText(m_hSourceDC, pszText, _tcslen(pszText), &rect, DT_SINGLELINE|DT_LEFT|DT_VCENTER) != 0);
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::DrawFilledRect(const RECT& rect)
+bool CFBitmapImpl::DrawFilledRect(const RECT& rect)
 {
   return DrawFilledRect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight)
+bool CFBitmapImpl::DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight)
 {
   return (::Rectangle(m_hSourceDC, iLeft, iTop, iLeft + iWidth, iTop + iHeight) != 0);
  }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::DrawPolygon(POINT *points, int count)
+bool CFBitmapImpl::DrawPolygon(POINT *points, int count)
 {
   return (::Polygon(m_hSourceDC, points, count) != 0);
 }

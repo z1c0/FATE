@@ -1,13 +1,11 @@
 #include "FSocket.h"
 
-#if defined(_WIN32_WCE)
-  #include "WIN32_WCE/FSystem.h"
-#elif defined (_WIN32)
-  #include "WIN32/FSystem.h"
+#if defined(_WIN32)
+  #include "../os/WIN32/FSocketImpl.h"
 #elif defined (_LINUX)
   #include "../os/LINUX/FSocketImpl.h"
 #elif defined (_PALM_OS)
-  #include "PalmOS/FSystem.h"
+  #include "../os/PALM_OS/FSocketImpl.h"
 #else
   #error "unknown OS"
 #endif
@@ -42,6 +40,14 @@ bool CFSocket::Listen()
 {
   assert(false);
   return false;
+}
+
+//--------------------------------------------------------------------------------
+bool CFSocket::Connect(const CFInetAddr* pInetAddr)
+{
+  assert(false);
+  return false;
+  //return m_pImpl->Connect(SOCKET_ERROR;
 }
 
 //--------------------------------------------------------------------------------

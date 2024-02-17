@@ -1,79 +1,70 @@
-#include "FSystem.h"
-#include "FBitmap.h"
-
+#include "FSystemImpl.h"
+#include "../../base/FBitmap.h"
 #include <commctrl.h>
 
 //------------------------------------------------------------------------------
-CFSystem::CFSystem(HWND hWnd, int nWidth, int nHeight)
+CFSystemImpl::CFSystemImpl(HWND hWnd, int nWidth, int nHeight)
 {
   m_hWnd = hWnd;
   m_nWidth = nWidth;
   m_nHeight = nHeight;
 
-  m_hdc = GetDC(hWnd);
-  m_pDoubleBuffer = new CFBitmap();
-  m_pDoubleBuffer->m_hDestDC = m_hdc;
-  m_pDoubleBuffer->Create(GetWidth(), GetHeight());
-  m_pDoubleBuffer->SolidFill(0);
-
-  srand(GetTickCount());
+  m_hdc = ::GetDC(hWnd);
+  ::srand(GetTickCount());
 }
 
 //------------------------------------------------------------------------------
-CFSystem::~CFSystem()
+CFSystemImpl::~CFSystemImpl()
 {
-  if (m_pDoubleBuffer) {
-    delete m_pDoubleBuffer;
-  }
-  if (m_hdc) {
+  if (m_hdc)
+  {
     ::ReleaseDC(m_hWnd, m_hdc);
   }
 }
 
 //------------------------------------------------------------------------------
-CFBitmap* CFSystem::GetDoubleBuffer()
+CFBitmapImpl* CFSystemImpl::CreateDoubleBuffer() const
 {
-  return m_pDoubleBuffer;
+  CFBitmapImpl* doubleBuffer = new CFBitmapImpl();
+  doubleBuffer->m_hDestDC = m_hdc;
+  doubleBuffer->Create(GetWidth(), GetHeight());
+  doubleBuffer->SolidFill(0);
+  return doubleBuffer;
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::RenderDoubleBuffer()
+void CFSystemImpl::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
 {
-  // Draw the double buffer to the screen in default (portrait) mode.
-  m_pDoubleBuffer->Blit();
+  ::PostMessage(m_hWnd, iEventID, iComponentID, (LPARAM)pCustomData);
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
+bool CFSystemImpl::ShutDownSystem()
 {
-  PostMessage(m_hWnd, iEventID, iComponentID, (LPARAM)pCustomData);
-}
-
-//------------------------------------------------------------------------------
-bool CFSystem::ShutDownSystem()
-{
-  DestroyWindow(m_hWnd);
-
+  ::DestroyWindow(m_hWnd);
   return true;
 }
 
 //------------------------------------------------------------------------------
-void CFSystem::ForceRedraw()
+void CFSystemImpl::ForceRedraw()
 {
-  InvalidateRect(m_hWnd, NULL, FALSE);
+  ::InvalidateRect(m_hWnd, NULL, FALSE);
 }
 
-void CFSystem::AddTimer(unsigned long id, int interval)
+//------------------------------------------------------------------------------
+void CFSystemImpl::AddTimer(unsigned long id, int interval)
 {
   ::SetTimer(m_hWnd, id, interval, NULL);
 }
 
-void CFSystem::ShowError(const TCHAR* msg)
+//------------------------------------------------------------------------------
+void CFSystemImpl::ShowError(const TCHAR* msg)
 {
   ::MessageBox(m_hWnd, msg, TEXT("Error"), MB_OK); 
 }
 
-void CFSystem::DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int y, bool normal)
+//------------------------------------------------------------------------------
+void CFSystemImpl::DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal)
 {
   SHFILEINFO shfi;
   HANDLE h = (HANDLE)SHGetFileInfo(pszFilePath, 0, &shfi, sizeof(SHFILEINFO), SHGFI_SYSICONINDEX|SHGFI_SMALLICON);
@@ -81,7 +72,7 @@ void CFSystem::DrawFileIcon(CFBitmap& bmp, const TCHAR *pszFilePath, int x, int 
 }
 
 //--------------------------------------------------------------------------------
-void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
+void CFSystemImpl::GetPathToApplication(TCHAR *pszAppPath)
 {
   TCHAR *pszDiff;
   int iPos;
@@ -100,13 +91,13 @@ void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
 }
 
 //--------------------------------------------------------------------------------
-unsigned int CFSystem::GetTicks()
+unsigned int CFSystemImpl::GetTicks()
 {
   return ::GetTickCount();
 }
 
 //--------------------------------------------------------------------------------
-int CFSystem::GetRandomNumber(int max)
+int CFSystemImpl::GetRandomNumber(int max)
 {
   return rand() % max;
 }

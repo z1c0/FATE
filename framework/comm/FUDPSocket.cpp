@@ -1,13 +1,11 @@
 #include "FUDPSocket.h"
 
-#if defined(_WIN32_WCE)
-  #include "WIN32_WCE/FSystem.h"
-#elif defined (_WIN32)
-  #include "WIN32/FSystem.h"
+#if defined (_WIN32)
+  #include "../os/WIN32/FUDPSocketImpl.h"
 #elif defined (_LINUX)
   #include "../os/LINUX/FUDPSocketImpl.h"
 #elif defined (_PALM_OS)
-  #include "PalmOS/FSystem.h"
+  #include "../os/PALM_OS/FUDPSocketImpl.h"
 #else
   #error "unknown OS"
 #endif

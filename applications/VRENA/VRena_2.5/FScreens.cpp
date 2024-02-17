@@ -87,64 +87,64 @@ bool CFScreens::Create()
   m_app->SetTransparency(0);
 
   // load background bitmap
-  m_bmpBack= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpBack= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpBack->Load(IDB_SCREENS_BACK)) return(FALSE);
   
   // load bitmaps for screens
   // NB: Depends on the screens that are actually used! (1-3)  
   if (m_iNrOfScreensUsed == 1) {
-    m_bmpScreens[0][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[0][0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][0]->Load(IDB_BLANC_MID)) return(FALSE);
 
-    m_bmpScreens[0][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[0][1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][1]->Load(IDB_ACTIVE_MID)) return(FALSE);
 
-    m_bmpScreens[0][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[0][2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][2]->Load(IDB_SET_MID)) return(FALSE);
 
     // rest are dummies
-    m_bmpScreens[1][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-    m_bmpScreens[1][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-    m_bmpScreens[1][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-    m_bmpScreens[2][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-    m_bmpScreens[2][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-    m_bmpScreens[2][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
 
   } else if (m_iNrOfScreensUsed == 3) {
-    m_bmpScreens[0][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[0][0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][0]->Load(IDB_BLANC_LEFT)) return(FALSE);
 
-    m_bmpScreens[0][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[0][1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][1]->Load(IDB_ACTIVE_LEFT)) return(FALSE);
 
-    m_bmpScreens[0][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[0][2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[0][2]->Load(IDB_SET_LEFT)) return(FALSE);
 
-    m_bmpScreens[1][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[1][0]->Load(IDB_BLANC_MID)) return(FALSE);
 
-    m_bmpScreens[1][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[1][1]->Load(IDB_ACTIVE_MID)) return(FALSE);
 
-    m_bmpScreens[1][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[1][2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[1][2]->Load(IDB_SET_MID)) return(FALSE);
 
-    m_bmpScreens[2][0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[2][0]->Load(IDB_BLANC_RIGHT)) return(FALSE);
 
-    m_bmpScreens[2][1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[2][1]->Load(IDB_ACTIVE_RIGHT)) return(FALSE);
 
-    m_bmpScreens[2][2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpScreens[2][2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpScreens[2][2]->Load(IDB_SET_RIGHT)) return(FALSE);  
   }
   
   // play button for videos
-  m_bmpPlay= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpPlay= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpPlay->Load(IDB_PLAY)) return(FALSE);
   
   // pause button for videos
-  m_bmpPause= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpPause= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpPause->Load(IDB_PAUSE)) return(FALSE);
 
   m_bCreated= TRUE;

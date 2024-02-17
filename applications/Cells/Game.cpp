@@ -45,7 +45,7 @@ bool CGame::InitFateApp()
   Add(*m_btnQuit);
 
   // create pitch bitmap
-  m_bmpPitch = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpPitch = new CFBitmap(m_pSystem->GetDoubleBuffer());
   m_bmpPitch->Create(BOUND_R - BOUND_L, BOUND_D - BOUND_U);
   m_bmpPitch->SetX(BOUND_L);
   m_bmpPitch->SetY(BOUND_U);
@@ -128,11 +128,11 @@ bool CGame::StylusDown(int iPosX, int iPosY)
 bool CGame::CreateCells()
 {
   m_pCells[0]= new CChaser();
-  if (!m_pCells[0]->Create(*m_pSystem->GetDoubleBuffer())) return(FALSE);
+  if (!m_pCells[0]->Create(m_pSystem->GetDoubleBuffer())) return(FALSE);
   
   for (int i=1; i<6; i++) {
     m_pCells[i]= new CCell();
-    if (!m_pCells[i]->Create(*m_pSystem->GetDoubleBuffer())) return(FALSE);
+    if (!m_pCells[i]->Create(m_pSystem->GetDoubleBuffer())) return(FALSE);
   }
   
   return(TRUE);

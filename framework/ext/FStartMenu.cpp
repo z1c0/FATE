@@ -149,8 +149,9 @@ CFBitmap* CFStartMenu::CreateAppBmp(int iNr)
   TCHAR szText[16];
   RECT rect;
 
-  if (m_pSystem) {
-    bmp = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  if (m_pSystem)
+  {
+    bmp = new CFBitmap(m_pSystem->GetDoubleBuffer());
     bmp->Create(m_iPicWidth, m_iPicHeight);
     bmp->SolidFill(m_colArr);
 
@@ -177,13 +178,13 @@ void CFStartMenu::CreateBmps()
 
     // create background bitmap
     SAFE_DELETE(m_bmpBack);
-    m_bmpBack = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpBack = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpBack->Create(m_iWidth, m_iHeight);
     m_bmpBack->SolidFill(m_colBack);
 
     // create left arrow bmp
     SAFE_DELETE(m_bmpArrL);
-    m_bmpArrL = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpArrL = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpArrL->Create(m_iWidth / 10, m_iPicHeight);
     m_bmpArrL->SolidFill(m_colBack);
     points[0].x= m_bmpArrL->GetWidth() - iWidth; 
@@ -201,7 +202,7 @@ void CFStartMenu::CreateBmps()
     
     // create right arrow bmp
     SAFE_DELETE(m_bmpArrR);
-    m_bmpArrR = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpArrR = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpArrR->Create(m_bmpArrL->GetWidth(), m_bmpArrL->GetHeight());
     m_bmpArrR->SolidFill(m_colBack);
     points[0].x= m_bmpArrR->GetX() + iWidth;

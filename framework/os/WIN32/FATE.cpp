@@ -1,10 +1,11 @@
-#include "../FateTypeDefs.h"
-#include "../FateApp.h"
-#include "FSystem.h"
-#include "FBitmap.h"
-#include "FFile.h"
+#include "../../base/FateTypeDefs.h"
+#include "../../base/FateApp.h"
+#include "../../base/FSystem.h"
+#include "../../base/FBitmap.h"
+#include "../../base/FFile.h"
 #include "../../util/FLinkedList.h"
-#include "../../comm/FUDPSocket_WIN32.h"
+#include "../../comm/FUDPSocket.h"
+#include "FSystemImpl.h"
 
 
 #define FATE_APP_WIDTH   240
@@ -14,8 +15,8 @@
 //--------------------------------------------------------------------------------
 /// Global variables
 CFateApp  *g_pApp;
-CFUDPSocket *g_sockDebug= NULL;
-CFInetAddr  *g_addrDebug= NULL;
+CFUDPSocket *g_sockDebug = NULL;
+CFInetAddr  *g_addrDebug = NULL;
 bool g_bInitOK= true;
 
 
@@ -74,7 +75,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       int appheight;
       appwidth = g_pApp->IsLandScapeMode() ? FATE_APP_HEIGHT : FATE_APP_WIDTH;
       appheight = g_pApp->IsLandScapeMode() ? FATE_APP_WIDTH : FATE_APP_HEIGHT;
-      g_pApp->SetSystem(new CFSystem(hWnd, appwidth, appheight));
+      g_pApp->SetSystem(new CFSystem(new CFSystemImpl(hWnd, appwidth, appheight)));
       g_pApp->Init();
       if (!g_pApp->InitFateApp()) {
         PostQuitMessage(0);

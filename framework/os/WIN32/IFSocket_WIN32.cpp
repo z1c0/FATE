@@ -83,20 +83,3 @@ const char* IFSocket::GetHostByAddr(const CFInetAddr* pInetAddr)
 	return(pHostEnt->h_name); // caller shouldn't delete this memory
 }
 
-//--------------------------------------------------------------------------------
-/// Initializes the Winsock library.
-bool IFSocket::InitSocketLibrary()
-{
-  WORD vr;
-  WSADATA wsaData;
-  vr= MAKEWORD(1, 1);
-  return(!WSAStartup(vr, &wsaData));
-}
-
-//--------------------------------------------------------------------------------
-/// De-initializes the Winsock library.
-bool IFSocket::CleanupSocketLibrary()
-{
-  WSACleanup();
-  return(TRUE);
-}

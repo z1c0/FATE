@@ -1,27 +1,25 @@
 #pragma once
 
-#include "../FateTypeDefs.h"
+#include "../../base/FateTypeDefs.h"
 
-class CFBitmap  
-{  
+class CFBitmapImpl
+{ 
+  friend class CFSystemImpl;
 public:
-	CFBitmap();
-	CFBitmap(const CFBitmap& bmp);
-	~CFBitmap();
-  
-  void Init();
+	CFBitmapImpl();
+	~CFBitmapImpl();
 
-  bool IsValid() const;
+  CFBitmapImpl& operator=(const CFBitmapImpl &bmp);
   
-  void CleanUp();
-  
-  bool Create(int iWidth, int iHeight);
-  
-  void SetDestBitmap(const CFBitmap& pBmp);  
+  void InitFrom(CFBitmapImpl& other);
+  bool IsValid() const;  
+  void CleanUp();  
+  bool Create(int iWidth, int iHeight);  
+  void SetDestBitmap(const CFBitmapImpl& bmp);  
   
   bool SolidFill(const COLORREF colFill);
 	
-  bool Load(TCHAR* pszFileName);
+  bool Load(const TCHAR* pszFileName);
   bool Load(int wResourceID);
 	bool Load(char *pszData, unsigned long dwSize);
   
@@ -43,24 +41,16 @@ public:
   bool StretchBlit(int iWidth, int iHeight);
   bool TransBlit(COLORREF colTrans);
   
-  bool CreateSaveBitmap(const CFBitmap& pBmp);
-  bool SaveUnder(const CFBitmap& pBmp);
+  bool CreateSaveBitmap(const CFBitmapImpl& pBmp);
+  bool SaveUnder(const CFBitmapImpl& pBmp);
   bool SaveUnder() { return SaveUnder(*this); };
 
-  bool RestoreUnder(const CFBitmap& pBmp);
+  bool RestoreUnder(const CFBitmapImpl& pBmp);
   bool RestoreUnder() { return RestoreUnder(*this); };
 
   bool SetBits(unsigned char *pBits, int iSize);
   char* GetBits() { return(m_pBits); };
   
-  bool PointInside(int iPosX, int iPosY)
-  { 
-    return(((iPosX >= m_iPosX)&&(iPosX <= m_iPosX + m_iWidth)&&
-           (iPosY >= m_iPosY)&&(iPosY <= m_iPosY + m_iHeight)));
-  };
-  CFBitmap &operator=(const CFBitmap &bmp);
-  CFBitmap *operator=(CFBitmap *pBmp);
-
   bool SaveToFile(const TCHAR *pszFileName);
 
   COLORREF SetTextColor(COLORREF col);
@@ -79,6 +69,7 @@ public:
   static bool CalcRectForText(const TCHAR *pszText, RECT& rect);
 
 private:
+  void Init();
 
   HBITMAP m_hOldBmp;
   HBITMAP m_hOldSaveBmp;

@@ -1,14 +1,6 @@
-// FComPort.h: interface for the CFComPort class.
-//////////////////////////////////////////////////////////////////////
-#if !defined(AFX_FCOMPORT_H__5608D25C_1518_4E8A_B252_321EE6A03B4B__INCLUDED_)
-#define AFX_FCOMPORT_H__5608D25C_1518_4E8A_B252_321EE6A03B4B__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
-
-#include <windows.h>
+#include "../../base/FateTypeDefs.h"
 
 
 //--------------------------------------------------------------------------------
@@ -33,9 +25,11 @@ enum BaudRate
 
 
 //--------------------------------------------------------------------------------
-class CFComPort  
+class CFComPortImpl
 {
 public:
+	CFComPortImpl();
+	~CFComPortImpl();
 	BOOL SetEventChar(char chEvtChar);
 	BOOL SetEofChar(char chEofChar);
 	BOOL SetErrorChar(char chErrorChar);
@@ -58,8 +52,6 @@ public:
 	BOOL EnableOutDsrFlow(BOOL bDSR);
 	BOOL EnableOutCtsFlow(BOOL bCTS);
 	BOOL EnableParityCheck(BOOL bParity);
-	CFComPort();
-	~CFComPort();
   BOOL Open(int iPort= 1, BaudRate brBaud= BD_9600);
   BOOL Close();
 	int Read(char *pszBuffer, int iBuffSize);
@@ -70,11 +62,9 @@ public:
   DCB *GetPortState();
   BOOL SetBaudRate(BaudRate brBaud);
 
-private:
-  
+private:  
   COMMTIMEOUTS m_CommTimeouts;
 	DCB m_dcb;
 	HANDLE m_hPort;
 };
 
-#endif // !defined(AFX_FCOMPORT_H__5608D25C_1518_4E8A_B252_321EE6A03B4B__INCLUDED_)

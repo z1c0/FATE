@@ -15,6 +15,7 @@ public:
     SAFE_DELETE(m_pAddrRemote);
   };
   
+	bool Bind(int port);
   bool Create();
   int Send(const char* pBuff, const int iSize);
 	int Receive(char* pBuff, const int iSize);
@@ -32,6 +33,10 @@ public:
 
   void EnableBroadcast();
   void JoinMultiCastGroup(const char *pszGroupAddress);
+  /// User can specify a timeout for send/receive operations. Timeout is specified
+  /// in seconds. The constant NO_TIMEOUT means, that operations will block.
+  void SetTimeout(DWORD dwTimeout);
+  bool IsReceiving();
 
 private:
   CFUDPSocketImpl* m_pImpl;

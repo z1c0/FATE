@@ -87,7 +87,7 @@ void CFDropList::SetSystem(CFSystem *pSystem)
   if (!m_bmpDropArrow)
   {
     m_bmpDropArrow = new CFBitmap();
-    m_bmpDropArrow->operator=(m_bmpDownArrow);
+    m_bmpDropArrow->operator=(*m_bmpDownArrow);
     m_bmpDropArrow->SetDestBitmap(m_pSystem->GetDoubleBuffer());
   }
   m_bmpTop->Create(m_bmpBack->GetWidth(), m_bmpDropArrow->GetHeight());

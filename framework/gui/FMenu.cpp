@@ -21,7 +21,7 @@ CFMenu::CFMenu()
   m_colBack  = RGB(0, 0, 255);
  
   // Calculate necessary height of items
-  RECT rect = {};
+  RECT rect = {0, 0, 0, 0};
   CFBitmap::CalcRectForText(TEXT("W"), rect);
   m_iItemHeight = (rect.bottom - rect.top) + 2 * m_iVerSpace;
 }

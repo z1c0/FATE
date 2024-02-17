@@ -42,8 +42,8 @@ BOOL CFFilePanel::Create()
   // create the item list
   CFBitmap *bmpUp;
   CFBitmap *bmpDown;
-  bmpUp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-  bmpDown= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpUp= new CFBitmap(m_pSystem->GetDoubleBuffer());
+  bmpDown= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDown->Load(IDB_DOWN_SCROLL)) return(FALSE);
   if (!bmpUp->Load(IDB_UP_SCROLL)) return(FALSE);
   m_ItemList= new CFItemList(m_iMaxItems, m_app->GetWidth() - m_iListIndent * 2 - bmpDown->GetWidth(), 
@@ -53,8 +53,8 @@ BOOL CFFilePanel::Create()
   m_ItemList->SetId(ID_LIST_PPT);   
 
   // create button for loading PPT presentations
-  CFBitmap *bmpA= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-  CFBitmap *bmpB= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpA= new CFBitmap(m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpB= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpA->Load(IDB_BUTTON_LOAD)) return(FALSE);
   if (!bmpB->Load(IDB_BUTTON_LOAD_P)) return(FALSE);
   m_btnLoad= new CFButton(bmpA, bmpB);
@@ -64,8 +64,8 @@ BOOL CFFilePanel::Create()
   Add(*m_btnLoad);
   
   // create button for back-navigation in file system
-  CFBitmap *bmp1= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-  CFBitmap *bmp2= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp1= new CFBitmap(m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp2= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmp1->Load(IDB_BUTTON_DIR_UP)) return(FALSE);
   if (!bmp2->Load(IDB_BUTTON_DIR_UP_P)) return(FALSE);
   m_btnDirUp= new CFButton(bmp1, bmp2);
@@ -74,8 +74,8 @@ BOOL CFFilePanel::Create()
   Add(*m_btnDirUp);
   
   // create button for refreshing the list of PPT presentations
-  CFBitmap *bmp3= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-  CFBitmap *bmp4= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp3= new CFBitmap(m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp4= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmp3->Load(IDB_BUTTON_REFRESH)) return(FALSE);
   if (!bmp4->Load(IDB_BUTTON_REFRESH_P)) return(FALSE);
   m_btnRefresh= new CFButton(bmp3,bmp4);
@@ -84,8 +84,8 @@ BOOL CFFilePanel::Create()
   m_btnRefresh->SetId(ID_BTN_REFRESH);
 
   // create button for navigating to home directory
-  CFBitmap *bmp5= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-  CFBitmap *bmp6= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp5= new CFBitmap(m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmp6= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmp5->Load(IDB_BUTTON_HOME)) return(FALSE);
   if (!bmp6->Load(IDB_BUTTON_HOME_P)) return(FALSE);
   m_btnHome= new CFButton(bmp5,bmp6);

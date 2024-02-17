@@ -42,7 +42,7 @@ void CFFileList::BeforeDrawItems()
 //--------------------------------------------------------------------------------
 /// Sets current directory for file-choser. If directory cannot be found FALSE is
 /// returned and change is not done.
-BOOL CFFileList::SetCurrDir(LPCTSTR pszDir)
+bool CFFileList::SetCurrDir(LPCTSTR pszDir)
 {
   TCHAR pCurrDir[MAX_PATH];
 
@@ -156,7 +156,7 @@ bool CFFileList::IsDirectory(LPCTSTR pDir) const
 /// A set of file-types for filtering can be specified to the filelist.
 /// Parameter "pFilterStr" must have the format ".ext1 .ext2 .ext3 .ext4"
 /// Return value indicates wether filter string was specified correctly.
-BOOL CFFileList::SetFilters(LPTSTR pFilterStr)
+bool CFFileList::SetFilters(LPTSTR pFilterStr)
 {
   if (_tcslen(pFilterStr)) {
     TCHAR *pszCopy;

@@ -1,23 +1,20 @@
-// FComPort.cpp: implementation of the CFComPort class.
-#include "FComPort.h"
+#include "FComPortImpl.h"
 
 //-------------------------------------------------------------------------------- 
-/// Construction.
-CFComPort::CFComPort()
+CFComPortImpl::CFComPortImpl()
 {
   m_hPort= NULL;
 }
 
 //-------------------------------------------------------------------------------- 
-/// Destruction. Open handle will be closed.
-CFComPort::~CFComPort()
+CFComPortImpl::~CFComPortImpl()
 {
   if (m_hPort) CloseHandle(m_hPort);
 }
 
 //-------------------------------------------------------------------------------- 
 /// Open specified COM port at specified baudrate.
-BOOL CFComPort::Open(int iPort /* = 1 */, BaudRate brBaud /* = BD_9600 */)
+BOOL CFComPortImpl::Open(int iPort /* = 1 */, BaudRate brBaud /* = BD_9600 */)
 {
   TCHAR szPort[8];
   wsprintf(szPort, TEXT("COM%d:"), iPort);
@@ -54,7 +51,7 @@ BOOL CFComPort::Open(int iPort /* = 1 */, BaudRate brBaud /* = BD_9600 */)
 
 //-------------------------------------------------------------------------------- 
 /// Closes handle to COM port.
-BOOL CFComPort::Close()
+BOOL CFComPortImpl::Close()
 {
   if (m_hPort) return(CloseHandle(m_hPort));
   return(FALSE);
@@ -63,7 +60,7 @@ BOOL CFComPort::Close()
 //-------------------------------------------------------------------------------- 
 /// Reads characters from COM port into "pszBuffer. Maximum of characters that will
 /// be read is specified in "iBuffSize".
-int CFComPort::Read(char *pszBuffer, int iBuffSize)
+int CFComPortImpl::Read(char *pszBuffer, int iBuffSize)
 {
   BYTE  Byte;
   DWORD dwBytesRead;
@@ -101,7 +98,7 @@ int CFComPort::Read(char *pszBuffer, int iBuffSize)
 //-------------------------------------------------------------------------------- 
 /// Writes characters in "pszBuffer" to COM port. The numbers of characters that
 /// will be written is specified in "iBuffSize".
-int CFComPort::Write(const char *pszBuffer, int iBuffSize)
+int CFComPortImpl::Write(const char *pszBuffer, int iBuffSize)
 {
   DWORD dwBytesWritten;
   int i = 0;
@@ -115,7 +112,7 @@ int CFComPort::Write(const char *pszBuffer, int iBuffSize)
 
 //-------------------------------------------------------------------------------- 
 /// Sets a new COMMTIMEOUTS structure for COM port.
-inline BOOL CFComPort::SetTimeOuts(LPCOMMTIMEOUTS lpCommTimeouts)
+inline BOOL CFComPortImpl::SetTimeOuts(LPCOMMTIMEOUTS lpCommTimeouts)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);
@@ -125,7 +122,7 @@ inline BOOL CFComPort::SetTimeOuts(LPCOMMTIMEOUTS lpCommTimeouts)
   
 //-------------------------------------------------------------------------------- 
 /// Retrieves COMMTIMEOUTS structure of COM port.
-inline LPCOMMTIMEOUTS CFComPort::GetTimeOuts()
+inline LPCOMMTIMEOUTS CFComPortImpl::GetTimeOuts()
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(NULL);
@@ -136,7 +133,7 @@ inline LPCOMMTIMEOUTS CFComPort::GetTimeOuts()
 
 //-------------------------------------------------------------------------------- 
 /// Sets a new DCB structure for COM port.
-inline BOOL CFComPort::SetPortState(DCB *dcb)
+inline BOOL CFComPortImpl::SetPortState(DCB *dcb)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);
@@ -148,7 +145,7 @@ inline BOOL CFComPort::SetPortState(DCB *dcb)
 
 //-------------------------------------------------------------------------------- 
 /// Retrieves current DCB structure of port settings.
-inline DCB *CFComPort::GetPortState()
+inline DCB *CFComPortImpl::GetPortState()
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(NULL);
@@ -159,7 +156,7 @@ inline DCB *CFComPort::GetPortState()
 
 //-------------------------------------------------------------------------------- 
 /// Sets the baudrate for the COM-port.
-BOOL CFComPort::SetBaudRate(BaudRate brBaud)
+BOOL CFComPortImpl::SetBaudRate(BaudRate brBaud)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -176,7 +173,7 @@ BOOL CFComPort::SetBaudRate(BaudRate brBaud)
 
 //-------------------------------------------------------------------------------- 
 /// Enables/Disables parity check
-BOOL CFComPort::EnableParityCheck(BOOL bParity)
+BOOL CFComPortImpl::EnableParityCheck(BOOL bParity)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -195,7 +192,7 @@ BOOL CFComPort::EnableParityCheck(BOOL bParity)
 //-------------------------------------------------------------------------------- 
 /// Enables/Disables monitoring of CTS signal for output flow-control. If set to 
 /// TRUE and CTS is turned off, output is suspended until CTS is sent again.
-BOOL CFComPort::EnableOutCtsFlow(BOOL bCTS)
+BOOL CFComPortImpl::EnableOutCtsFlow(BOOL bCTS)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -214,7 +211,7 @@ BOOL CFComPort::EnableOutCtsFlow(BOOL bCTS)
 //-------------------------------------------------------------------------------- 
 /// Enables/Disables monitoring of DSR signal for output flow-control. If set to 
 /// TRUE and DSR is turned off, output is suspended until DSR is sent again.
-BOOL CFComPort::EnableOutDsrFlow(BOOL bDSR)
+BOOL CFComPortImpl::EnableOutDsrFlow(BOOL bDSR)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -232,7 +229,7 @@ BOOL CFComPort::EnableOutDsrFlow(BOOL bDSR)
 //-------------------------------------------------------------------------------- 
 /// Sets the DTR flow-control. Possible values are:
 /// DTR_CONTROL_DISABLE, DTR_CONTROL_ENABLE Enables & DTR_CONTROL_HANDSHAKE
-BOOL CFComPort::SetDtrControl(DWORD dwDtrControl)
+BOOL CFComPortImpl::SetDtrControl(DWORD dwDtrControl)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -251,7 +248,7 @@ BOOL CFComPort::SetDtrControl(DWORD dwDtrControl)
 /// Specifies if the communications driver is sensitive to the state of the DSR 
 /// signal. If this member is TRUE, the driver ignores any bytes received, unless 
 /// the DSR modem input line is high.
-BOOL CFComPort::EnableDsrSensitivity(BOOL bDsrSensitivity)
+BOOL CFComPortImpl::EnableDsrSensitivity(BOOL bDsrSensitivity)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -269,7 +266,7 @@ BOOL CFComPort::EnableDsrSensitivity(BOOL bDsrSensitivity)
 //-------------------------------------------------------------------------------- 
 /// Specifies if transmission stops when the input buffer is full and the driver 
 /// has transmitted the XoffChar character. 
-BOOL CFComPort::EnableContinueOnXoff(BOOL bCont)
+BOOL CFComPortImpl::EnableContinueOnXoff(BOOL bCont)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -286,7 +283,7 @@ BOOL CFComPort::EnableContinueOnXoff(BOOL bCont)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies if XON/XOFF flow control is used when writing to COM port.
-BOOL CFComPort::EnableOutX(BOOL bOutX)
+BOOL CFComPortImpl::EnableOutX(BOOL bOutX)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -303,7 +300,7 @@ BOOL CFComPort::EnableOutX(BOOL bOutX)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies if XON/XOFF flow control is used when receiving from COM port.
-BOOL CFComPort::EnableInX(BOOL bInX)
+BOOL CFComPortImpl::EnableInX(BOOL bInX)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -322,7 +319,7 @@ BOOL CFComPort::EnableInX(BOOL bInX)
 //-------------------------------------------------------------------------------- 
 /// Specifies if bytes received with parity errors are replaced with the character
 /// specified by the ErrorChar member.
-BOOL CFComPort::EnableErrorChar(BOOL bErrorChar)
+BOOL CFComPortImpl::EnableErrorChar(BOOL bErrorChar)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -339,7 +336,7 @@ BOOL CFComPort::EnableErrorChar(BOOL bErrorChar)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies if null bytes are discarded when received.
-BOOL CFComPort::EnableNullBytes(BOOL bNull)
+BOOL CFComPortImpl::EnableNullBytes(BOOL bNull)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -358,7 +355,7 @@ BOOL CFComPort::EnableNullBytes(BOOL bNull)
 /// Specifies the RTS (request-to-send) flow control. Possible values are:
 /// RTS_CONTROL_DISABLE, RTS_CONTROL_ENABLE, 
 /// RTS_CONTROL_HANDSHAKE & RTS_CONTROL_TOGGLE 
-BOOL CFComPort::SetRtsControl(DWORD dwRtsControl)
+BOOL CFComPortImpl::SetRtsControl(DWORD dwRtsControl)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -375,7 +372,7 @@ BOOL CFComPort::SetRtsControl(DWORD dwRtsControl)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies if read and write operations are terminated if an error occurs.
-BOOL CFComPort::EnableAbortOnError(BOOL bAbort)
+BOOL CFComPortImpl::EnableAbortOnError(BOOL bAbort)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -393,7 +390,7 @@ BOOL CFComPort::EnableAbortOnError(BOOL bAbort)
 //-------------------------------------------------------------------------------- 
 /// Specifies the minimum number of bytes accepted in the input buffer before the 
 /// XON character is sent.
-BOOL CFComPort::SetXonLim(WORD wXonLim)
+BOOL CFComPortImpl::SetXonLim(WORD wXonLim)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -411,7 +408,7 @@ BOOL CFComPort::SetXonLim(WORD wXonLim)
 //-------------------------------------------------------------------------------- 
 /// Specifies the maximum number of bytes accepted in the input buffer before the
 /// XOFF character is sent.
-BOOL CFComPort::SetXoffLim(WORD wXoffLim)
+BOOL CFComPortImpl::SetXoffLim(WORD wXoffLim)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -428,7 +425,7 @@ BOOL CFComPort::SetXoffLim(WORD wXoffLim)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies the number of bits in the bytes transmitted and received. 
-BOOL CFComPort::SetByteSize(BYTE ByteSize)
+BOOL CFComPortImpl::SetByteSize(BYTE ByteSize)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -446,7 +443,7 @@ BOOL CFComPort::SetByteSize(BYTE ByteSize)
 //-------------------------------------------------------------------------------- 
 /// Specifies the parity scheme to be used. It is one of the following values:
 /// EVENPARITY,MARKPARITY, NOPARITY, ODDPARITY, SPACEPARITY
-BOOL CFComPort::SetParity(BYTE Parity)
+BOOL CFComPortImpl::SetParity(BYTE Parity)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -464,7 +461,7 @@ BOOL CFComPort::SetParity(BYTE Parity)
 //-------------------------------------------------------------------------------- 
 /// Specifies the number of stop bits to be used. It is one of these values:
 /// ONESTOPBIT, ONE5STOPBITS, TWOSTOPBITS
-BOOL CFComPort::SetStopBits(BYTE StopBits)
+BOOL CFComPortImpl::SetStopBits(BYTE StopBits)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -481,7 +478,7 @@ BOOL CFComPort::SetStopBits(BYTE StopBits)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies the value of the XON character for both transmission and reception. 
-BOOL CFComPort::SetXonChar(char chXonChar)
+BOOL CFComPortImpl::SetXonChar(char chXonChar)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -498,7 +495,7 @@ BOOL CFComPort::SetXonChar(char chXonChar)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies the value of the XOFF character for both transmission and reception. 
-BOOL CFComPort::SetXoffChar(char chXoffChar)
+BOOL CFComPortImpl::SetXoffChar(char chXoffChar)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -516,7 +513,7 @@ BOOL CFComPort::SetXoffChar(char chXoffChar)
 //-------------------------------------------------------------------------------- 
 /// Specifies the value of the character used to replace bytes received 
 /// with a parity error. 
-BOOL CFComPort::SetErrorChar(char chErrorChar)
+BOOL CFComPortImpl::SetErrorChar(char chErrorChar)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -533,7 +530,7 @@ BOOL CFComPort::SetErrorChar(char chErrorChar)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies the value of the character used to signal the end of data. 
-BOOL CFComPort::SetEofChar(char chEofChar)
+BOOL CFComPortImpl::SetEofChar(char chEofChar)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  
@@ -550,7 +547,7 @@ BOOL CFComPort::SetEofChar(char chEofChar)
 
 //-------------------------------------------------------------------------------- 
 /// Specifies the value of the character used to signal an event. 
-BOOL CFComPort::SetEventChar(char chEvtChar)
+BOOL CFComPortImpl::SetEventChar(char chEvtChar)
 {
   // is port handle valid?
   if ((m_hPort)||(m_hPort == INVALID_HANDLE_VALUE)) return(FALSE);  

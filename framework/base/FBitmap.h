@@ -6,8 +6,10 @@ class CFBitmapImpl;
 
 class CFBitmap
 {  
+  friend class CFSystem;
 public:
 	CFBitmap();
+	CFBitmap(CFBitmapImpl* pImpl);
 	CFBitmap(const CFBitmap& bmp);
 	~CFBitmap();
   
@@ -17,18 +19,18 @@ public:
   
   bool Create(int width, int height);
   
-  void SetDestBitmap(const CFBitmap& pBmp);  
+  void SetDestBitmap(const CFBitmap& bmp);  
   
   bool SolidFill(const COLORREF colFill);
 	
-  bool Load(TCHAR* pszFileName);
+  bool Load(const TCHAR* pszFileName);
   bool Load(int wResourceID);
 	bool Load(char *pszData, unsigned long dwSize);
   
-  int GetX() const { return m_posX; }
-  void SetX(int posX) { m_posX = posX; }  
-  int GetY() const { return m_posY; }
-  void SetY(int posY) { m_posY = posY; }
+  int GetX() const;
+  void SetX(int posX);
+  int GetY() const;
+  void SetY(int posY);
   int GetWidth() const;
   int GetHeight() const;
   int GetRight() const { return GetX() + GetWidth(); }
@@ -59,8 +61,7 @@ public:
       iPosY <= GetY() + GetHeight();
   };
   CFBitmap &operator=(const CFBitmap &bmp);
-  CFBitmap *operator=(CFBitmap *pBmp);
-
+  
   bool SaveToFile(const TCHAR *pszFileName) const;
 
   COLORREF SetTextColor(COLORREF col);
@@ -69,18 +70,12 @@ public:
 
   bool DrawFilledRect(int iLeft, int iTop, int iWidth, int iHeight);
   bool DrawFilledRect(const RECT& rect);
-
   bool DrawPolygon(POINT *points, int count);
-
   bool DrawText(const TCHAR *pszText, RECT& rect);
 
   //------------------------------------------------------------------------------
   /// Drawing operations on Bitmap
   static bool CalcRectForText(const TCHAR *pszText, RECT& rect);
 private:
-  void Init();
-
   CFBitmapImpl* m_pImpl;
-  int m_posX;
-  int m_posY;
 };

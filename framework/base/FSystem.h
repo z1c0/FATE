@@ -17,8 +17,8 @@ public:
   void ShowError(const TCHAR* msg);  
   void QueueEvent(int iEventID, int iComponentID, void *pCustomData);
   bool ShutDownSystem();
-  int GetWidth() const { return m_nWidth; };
-  int GetHeight() const { return m_nHeight; };
+  int GetWidth() const;
+  int GetHeight() const;
   void AddTimer(unsigned long id, int interval);  
   bool EnableSuspend(bool suspend) { return false; }  
 
@@ -28,9 +28,7 @@ public:
 
 private:
   CFSystemImpl* m_pImpl;
-  CFBitmap m_doubleBuffer;
-  int m_nWidth;
-  int m_nHeight;
+  CFBitmap* m_pDoubleBuffer;
 };
 
 

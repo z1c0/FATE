@@ -28,7 +28,7 @@ void CNavi::Draw()
 //--------------------------------------------------------------------------------
 bool CNavi::InitFateApp()
 {
-  CFBitmap *bmpMap= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpMap= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpMap->Load("map.bmp")) return(false);
   m_pMap = new CFNaviMap(bmpMap);
   m_pMap->SetX(20);

@@ -27,8 +27,8 @@ void CCard::Draw()
 void CCard::SetSystem(CFSystem *pSystem)
 {
   m_pSystem = pSystem;
-  CFBitmap *pBmp = m_pSystem->GetDoubleBuffer();
-  m_bmp.SetDestBitmap(*pBmp);
+  CFBitmap& bmp = m_pSystem->GetDoubleBuffer();
+  m_bmp.SetDestBitmap(bmp);
 
   m_bmp.Create(CARD_WIDTH, CARD_HEIGHT);
   COLORREF col;
