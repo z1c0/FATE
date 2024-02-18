@@ -26,7 +26,14 @@ typedef unsigned int UINT;
 
 #define SOCKET_ERROR -1
 
-typedef unsigned long COLORREF;
+struct COLORREF
+{
+  COLORREF() : r(0), g(0), b(0) {}
+  COLORREF(int r, int g, int b) : r(r), g(g), b(b) {}
+  int r;
+  int g;
+  int b;
+};
 
 struct POINT
 {
@@ -61,7 +68,7 @@ struct RECT
 
 #define _tfopen fopen
 
-#define RGB(r, g, b) 0
+#define RGB(r, g, b) COLORREF(r, g, b)
 
 #else
 
@@ -136,3 +143,4 @@ enum EFateDrawMode
 // Macro for safe memory release.
 #define SAFE_DELETE(p)  { if (p) { delete(p); (p)= NULL; } }
 
+#define COLOR_CORNFLOWER_BLUE RGB(100, 149, 237)

@@ -13,12 +13,6 @@ CFBitmapImpl::~CFBitmapImpl()
   CleanUp();
 }
 
-//--------------------------------------------------------------------------------
-void CFBitmapImpl::InitFrom(CFBitmapImpl& other)
-{
-  m_hDestDC = other.m_hSourceDC;
-  Init();
-}
 
 //--------------------------------------------------------------------------------
 void CFBitmapImpl::Init()
@@ -92,7 +86,7 @@ bool CFBitmapImpl::Create(int iWidth, int iHeight)
     Init();
   }
 
-  m_hSourceDC= CreateCompatibleDC(m_hDestDC);
+  m_hSourceDC = CreateCompatibleDC(m_hDestDC);
   if (!m_hSourceDC) return(FALSE);
 
   // fill bitmapinfo structure
@@ -581,12 +575,6 @@ bool CFBitmapImpl::CalcRectForText(const TCHAR *pszText, RECT& rect)
 bool CFBitmapImpl::DrawText(const TCHAR *pszText, RECT& rect)
 {
   return (::DrawText(m_hSourceDC, pszText, _tcslen(pszText), &rect, DT_SINGLELINE|DT_LEFT|DT_VCENTER) != 0);
-}
-
-//------------------------------------------------------------------------------
-bool CFBitmapImpl::DrawFilledRect(const RECT& rect)
-{
-  return DrawFilledRect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 }
 
 //------------------------------------------------------------------------------

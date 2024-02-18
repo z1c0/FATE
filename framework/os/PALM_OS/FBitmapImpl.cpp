@@ -22,10 +22,6 @@ void CFBitmapImpl::CleanUp()
     WinDeleteWindow(m_hWinSrc, false);
 }
 
-void CFBitmapImpl::InitFrom(const CFBitmapImpl& other)
-{
-}
-
 //--------------------------------------------------------------------------------
 void CFBitmapImpl::Init()
 {

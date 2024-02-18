@@ -11,7 +11,6 @@ public:
 
   CFBitmapImpl& operator=(const CFBitmapImpl &bmp);
   
-  void InitFrom(CFBitmapImpl& other);
   bool IsValid() const;  
   void CleanUp();  
   bool Create(int iWidth, int iHeight);  

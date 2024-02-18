@@ -7,9 +7,7 @@ class CFBitmapImpl
 public:	
   CFBitmapImpl();
   ~CFBitmapImpl();
-  
-  void InitFrom(const CFBitmapImpl& other);
-  
+
   void CleanUp();
   
   bool Create(int iWidth, int iHeight);

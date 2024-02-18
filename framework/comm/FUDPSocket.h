@@ -4,8 +4,6 @@
 
 class CFUDPSocketImpl;
 
-//--------------------------------------------------------------------------------
-/// Implementation of a UDP socket.
 class CFUDPSocket
 {
 public:
@@ -21,8 +19,6 @@ public:
   void SetRemoteAddr(CFInetAddr* pAddrRemote);
   void EnableBroadcast();
   void JoinMultiCastGroup(const char *pszGroupAddress);
-  /// User can specify a timeout for send/receive operations. Timeout is specified
-  /// in seconds. The constant NO_TIMEOUT means, that operations will block.
   void SetTimeout(DWORD dwTimeout);
   bool IsReceiving() const;
 

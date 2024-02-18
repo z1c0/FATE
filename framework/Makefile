@@ -5,7 +5,7 @@ CXXFLAGS :=-std=c++98 -Wall -Wextra -pedantic -Wno-unused-parameter -D_LINUX
 # Directories
 SRC_DIR := .
 INCLUDED_SUBDIRS := base gui comm os/LINUX
-BUILD_DIR := build
+BUILD_DIR := obj
 LIB_DIR := lib
 
 # Source files
@@ -24,6 +24,7 @@ LIB := $(LIB_DIR)/$(LIB_NAME)
 all: $(LIB)
 
 $(LIB): $(OBJ)
+	@mkdir -p $(dir $@)
 	ar rcs $(LIB) $(OBJ)
 
 $(BUILD_DIR)/%.o: %.cpp
@@ -31,7 +32,7 @@ $(BUILD_DIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 demo: $(LIB)
-	$(CXX) $(CXXFLAGS) demo.cpp -o demo -L$(LIB_DIR) -lFATE
+	$(CXX) $(CXXFLAGS) demo.cpp -o demo -L$(LIB_DIR) -lFATE -lSDL2 
 
 clean:
 	rm -rf $(BUILD_DIR) $(LIB) 

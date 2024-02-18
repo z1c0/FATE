@@ -18,7 +18,7 @@ CFBitmap::CFBitmap() : m_pImpl(new CFBitmapImpl())
 //------------------------------------------------------------------------------
 CFBitmap::CFBitmap(const CFBitmap& bmp) : m_pImpl(new CFBitmapImpl())
 {
-  m_pImpl->InitFrom(*bmp.m_pImpl);
+  m_pImpl->SetDestBitmap(*bmp.m_pImpl);
 }
 
 //------------------------------------------------------------------------------
@@ -198,7 +198,7 @@ bool CFBitmap::DrawPolygon(POINT *points, int count)
 //------------------------------------------------------------------------------
 bool CFBitmap::DrawFilledRect(const RECT& rect)
 {
-  return m_pImpl->DrawFilledRect(rect);
+  return DrawFilledRect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
 }
 
 //------------------------------------------------------------------------------

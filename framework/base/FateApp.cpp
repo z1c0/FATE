@@ -21,7 +21,7 @@ CFateApp::CFateApp(EFateDrawMode drawMode /* = DM_PORTRAIT */)
   m_DrawMode         = drawMode;
   m_bFateLoopEnabled = true;
   m_ulNextID         = 0;
-  m_colTrans         = COL_NO_TRANSPARENCY;
+  m_useTransparency = false;
   m_bEnabled         = true;
   m_bVisible         = true;
   m_panelMsg         = NULL;  
@@ -126,10 +126,14 @@ void CFateApp::DoDrag(int iPosX, int iPosY)
     m_di.pBmpDrag->SetX(iPosX - m_di.iOffsX);
     m_di.pBmpDrag->SetY(iPosY - m_di.iOffsY);
     m_di.pBmpDrag->SaveUnder();
-    if (m_colTrans == COL_NO_TRANSPARENCY)
+    if (!m_useTransparency)
+    {
       m_di.pBmpDrag->Blit();
+    }
     else 
+    {
       m_di.pBmpDrag->TransBlit(m_colTrans);
+    }
   }
 }
 
@@ -149,10 +153,14 @@ void CFateApp::DoDragX(int iPosX, int iMinX, int iMaxX)
     m_di.pBmpDrag->RestoreUnder();
     m_di.pBmpDrag->SetX(iPosX);
     m_di.pBmpDrag->SaveUnder();
-    if (m_colTrans == COL_NO_TRANSPARENCY)
+    if (!m_useTransparency)
+    {
       m_di.pBmpDrag->Blit();
+    }
     else 
+    {
       m_di.pBmpDrag->TransBlit(m_colTrans);
+    }
   }
 }
 
@@ -168,14 +176,19 @@ void CFateApp::DoDragY(int iPosY, int iMinY, int iMaxY)
     iPosY = iPosY - m_di.iOffsY;
   }
 
-  if (m_bDragMode) {
+  if (m_bDragMode)
+  {
     m_di.pBmpDrag->RestoreUnder();
     m_di.pBmpDrag->SetY(iPosY);
     m_di.pBmpDrag->SaveUnder();
-    if (m_colTrans == COL_NO_TRANSPARENCY)
+    if (!m_useTransparency)
+    {
       m_di.pBmpDrag->Blit();
+    }
     else 
+    {
       m_di.pBmpDrag->TransBlit(m_colTrans);
+    }
   }
 }
 

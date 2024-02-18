@@ -19,7 +19,7 @@ public:
   
   bool Create(int width, int height);
   
-  void SetDestBitmap(const CFBitmap& bmp);  
+  void SetDestBitmap(const CFBitmap& bmp);
   
   bool SolidFill(const COLORREF colFill);
 	
@@ -51,7 +51,7 @@ public:
   bool RestoreUnder() { return RestoreUnder(*this); };
 
   bool SetBits(unsigned char *pBits, int iSize);
-  char* GetBits() ;
+  char* GetBits();
   
   bool PointInside(int iPosX, int iPosY) const
   { 
@@ -73,8 +73,6 @@ public:
   bool DrawPolygon(POINT *points, int count);
   bool DrawText(const TCHAR *pszText, RECT& rect);
 
-  //------------------------------------------------------------------------------
-  /// Drawing operations on Bitmap
   static bool CalcRectForText(const TCHAR *pszText, RECT& rect);
 private:
   CFBitmapImpl* m_pImpl;
