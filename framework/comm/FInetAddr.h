@@ -1,5 +1,22 @@
-#ifdef _WIN32
-  #include "FInetAddr_WIN32.h"
-#else
-  #include "FInetAddr_PalmOS.h"
-#endif
+#pragma once
+
+#include "../base/FateTypeDefs.h"
+
+class CFInetAddrImpl;
+
+class CFInetAddr
+{
+  friend class CFSocket;
+  friend class CFUDPSocket;
+  
+  CFInetAddr(CFInetAddrImpl* pImpl) : m_pImpl(pImpl) {}
+
+public:
+  CFInetAddr();
+  CFInetAddr(const char* ip, int port);
+  CFInetAddr(const wchar_t* ip, int port);
+  ~CFInetAddr();
+
+private:
+  CFInetAddrImpl* m_pImpl;
+};

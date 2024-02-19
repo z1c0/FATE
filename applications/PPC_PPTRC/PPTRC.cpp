@@ -69,13 +69,13 @@ bool CPPTRC::InitFateApp()
   m_pSockRecv->Listen();
 
   // create title bar
-  m_bmpTitle= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpTitle= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpTitle->Load(IDB_TITLE)) return(FALSE);
 
   // create close button
-  CFBitmap *bmpClose= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpClose= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpClose->Load(IDB_SKIP)) return(FALSE);
-  CFBitmap *bmpCloseDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpCloseDis= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpCloseDis->Load(IDB_SKIP_DIS)) return(FALSE);
   m_btnClose= new CFButton(bmpClose, NULL, bmpCloseDis);
   m_btnClose->SetX(m_bmpTitle->GetRight() - m_btnClose->GetWidth() - 3);
@@ -232,10 +232,10 @@ void CPPTRC::DisplayIntro()
   // default bitmap
   _tcscpy(szFullPath, szPath);
   _tcscat(szFullPath, TEXT("intro.bmp"));
-  bmpStart= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpStart= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpStart->Load(szFullPath);
   for (int i=0; i<11; i++) {
-    bmpAnim[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    bmpAnim[i]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     _tcscpy(szFullPath, szPath);
 		_tcscat(szFullPath, TEXT("frame"));
 		_itot(i, szBuff, 10);
@@ -453,7 +453,7 @@ BOOL CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
         // get extension of file
         pszExt= _tcsrchr(szTemp2, '.');
         if ((pszExt)&&(((!_tcsicmp(pszExt, TEXT(".ppt")))||(!_tcsicmp(pszExt, TEXT(".pps")))))) {
-          CFBitmap *bmpPPT= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+          CFBitmap *bmpPPT= new CFBitmap(m_pSystem->GetDoubleBuffer());
           bmpPPT->Load(IDB_PPT_ICON);
           m_panelFiles->AddItem(bmpPPT, (_tcsrchr(szTemp2, '\\') + 1), szTemp2);
 
@@ -461,28 +461,28 @@ BOOL CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
           CFBitmap *bmp= NULL;
           switch(pszTemp[strlen(pszTemp) - 1]) {
             case FILE_MARK_DIR:
-              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+              bmp= new CFBitmap(m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_FOLDER_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, (_tcsrchr(szTemp2, '\\') + 1), TEXT("?"));
               break;
 
             case FILE_MARK_FLOPPY:
-              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+              bmp= new CFBitmap(m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_FLOPPY_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, szTemp2, TEXT("?"));
               break;
 
             case FILE_MARK_CDROM:
-              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+              bmp= new CFBitmap(m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_CDROM_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, szTemp2, TEXT("?"));
               break;
 
             case FILE_MARK_HD:
-              bmp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+              bmp= new CFBitmap(m_pSystem->GetDoubleBuffer());
               bmp->Load(IDB_HD_ICON);
               szTemp2[_tcslen(szTemp2) - 1]= 0;
               m_panelFiles->AddItem(bmp, szTemp2, TEXT("?"));

@@ -115,9 +115,9 @@ public:
     LISTNODE<Data> *pTemp= new LISTNODE<Data>;
     int j= 0;
 
-    if (!pTemp) return(false);
+    if (!pTemp) return false;
 
-    if (i < 0) return(FALSE);
+    if (i < 0) return false;
     else if (i > m_iSize - 1) return(Append(data));
 
     // go to specified position

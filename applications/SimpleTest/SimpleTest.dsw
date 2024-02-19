@@ -15,7 +15,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "GetID_Sim"=".\SimpleTest.dsp" - Package Owner=<4>
+Project: "SimpleTest"=".\SimpleTest.dsp" - Package Owner=<4>
 
 Package=<5>
 {{{

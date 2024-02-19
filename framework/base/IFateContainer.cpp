@@ -41,7 +41,8 @@ IFateContainer::~IFateContainer()
 bool IFateContainer::Add(IFateComponent& comp)
 { 
   // set main initialization values
-  if (comp.GetId() == 0xFFFFFFFF) {
+  if (comp.GetId() == 0xFFFFFFFF)
+  {
     comp.SetId(m_app->GetNextID());
   }
   comp.SetParent(this);
@@ -53,8 +54,9 @@ bool IFateContainer::Add(IFateComponent& comp)
     return false;
   }
   
-  //autmatically register textfields as Char-Listeners
-  if (!_tcscmp(comp.GetClassName(), TEXT("CFTextField"))) {
+  // automatically register textfields as Char-Listeners
+  if (!_tcscmp(comp.GetClassName(), TEXT("CFTextField")))
+  {
     AddCharListener((CFTextField&)comp);
   }  
   

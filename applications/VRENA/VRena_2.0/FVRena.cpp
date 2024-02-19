@@ -96,56 +96,56 @@ bool CFVRena::InitFateApp()
   _tcscpy(szPath, m_app->GetAppPath());
 
   // create title bar
-  m_bmpTitle= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpTitle= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpTitle->Load(IDB_TITLE)) return(FALSE);
   
   // create bitmaps for switching tabs
   // PPT
-  m_bmpPPT[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpPPT[0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpPPT[0]->Load(IDB_BUTTON_PPT)) return(FALSE);
   m_bmpPPT[0]->SetX(1);  
   m_bmpPPT[0]->SetY(m_app->GetHeight() - m_bmpPPT[0]->GetHeight());  
-  m_bmpPPT[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpPPT[1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpPPT[1]->Load(IDB_BUTTON_PPT_P)) return(FALSE);
   m_bmpPPT[1]->SetX(m_bmpPPT[1]->GetX());  
   m_bmpPPT[1]->SetY(m_bmpPPT[0]->GetY());  
   
   // VIDEO
-  m_bmpVideo[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpVideo[0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpVideo[0]->Load(IDB_BUTTON_VIDEO)) return(FALSE);
   m_bmpVideo[0]->SetX(m_bmpPPT[0]->GetRight() + 1);
   m_bmpVideo[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmpVideo[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpVideo[1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpVideo[1]->Load(IDB_BUTTON_VIDEO_P)) return(FALSE);
   m_bmpVideo[1]->SetX(m_bmpVideo[0]->GetX());
   m_bmpVideo[1]->SetY(m_bmpPPT[0]->GetY());  
   
   // PIC
-  m_bmpPic[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());  
+  m_bmpPic[0]= new CFBitmap(m_pSystem->GetDoubleBuffer());  
   if (!m_bmpPic[0]->Load(IDB_BUTTON_PICS)) return(FALSE);
   m_bmpPic[0]->SetX(m_bmpVideo[1]->GetRight() + 1);
   m_bmpPic[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmpPic[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpPic[1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpPic[1]->Load(IDB_BUTTON_PICS_P)) return(FALSE);
   m_bmpPic[1]->SetX(m_bmpPic[0]->GetX());
   m_bmpPic[1]->SetY(m_bmpPPT[0]->GetY());  
   
   // 3D
-  m_bmp3D[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());  
+  m_bmp3D[0]= new CFBitmap(m_pSystem->GetDoubleBuffer());  
   if (!m_bmp3D[0]->Load(IDB_BUTTON_3D)) return(FALSE);
   m_bmp3D[0]->SetX(m_bmpPic[1]->GetRight() + 1);
   m_bmp3D[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmp3D[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmp3D[1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmp3D[1]->Load(IDB_BUTTON_3D_P)) return(FALSE);
   m_bmp3D[1]->SetX(m_bmp3D[0]->GetX());
   m_bmp3D[1]->SetY(m_bmpPPT[0]->GetY());  
  
   // VR
-  m_bmpVR[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpVR[0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpVR[0]->Load(IDB_BUTTON_VR)) return(FALSE);
   m_bmpVR[0]->SetX(m_bmp3D[1]->GetRight() + 1);
   m_bmpVR[0]->SetY(m_bmpPPT[0]->GetY());  
-  m_bmpVR[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpVR[1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpVR[1]->Load(IDB_BUTTON_VR_P)) return(FALSE);
   m_bmpVR[1]->SetX(m_bmpVR[0]->GetX());
   m_bmpVR[1]->SetY(m_bmpPPT[0]->GetY());  
@@ -156,9 +156,9 @@ bool CFVRena::InitFateApp()
   Add(*m_panelCtls);
 
   // create close button
-  CFBitmap *bmpClose= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpClose= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpClose->Load(IDB_SKIP)) return(FALSE);
-  CFBitmap *bmpCloseDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpCloseDis= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpCloseDis->Load(IDB_SKIP_DIS)) return(FALSE);
   m_btnClose= new CFButton(bmpClose, NULL, bmpCloseDis);
   m_btnClose->SetX(m_bmpTitle->GetRight() - m_btnClose->GetWidth() - 3);
@@ -171,8 +171,8 @@ bool CFVRena::InitFateApp()
   CFBitmap *aBmpUp[4];
   CFBitmap *aBmpDown[4];
   for (int i=0; i<4; i++) {
-    aBmpUp[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
-    aBmpDown[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    aBmpUp[i]= new CFBitmap(m_pSystem->GetDoubleBuffer());
+    aBmpDown[i]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!aBmpDown[i]->Load(IDB_DOWN_SCROLL)) return(FALSE);
     if (!aBmpUp[i]->Load(IDB_UP_SCROLL)) return(FALSE);
     m_aItemLists[i]= new CFItemList(m_iMaxItems, GetWidth() - m_iListIndent * 2 - aBmpDown[i]->GetWidth(), 
@@ -193,7 +193,7 @@ bool CFVRena::InitFateApp()
   m_aItemLists[0]->SetVisible(TRUE);
   
   // create drag'n' drop bitmap
-  m_bmpDrag= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpDrag= new CFBitmap(m_pSystem->GetDoubleBuffer());
 
   // create VR panel
   m_panelVR= new CFVRPanel();
@@ -574,49 +574,49 @@ void CFVRena::DisplayIntro()
   CFBitmap *bmpStart;
   CFBitmap *bmpAnim[11];
   
-  bmpStart= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpStart= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpStart->Load(IDB_INTRO);
-  bmpAnim[ 0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 0]->Load(IDB_FRAME0);
   bmpAnim[ 0]->SetX(75); 
   bmpAnim[ 0]->SetY(35);
-  bmpAnim[ 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 1]->Load(IDB_FRAME1);
   bmpAnim[ 1]->SetX(75); 
   bmpAnim[ 1]->SetY(35);
-  bmpAnim[ 2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 2]->Load(IDB_FRAME2);
   bmpAnim[ 2]->SetX(75); 
   bmpAnim[ 2]->SetY(35);
-  bmpAnim[ 3]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 3]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 3]->Load(IDB_FRAME3);
   bmpAnim[ 3]->SetX(75); 
   bmpAnim[ 3]->SetY(35);
-  bmpAnim[ 4]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 4]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 4]->Load(IDB_FRAME4);
   bmpAnim[ 4]->SetX(75); 
   bmpAnim[ 4]->SetY(35);
-  bmpAnim[ 5]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 5]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 5]->Load(IDB_FRAME5);
   bmpAnim[ 5]->SetX(75); 
   bmpAnim[ 5]->SetY(35);
-  bmpAnim[ 6]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 6]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 6]->Load(IDB_FRAME6);
   bmpAnim[ 6]->SetX(75); 
   bmpAnim[ 6]->SetY(35);
-  bmpAnim[ 7]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 7]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 7]->Load(IDB_FRAME7);
   bmpAnim[ 7]->SetX(75); 
   bmpAnim[ 7]->SetY(35);
-  bmpAnim[ 8]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 8]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 8]->Load(IDB_FRAME8);
   bmpAnim[ 8]->SetX(75); 
   bmpAnim[ 8]->SetY(35);
-  bmpAnim[ 9]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[ 9]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[ 9]->Load(IDB_FRAME9);
   bmpAnim[ 9]->SetX(75); 
   bmpAnim[ 9]->SetY(35);
-  bmpAnim[10]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  bmpAnim[10]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   bmpAnim[10]->Load(IDB_FRAME10);
   bmpAnim[10]->SetX(75); 
   bmpAnim[10]->SetY(35);

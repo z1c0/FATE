@@ -87,10 +87,6 @@ LIB32=link.exe -lib
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=.\base\WIN32\FATE.cpp
-# End Source File
-# Begin Source File
-
 SOURCE=.\base\FateApp.cpp
 # End Source File
 # Begin Source File
@@ -103,7 +99,7 @@ SOURCE=.\base\FateTypeDefs.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\WIN32\FBitmap.cpp
+SOURCE=.\base\FBitmap.cpp
 # End Source File
 # Begin Source File
 
@@ -111,19 +107,11 @@ SOURCE=.\base\FBitmap.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\WIN32\FBitmap.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\WIN32\FFile.cpp
+SOURCE=.\base\FFile.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\base\FFile.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\WIN32\FFile.h
 # End Source File
 # Begin Source File
 
@@ -135,15 +123,11 @@ SOURCE=.\base\FPoint.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\base\WIN32\FSystem.cpp
+SOURCE=.\base\FSystem.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\base\FSystem.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\base\WIN32\FSystem.h
 # End Source File
 # Begin Source File
 
@@ -191,11 +175,19 @@ SOURCE=.\base\IFSliderListener.h
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\comm\FComPort.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\comm\FComPort.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\comm\FInetAddr_WIN32.h
+SOURCE=.\comm\FInetAddr.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\comm\FInetAddr.h
 # End Source File
 # Begin Source File
 
@@ -211,27 +203,23 @@ SOURCE=.\comm\FServer.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\comm\FSocket_WIN32.cpp
+SOURCE=.\comm\FServer.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\comm\FSocket_WIN32.h
+SOURCE=.\comm\FSocket.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\comm\FUDPSocket_WIN32.cpp
+SOURCE=.\comm\FSocket.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\comm\FUDPSocket_WIN32.h
+SOURCE=.\comm\FUDPSocket.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\comm\IFSocket_WIN32.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\comm\IFSocket_WIN32.h
+SOURCE=.\comm\FUDPSocket.h
 # End Source File
 # End Group
 # Begin Group "gui"
@@ -508,6 +496,66 @@ SOURCE=.\audio\FWaveOut.cpp
 # Begin Source File
 
 SOURCE=.\audio\FWaveOut.h
+# End Source File
+# End Group
+# Begin Group "os"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\os\WIN32\FATE.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FBitmapImpl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FBitmapImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FComPortImpl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FComPortImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FFileImpl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FFileImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FInetAddrImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FSocketImpl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FSocketImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FSystemImpl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FSystemImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FUDPSocketImpl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FUDPSocketImpl.h
 # End Source File
 # End Group
 # Begin Source File

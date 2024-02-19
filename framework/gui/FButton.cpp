@@ -187,38 +187,40 @@ void CFButton::Draw()
 /// Image is created for non bitmap-buttons here.
 void CFButton::SetSystem(CFSystem *pSystem)
 {
-   m_pSystem = pSystem;
+  m_pSystem = pSystem;
 
-   if (!m_bBmpButton) {
-     // width and height specified?
-     if ((m_iWidth <= 0)||(m_iHeight <= 0)) {
-       RECT rectText;
+  if (!m_bBmpButton)
+  {
+    // width and height specified?
+    if ( m_iWidth <= 0 || m_iHeight <= 0)
+    {
+      RECT rectText;
   
-       // get needed space for text
-       rectText.left  = 0;
-       rectText.top   = 0;
-       rectText.right = 0;
-       rectText.bottom= 0;
-       
-       CFBitmap::CalcRectForText(m_szCaption, rectText);
-       
-       m_iWidth = rectText.right  + 4;
-       m_iHeight= rectText.bottom + 4;
-     }
+      // get needed space for text
+      rectText.left  = 0;
+      rectText.top   = 0;
+      rectText.right = 0;
+      rectText.bottom= 0;
+      
+      CFBitmap::CalcRectForText(m_szCaption, rectText);
+      
+      m_iWidth = rectText.right  + 4;
+      m_iHeight= rectText.bottom + 4;
+    }
 
-     CFBitmap *pBmp = m_pSystem->GetDoubleBuffer();
+    CFBitmap& bmp = m_pSystem->GetDoubleBuffer();
 
-     m_pBmpDefault->SetDestBitmap(*pBmp);
-     m_pBmpDefault->Create(m_iWidth, m_iHeight);
-     
-     m_pBmpPress->SetDestBitmap(*pBmp);
-     m_pBmpPress->Create(m_iWidth, m_iHeight);
-     
-     m_pBmpDisabled->SetDestBitmap(*pBmp);
-     m_pBmpDisabled->Create(m_iWidth, m_iHeight);
-     
-     CreateButton();
-   }
+    m_pBmpDefault->SetDestBitmap(bmp);
+    m_pBmpDefault->Create(m_iWidth, m_iHeight);
+    
+    m_pBmpPress->SetDestBitmap(bmp);
+    m_pBmpPress->Create(m_iWidth, m_iHeight);
+    
+    m_pBmpDisabled->SetDestBitmap(bmp);
+    m_pBmpDisabled->Create(m_iWidth, m_iHeight);
+    
+    CreateButton();
+  }
 }
 
 //--------------------------------------------------------------------------------

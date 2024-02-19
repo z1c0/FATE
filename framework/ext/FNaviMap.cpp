@@ -199,7 +199,7 @@ void CFNaviMap::CreateNaviBmps()
     m_iHeight= min(m_iHeight, m_app->GetHeight() - m_iPosX);
 
     // Create north navigation bitmap.
-    m_bmpN = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpN = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpN->Create(m_iWidth / 4, m_iHeight / 12);
     m_bmpN->SolidFill(RGB(255, 0, 0));
     points[0].x= m_bmpN->GetX() + iWidth;
@@ -216,7 +216,7 @@ void CFNaviMap::CreateNaviBmps()
     m_bmpN->SetY(m_iPosY + 5);
   
     // create south navigation bitmap
-    m_bmpS = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpS = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpS->Create(m_bmpN->GetWidth(), m_bmpN->GetHeight());
     m_bmpS->SolidFill(RGB(255, 0, 0));
     points[0].x= m_bmpS->GetX() + iWidth;
@@ -233,7 +233,7 @@ void CFNaviMap::CreateNaviBmps()
     m_bmpS->SetY(m_iPosY + m_iHeight - m_bmpS->GetHeight() - 5);
   
     // Create west navigation bitmap.
-    m_bmpW = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpW = new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpW->Create(m_iWidth / 12, m_iHeight / 4);
     m_bmpW->SolidFill(RGB(255, 0, 0));
     points[0].x= m_bmpW->GetWidth() - iWidth; 
@@ -250,7 +250,7 @@ void CFNaviMap::CreateNaviBmps()
     m_bmpW->SetY(m_iPosY + m_iHeight / 2 - m_bmpW->GetHeight() / 2);
   
     // Create east navigation bitmap.
-    m_bmpE= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+    m_bmpE= new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpE->Create(m_bmpW->GetWidth(), m_bmpW->GetHeight());
     m_bmpE->SolidFill(RGB(255, 0, 0));
     points[0].x= m_bmpE->GetX() + iWidth;

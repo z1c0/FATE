@@ -406,3 +406,5 @@ PalmRelease
 *.vco
 *.VCO	
 FATE_Data
+lib
+demo

@@ -79,7 +79,7 @@ CIdApp::~CIdApp()
 bool CIdApp::InitFateApp()
 {
   // load background bitmap
-  m_pBmpBack = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_pBmpBack = new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_pBmpBack->Load(IDB_BACK)) {
     return (false);
   }

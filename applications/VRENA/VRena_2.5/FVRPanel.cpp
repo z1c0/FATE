@@ -80,21 +80,21 @@ bool CFVRPanel::Create()
   _tcscat(szPath, TEXT("menupics\\"));
   
   // title
-  m_bmpTitle= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpTitle= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpTitle->Load(IDB_VR_TITLE)) return(FALSE);
   
   // tabs
-  m_bmpTab[0]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpTab[0]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpTab[0]->Load(IDB_LI_UP)) return(FALSE);
   
-  m_bmpTab[1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpTab[1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpTab[1]->Load(IDB_MI_UP)) return(FALSE);
   
-  m_bmpTab[2]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpTab[2]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpTab[2]->Load(IDB_RE_UP)) return(FALSE);  
   
   // close button
-  CFBitmap *bmpClose= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpClose= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpClose->Load(IDB_SKIP_SMALL)) return(FALSE);
   m_btnClose= new CFButton(bmpClose);
   m_btnClose->SetVisible(TRUE);
@@ -102,11 +102,11 @@ bool CFVRPanel::Create()
   Add(*m_btnClose);
 
   // left arrow button
-  CFBitmap *bmpLeft= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpLeft= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpLeft->Load(IDB_LINKS)) return(FALSE);
-  CFBitmap *bmpLeftPr= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpLeftPr= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpLeftPr->Load(IDB_LINKS_PR)) return(FALSE);
-  CFBitmap *bmpLeftDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpLeftDis= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpLeftDis->Load(IDB_LINKS_END)) return(FALSE);  
   m_btnLeft= new CFButton(bmpLeft, bmpLeftPr, bmpLeftDis);
   m_btnLeft->SetVisible(TRUE);
@@ -116,11 +116,11 @@ bool CFVRPanel::Create()
   Add(*m_btnLeft);
 
   // right arrow button
-  CFBitmap *bmpRight= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpRight= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpRight->Load(IDB_RECHTS)) return(FALSE);
-  CFBitmap *bmpRightPr= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpRightPr= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpRightPr->Load(IDB_RECHTS_PR)) return(FALSE);
-  CFBitmap *bmpRightDis= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpRightDis= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpRightDis->Load(IDB_RECHTS_END)) return(FALSE);  
   m_btnRight= new CFButton(bmpRight, bmpRightPr, bmpRightDis);
   m_btnRight->SetVisible(TRUE);
@@ -129,7 +129,7 @@ bool CFVRPanel::Create()
   Add(*m_btnRight);
 
   // reset
-  m_bmpReset= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpReset= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpReset->Load(IDB_RESET)) return(FALSE);
 
   // retrieve number of applications to display
@@ -142,9 +142,9 @@ bool CFVRPanel::Create()
   m_bmpPics = new CFBitmap*[m_iNrOfApps];
   
   // add icon and image for ARS-BOX app
-  m_bmpIcons[m_iNrOfApps - 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpIcons[m_iNrOfApps - 1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpIcons[m_iNrOfApps - 1]->Load(IDB_ARSBOX_ICON)) return(FALSE);
-	m_bmpPics[m_iNrOfApps - 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+	m_bmpPics[m_iNrOfApps - 1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpPics[m_iNrOfApps - 1]->Load(IDB_ARSBOX_PIC)) return(FALSE);
 
   // load images
@@ -155,7 +155,7 @@ bool CFVRPanel::Create()
 		_itot(i, szBuff, 10);
 		_tcscat(szFullPath, szBuff);
 		_tcscat(szFullPath, TEXT(".bmp"));
-		m_bmpIcons[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());    
+		m_bmpIcons[i]= new CFBitmap(m_pSystem->GetDoubleBuffer());    
   	if (!m_bmpIcons[i]->Load(szFullPath)) return(FALSE);
 
 		// load pictures
@@ -164,7 +164,7 @@ bool CFVRPanel::Create()
 		_itot(i, szBuff, 10);
 		_tcscat(szFullPath, szBuff);
 		_tcscat(szFullPath, TEXT(".bmp"));
-		m_bmpPics[i]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+		m_bmpPics[i]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     if (!m_bmpPics[i]->Load(szFullPath)) return(FALSE);
 	}  
   

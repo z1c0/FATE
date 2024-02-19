@@ -31,7 +31,8 @@ DWORD WINAPI ReceiveFrameThreadFunc(LPVOID pParam)
   // save current time
   uiLast= GetTickCount();
 
-  while (pOffscreenRenderer->m_bRun) {
+  while (pOffscreenRenderer->m_bRun)
+  {
     if ((pOffscreenRenderer->m_pSystem)&&(sock.IsReceiving())) {
       // we received something increase timeout
       pOffscreenRenderer->m_uiTimeout= OFFSCREEN_RENDER_TIMEOUT;
@@ -98,7 +99,7 @@ void CFOffscreenRenderer::SetSystem(CFSystem *pSystem)
 {
   m_pSystem = pSystem;
   // Always draw directly to the application's doublebuffer!
-  m_pFrame = new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_pFrame = new CFBitmap(m_pSystem->GetDoubleBuffer());
   // Create the offscreen bitmap.
   m_pFrame->SetX(m_iPosX);
   m_pFrame->SetY(m_iPosY);

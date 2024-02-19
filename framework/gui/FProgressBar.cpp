@@ -48,7 +48,7 @@ void CFProgressBar::DrawOffScreen()
 void CFProgressBar::SetSystem(CFSystem *pSystem)
 {
   m_pSystem = pSystem;
-  m_bmpBuff = new CFBitmap(*pSystem->GetDoubleBuffer());
+  m_bmpBuff = new CFBitmap(pSystem->GetDoubleBuffer());
   m_bmpBuff->Create(m_iWidth, m_iHeight);
   m_bmpBuff->SetX(m_iPosX);
   m_bmpBuff->SetY(m_iPosY);

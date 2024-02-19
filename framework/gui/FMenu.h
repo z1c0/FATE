@@ -10,7 +10,7 @@ class CFBitmap;
 class CFMenu : public IFateComponent  
 {
 public:
-  typedef struct MENUITEM
+  struct MENUITEM
   {
     LPCTSTR pText;
     CFBitmap *pBmp;

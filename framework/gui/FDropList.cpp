@@ -82,13 +82,13 @@ void CFDropList::SetSystem(CFSystem *pSystem)
 {
   CFItemList::SetSystem(pSystem);
   
-  m_bmpTop->SetDestBitmap(*(m_pSystem->GetDoubleBuffer()));
+  m_bmpTop->SetDestBitmap(m_pSystem->GetDoubleBuffer());
   // If no bitmap wase specified, it is created.
   if (!m_bmpDropArrow)
   {
     m_bmpDropArrow = new CFBitmap();
-    m_bmpDropArrow->operator=(m_bmpDownArrow);
-    m_bmpDropArrow->SetDestBitmap(*(m_pSystem->GetDoubleBuffer()));
+    m_bmpDropArrow->operator=(*m_bmpDownArrow);
+    m_bmpDropArrow->SetDestBitmap(m_pSystem->GetDoubleBuffer());
   }
   m_bmpTop->Create(m_bmpBack->GetWidth(), m_bmpDropArrow->GetHeight());
 

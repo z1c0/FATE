@@ -23,12 +23,6 @@ class CFSystem;
 #define WM_CLIENTCONNECT         0xBE09
 
 
-
-//--------------------------------------------------------------------------------
-// Constant specifying no transparency.
-#define COL_NO_TRANSPARENCY      0xFF000000
-
-
 //--------------------------------------------------------------------------------
 /// Utility functions for debug output via UDP datagrams
 #ifdef _REMOTE_CONSOLE
@@ -134,8 +128,12 @@ public:
   
   void Message(LPCTSTR pszMsg);
   
-  void SetTransparency(COLORREF colTrans) { m_colTrans= colTrans; };
-  void NoTransparency() { m_colTrans= COL_NO_TRANSPARENCY; };
+  void SetTransparency(COLORREF colTrans)
+  { 
+    m_useTransparency = true;
+    m_colTrans = colTrans;
+  }
+  void NoTransparency() { m_useTransparency = false; }
   
   bool Exit();
   
@@ -144,7 +142,7 @@ public:
   void AddServer(int iPort);
   inline bool IsListening() { return(m_bIsListening); };
   void CheckServers();
- 
+
   static CFateApp* GetApp() { return m_pApp; };
 
 protected:
@@ -163,9 +161,10 @@ private:
   static CFateApp *m_pApp;
   
   CFateVersion m_fateVersion;
-  EFateDrawMode m_DrawMode;  
+  EFateDrawMode m_DrawMode;
   IFateComponent *m_pCapt;
   TCHAR m_szAppPath[MAX_PATH];
+  bool m_useTransparency;
   COLORREF m_colTrans;
   bool m_bIsListening;
   CFLinkedList<CFServer*> m_ListServers;

@@ -1,6 +1,20 @@
 #pragma once
 
-#if defined(_WIN32) || defined(_WIN32_WCE)
-  #include "WIN32/FFile.h"
-#else
-#endif
+#include "FateTypeDefs.h"
+
+class CFFileImpl;
+
+class CFFile
+{
+public:
+  CFFile(const TCHAR *pszFileName);
+  virtual ~CFFile();
+
+  bool IsValid() const;
+  unsigned int GetSize() const;
+  bool WriteBytes(unsigned char* pBytes, unsigned int count);
+  bool ReadBytes(unsigned char*& bytes, unsigned int& count);
+
+private:
+  CFFileImpl* m_pImpl;
+};

@@ -1,37 +1,35 @@
 #include "FateApp.h"
-#include "../comm/IFSocket.h"
+#include "../comm/FSocket.h"
 #include "../comm/FServer.h"
 #include "../gui/FMsgPanel.h"
 
 
 //------------------------------------------------------------------------------
-bool CFMsgPanel::m_bCreated= false;
-CFateApp* CFateApp::m_pApp= NULL;
-int IFateComponent::m_iInstanceCounter= 0;
+bool CFMsgPanel::m_bCreated = false;
+CFateApp* CFateApp::m_pApp = NULL;
+int IFateComponent::m_iInstanceCounter = 0;
 
 
 //--------------------------------------------------------------------------------
-CFateApp::CFateApp(EFateDrawMode DrawMode /* = DM_PORTRAIT */)
+CFateApp::CFateApp(EFateDrawMode drawMode /* = DM_PORTRAIT */)
 {
   m_bDragMode        = false;
   m_app              = this;
   m_pApp             = this;  // static pointer to application object
   m_pCapt            = NULL;
   m_pSysCapt         = NULL;
-  m_DrawMode         = DrawMode;
+  m_DrawMode         = drawMode;
   m_bFateLoopEnabled = true;
   m_ulNextID         = 0;
-  m_colTrans         = COL_NO_TRANSPARENCY;
+  m_useTransparency = false;
   m_bEnabled         = true;
   m_bVisible         = true;
   m_panelMsg         = NULL;  
   m_bIsListening     = false;
   m_pSystem          = NULL;
                     
-  // get path of application
   CFSystem::GetPathToApplication(m_szAppPath);
-  
-  IFSocket::InitSocketLibrary();
+  CFSocket::InitSocketLibrary();
 }
 
 //--------------------------------------------------------------------------------
@@ -40,10 +38,13 @@ CFateApp::~CFateApp()
   SAFE_DELETE(m_panelMsg);
   SAFE_DELETE(m_pSystem);
   
-  for (int i=0; i<m_ListServers.GetSize(); i++) delete(m_ListServers[i]);
+  for (int i=0; i<m_ListServers.GetSize(); i++)
+  {
+    delete(m_ListServers[i]);
+  }
   m_ListServers.Clear();
 
-  IFSocket::CleanupSocketLibrary();
+  CFSocket::CleanupSocketLibrary();
 }
 
 //------------------------------------------------------------------------------
@@ -70,7 +71,7 @@ bool CFateApp::Init()
     return false; 
   }
 
-  m_pBmp = m_pDblBuffer = m_pSystem->GetDoubleBuffer();
+  m_pBmp = m_pDblBuffer = &m_pSystem->GetDoubleBuffer();
 
   // create panel for error messages
   m_panelMsg= CFMsgPanel::Create();
@@ -91,7 +92,7 @@ bool CFateApp::Exit()
   m_pSystem->ShutDownSystem();
   
   return true; 
-};
+}
 
 //--------------------------------------------------------------------------------
 /// This method is called, whenever there is no window message which has to be
@@ -125,10 +126,14 @@ void CFateApp::DoDrag(int iPosX, int iPosY)
     m_di.pBmpDrag->SetX(iPosX - m_di.iOffsX);
     m_di.pBmpDrag->SetY(iPosY - m_di.iOffsY);
     m_di.pBmpDrag->SaveUnder();
-    if (m_colTrans == COL_NO_TRANSPARENCY)
+    if (!m_useTransparency)
+    {
       m_di.pBmpDrag->Blit();
+    }
     else 
+    {
       m_di.pBmpDrag->TransBlit(m_colTrans);
+    }
   }
 }
 
@@ -148,10 +153,14 @@ void CFateApp::DoDragX(int iPosX, int iMinX, int iMaxX)
     m_di.pBmpDrag->RestoreUnder();
     m_di.pBmpDrag->SetX(iPosX);
     m_di.pBmpDrag->SaveUnder();
-    if (m_colTrans == COL_NO_TRANSPARENCY)
+    if (!m_useTransparency)
+    {
       m_di.pBmpDrag->Blit();
+    }
     else 
+    {
       m_di.pBmpDrag->TransBlit(m_colTrans);
+    }
   }
 }
 
@@ -167,14 +176,19 @@ void CFateApp::DoDragY(int iPosY, int iMinY, int iMaxY)
     iPosY = iPosY - m_di.iOffsY;
   }
 
-  if (m_bDragMode) {
+  if (m_bDragMode)
+  {
     m_di.pBmpDrag->RestoreUnder();
     m_di.pBmpDrag->SetY(iPosY);
     m_di.pBmpDrag->SaveUnder();
-    if (m_colTrans == COL_NO_TRANSPARENCY)
+    if (!m_useTransparency)
+    {
       m_di.pBmpDrag->Blit();
+    }
     else 
+    {
       m_di.pBmpDrag->TransBlit(m_colTrans);
+    }
   }
 }
 

@@ -25,8 +25,8 @@ CSimple::~CSimple()
 bool CSimple::InitFateApp()
 {
   ClearScreen(RGB(58, 110, 165));
-
-  m_pBtnQuit= new CFButton("Exit");
+  
+  m_pBtnQuit= new CFButton("Quit");
   m_pBtnQuit->SetId(1234);
   Add(*m_pBtnQuit);
 

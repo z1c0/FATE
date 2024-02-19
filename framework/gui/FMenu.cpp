@@ -21,7 +21,7 @@ CFMenu::CFMenu()
   m_colBack  = RGB(0, 0, 255);
  
   // Calculate necessary height of items
-  RECT rect = {0};
+  RECT rect = {0, 0, 0, 0};
   CFBitmap::CalcRectForText(TEXT("W"), rect);
   m_iItemHeight = (rect.bottom - rect.top) + 2 * m_iVerSpace;
 }
@@ -134,11 +134,11 @@ bool CFMenu::StylusDown(int xPos, int yPos)
     {
       if (pTemp->pBmp->PointInside(xPos, yPos))
       {
-        m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, (void*)pTemp->id);
-        m_bSubMenuOpen= true;
-        return(true);
+        m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, reinterpret_cast<void*>(pTemp->id));
+        m_bSubMenuOpen = true;
+        return true;
       }
-      pTemp= pTemp->pDown;
+      pTemp = pTemp->pDown;
     }  
   }
 
@@ -314,8 +314,8 @@ CFBitmap* CFMenu::CreateMenuBmp(LPCTSTR pText, int iWidth /* = -1 */)
   if (iWidth != -1) rectText.right= iWidth;
 
   // Create the bitmap.
-  CFBitmap *pDestBmp = m_pSystem->GetDoubleBuffer();
-  pBmp= new CFBitmap(*pDestBmp);
+  CFBitmap& destBmp = m_pSystem->GetDoubleBuffer();
+  pBmp= new CFBitmap(destBmp);
   pBmp->Create(rectText.right + 2 * m_iHorSpace, m_iItemHeight);
   
   // Draw the bitmap.
@@ -346,7 +346,7 @@ int CFMenu::GetMaxWidth(MENUITEM *pItem)
     rectText.right= m_iHorSpace + 1;
     rectText.bottom= m_iVerSpace;
     CFBitmap::CalcRectForText(pTemp->pText, rectText);
-    iMax = max(iMax, rectText.right);
+    iMax = _max(iMax, rectText.right);
     pTemp = pTemp->pDown;
   }
 

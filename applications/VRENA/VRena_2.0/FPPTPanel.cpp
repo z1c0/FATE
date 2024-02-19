@@ -71,9 +71,10 @@ void CFPPTPanel::DrawCurrent()
     memset(szMsg, 0, 6);
     szMsg[0]= CMD_PREVIEW;
     sprintf(&szMsg[1], "%d", m_iCurrSlide);
-    if((bOK= SendToPPTHost(szMsg))) {
+    if((bOK= SendToPPTHost(szMsg)))
+    {
       // image data was sent, create image
-      m_bmpPreviews[m_iCurrSlide - 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+      m_bmpPreviews[m_iCurrSlide - 1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
       m_bmpPreviews[m_iCurrSlide - 1]->Load(m_pPrevData, m_dwPrevSize);
     }
   }    
@@ -100,7 +101,7 @@ void CFPPTPanel::DrawNext()
     sprintf(&szMsg[1], "%d", iNextIndex);
     if((bOK= SendToPPTHost(szMsg))) {
       // image data was sent, create image
-      m_bmpPreviews[iNextIndex - 1]= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+      m_bmpPreviews[iNextIndex - 1]= new CFBitmap(m_pSystem->GetDoubleBuffer());
       m_bmpPreviews[iNextIndex - 1]->Load(m_pPrevData, m_dwPrevSize);
     }
   }  
@@ -116,19 +117,19 @@ void CFPPTPanel::DrawNext()
 BOOL CFPPTPanel::Create()
 {
   // slides icon
-  m_bmpSlide= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpSlide= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpSlide->Load(IDB_BUTTON_FOLIEN)) return(FALSE);
   
   // current slide "window"
-  m_bmpCurr= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpCurr= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpCurr->Load(IDB_CURRENT_SLIDE)) return(FALSE);
   
   // next slide "window"
-  m_bmpNext= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  m_bmpNext= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!m_bmpNext->Load(IDB_NEXT_SLIDE)) return(FALSE);
 
   // close button
-  CFBitmap *bmpClose= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpClose= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpClose->Load(IDB_SKIP_SMALL)) return(FALSE);
   m_btnClose= new CFButton(bmpClose);
   m_btnClose->SetVisible(TRUE);
@@ -136,11 +137,11 @@ BOOL CFPPTPanel::Create()
   Add(*m_btnClose);
 
   // create droplist
-  CFBitmap *bmpDrop= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpDrop= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDrop->Load(IDB_DROP_ARROW)) return(FALSE);
-  CFBitmap *bmpUp= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpUp= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpUp->Load(IDB_UP_SCROLL)) return(FALSE);
-  CFBitmap *bmpDown= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpDown= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpDown->Load(IDB_DOWN_SCROLL)) return(FALSE);
   m_dropList= new CFDropList(m_iMaxItems, m_iItemWidth, bmpDrop, bmpUp, bmpDown);
   m_dropList->SetVisible(TRUE);
@@ -148,9 +149,9 @@ BOOL CFPPTPanel::Create()
   Add(*m_dropList);
 
   // next-slide button
-  CFBitmap *bmpNextSlide= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpNextSlide= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpNextSlide->Load(IDB_BUTTON_NEXT_S)) return(FALSE);
-  CFBitmap *bmpNextSlidePressed= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpNextSlidePressed= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpNextSlidePressed->Load(IDB_BUTTON_NEXT_S_P)) return(FALSE);
   m_btnNextSlide= new CFButton(bmpNextSlide, bmpNextSlidePressed);
   m_btnNextSlide->SetVisible(TRUE);
@@ -158,9 +159,9 @@ BOOL CFPPTPanel::Create()
   Add(*m_btnNextSlide);
   
   // prev-slide button
-  CFBitmap *bmpPrevSlide= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpPrevSlide= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPrevSlide->Load(IDB_BUTTON_PREV_S)) return(FALSE);
-  CFBitmap *bmpPrevSlidePressed= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpPrevSlidePressed= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPrevSlidePressed->Load(IDB_BUTTON_PREV_S_P)) return(FALSE);
   m_btnPrevSlide= new CFButton(bmpPrevSlide, bmpPrevSlidePressed);
   m_btnPrevSlide->SetVisible(TRUE);
@@ -168,9 +169,9 @@ BOOL CFPPTPanel::Create()
   Add(*m_btnPrevSlide);
   
   // next-link button
-  CFBitmap *bmpNextLink= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpNextLink= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpNextLink->Load(IDB_BUTTON_NEXT_HL)) return(FALSE);
-  CFBitmap *bmpNextLinkPressed= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpNextLinkPressed= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpNextLinkPressed->Load(IDB_BUTTON_NEXT_HL_P)) return(FALSE);
   m_btnNextLink= new CFButton(bmpNextLink, bmpNextLinkPressed);
   m_btnNextLink->SetVisible(TRUE);
@@ -178,9 +179,9 @@ BOOL CFPPTPanel::Create()
   Add(*m_btnNextLink);
   
   // prev-link button  
-  CFBitmap *bmpPrevLink= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpPrevLink= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPrevLink->Load(IDB_BUTTON_PREV_HL)) return(FALSE);
-  CFBitmap *bmpPrevLinkPressed= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpPrevLinkPressed= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpPrevLinkPressed->Load(IDB_BUTTON_PREV_HL_P)) return(FALSE);
   m_btnPrevLink= new CFButton(bmpPrevLink, bmpPrevLinkPressed);
   m_btnPrevLink->SetVisible(TRUE);
@@ -188,9 +189,9 @@ BOOL CFPPTPanel::Create()
   Add(*m_btnPrevLink);
   
   // activate-link button  
-  CFBitmap *bmpActLink= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpActLink= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpActLink->Load(IDB_BUTTON_HYPER)) return(FALSE);
-  CFBitmap *bmpActLinkPressed= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpActLinkPressed= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpActLinkPressed->Load(IDB_BUTTON_HYPER_P)) return(FALSE);
   m_btnActLink= new CFButton(bmpActLink, bmpActLinkPressed);
   m_btnActLink->SetVisible(TRUE);
@@ -198,9 +199,9 @@ BOOL CFPPTPanel::Create()
   Add(*m_btnActLink);
   
   // black button  
-  CFBitmap *bmpBlack= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpBlack= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpBlack->Load(IDB_BUTTON_BLACK)) return(FALSE);
-  CFBitmap *bmpBlackPressed= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpBlackPressed= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpBlackPressed->Load(IDB_BUTTON_BLACK_P)) return(FALSE);
   m_btnBlack= new CFButton(bmpBlack, bmpBlackPressed);
   m_btnBlack->SetVisible(TRUE);
@@ -208,9 +209,9 @@ BOOL CFPPTPanel::Create()
   Add(*m_btnBlack);
   
   // white button  
-  CFBitmap *bmpWhite= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpWhite= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpWhite->Load(IDB_BUTTON_WHITE)) return(FALSE);
-  CFBitmap *bmpWhitePressed= new CFBitmap(*m_pSystem->GetDoubleBuffer());
+  CFBitmap *bmpWhitePressed= new CFBitmap(m_pSystem->GetDoubleBuffer());
   if (!bmpWhitePressed->Load(IDB_BUTTON_WHITE_P)) return(FALSE);
   m_btnWhite= new CFButton(bmpWhite, bmpWhitePressed);
   m_btnWhite->SetVisible(TRUE);
