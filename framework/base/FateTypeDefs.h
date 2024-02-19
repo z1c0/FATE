@@ -4,7 +4,7 @@
   #include <windows.h>
   #include <winsock.h>
   #include <stdio.h>
-  #include <TCHAR.h>  
+  #include <TCHAR.h>
 
 #ifdef _WIN32_WCE
   #include <aygshell.h>
@@ -24,6 +24,7 @@ typedef unsigned int UINT;
 
 #define MAX_PATH 250
 
+#define INVALID_SOCKET -1
 #define SOCKET_ERROR -1
 
 struct COLORREF
@@ -112,7 +113,6 @@ struct RECT
 //
 
 // Socket constants.
-#define INVALID_SOCKET      -1
 #define SOCKET_TIMEOUT      SOCKET_ERROR - 1
 #define DEFAULT_TIMEOUT     5
 #define NO_TIMEOUT          0xFFFF

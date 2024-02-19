@@ -4,7 +4,7 @@
 #include "../base/FBitmap.h"
 #include "../base/FateApp.h"
 #include "../base/FFile.h"
-
+#include "../base/FDirectory.h"
 
 #include "../gui/FButton.h"
 #include "../gui/FMenu.h"
@@ -17,11 +17,11 @@
 #include "../comm/FSocket.h"
 #include "../comm/FUDPSocket.h"
 
-#ifdef _WIN32
-
 #include "../util/FPoint.h"
 #include "../util/FRect.h"
 #include "../util/FTicker.h"
+
+#ifdef _WIN32
 
 #include "../ext/gui_protocol.h"
 #include "../ext/FVEObjPanel.h"

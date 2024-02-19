@@ -145,7 +145,7 @@ void CFStartMenu::AppSelected(int iNr)
 //--------------------------------------------------------------------------------
 CFBitmap* CFStartMenu::CreateAppBmp(int iNr)
 {
-  CFBitmap *bmp;
+  CFBitmap *bmp = NULL;
   TCHAR szText[16];
   RECT rect;
 

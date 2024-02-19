@@ -1,12 +1,9 @@
-#ifndef __TICKER__H__
-#define __TICKER__H__
+#pragma once
 
 //------------------------------------------------------------------------------
 class CFTicker
 {
-
 public:
-
   CFTicker() 
   {
     m_interval = 0;
@@ -41,10 +38,7 @@ public:
   }
 
 private:
-
   unsigned int m_lasttick;
   unsigned int m_interval;
-
 };
 
-#endif  // __TICKER__H__

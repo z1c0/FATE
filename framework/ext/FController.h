@@ -1,6 +1,4 @@
-#ifndef __FCONTROLLER__H__
-#define __FCONTROLLER__H__
-
+#pragma once
 #include "../base/IFateComponent.h"
 
 //------------------------------------------------------------------------------
@@ -55,5 +53,3 @@ private:
   bool m_bRun;
   DWORD m_dwSleep;
 };
-
-#endif  // __FCONTROLLER__H__

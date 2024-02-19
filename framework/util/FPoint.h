@@ -1,12 +1,9 @@
-#ifndef __FPOINT__H__
-#define __FPOINT__H__
+#pragma once
 
 //------------------------------------------------------------------------------
 class CFPoint
 {
-
 public:
-
   CFPoint() { m_x = 0; m_y = 0; };
   CFPoint(int x, int y) { m_x = x; m_y = y; };
 
@@ -39,9 +36,7 @@ public:
   }
 
 private:
-
   int m_x;
   int m_y;
 };
 
-#endif  // __FPOINT__H__

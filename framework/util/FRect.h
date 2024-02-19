@@ -1,12 +1,9 @@
-#ifndef __FRECT__H__
-#define __FRECT__H__
+#pragma once
 
 //------------------------------------------------------------------------------
 class CFRect
 {
-
 public:
-
   CFRect() { m_left = 0; m_top = 0; m_width = 0; m_height = 0; };
   CFRect(int left, int top, int width, int height) 
   { 
@@ -55,11 +52,9 @@ public:
   }
 
 private:
-
   int m_left;
   int m_top;
   int m_width;
   int m_height;
 };
 
-#endif  // __FRECT__H__

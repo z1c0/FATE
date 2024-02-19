@@ -1,8 +1,4 @@
-// FLinkedList.h: interface for the CFLinkedList class.
-//////////////////////////////////////////////////////////////////////
-#if !defined(AFX_FLINKEDLIST_H__E2427ADF_F838_464D_924B_87632DFCD4CE__INCLUDED_)
-#define AFX_FLINKEDLIST_H__E2427ADF_F838_464D_924B_87632DFCD4CE__INCLUDED_
-
+#pragma once
 
 //--------------------------------------------------------------------------------
 /// An entry in the list.
@@ -246,10 +242,9 @@ public:
   void ResetToEnd() { m_pCurr = m_pTail->pPrev; };
 
 private:
-
   LISTNODE<Data> *m_pCurr;       /// pointer to current position in list
   LISTNODE<Data> *m_pHead;
   LISTNODE<Data> *m_pTail;
 };
 
-#endif // !defined(AFX_FLINKEDLIST_H__E2427ADF_F838_464D_924B_87632DFCD4CE__INCLUDED_)
+

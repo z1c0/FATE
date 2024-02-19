@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="FateVersion.h" />
+    <ClInclude Include="base\FateApp.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\FateTypeDefs.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\FBitmap.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\FFile.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\FSystem.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFateComponent.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFateContainer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFButtonListener.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFCharListener.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFConnectionListener.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFDropListListener.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFItemListListener.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFMenuListener.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\IFSliderListener.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\FMMWave.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\FSampleList.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\FWave.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\FWaveIn.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\FWaveOut.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="comm\FComPort.h">
+      <Filter>comm</Filter>
+    </ClInclude>
+    <ClInclude Include="comm\FInetAddr.h">
+      <Filter>comm</Filter>
+    </ClInclude>
+    <ClInclude Include="comm\FMsgServerProxy.h">
+      <Filter>comm</Filter>
+    </ClInclude>
+    <ClInclude Include="comm\FServer.h">
+      <Filter>comm</Filter>
+    </ClInclude>
+    <ClInclude Include="comm\FSocket.h">
+      <Filter>comm</Filter>
+    </ClInclude>
+    <ClInclude Include="comm\FUDPSocket.h">
+      <Filter>comm</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FController.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FNaviMap.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FOffscreenRenderer.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FRemoteButton.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FStartMenu.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FVEObj.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FVEObjAttr.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FVEObjManager.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FVEObjPanel.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FWidgetMgr.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\FWidgetPanel.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gui_protocol.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\IFRemoteWidget.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\ve_protocol.h">
+      <Filter>ext</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FButton.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FDirList.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FDropList.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FFileList.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FItemList.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FLabel.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FMenu.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FMsgPanel.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPanel.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FProgressBar.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FSlider.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FTextField.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FToggleButton.h">
+      <Filter>gui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FBitmapImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FComPortImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FFileImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FInetAddrImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FSocketImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FSystemImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FUDPSocketImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+    <ClInclude Include="util\FLinkedList.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\FPoint.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\FRect.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\FTicker.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="base\FDirectory.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="os\WIN32\FDirectoryImpl.h">
+      <Filter>os</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="base">
+      <UniqueIdentifier>{fa39be76-7d55-4859-80cd-6933d4929fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{0e9defc2-1b42-4ec2-9979-341ff64c9d43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="comm">
+      <UniqueIdentifier>{5df63d68-cbeb-475f-93ea-110292166fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext">
+      <UniqueIdentifier>{9337d2f1-8abd-4de4-a3e6-97169cead3cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gui">
+      <UniqueIdentifier>{934475b8-2a6c-4df3-87ff-842ef905f087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{2416030e-4cad-41d0-8692-d47985a25570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="os">
+      <UniqueIdentifier>{74282fc4-f448-4481-8f3f-99c3d6a8f2d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{aebf2bad-ae8d-43ab-9d1a-ca5a3c2210b2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="base\FateApp.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\FBitmap.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\FFile.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\FSystem.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\IFateContainer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\FMMWave.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\FSampleList.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\FWave.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\FWaveIn.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\FWaveOut.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="comm\FComPort.cpp">
+      <Filter>comm</Filter>
+    </ClCompile>
+    <ClCompile Include="comm\FInetAddr.cpp">
+      <Filter>comm</Filter>
+    </ClCompile>
+    <ClCompile Include="comm\FMsgServerProxy.cpp">
+      <Filter>comm</Filter>
+    </ClCompile>
+    <ClCompile Include="comm\FServer.cpp">
+      <Filter>comm</Filter>
+    </ClCompile>
+    <ClCompile Include="comm\FSocket.cpp">
+      <Filter>comm</Filter>
+    </ClCompile>
+    <ClCompile Include="comm\FUDPSocket.cpp">
+      <Filter>comm</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FController.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FNaviMap.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FOffscreenRenderer.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FRemoteButton.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FStartMenu.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FVEObj.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FVEObjAttr.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FVEObjManager.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FVEObjPanel.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FWidgetMgr.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\FWidgetPanel.cpp">
+      <Filter>ext</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FButton.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FDirList.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FDropList.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FFileList.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FItemList.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FLabel.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FMenu.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FProgressBar.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FSlider.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FTextField.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FToggleButton.cpp">
+      <Filter>gui</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FATE.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FBitmapImpl.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FComPortImpl.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FFileImpl.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FSocketImpl.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FSystemImpl.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FUDPSocketImpl.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+    <ClCompile Include="base\FDirectory.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="os\WIN32\FDirectoryImpl.cpp">
+      <Filter>os</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

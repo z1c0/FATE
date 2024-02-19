@@ -68,3 +68,10 @@ bool CFFileImpl::ReadBytes(unsigned char*& bytes, unsigned int& count)
   }
   return ret;
 }
+
+//------------------------------------------------------------------------------
+/* static */ bool CFFileImpl::IsDirectory(const TCHAR* fileName)
+{
+  DWORD attrib = ::GetFileAttributes(fileName);
+  return (attrib & FILE_ATTRIBUTE_DIRECTORY) != 0;
+}

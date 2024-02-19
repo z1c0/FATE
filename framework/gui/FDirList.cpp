@@ -1,10 +1,8 @@
-#ifdef _WIN32
-
-#include <windows.h>
 #include "FDirList.h"
 #include "../base/FBitmap.h"
 #include "../base/FateApp.h"
-
+#include "../base/FFile.h"
+#include "../base/FDirectory.h"
 
 //--------------------------------------------------------------------------------
 CFDirList::CFDirList(int iMaxVisItems, int iItemWidth, CFBitmap *cbUpArrow, CFBitmap *cbDownArrow) :
@@ -32,13 +30,16 @@ void CFDirList::BeforeDrawItems()
 //--------------------------------------------------------------------------------
 /// Sets current directory for file-choser. If directory cannot be found FALSE is
 /// returned and change is not done.
-bool CFDirList::SetCurrDir(LPTSTR pCurrDir)
+bool CFDirList::SetCurrDir(const TCHAR* pCurrDir)
 {
   // directory up?
   if (_tcscmp(pCurrDir, TEXT("..")) == 0)
   {
-    int i= _tcslen(m_szCurrDir);
-    while ((i > 0)&&(m_szCurrDir[i] != '\\')) i--;
+    size_t i = _tcslen(m_szCurrDir);
+    while ((i > 0) && (m_szCurrDir[i] != '\\'))
+    {
+      i--;
+    }
     m_szCurrDir[i]= 0;
     m_bDirRead = FALSE;
   }
@@ -71,27 +72,24 @@ bool CFDirList::ReadDir()
   _tcscpy(szFilePath, m_szCurrDir);
   _tcscat(szFilePath, TEXT("\\*.*"));
 
-  WIN32_FIND_DATA ffd = {0};
-  HANDLE hFile = FindFirstFile(szFilePath, &ffd);
-  if (hFile == INVALID_HANDLE_VALUE)
+  CFDirectory directory(szFilePath);
+  while (true)
   {
-    return false;
-  }
-  
-  do
-  {
+    const TCHAR* fileName = directory.GetNextChild();
+    if (!fileName)
+    {
+      break;
+    }
+
     // create full qualified path of file
     _tcscpy(szFullPath, m_szCurrDir);
     _tcscat(szFullPath, TEXT("\\"));
-    _tcscat(szFullPath, ffd.cFileName);
-    if (IsDirectory(szFullPath) && _tcscmp(ffd.cFileName, TEXT(".")) != 0 && _tcscmp(ffd.cFileName, TEXT("..")) != 0)
+    _tcscat(szFullPath, fileName);
+    if (CFFile::IsDirectory(szFullPath) && _tcscmp(fileName, TEXT(".")) != 0 && _tcscmp(fileName, TEXT("..")) != 0)
     {
-      AddItem(ffd.cFileName, szFullPath);
+      AddItem(fileName, szFullPath);
     }
   }
-  while (FindNextFile(hFile, &ffd));
-  
-  FindClose(hFile);
 
   return true;
 }
@@ -110,13 +108,3 @@ void CFDirList::ItemSelected(ITEMLISTENTRY *pEntry)
   
   m_pSystem->QueueEvent(WM_ITEMLISTSELECT, m_ulID, (void*)pEntry);
 }
-
-//--------------------------------------------------------------------------------
-/// Checks whether the specified directory name is really one.
-bool CFDirList::IsDirectory(LPCTSTR pDir) const
-{
-  DWORD dwAttr = GetFileAttributes(pDir);
-  return (dwAttr != (DWORD)-1) && (dwAttr & FILE_ATTRIBUTE_DIRECTORY);
-}
-
-#endif

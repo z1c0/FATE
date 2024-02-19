@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="audio\FMMWave.h" />
+    <ClInclude Include="audio\FSampleList.h" />
+    <ClInclude Include="audio\FWave.h" />
+    <ClInclude Include="audio\FWaveIn.h" />
+    <ClInclude Include="audio\FWaveOut.h" />
+    <ClInclude Include="base\FateApp.h" />
+    <ClInclude Include="base\FateTypeDefs.h" />
+    <ClInclude Include="base\FBitmap.h" />
+    <ClInclude Include="base\FDirectory.h" />
+    <ClInclude Include="base\FFile.h" />
+    <ClInclude Include="base\FSystem.h" />
+    <ClInclude Include="base\IFateComponent.h" />
+    <ClInclude Include="base\IFateContainer.h" />
+    <ClInclude Include="base\IFButtonListener.h" />
+    <ClInclude Include="base\IFCharListener.h" />
+    <ClInclude Include="base\IFConnectionListener.h" />
+    <ClInclude Include="base\IFDropListListener.h" />
+    <ClInclude Include="base\IFItemListListener.h" />
+    <ClInclude Include="base\IFMenuListener.h" />
+    <ClInclude Include="base\IFSliderListener.h" />
+    <ClInclude Include="comm\FComPort.h" />
+    <ClInclude Include="comm\FInetAddr.h" />
+    <ClInclude Include="comm\FMsgServerProxy.h" />
+    <ClInclude Include="comm\FServer.h" />
+    <ClInclude Include="comm\FSocket.h" />
+    <ClInclude Include="comm\FUDPSocket.h" />
+    <ClInclude Include="ext\FController.h" />
+    <ClInclude Include="ext\FNaviMap.h" />
+    <ClInclude Include="ext\FOffscreenRenderer.h" />
+    <ClInclude Include="ext\FRemoteButton.h" />
+    <ClInclude Include="ext\FStartMenu.h" />
+    <ClInclude Include="ext\FVEObj.h" />
+    <ClInclude Include="ext\FVEObjAttr.h" />
+    <ClInclude Include="ext\FVEObjManager.h" />
+    <ClInclude Include="ext\FVEObjPanel.h" />
+    <ClInclude Include="ext\FWidgetMgr.h" />
+    <ClInclude Include="ext\FWidgetPanel.h" />
+    <ClInclude Include="ext\gui_protocol.h" />
+    <ClInclude Include="ext\IFRemoteWidget.h" />
+    <ClInclude Include="ext\ve_protocol.h" />
+    <ClInclude Include="FateVersion.h" />
+    <ClInclude Include="gui\FButton.h" />
+    <ClInclude Include="gui\FDirList.h" />
+    <ClInclude Include="gui\FDropList.h" />
+    <ClInclude Include="gui\FFileList.h" />
+    <ClInclude Include="gui\FItemList.h" />
+    <ClInclude Include="gui\FLabel.h" />
+    <ClInclude Include="gui\FMenu.h" />
+    <ClInclude Include="gui\FMsgPanel.h" />
+    <ClInclude Include="gui\FPanel.h" />
+    <ClInclude Include="gui\FProgressBar.h" />
+    <ClInclude Include="gui\FSlider.h" />
+    <ClInclude Include="gui\FTextField.h" />
+    <ClInclude Include="gui\FToggleButton.h" />
+    <ClInclude Include="include\fate.h" />
+    <ClInclude Include="os\WIN32\FBitmapImpl.h" />
+    <ClInclude Include="os\WIN32\FComPortImpl.h" />
+    <ClInclude Include="os\WIN32\FDirectoryImpl.h" />
+    <ClInclude Include="os\WIN32\FFileImpl.h" />
+    <ClInclude Include="os\WIN32\FInetAddrImpl.h" />
+    <ClInclude Include="os\WIN32\FSocketImpl.h" />
+    <ClInclude Include="os\WIN32\FSystemImpl.h" />
+    <ClInclude Include="os\WIN32\FUDPSocketImpl.h" />
+    <ClInclude Include="util\FLinkedList.h" />
+    <ClInclude Include="util\FPoint.h" />
+    <ClInclude Include="util\FRect.h" />
+    <ClInclude Include="util\FTicker.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="audio\FMMWave.cpp" />
+    <ClCompile Include="audio\FSampleList.cpp" />
+    <ClCompile Include="audio\FWave.cpp" />
+    <ClCompile Include="audio\FWaveIn.cpp" />
+    <ClCompile Include="audio\FWaveOut.cpp" />
+    <ClCompile Include="base\FateApp.cpp" />
+    <ClCompile Include="base\FBitmap.cpp" />
+    <ClCompile Include="base\FDirectory.cpp" />
+    <ClCompile Include="base\FFile.cpp" />
+    <ClCompile Include="base\FSystem.cpp" />
+    <ClCompile Include="base\IFateContainer.cpp" />
+    <ClCompile Include="comm\FComPort.cpp" />
+    <ClCompile Include="comm\FInetAddr.cpp" />
+    <ClCompile Include="comm\FMsgServerProxy.cpp" />
+    <ClCompile Include="comm\FServer.cpp" />
+    <ClCompile Include="comm\FSocket.cpp" />
+    <ClCompile Include="comm\FUDPSocket.cpp" />
+    <ClCompile Include="ext\FController.cpp" />
+    <ClCompile Include="ext\FNaviMap.cpp" />
+    <ClCompile Include="ext\FOffscreenRenderer.cpp" />
+    <ClCompile Include="ext\FRemoteButton.cpp" />
+    <ClCompile Include="ext\FStartMenu.cpp" />
+    <ClCompile Include="ext\FVEObj.cpp" />
+    <ClCompile Include="ext\FVEObjAttr.cpp" />
+    <ClCompile Include="ext\FVEObjManager.cpp" />
+    <ClCompile Include="ext\FVEObjPanel.cpp" />
+    <ClCompile Include="ext\FWidgetMgr.cpp" />
+    <ClCompile Include="ext\FWidgetPanel.cpp" />
+    <ClCompile Include="gui\FButton.cpp" />
+    <ClCompile Include="gui\FDirList.cpp" />
+    <ClCompile Include="gui\FDropList.cpp" />
+    <ClCompile Include="gui\FFileList.cpp" />
+    <ClCompile Include="gui\FItemList.cpp" />
+    <ClCompile Include="gui\FLabel.cpp" />
+    <ClCompile Include="gui\FMenu.cpp" />
+    <ClCompile Include="gui\FProgressBar.cpp" />
+    <ClCompile Include="gui\FSlider.cpp" />
+    <ClCompile Include="gui\FTextField.cpp" />
+    <ClCompile Include="gui\FToggleButton.cpp" />
+    <ClCompile Include="os\WIN32\FATE.cpp" />
+    <ClCompile Include="os\WIN32\FBitmapImpl.cpp" />
+    <ClCompile Include="os\WIN32\FComPortImpl.cpp" />
+    <ClCompile Include="os\WIN32\FDirectoryImpl.cpp" />
+    <ClCompile Include="os\WIN32\FFileImpl.cpp" />
+    <ClCompile Include="os\WIN32\FSocketImpl.cpp" />
+    <ClCompile Include="os\WIN32\FSystemImpl.cpp" />
+    <ClCompile Include="os\WIN32\FUDPSocketImpl.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b8826eea-de83-4194-9280-c42e30e2dfb8}</ProjectGuid>
+    <RootNamespace>FATE</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

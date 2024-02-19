@@ -1,19 +1,9 @@
-// FMMWave.h: interface for the CFMMWave class.
-//////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_FMMWave_H__099A488F_0774_4CB7_850F_3BC0C205B2F4__INCLUDED_)
-#define AFX_FMMWave_H__099A488F_0774_4CB7_850F_3BC0C205B2F4__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
-
 
 #include <windows.h>
 #include <mmsystem.h>
 #include <mmreg.h>
 #include "FSampleList.h"
-
 
 //------------------------------------------------------------------------------
 #ifndef WAVE_FORMAT_PCM
@@ -93,13 +83,12 @@ private:
   HANDLE m_hFileToMap;
   HANDLE m_hMappedFile;
   char *m_pMappedData;
-  WAVEFORMATEX m_wavefmt;  
-  char *m_pWaveData; 
-  TCHAR *m_pszErr;
+  WAVEFORMATEX m_wavefmt;
+  char *m_pWaveData;
+  const TCHAR *m_pszErr;
   int m_iCurrList;
   int m_iNrOfCuts;
-  int m_iNrOfRedoes;  
+  int m_iNrOfRedoes;
   BOOL m_bChanged;
 };
 
-#endif // !defined(AFX_FMMWave_H__099A488F_0774_4CB7_850F_3BC0C205B2F4__INCLUDED_)

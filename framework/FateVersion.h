@@ -1,8 +1,8 @@
 #pragma once
 
 #define FATE_VERSION_MAJOR 1
-#define FATE_VERSION_MINOR 1
-#define FATE_VERSION_REVISION 1
+#define FATE_VERSION_MINOR 2
+#define FATE_VERSION_REVISION 0
 
 class CFateVersion
 {

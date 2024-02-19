@@ -15,6 +15,8 @@ public:
   bool WriteBytes(unsigned char* pBytes, unsigned int count);
   bool ReadBytes(unsigned char*& bytes, unsigned int& count);
 
+  static bool IsDirectory(const TCHAR* fileName);
+
 private:
   CFFileImpl* m_pImpl;
 };

@@ -48,7 +48,7 @@ void __RemoteConsole(LPCTSTR pszFormat, ...)
     va_end(pArgs);
     _tcscat(szBuffer, TEXT("\r\n"));
 
-    g_sockDebug->Send(szBuffer, strlen(szBuffer) + 1, g_addrDebug);
+    g_sockDebug->Send(szBuffer, static_cast<int>(strlen(szBuffer) + 1), g_addrDebug);
   }
 }
 
@@ -327,18 +327,17 @@ ATOM RegisterWndClass(HINSTANCE hInstance, LPTSTR szWindowClass)
 //--------------------------------------------------------------------------------
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-  HWND hWnd;
-  char *szTitle=       "FateApp";       // the title bar text
-	char *szWindowClass= "FateAppClass";  // the window class name
+  const char *szTitle = "FateApp";       // the title bar text
+  const char *szWindowClass = "FateAppClass";  // the window class name
 
   // instantiate application object
   g_pApp = CreateFateApp();
   
-  RegisterWndClass(hInstance, szWindowClass);
+  RegisterWndClass(hInstance, const_cast<char*>(szWindowClass));
 
   int width = g_pApp->IsLandScapeMode() ? FATE_APP_HEIGHT : FATE_APP_WIDTH;
   int height = g_pApp->IsLandScapeMode() ? FATE_APP_WIDTH : FATE_APP_HEIGHT;
-  hWnd = CreateWindowEx(0, 
+  HWND hWnd = CreateWindowEx(0, 
                         szWindowClass, 
                         szTitle,
                         WS_OVERLAPPEDWINDOW, //WS_POPUP,
@@ -378,7 +377,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	}	
 
 	// main message loop:
-  while (true) {
+  while (true)
+  {
     if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
       if(msg.message == WM_QUIT) {
 			  break;
@@ -412,7 +412,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
   SAFE_DELETE(g_sockDebug);
   SAFE_DELETE(g_addrDebug);
 
-	return(msg.wParam);
+	return static_cast<int>(msg.wParam);
 }
 
 

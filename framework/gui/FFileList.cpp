@@ -1,11 +1,8 @@
-#ifdef _WIN32
-
-#include <windows.h>
 #include "FFileList.h"
-#include "../base/FateTypeDefs.h"
 #include "../base/FateApp.h"
 #include "../base/FBitmap.h"
-
+#include "../base/FFile.h"
+#include "../base/FDirectory.h"
 
 //--------------------------------------------------------------------------------
 CFFileList::CFFileList(int iMaxVisItems, int iItemWidth, CFBitmap *cbUpArrow, CFBitmap *cbDownArrow) :
@@ -52,7 +49,8 @@ bool CFFileList::SetCurrDir(LPCTSTR pszDir)
   int iLen= _tcslen(pCurrDir);
   if ((iLen)&&(pCurrDir[iLen-1] == '\\')) pCurrDir[iLen-1]= 0;
 
-  if (IsDirectory(pCurrDir)) {
+  if (CFFile::IsDirectory(pCurrDir))
+  {
     // directory up?
     if (!_tcscmp(pCurrDir, TEXT(".."))) {
       int i= _tcslen(m_szCurrDir) - 2;
@@ -74,56 +72,57 @@ bool CFFileList::SetCurrDir(LPCTSTR pszDir)
 //--------------------------------------------------------------------------------
 bool CFFileList::ReadDir()
 {
-  WIN32_FIND_DATA ffd;
-  HANDLE hFile;
   TCHAR szFilePath[256];
   TCHAR szFullPath[256];
   
   // first entry is always "directory up" except for root-directory
-  if (_tcscmp(m_szCurrDir, TEXT("\\"))) AddItem(TEXT(".."), TEXT(".."));
+  if (_tcscmp(m_szCurrDir, TEXT("\\")))
+  {
+     AddItem(TEXT(".."), TEXT(".."));
+  }
   
   // create wild card string for directory exploring
   _tcscpy(szFilePath, m_szCurrDir);
   _tcscat(szFilePath, TEXT("*.*"));
 
-  hFile= FindFirstFile(szFilePath, &ffd);
-  if (hFile == INVALID_HANDLE_VALUE) return(FALSE);
-  
-  do
+  CFDirectory directory(szFilePath);
+  while (true)
   {
+    const TCHAR* fileName = directory.GetNextChild();
+    if (!fileName)
+    {
+      break;
+    }
+
     // create full qualified path of file
     _tcscpy(szFullPath, m_szCurrDir);
-    _tcscat(szFullPath, ffd.cFileName);
+    _tcscat(szFullPath, fileName);
     
     // exclude current and parent directory
-    if (ffd.cFileName[0] != '.')
+    if (fileName[0] != '.')
     {
       // any filters specified?
-      if ((!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))&&(m_pFilters))
+      if (!CFFile::IsDirectory(szFullPath) && m_pFilters)
       {
-        int iStrLen;
-        FILEFILTER *pTemp= m_pFilters;
-
+        FILEFILTER *pTemp = m_pFilters;
         while (pTemp)
         {
-          iStrLen= _tcslen(ffd.cFileName);
-          if ((iStrLen >= 4)&&(!_tcscmp(&ffd.cFileName[iStrLen - 4], pTemp->pszFilter)))
+          int iStrLen = _tcslen(fileName);
+          if (iStrLen >= 4 && !_tcscmp(&fileName[iStrLen - 4], pTemp->pszFilter))
           {
-            AddItem(ffd.cFileName, szFullPath);
+            AddItem(fileName, szFullPath);
           }
           pTemp= pTemp->pNext;
         }
-      } else
+      }
+      else
       {
-        AddItem(ffd.cFileName, szFullPath);
+        AddItem(fileName, szFullPath);
       }
     }
-  }
-  while(FindNextFile(hFile, &ffd));
-  
-  FindClose(hFile);
+  }  
 
-  return(TRUE);
+  return true;
 }
 
 //--------------------------------------------------------------------------------
@@ -136,20 +135,11 @@ void CFFileList::ItemSelected(ITEMLISTENTRY *pEntry)
     pEntry->ulUser= IL_DIRFLAG;  // mark it as directory
     m_pSystem->QueueEvent(WM_ITEMLISTSELECT, m_ulID, (void*)pEntry);
     Draw();
-  
   }
   else
   {
     CFItemList::ItemSelected(pEntry);
   }
-}
-
-//--------------------------------------------------------------------------------
-/// Checks whether the specified directory name is really one.
-bool CFFileList::IsDirectory(LPCTSTR pDir) const
-{
-  DWORD dwAttr= GetFileAttributes(pDir);
-  return (dwAttr != (DWORD)-1) && (dwAttr & FILE_ATTRIBUTE_DIRECTORY);
 }
 
 //--------------------------------------------------------------------------------
@@ -213,5 +203,3 @@ void CFFileList::RemoveFilters()
     delete(pOld);
   }
 }
-
-#endif

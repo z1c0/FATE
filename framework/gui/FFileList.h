@@ -27,7 +27,6 @@ private:
   virtual void BeforeDrawItems();
   virtual void ItemSelected(ITEMLISTENTRY* pEntry);
 
-  bool IsDirectory(LPCTSTR pDir) const;
   bool ReadDir();
   TCHAR m_szCurrDir[MAX_PATH];
   bool m_bDirRead;
