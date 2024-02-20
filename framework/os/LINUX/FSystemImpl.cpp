@@ -1,7 +1,6 @@
 #include "FSystemImpl.h"
 #include "FBitmapImpl.h"
 #include "FFileImpl.h"
-#include "../../base/FateApp.h"
 
 //------------------------------------------------------------------------------
 CFSystemImpl::CFSystemImpl(SDL_Window* pWindow, int width, int height) :
@@ -77,13 +76,14 @@ void CFSystemImpl::QueueEvent(int eventId, int componentId, void *pCustomData)
 
 struct TimerData
 {
+	CFSystemImpl* pSystem;
 	unsigned long id;
 };
 Uint32 TimerCallBack(Uint32 interval, void* param)
 {
-	TimerData* timerData = reinterpret_cast<TimerData*>(param);	
-	CFateApp::GetApp()->Timer(timerData->id);
-	return 1;
+	TimerData* timerData = reinterpret_cast<TimerData*>(param);
+	timerData->pSystem->QueueEvent(FATE_EVENT_ID_TIMER, timerData->id, NULL);
+	return interval;
 }
 
 //------------------------------------------------------------------------------

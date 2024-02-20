@@ -59,7 +59,7 @@ bool CPPTRC::InitFateApp()
 		return false;
 	}  
 	
-	// create a socket and bind it to port  
+	// create a socket and bind it to port
 	m_pSockRecv = new CFSocket();
 	m_pSockRecv->Create();
 	m_pSockRecv->SetTimeout(0);
@@ -300,24 +300,23 @@ bool CPPTRC::SendToPPTHost(const char *pMsg)
 
 	// prepare message
 	int iMsgLen = strlen(pMsg);
-	char* szSendBuff = new char[iMsgLen + 1];
-	memset(szSendBuff, 0, iMsgLen + 1);
-
+	char* pSendBuff = new char[5 + iMsgLen + 1];
 	int i = 3;
 	while (iMsgLen)
 	{
-		szSendBuff[i--]= (unsigned char)iMsgLen & 0x000000FF;
+		pSendBuff[i--]= (unsigned char)iMsgLen & 0x000000FF;
 		iMsgLen >>= 8;
 	}
-	memcpy(&szSendBuff[4], pMsg, strlen(pMsg) + 1);
+	memcpy(&pSendBuff[4], pMsg, strlen(pMsg) + 1);
 	
 	// send message
-	int iRet = sock.Send(szSendBuff, strlen(pMsg) + 5);
+	int iRet = sock.Send(pSendBuff, strlen(pMsg) + 5);
 	if (iRet == SOCKET_TIMEOUT || iRet == SOCKET_ERROR)
 	{
 		return false;
 	} 
 	sock.Close();
+	delete[] pSendBuff;
 	
 	return true;
 }
@@ -326,14 +325,16 @@ bool CPPTRC::SendToPPTHost(const char *pMsg)
 bool CPPTRC::ReceiveFromPPTHost(CFSocket *sock) 
 {
 	char szRecvBuff1[4];
-	char *pszRecvBuff2;
 	char cCmd;
 	DWORD dwRespLen;
 	bool bRet = true;
 
 	// first receive length of response
 	int iRet = sock->Receive(szRecvBuff1, 4);
-	if ((iRet == SOCKET_ERROR)||(iRet == SOCKET_TIMEOUT)) return(false);
+	if (iRet == SOCKET_ERROR || iRet == SOCKET_TIMEOUT)
+	{
+		return false;
+	}
 
 	// bytes 0 ... 3 are length of message
 	DWORD b0 = (unsigned char)szRecvBuff1[0] << 16;
@@ -343,27 +344,31 @@ bool CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
 	dwRespLen = b0 | b1 | b2 | b3;
 
 	// allocate memory for response
-	iRet= 0;
-	pszRecvBuff2= (char*)malloc(dwRespLen);
+	iRet = 0;
+	char* pszRecvBuff2 = (char*)malloc(dwRespLen);
 	memset(pszRecvBuff2, 0, dwRespLen);
-	while (((UINT)iRet < dwRespLen)&&(iRet != SOCKET_ERROR)&&(iRet != SOCKET_TIMEOUT))
+	while ((UINT)iRet < dwRespLen)
 	{
-		iRet += sock->Receive((char*)&pszRecvBuff2[iRet], dwRespLen - iRet);
+		int tmp = sock->Receive((char*)&pszRecvBuff2[iRet], dwRespLen - iRet);
+		if (iRet == SOCKET_ERROR|| iRet == SOCKET_TIMEOUT)
+		{
+			return(false); 
+		}
+		iRet += tmp;
 	}
-	if ((iRet == SOCKET_ERROR)||(iRet == SOCKET_TIMEOUT)) return(false); 
 	
 	// byte 4 is protocol command
-	cCmd= pszRecvBuff2[0]; 
-
+	cCmd = pszRecvBuff2[0];
 	// react depending on protocol command
-	switch (cCmd) {
-
+	switch (cCmd)
+	{
 		case ACK_COUNT:
 		{
 			// read number of slides from response
 			char pszTempBuff[4];
 			memcpy(pszTempBuff, &pszRecvBuff2[1], 4);
 			m_panelPPT->SetSlideCount(atoi(pszTempBuff));
+			m_panelPPT->Draw();
 			break;
 		}
 		
@@ -386,37 +391,35 @@ bool CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
 
 		case ACK_FILEINFO:
 		{
-			char *pszTemp;
-			TCHAR szTemp2[1024];
-			TCHAR *pszExt;  // extension of file
-			int iLen= 0;
+			char *pTmp;
+			TCHAR szTemp2[256];
+			TCHAR *pszExt; // extension of file
+			int iLen = 0;
 
 			// first clear old list
 			m_panelFiles->ClearItems();
 
 			// extract PPT files
-			//iLen= 5;
-			pszTemp= &pszRecvBuff2[1];
+			pTmp = &pszRecvBuff2[1];
 #ifdef _WIN32_WCE
-			MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pszTemp, -1, szTemp2, 1024);
+			MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pTmp, -1, szTemp2, 256);
 #else
-			strcpy(szTemp2, pszTemp);
+			strcpy(szTemp2, pTmp);
 #endif
-			while(*pszTemp)
+			while(*szTemp2)
 			{
 				// get extension of file
 				pszExt = _tcsrchr(szTemp2, '.');
-				if ((pszExt)&&(((!_tcscmp(pszExt, TEXT(".ppt")))||(!_tcscmp(pszExt, TEXT(".pps"))))))
+				if (pszExt && (((!_tcscmp(pszExt, TEXT(".ppt")))||(!_tcscmp(pszExt, TEXT(".pps"))))))
 				{
 					CFBitmap *bmpPPT = new CFBitmap(m_pSystem->GetDoubleBuffer());
 					bmpPPT->Load(IDB_PPT_ICON, "res_pics/ppt_icon.bmp");
 					m_panelFiles->AddItem(bmpPPT, (_tcsrchr(szTemp2, '\\') + 1), szTemp2);
-
 				}
 				else
 				{
-					CFBitmap *bmp= NULL;
-					switch (pszTemp[strlen(pszTemp) - 1])
+					CFBitmap *bmp = NULL;
+					switch (szTemp2[strlen(szTemp2) - 1])
 					{
 						case FILE_MARK_DIR:
 							bmp= new CFBitmap(m_pSystem->GetDoubleBuffer());
@@ -440,7 +443,7 @@ bool CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
 							break;
 
 						case FILE_MARK_HD:
-							bmp= new CFBitmap(m_pSystem->GetDoubleBuffer());
+							bmp = new CFBitmap(m_pSystem->GetDoubleBuffer());
 							bmp->Load(IDB_HD_ICON, "res_pics/hd_icon.bmp");
 							szTemp2[_tcslen(szTemp2) - 1]= 0;
 							m_panelFiles->AddItem(bmp, szTemp2, TEXT("?"));
@@ -451,16 +454,15 @@ bool CPPTRC::ReceiveFromPPTHost(CFSocket *sock)
 					}
 				}
 				
-				iLen+= strlen(&pszRecvBuff2[iLen]);
-				pszTemp= &pszRecvBuff2[++iLen];
+				iLen += strlen(&pszRecvBuff2[iLen]);
+				pTmp = &pszRecvBuff2[++iLen];
 #ifdef _WIN32_WCE
-				MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pszTemp, -1, szTemp2, 1024);
+				MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pTmp, -1, szTemp2, 256);
 #else
-				strcpy(szTemp2, pszTemp);
-#endif        
+				strcpy(szTemp2, pTmp);
+#endif
 			} 
 			m_panelFiles->Draw();
-			m_pSystem->ForceRedraw();
 			break;
 		}
 

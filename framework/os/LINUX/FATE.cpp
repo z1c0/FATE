@@ -50,7 +50,7 @@ void __RemoteConsole(LPCTSTR pszFormat, ...)
 //------------------------------------------------------------------------------
 static bool StartApplication()
 {
-	::SDL_Init(SDL_INIT_VIDEO);
+	::SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
 	::TTF_Init();
 
 	g_pApp = CreateFateApp();
@@ -153,6 +153,10 @@ void EventLoop()
 							}
 							break;
 						}
+
+						case FATE_EVENT_ID_TIMER:
+							g_pApp->Timer(data->componentId);
+							break;
 
 						default:
 							printf("EVENT: %06X\n", data->eventId);

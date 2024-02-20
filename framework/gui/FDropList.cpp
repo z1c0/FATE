@@ -4,9 +4,8 @@
 #include "FDropList.h"
 
 //--------------------------------------------------------------------------------
-CFDropList::CFDropList(int iMaxVisItems, int iItemWidth, CFBitmap *bmpDropArrow,
-                     CFBitmap *bmpUpArrow, CFBitmap *bmpDownArrow) :
-                     CFItemList(iMaxVisItems, iItemWidth, bmpUpArrow, bmpDownArrow)
+CFDropList::CFDropList(int iMaxVisItems, int iItemWidth, CFBitmap *bmpDropArrow, CFBitmap *bmpUpArrow, CFBitmap *bmpDownArrow) :
+  CFItemList(iMaxVisItems, iItemWidth, bmpUpArrow, bmpDownArrow)
 {
   m_bmpDropArrow = bmpDropArrow;
   m_bDropState = false;
@@ -196,23 +195,24 @@ bool CFDropList::CreateBackGround()
 }
 
 //--------------------------------------------------------------------------------
-/// Selects an item by specifiying its index in the list, starting with 0.
+/// Selects an item by specifying its index in the list, starting with 0.
 bool CFDropList::SetSelectedItem(int iNr)
-{
+{  
   ITEMLISTENTRY *pAuxEntry = m_pEntries;
   int i = 0;
-  
-  while ((pAuxEntry)&&(i++ < iNr)) {
+  while (pAuxEntry && i++ < iNr)
+  {
     pAuxEntry = pAuxEntry->pNext;
   }
-    
-  if (!pAuxEntry) {
+  if (!pAuxEntry)
+  {
     return false;
   }
   
   m_pszSelItem = pAuxEntry->pszItem;
   
-  if (m_pSystem) {
+  if (m_pSystem)
+  {
     DrawSelItem(m_pszSelItem);
   }
   

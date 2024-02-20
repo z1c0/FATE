@@ -32,9 +32,8 @@ void CFDirList::BeforeDrawItems()
 bool CFDirList::SetCurrDir(const TCHAR* pszDir)
 {
   TCHAR pCurrDir[MAX_PATH];
-
   _tcscpy(pCurrDir, pszDir);
-
+  
   // remove finishing '\' if necessary
   int iLen = _tcslen(pCurrDir);
   if (iLen && pCurrDir[iLen-1] == CFSystem::GetDirectorySeparator()[0])
@@ -42,28 +41,28 @@ bool CFDirList::SetCurrDir(const TCHAR* pszDir)
     pCurrDir[iLen-1] = 0;
   }
 
-  if (CFFile::IsDirectory(pCurrDir))
+  // directory up?
+  if (_tcscmp(pCurrDir, TEXT("..")) == 0)
   {
-    // directory up?
-    if (!_tcscmp(pCurrDir, TEXT("..")))
+    size_t i = _tcslen(m_szCurrDir);
+    while (i > 0 && m_szCurrDir[i] != CFSystem::GetDirectorySeparator()[0])
     {
-      int i = _tcslen(m_szCurrDir) - 2;
-      while (i > 0 && m_szCurrDir[i] != CFSystem::GetDirectorySeparator()[0])
-      {
-        i--;
-      }
-      m_szCurrDir[i + 1]= 0;
-
+      i--;
     }
-    else
-    {
-      _tcscpy(m_szCurrDir, pCurrDir);
-      _tcscat(m_szCurrDir, CFSystem::GetDirectorySeparator());
-    }
+    m_szCurrDir[i] = 0;
     m_bDirRead = false;
-    return true;
   }
-  return false;
+  else if ((_tcscmp(m_szCurrDir, pCurrDir) == 0)) // it the same as before? then read directory
+  {
+    m_bDirRead = false;
+  }
+  else
+  {
+    _tcscpy(m_szCurrDir, pCurrDir);  // if not, set new name and highlight
+    m_bDirRead = true;
+  }
+
+  return true;
 }
 
 //--------------------------------------------------------------------------------
@@ -76,7 +75,6 @@ bool CFDirList::ReadDir()
   }
   
   CFDirectory directory(m_szCurrDir);
-  printf("dir: %s\n", m_szCurrDir);
   while (true)
   {
     const TCHAR* fileName = directory.GetNextChild();
@@ -103,13 +101,14 @@ bool CFDirList::ReadDir()
 /// Method is called when an items was selected.
 void CFDirList::ItemSelected(ITEMLISTENTRY *pEntry)
 {
-  DrawItems();
-
+  // move to selected directory
   if (SetCurrDir(pEntry->pszAddInfo))
   {
-    m_app->DrawDoubleBuffer();
+    m_pSystem->QueueEvent(FATE_EVENT_ID_ITEMLISTSELECT, m_ulID, (void*)pEntry);
     Draw();
   }
-  
-  m_pSystem->QueueEvent(FATE_EVENT_ID_ITEMLISTSELECT, m_ulID, (void*)pEntry);
+  else
+  {
+    CFItemList::ItemSelected(pEntry);
+  }
 }

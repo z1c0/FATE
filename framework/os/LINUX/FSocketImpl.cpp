@@ -53,7 +53,8 @@ bool CFSocketImpl::Accept(CFSocketImpl& sock)
 		struct timeval timeout;
 		timeout.tv_sec = 0;
 		timeout.tv_usec = m_timeout * 1000;
-		if (::select(m_socket + 1, &readSet, NULL, NULL, &timeout) == -1)
+		::select(m_socket + 1, &readSet, NULL, NULL, &timeout);
+		if (!FD_ISSET(m_socket, &readSet))
 		{
 			return false;
 		}
@@ -89,7 +90,8 @@ int CFSocketImpl::Send(const char* pBuff, const int size)
 		struct timeval timeout;
 		timeout.tv_sec = 0;
 		timeout.tv_usec = m_timeout * 1000;
-		if  (::select(m_socket + 1, NULL, &writeSet, NULL, &timeout) == -1)
+		::select(m_socket + 1, NULL, &writeSet, NULL, &timeout);
+		if (!FD_ISSET(m_socket, &writeSet))
 		{
 			return SOCKET_TIMEOUT;
 		}
@@ -122,7 +124,8 @@ int CFSocketImpl::Receive(char* pBuff, const int size)
 		struct timeval timeout;
 		timeout.tv_sec = 0;
 		timeout.tv_usec = m_timeout * 1000;
-		if (::select(m_socket + 1, &readSet, NULL, NULL, &timeout) == -1)
+		::select(m_socket + 1, &readSet, NULL, NULL, &timeout);
+		if (!FD_ISSET(m_socket, &readSet))
 		{
 			return SOCKET_TIMEOUT;
 		}

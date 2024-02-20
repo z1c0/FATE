@@ -49,6 +49,7 @@ private:
   SDL_Texture* m_pTexture;
   SDL_Texture* m_pTargetTexture;
   SDL_Texture* m_pSaveTexture;
+  SDL_Surface* m_pSurface;
   int m_posX;
   int m_posY;
   int m_width;

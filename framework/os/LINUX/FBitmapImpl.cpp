@@ -10,6 +10,7 @@ CFBitmapImpl::CFBitmapImpl() :
 	m_pTexture(NULL),
 	m_pTargetTexture(NULL),
 	m_pSaveTexture(NULL),
+	m_pSurface(NULL),
 	m_posX(0),
 	m_posY(0),
 	m_width(0),
@@ -20,6 +21,10 @@ CFBitmapImpl::CFBitmapImpl() :
 //------------------------------------------------------------------------------
 CFBitmapImpl::~CFBitmapImpl()
 {
+	if (m_pSurface)
+	{
+		::SDL_FreeSurface(m_pSurface);
+	}
 	::SDL_DestroyTexture(m_pTexture);
 	if (m_pSaveTexture)
 	{
@@ -62,11 +67,10 @@ bool CFBitmapImpl::Load(const TCHAR* fileName)
 {
 	assert(m_pRenderer);
 	assert(CFFileImpl::Exists(fileName));
-	SDL_Surface* pSurface = ::SDL_LoadBMP(fileName);
-	assert(pSurface);
-	m_pTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
+	m_pSurface = ::SDL_LoadBMP(fileName);
+	assert(m_pSurface);
+	m_pTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, m_pSurface);
 	assert(m_pTexture);
-	::SDL_FreeSurface(pSurface);
 	::SDL_QueryTexture(m_pTexture, NULL, NULL, &m_width, &m_height);
 	return true;
 }
@@ -85,8 +89,14 @@ bool CFBitmapImpl::Load(int resourceId, const TCHAR* fallbackFilePath)
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::Load(const char *data, unsigned long size)
 {
-	assert(false);
-	return false;
+	SDL_RWops* pRwops = ::SDL_RWFromConstMem(data, size);
+	SDL_Surface* pSurface = ::SDL_LoadBMP_RW(pRwops, 1);
+	assert(pSurface);
+	m_pTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
+	assert(m_pTexture);
+	::SDL_FreeSurface(pSurface);
+	::SDL_QueryTexture(m_pTexture, NULL, NULL, &m_width, &m_height);
+	return true;
 }
 
 //------------------------------------------------------------------------------
@@ -137,7 +147,11 @@ bool CFBitmapImpl::Blit(int srcx, int srcy, int srcw, int srch, int destx, int d
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::StretchBlit(int width, int height)
 {
-	assert(false);
+	assert(m_pTargetTexture);
+	::SDL_SetRenderTarget(m_pRenderer, m_pTargetTexture);
+	SDL_Rect destRect = { m_posX, m_posY, width, height };
+	::SDL_RenderCopy(m_pRenderer, m_pTexture, NULL, &destRect);
+	::SDL_SetRenderTarget(m_pRenderer, NULL);
 	return true;
 }
 
@@ -149,10 +163,20 @@ bool CFBitmapImpl::ClipBlit(int width, int height)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmapImpl::TransBlit(COLORREF colTrans)
+bool CFBitmapImpl::TransBlit(COLORREF col)
 {
-	Blit();
-	return true;
+	if (m_pSurface)
+	{
+		// Workaround: render again with color key.
+		Uint32 colorKey = ::SDL_MapRGB(m_pSurface->format, col.r, col.g, col.b);
+		::SDL_SetColorKey(m_pSurface, SDL_TRUE, colorKey);
+		assert(m_pTexture);
+		::SDL_DestroyTexture(m_pTexture);
+		m_pTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, m_pSurface);
+		::SDL_FreeSurface(m_pSurface);
+		m_pSurface = NULL;
+	}
+	return Blit();
 }
 
 //------------------------------------------------------------------------------

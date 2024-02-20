@@ -21,8 +21,9 @@ EXE := $(BIN_DIR)/$(EXE_NAME)
 # Targets
 all: $(EXE)
 
-$(EXE): $(OBJ)
+$(EXE): $(OBJ) ../../framework/lib/libFATE.a
 	@mkdir -p $(BIN_DIR)
+	@cp ../../framework/font.ttf .
 	$(CXX) $(CXXFLAGS) -o $(EXE) $(OBJ) -L../../framework/lib -lFATE -lSDL2 -lSDL2_ttf
 
 $(BUILD_DIR)/%.o: %.cpp

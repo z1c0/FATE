@@ -66,20 +66,25 @@ void CFPPTPanel::DrawCurrent()
   char szMsg[6];
 
   // memory for previews allocated?
-  if (!m_bmpPreviews) return;
-  
+  if (!m_bmpPreviews)
+  {
+    return;
+  }
+
   // if preview for current slide not ready, receive from server
-  if (!m_bmpPreviews[m_iCurrSlide - 1]) {
+  if (!m_bmpPreviews[m_iCurrSlide - 1])
+  {
     memset(szMsg, 0, 6);
-    szMsg[0]= CMD_PREVIEW;
+    szMsg[0] = CMD_PREVIEW;
     sprintf(&szMsg[1], "%d", m_iCurrSlide);
     m_theApp->SendToPPTHost(szMsg);
   } 
   // draw preview for current slide
-  if (m_bmpPreviews[m_iCurrSlide - 1]) {
+  if (m_bmpPreviews[m_iCurrSlide - 1])
+  {
     m_bmpPreviews[m_iCurrSlide - 1]->SetX(10);
     m_bmpPreviews[m_iCurrSlide - 1]->SetY(50);
-    m_bmpPreviews[m_iCurrSlide - 1]->Blit();  
+    m_bmpPreviews[m_iCurrSlide - 1]->Blit();
   }
 }
   
@@ -93,18 +98,20 @@ void CFPPTPanel::DrawNext()
   if (!m_bmpPreviews) return;
   
   // if preview for next slide not ready, receive from server
-  iNextIndex= m_iCurrSlide + 1 <= m_iSlideCount ? m_iCurrSlide + 1 : 1;
-  if (!m_bmpPreviews[iNextIndex - 1]) {
+  iNextIndex = m_iCurrSlide + 1 <= m_iSlideCount ? m_iCurrSlide + 1 : 1;
+  if (!m_bmpPreviews[iNextIndex - 1])
+  {
     memset(szMsg, 0, 6);
-    szMsg[0]= CMD_PREVIEW;
+    szMsg[0] = CMD_PREVIEW;
     sprintf(&szMsg[1], "%d", iNextIndex);
     m_theApp->SendToPPTHost(szMsg);
   } 
   // draw preview for next slide
-  if (m_bmpPreviews[iNextIndex - 1]) {
+  if (m_bmpPreviews[iNextIndex - 1])
+  {
     m_bmpPreviews[iNextIndex - 1]->SetX(10);
     m_bmpPreviews[iNextIndex - 1]->SetY(50);
-    m_bmpPreviews[iNextIndex - 1]->StretchBlit(m_iPrevWidth, m_iPrevHeight);  
+    m_bmpPreviews[iNextIndex - 1]->StretchBlit(m_iPrevWidth, m_iPrevHeight);
   }
 }
 
@@ -369,8 +376,9 @@ bool CFPPTPanel::DropListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry)
 {
   if (!m_bEnabled) return false;
 
-  switch(dwListID) {
-    case ID_DROPLIST:      
+  switch(dwListID)
+  {
+    case ID_DROPLIST:
       GotoSlide(pEntry->ulIndex + 1);
       return(true);
       break;
@@ -498,10 +506,10 @@ bool CFPPTPanel::ClosePPT()
 //--------------------------------------------------------------------------------
 void CFPPTPanel::SetSlideCount(int iSlideCount)
 {
-  m_iSlideCount= iSlideCount;
+  m_iSlideCount = iSlideCount;
 
   // allocate memory for previews
-  m_bmpPreviews= new CFBitmap*[m_iSlideCount];
+  m_bmpPreviews = new CFBitmap*[m_iSlideCount];
   
   // set entry in droplist for each slide
   m_dropList->ClearItems();
@@ -520,9 +528,12 @@ void CFPPTPanel::SetSlideCount(int iSlideCount)
 // Does a safe-release of the preview pictures.
 void CFPPTPanel::DeletePreviews()
 {
-  if (m_bmpPreviews) {
-    for (int i=0; i<m_iSlideCount; i++) {
-      if (m_bmpPreviews[i]) {
+  if (m_bmpPreviews)
+  {
+    for (int i=0; i<m_iSlideCount; i++)
+    {
+      if (m_bmpPreviews[i])
+      {
         delete(m_bmpPreviews[i]);
         m_bmpPreviews[i]= NULL;
       }
@@ -536,15 +547,16 @@ void CFPPTPanel::DeletePreviews()
 // Allocate memory for sent preview
 bool CFPPTPanel::StorePreview(char *pBuff, DWORD dwSize)
 {
-  long lSlideNr;
+  int lSlideNr;
 
   // get slide number
   memcpy(&lSlideNr, pBuff, 4);
-  m_iCurrSlide= lSlideNr;
+  m_iCurrSlide = lSlideNr;
   lSlideNr--;
 
   // try to load image
-  if ((lSlideNr >= 0)&&(lSlideNr < m_iSlideCount)) {
+  if ((lSlideNr >= 0)&&(lSlideNr < m_iSlideCount))
+  {
     m_bmpPreviews[lSlideNr]= new CFBitmap(m_pSystem->GetDoubleBuffer());
     m_bmpPreviews[lSlideNr]->Load(pBuff + 4, dwSize - 4);
   }

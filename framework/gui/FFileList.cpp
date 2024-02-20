@@ -42,7 +42,6 @@ void CFFileList::BeforeDrawItems()
 bool CFFileList::SetCurrDir(LPCTSTR pszDir)
 {
   TCHAR pCurrDir[MAX_PATH];
-
   _tcscpy(pCurrDir, pszDir);
 
   // remove finishing '\' if necessary

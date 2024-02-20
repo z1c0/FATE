@@ -1,5 +1,3 @@
-// FFilePanel.cpp: implementation of the CFFilePanel class.
-//////////////////////////////////////////////////////////////////////
 #include "FFilePanel.h"
 #include "PPTRC.h"
 #include "ids.h"
@@ -163,7 +161,6 @@ bool CFFilePanel::ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry)
 #else
     strcpy(szDir, pEntry->pszItem);
 #endif
-    //printf("-> %s\n", szDir);
     FillItemListFromServer(szDir);
     m_btnLoad->SetEnabled(false);
   }
@@ -216,7 +213,7 @@ bool CFFilePanel::ButtonReleased(DWORD dwBtnID)
       {
         m_theApp->Error(TEXT("Could not reach PPT Server."));
       }
-      return(true);
+      return true;
 
     default:
       return false;

@@ -23,5 +23,7 @@ private:
   CFVEObjPanel m_vePanel;
   CFLabel m_label;
   CFMenu m_menu;
+  CFButton m_btnAdd;
+  CFButton m_btnClear;
 };
 
