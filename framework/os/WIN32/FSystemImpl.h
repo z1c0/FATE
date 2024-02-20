@@ -19,11 +19,14 @@ public:
   int GetWidth() const { return m_nWidth; };
   int GetHeight() const { return m_nHeight; };
   void AddTimer(unsigned long id, int interval);  
-  bool EnableSuspend(bool suspend) { return false; }  
+  bool EnableSuspend(bool suspend) { return false; } 
+  void Sleep(int milliSeconds);
 
   static void GetPathToApplication(TCHAR *pszAppPath);
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);
+  static int GetDefaultWidth() { return 240; }
+  static int GetDefaultHeight() { return 320; }
 
 private:
   HWND m_hWnd;  

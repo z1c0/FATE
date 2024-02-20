@@ -115,7 +115,7 @@ bool CFVEObjManager::Update()
   pack.uiKind= REQ_LIST;
 
   // send the message
-  sock.Write((char*)&pack, sizeof(VE_PACKET));
+  sock.Send((const char*)&pack, sizeof(VE_PACKET));
   
   // receive answer
   sock.Receive((char*)&pack, sizeof(VE_PACKET));
@@ -165,8 +165,8 @@ bool CFVEObjManager::SendPosition(CFVEObj *pObj)
   pack3D.fVal3=pObj->GetPosZ();
 
   // send the messages
-  sock.Write((char*)&pack, sizeof(VE_PACKET));
-  sock.Write((char*)&pack3D, sizeof(VE_PACKET_3D));
+  sock.Send((char*)&pack, sizeof(VE_PACKET));
+  sock.Send((char*)&pack3D, sizeof(VE_PACKET_3D));
   
   // receive answer
   sock.Receive((char*)&pack, sizeof(VE_PACKET));
@@ -193,8 +193,8 @@ bool CFVEObjManager::SendOrientation(CFVEObj *pObj)
   pack3D.fVal3=pObj->GetRoll();
 
   // send the messages
-  sock.Write((char*)&pack, sizeof(VE_PACKET));
-  sock.Write((char*)&pack3D, sizeof(VE_PACKET_3D));
+  sock.Send((char*)&pack, sizeof(VE_PACKET));
+  sock.Send((char*)&pack3D, sizeof(VE_PACKET_3D));
   
   // receive answer
   sock.Receive((char*)&pack, sizeof(VE_PACKET));
@@ -221,8 +221,8 @@ bool CFVEObjManager::SendScale(CFVEObj *pObj)
   pack3D.fVal3=pObj->GetScaleZ();
 
   // send the messages
-  sock.Write((char*)&pack, sizeof(VE_PACKET));
-  sock.Write((char*)&pack3D, sizeof(VE_PACKET_3D));
+  sock.Send((char*)&pack, sizeof(VE_PACKET));
+  sock.Send((char*)&pack3D, sizeof(VE_PACKET_3D));
   
   // receive answer
   sock.Receive((char*)&pack, sizeof(VE_PACKET));
@@ -252,9 +252,9 @@ bool CFVEObjManager::SendExtra(CFVEObj *pObj, CFVEObjAttr *pAttr)
   packAttr.uiLen= pAttr->GetSize();
 
   // send the messages
-  sock.Write((char*)&pack, sizeof(VE_PACKET));
-  sock.Write((char*)&packAttr, sizeof(VE_PACKET_ATTR));
-  sock.Write((char*)pAttr->GetData(), pAttr->GetSize());
+  sock.Send((char*)&pack, sizeof(VE_PACKET));
+  sock.Send((char*)&packAttr, sizeof(VE_PACKET_ATTR));
+  sock.Send((char*)pAttr->GetData(), pAttr->GetSize());
   
   // receive answer
   sock.Receive((char*)&pack, sizeof(VE_PACKET));
@@ -293,8 +293,8 @@ bool CFVEObjManager::SendAll(CFVEObj *pObj)
   packObj.iExtra= pObj->GetExtraAttrCount();
 
   // send the messages
-  sock.Write((char*)&pack, sizeof(VE_PACKET));
-  sock.Write((char*)&packObj, sizeof(VE_PACKET_OBJ));
+  sock.Send((char*)&pack, sizeof(VE_PACKET));
+  sock.Send((char*)&packObj, sizeof(VE_PACKET_OBJ));
   for (int i=0; i<packObj.iExtra; i++) {
     // create the messages
     VE_PACKET_ATTR packAttr= {0};
@@ -307,8 +307,8 @@ bool CFVEObjManager::SendAll(CFVEObj *pObj)
     packAttr.uiLen= pObj->GetExtraAttr(i)->GetSize();
 
     // send the messages
-    sock.Write((char*)&packAttr, sizeof(VE_PACKET_ATTR));
-    sock.Write((char*)pObj->GetExtraAttr(i)->GetData(),
+    sock.Send((char*)&packAttr, sizeof(VE_PACKET_ATTR));
+    sock.Send((char*)pObj->GetExtraAttr(i)->GetData(),
                pObj->GetExtraAttr(i)->GetSize());  
   }
   
@@ -346,7 +346,7 @@ bool CFVEObjManager::RequestValues(CFVEObj *pObj)
   pack.uiExtra= pObj->GetID();
 
   // send the message
-  sock.Write((char*)&pack, sizeof(VE_PACKET));
+  sock.Send((char*)&pack, sizeof(VE_PACKET));
   
   // receive answer
   sock.Receive((char*)&pack, sizeof(VE_PACKET));

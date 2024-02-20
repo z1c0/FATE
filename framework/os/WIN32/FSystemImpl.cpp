@@ -52,6 +52,12 @@ bool CFSystemImpl::ShutDownSystem()
 }
 
 //------------------------------------------------------------------------------
+void CFSystemImpl::Sleep(int milliSeconds)
+{
+  ::Sleep(milliSeconds);
+}
+
+//------------------------------------------------------------------------------
 void CFSystemImpl::ForceRedraw()
 {
   ::InvalidateRect(m_hWnd, NULL, FALSE);

@@ -214,6 +214,12 @@ void CFSystemImpl::AddTimer(unsigned long id, int interval)
   ::SetTimer(m_hWnd, id, interval, NULL);
 }
 
+//------------------------------------------------------------------------------
+void CFSystemImpl::Sleep(int milliSeconds)
+{
+  ::Sleep(milliSeconds);
+}
+
 //--------------------------------------------------------------------------------
 void CFSystemImpl::DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal)
 {

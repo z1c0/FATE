@@ -19,8 +19,8 @@ public:
   bool SolidFill(const COLORREF colFill);
 	
   bool Load(const TCHAR* pszFileName);
-  bool Load(int wResourceID);
-	bool Load(char *pszData, unsigned long dwSize);
+  bool Load(int resourceId, const TCHAR* fallback);
+	bool Load(const char *pData, unsigned long dwSize);
   
   int GetX() { return(m_iPosX); };
   void SetX(int iPosX) { m_iPosX= iPosX; };

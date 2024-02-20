@@ -27,15 +27,6 @@ typedef unsigned int UINT;
 #define INVALID_SOCKET -1
 #define SOCKET_ERROR -1
 
-struct COLORREF
-{
-  COLORREF() : r(0), g(0), b(0) {}
-  COLORREF(int r, int g, int b) : r(r), g(g), b(b) {}
-  int r;
-  int g;
-  int b;
-};
-
 struct POINT
 {
   int x;
@@ -75,6 +66,15 @@ struct RECT
 
 #define RGB(r, g, b) COLORREF(r, g, b)
 
+struct COLORREF
+{
+  COLORREF() : r(0), g(0), b(0) {}
+  COLORREF(int r, int g, int b) : r(r), g(g), b(b) {}
+  int r;
+  int g;
+  int b;
+};
+
 #else
 
 #define _PALM_OS
@@ -98,6 +98,8 @@ struct RECT
 
 //------------------------------------------------------------------------------
 /// RGB
+
+typedef unsigned short COLORREF;
 
 #define RGB(r, g, b) (unsigned short)((((unsigned char)(r)&0xF8)<<8)|(((unsigned char)(g)&0xFC)<<3)|(((unsigned char)(b)&0xF8)>>3))
 

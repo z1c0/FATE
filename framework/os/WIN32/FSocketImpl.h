@@ -14,7 +14,7 @@ public:
 	bool Connect(char *pAddrStr, USHORT usPort);	
   bool Bind(int port);	
   bool Bind(const CFInetAddrImpl* pInetAddr);
-  int Accept(CFSocketImpl& sock);	
+  bool Accept(CFSocketImpl& sock);	
 	int Receive(char* pBuff, const int size);	
   int Send(const char* pBuff, const int size);
   bool GetRemoteAddr(CFInetAddrImpl* pIntAddr);

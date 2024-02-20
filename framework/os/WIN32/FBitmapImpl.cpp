@@ -253,7 +253,7 @@ bool CFBitmapImpl::Load(const TCHAR* szFileName)
 
 //--------------------------------------------------------------------------------
 /// Loads a bitmap from the specfied resource-identifier.
-bool CFBitmapImpl::Load(int wResourceID)
+bool CFBitmapImpl::Load(int resourceId, const TCHAR* /* fallbackFilePath */)
 {
   HRSRC hResource;
   DWORD dwSize;
@@ -269,7 +269,7 @@ bool CFBitmapImpl::Load(int wResourceID)
   if (hMod == NULL) return(FALSE);
   
   // locate the resource
-  hResource= FindResource(hMod, MAKEINTRESOURCE(wResourceID), RT_BITMAP); 
+  hResource= FindResource(hMod, MAKEINTRESOURCE(resourceId), RT_BITMAP); 
   if (hResource == NULL) return(FALSE);
   
   dwSize= SizeofResource(hMod,  hResource);
@@ -295,7 +295,7 @@ bool CFBitmapImpl::Load(int wResourceID)
 
 //--------------------------------------------------------------------------------
 /// Loads a bitmap from a memory file.
-bool CFBitmapImpl::Load(char *pszData, DWORD dwSize)
+bool CFBitmapImpl::Load(const char *pData, DWORD dwSize)
 {
   BITMAPFILEHEADER bmpfh;
   HBITMAP hBmp;
@@ -311,7 +311,7 @@ bool CFBitmapImpl::Load(char *pszData, DWORD dwSize)
 
   // read bitmap-file-header
   if (sizeof(BITMAPFILEHEADER) > dwSize) return(FALSE);  
-  memcpy((LPVOID)&bmpfh, pszData, sizeof(BITMAPFILEHEADER));
+  memcpy((LPVOID)&bmpfh, pData, sizeof(BITMAPFILEHEADER));
   dwBuffPos+= sizeof(BITMAPFILEHEADER);
 
   // check if it is a valid bitmap-file
@@ -330,7 +330,7 @@ bool CFBitmapImpl::Load(char *pszData, DWORD dwSize)
    	free(m_pBits);
     return(FALSE);  
   }
-  memcpy(m_pBits, pszData + dwBuffPos, sizeof(BITMAPINFOHEADER));
+  memcpy(m_pBits, pData + dwBuffPos, sizeof(BITMAPINFOHEADER));
   dwBuffPos+= sizeof(BITMAPINFOHEADER);
 	
 	if (((LPBITMAPINFOHEADER)m_pBits)->biSize != sizeof(BITMAPINFOHEADER)) {
@@ -373,7 +373,7 @@ bool CFBitmapImpl::Load(char *pszData, DWORD dwSize)
 			free(m_pBits);
       return(FALSE);  
     }
-    memcpy(((LPBITMAPINFO)m_pBits)->bmiColors, pszData + dwBuffPos, m_ulPaletteSize);
+    memcpy(((LPBITMAPINFO)m_pBits)->bmiColors, pData + dwBuffPos, m_ulPaletteSize);
     dwBuffPos+= m_ulPaletteSize;
 	}
 
@@ -391,7 +391,7 @@ bool CFBitmapImpl::Load(char *pszData, DWORD dwSize)
 		free(m_pBits);
     return(FALSE);  
   }
-  memcpy(m_pBits + *(LPDWORD)m_pBits + m_ulPaletteSize, pszData + dwBuffPos, m_ulDataSize);
+  memcpy(m_pBits + *(LPDWORD)m_pBits + m_ulPaletteSize, pData + dwBuffPos, m_ulDataSize);
   dwBuffPos+= m_ulDataSize;  
 
   // all data is read from file

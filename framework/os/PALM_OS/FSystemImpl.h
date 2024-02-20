@@ -39,10 +39,14 @@ public:
   void ShowError(const TCHAR* msg);
   void DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
   void AddTimer(unsigned long id, int interval);
+  void Sleep(int milliSeconds);
+  bool EnableSuspend(bool) { return true; }
   
   static void GetPathToApplication(TCHAR *pszAppPath);
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);
+  static int GetDefaultWidth() { return 320; }
+  static int GetDefaultHeight() { return 320; }
   
 private:
   int m_iWidth;

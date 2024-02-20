@@ -534,7 +534,7 @@ BOOL CFPPTPanel::SendToPPTHost(char *pMsg)
   if (!sock.Connect(m_addrPPT)) return(FALSE);
   
   // send message
-  iRet= sock.Write(szSendBuff, strlen(pMsg) + 5);
+  iRet = sock.Send(szSendBuff, strlen(pMsg) + 5);
   if ((iRet == SOCKET_TIMEOUT)||(iRet == SOCKET_ERROR)) 
     return(FALSE);
   

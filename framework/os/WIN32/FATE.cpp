@@ -231,19 +231,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         g_pApp->CharNotify((int)wParam);
       break;
 
-    case WM_BUTTONPRESS:      
+    case FATE_EVENT_ID_BUTTONPRESS:      
       // send WM_BUTTONPRESS event to registered components if application does not handle it
       if (!g_pApp->ButtonPressed((DWORD)wParam))
+      {
         g_pApp->ButtonPressNotify((DWORD)wParam);
+      }
       break;
     
-    case WM_BUTTONRELEASE:      
+    case FATE_EVENT_ID_BUTTONRELEASE:      
       // send WM_BUTTONRELEASE event to registered components if application does not handle it
       if (!g_pApp->ButtonReleased((DWORD)wParam))
+      {
         g_pApp->ButtonReleaseNotify((DWORD)wParam);
+      }
       break;
 
-    case WM_MENUSELECTION:        
+    case FATE_EVENT_ID_MENUSELECTION:        
       // send WM_MENUSELECTION event to registered components if application does not handle it
       if (!g_pApp->MenuItemSelected((DWORD)wParam, DWORD(lParam)))
       {
@@ -251,40 +255,52 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       }
       break;    
    
-    case WM_ITEMLISTSELECT: 
+    case FATE_EVENT_ID_ITEMLISTSELECT: 
       // send WM_ITEMLISTSELECT event to registered components if application does not handle it
       if (!g_pApp->ItemListSelected((DWORD)wParam, (ITEMLISTENTRY*)lParam))
+      {
         g_pApp->ItemListSelectNotify((DWORD)wParam, (ITEMLISTENTRY*)lParam);
+      }
       break;
 
-    case WM_DROPLISTEXPAND:
+    case FATE_EVENT_ID_DROPLISTEXPAND:
       // send WM_LISTBOXEXPAND event to registered components if application does not handle it
       if (!g_pApp->DropListExpanded((DWORD)wParam))
+      {
         g_pApp->DropListExpandNotify((DWORD)wParam);
+      }
       break;
 
-    case WM_DROPLISTSELECT: 
+    case FATE_EVENT_ID_DROPLISTSELECT: 
       // send WM_LISTBOXSELECT event to registered components if application does not handle it
       if (!g_pApp->DropListSelected((DWORD)wParam, (ITEMLISTENTRY*)lParam))
+      {
         g_pApp->DropListSelectNotify((DWORD)wParam, (ITEMLISTENTRY*)lParam);
+      }
       break;
   
-    case WM_DROPLISTCOLLAPSE: 
+    case FATE_EVENT_ID_DROPLISTCOLLAPSE: 
       // send WM_LISTBOXCOLLAPSE event to registered components if application does not handle it
       if (!g_pApp->DropListCollapsed((DWORD)wParam))
+      {
         g_pApp->DropListCollapseNotify((DWORD)wParam);
+      }
       break;
 
-    case WM_SLIDERCHANGE: 
+    case FATE_EVENT_ID_SLIDERCHANGE: 
       // send WM_SLIDERCHANGE to registered components if application does not handle it
       if (!g_pApp->SliderChanged((DWORD)wParam, (int)lParam))
+      {
         g_pApp->SliderChangeNotify((DWORD)wParam, (int)lParam);
+      }
       break;
 
-    case WM_CLIENTCONNECT:
+    case FATE_EVENT_ID_CLIENTCONNECT:
       // send WM_SLIDERCHANGE to registered components if application does not handle it
       if (!g_pApp->ClientConnect((CFServer*)wParam))
+      {
         g_pApp->ClientConnectNotify((CFServer*)wParam);
+      }
       break;
 
 

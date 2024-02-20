@@ -1,4 +1,3 @@
-// FDirPanel.cpp: implementation of the CFDirPanel class.
 //////////////////////////////////////////////////////////////////////
 #include "stdafx.h"
 #include "FDirPanel.h"

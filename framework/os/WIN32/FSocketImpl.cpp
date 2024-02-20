@@ -73,7 +73,7 @@ bool CFSocketImpl::Listen()
 }
 
 //--------------------------------------------------------------------------------
-int CFSocketImpl::Accept(CFSocketImpl& sConnect)
+bool CFSocketImpl::Accept(CFSocketImpl& sConnect)
 {
   sockaddr_in addr;
   int iSize;
@@ -84,14 +84,15 @@ int CFSocketImpl::Accept(CFSocketImpl& sConnect)
   {
     FD_SET fd= {1, m_hSocket};
 	  TIMEVAL tv= {m_dwTimeout, 0};
-	  if(select(0, &fd, NULL, NULL, &tv) == 0) {
-		  return(SOCKET_TIMEOUT);
+	  if(select(0, &fd, NULL, NULL, &tv) == 0)
+    {
+		  return false;
 	  }
   }
 
-  iSize= sizeof(sockaddr_in);
+  iSize = sizeof(sockaddr_in);
 	sConnect.m_hSocket= accept(m_hSocket, (sockaddr*)&addr, &iSize);
-  return(sConnect.m_hSocket != INVALID_SOCKET);
+  return (sConnect.m_hSocket != INVALID_SOCKET);
 }
 
 //--------------------------------------------------------------------------------
@@ -113,21 +114,23 @@ bool CFSocketImpl::Connect(char *pAddrStr, USHORT usPort)
 }
 
 //--------------------------------------------------------------------------------
-int CFSocketImpl::Write(const char* pBuff, const int iSize)
+int CFSocketImpl::Send(const char* pBuff, const int iSize)
 {
 	int iBytesSent= 0;
 	int iBytesTemp;
 	const char* pTemp= pBuff;
 	
-  do {
-	  iBytesTemp= Send(pTemp, iSize - iBytesSent);
+  do
+  {
+	  iBytesTemp= SendInternal(pTemp, iSize - iBytesSent);
     // error occured?
     if (iBytesTemp == SOCKET_ERROR) return(SOCKET_ERROR);
     if (iBytesTemp == SOCKET_TIMEOUT) return(SOCKET_TIMEOUT);
 
 		iBytesSent+= iBytesTemp;
 		pTemp+= iBytesTemp;
-	} while(iBytesSent < iSize);
+	}
+  while(iBytesSent < iSize);
 	
   return(iBytesSent);
 }

@@ -21,10 +21,13 @@ public:
   bool ShutDownSystem();
   bool EnableSuspend(bool suspend);
   void ShowError(const TCHAR* msg);
+  void Sleep(int milliSeconds);
 
   static void GetPathToApplication(TCHAR *pszAppPath);
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);
+  static int GetDefaultWidth() { return 240; }
+  static int GetDefaultHeight() { return 320; }
 
 private:  
   void DrawPortraitFlipped(CFBitmapImpl& doubleBuffer);

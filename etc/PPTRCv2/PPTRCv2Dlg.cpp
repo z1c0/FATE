@@ -1204,6 +1204,7 @@ BOOL CPPTRCv2Dlg::PrepareDriveList()
 //--------------------------------------------------------------------------------
 BOOL CPPTRCv2Dlg::PrepareFileInfo(char *pszDir)
 {
+  TRACE("PrepareFileInfo: '%s'\n", pszDir);
   WIN32_FIND_DATA w32fd;
   ULONG ulBufSize= 4096;
   char szSearchPath[MAX_PATH]= {0};

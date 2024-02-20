@@ -121,7 +121,7 @@ void CFSavePanel::Refresh()
   m_dirList->Refresh();
 }
 
-void CFSavePanel::SetDirectory(LPTSTR pDirectory) 
+void CFSavePanel::SetDirectory(const TCHAR* pDirectory) 
 {
   TCHAR szFileName[MAX_PATH];
   

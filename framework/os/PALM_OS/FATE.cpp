@@ -53,7 +53,7 @@ static bool StartApplication()
   UInt32 uiDepth = 0x800000;  // 24BIT
   Boolean bUseColor = true;     
 
-	WinScreenMode(winScreenModeGet, &uiWidth, &uiHeight, NULL, &bUseColor);
+  WinScreenMode(winScreenModeGet, &uiWidth, &uiHeight, NULL, &bUseColor);
   WinScreenMode(winScreenModeSet, &uiWidth, &uiHeight, &uiDepth, &bUseColor);  
 
   // instantiate application object
@@ -148,13 +148,13 @@ static bool HandleEvent(EventType *pEvent)
       return(true);  
       break;        
 
-    case WM_BUTTONPRESS:      
+    case FATE_EVENT_ID_BUTTONPRESS:      
       // send WM_BUTTONPRESS event to registered components if application does not handle it      
       if (!g_pApp->ButtonPressed(((FateEventType*)pEvent)->data.FateEventData.ulID))
         g_pApp->ButtonPressNotify(((FateEventType*)pEvent)->data.FateEventData.ulID);
       break;
 
-    case WM_BUTTONRELEASE:      
+    case FATE_EVENT_ID_BUTTONRELEASE:      
       // send WM_BUTTONRELEASE event to registered components if application does not handle it
       if (!g_pApp->ButtonReleased(((FateEventType*)pEvent)->data.FateEventData.ulID))
         g_pApp->ButtonReleaseNotify(((FateEventType*)pEvent)->data.FateEventData.ulID);

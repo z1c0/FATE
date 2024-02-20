@@ -1,13 +1,4 @@
-// FSavePanel.h: interface for the CFSavePanel class.
-//
-//////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_FSAVEPANEL_H__B7FA1982_FB24_4B93_889D_97724D6B6797__INCLUDED_)
-#define AFX_FSAVEPANEL_H__B7FA1982_FB24_4B93_889D_97724D6B6797__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 class CFSavePanel : public CFPanel  
 {
@@ -26,7 +17,7 @@ public:
   virtual void SetX(int iPosX); 
   virtual void SetY(int iPosY); 
   
-  void SetDirectory(LPTSTR pDirectory);
+  void SetDirectory(const TCHAR* pDirectory);
   LPCTSTR GetDirectory() { return(m_szDirectory); };
 
   void SetFileToSave(LPCTSTR pFileToSave);
@@ -51,4 +42,3 @@ private:
 
 };
 
-#endif // !defined(AFX_FSAVEPANEL_H__B7FA1982_FB24_4B93_889D_97724D6B6797__INCLUDED_)

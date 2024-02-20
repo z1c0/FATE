@@ -798,7 +798,7 @@ bool CFVRena::SendToMediaHost(int iScreen, char *pMsg)
     if (sock.Create()) {
       if (sock.Connect(m_addrVideo[iScreen])) {
         // send message
-        sock.Write(pMsg, iLen);
+        sock.Send(pMsg, iLen);
         sock.Close();
       }
     }
@@ -841,7 +841,7 @@ BOOL CFVRena::SendCaveMenuChange(int iNr)
     if (!sock.Connect(m_addrVR[i])) return(FALSE);
 
     sprintf(szSendBuff, "%d\n", iNr);
-    sock.Write(szSendBuff, strlen(szSendBuff) + 1);
+    sock.Send(szSendBuff, strlen(szSendBuff) + 1);
     sock.Close();
   }
 
@@ -861,7 +861,7 @@ BOOL CFVRena::ModelLoad(char *pszModel)
     if (!sock.Connect(m_addrModel[i])) return(FALSE);
 
     sprintf(szSendBuff, "obj|file(\"%s\")\n", pszModel);
-    sock.Write(szSendBuff, strlen(szSendBuff) + 1);
+    sock.Send(szSendBuff, strlen(szSendBuff) + 1);
     sock.Close();
   }
 
@@ -881,7 +881,7 @@ BOOL CFVRena::ModelSize(float fSize)
     if (!sock.Connect(m_addrModel[i])) return(FALSE);
 
     sprintf(szSendBuff, "sizer|size(%f)\n", fSize);
-    sock.Write(szSendBuff, strlen(szSendBuff) + 1);
+    sock.Send(szSendBuff, strlen(szSendBuff) + 1);
     sock.Close();
   }
 
@@ -906,7 +906,7 @@ BOOL CFVRena::ModelRotate(int iAxis, int iAngle)
     else 
       sprintf(szSendBuff, "zrotor|orientation(0, 0, %d)\n", iAngle);
 
-    sock.Write(szSendBuff, strlen(szSendBuff) + 1);
+    sock.Send(szSendBuff, strlen(szSendBuff) + 1);
     sock.Close();
   }
 

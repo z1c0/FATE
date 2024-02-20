@@ -420,7 +420,7 @@ BOOL CFPPTPanel::SendToPPTHost(char *pMsg)
   sock.SetTimeout(20);
   
   // send message
-  iRet= sock.Write(pMsg, strlen(pMsg)+1);
+  iRet= sock.Send(pMsg, strlen(pMsg)+1);
   if ((iRet == SOCKET_TIMEOUT)||(iRet == SOCKET_ERROR)) 
     return(FALSE);
   
