@@ -419,7 +419,7 @@ void CFItemList::DrawItems()
       m_bmpBack->SetBackgroundColor(colBack);
       m_bmpBack->DrawFilledRect(itemRect);
 
-      m_bmpBack->SetTextColor(colText);             
+      m_bmpBack->SetTextColor(colText);
       RECT textRect = itemRect;
       textRect.left += 2;
       m_bmpBack->DrawText(pAuxEntry->pszItem, textRect);

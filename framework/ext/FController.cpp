@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "FController.h"
 #include "../base/FateTypeDefs.h"
 #include "../comm/FInetAddr.h"
@@ -416,3 +418,5 @@ bool CFController::ReadConfigData(char *pszData)
   }
   return(true);
 }
+
+#endif

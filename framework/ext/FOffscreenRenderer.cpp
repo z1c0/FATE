@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "FOffscreenRenderer.h"
 #include "../base/FateApp.h"
 #include "../comm/FUDPSocket.h"
@@ -160,3 +162,5 @@ bool CFOffscreenRenderer::StylusUp(int xPos, int yPos)
   }
   return(false);
 }
+
+#endif

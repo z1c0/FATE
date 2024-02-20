@@ -144,9 +144,15 @@ void EventLoop()
 							}
 							break;
 
-						case FATE_EVENT_ID_TIMER:
-							g_pApp->Timer(data->componentId);
+						case FATE_EVENT_ID_MENUSELECTION:
+						{
+							long id = reinterpret_cast<long>(data->pCustomData);
+							g_pApp->MenuItemSelected(data->componentId, id);
+							{
+								g_pApp->MenuItemSelectNotify(data->componentId, id);
+							}
 							break;
+						}
 
 						default:
 							printf("EVENT: %06X\n", data->eventId);

@@ -110,7 +110,7 @@ void CFVEObj::SetScaleZ(float fScaleZ)
 }
 
 //--------------------------------------------------------------------------------
-void CFVEObj::SetExtraAttr(LPCTSTR pszName, BYTE *pData, unsigned long dwSize)
+void CFVEObj::SetExtraAttr(LPCTSTR pszName, unsigned char* pData, unsigned long dwSize)
 {
   CFVEObjAttr *pAttr= new CFVEObjAttr(pszName, pData, dwSize);
 

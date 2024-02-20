@@ -144,7 +144,8 @@ enum EFateDrawMode
   DM_LANDSCAPE_FLIPPED
 };
 
-#define _max(a, b) (((a) > (b)) ? (a) : (b)) 
+#define _max(a, b) (((a) > (b)) ? (a) : (b))
+#define _min(a, b) (((a) < (b)) ? (a) : (b)) 
 
 // Macro for safe memory release.
 #define SAFE_DELETE(p)  { if (p) { delete(p); (p)= NULL; } }

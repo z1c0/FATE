@@ -38,7 +38,7 @@ bool CDemo::InitFateApp()
   for (int i = 0; i < NR_OF_PANELS; i++)
   {
     TCHAR str[10];
-    _itot(i + 1, str, 10);
+    _stprintf(str, "%d", i);
 
     m_btns[i].SetCaption(str);
     m_btns[i].SetId(i);
@@ -46,7 +46,7 @@ bool CDemo::InitFateApp()
     m_btns[i].SetY(300);
     Add(m_btns[i]);
 
-    m_panels[i].SetVisible(i == 4);
+    m_panels[i].SetVisible(i == 2);
     Add(m_panels[i]);
   }
 

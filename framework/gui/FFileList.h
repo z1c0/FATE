@@ -3,8 +3,6 @@
 #include "../base/FateTypeDefs.h"
 #include "FItemList.h"
 
-#define IL_DIRFLAG    0x03
-
 class CFFileList : public CFItemList
 {
 public:

@@ -43,9 +43,12 @@ public:
   static bool CalcRectForText(const TCHAR *pszText, RECT& rect);
 
 private:
+  void Trace();
+  
   SDL_Renderer* m_pRenderer;
   SDL_Texture* m_pTexture;
   SDL_Texture* m_pTargetTexture;
+  SDL_Texture* m_pSaveTexture;
   int m_posX;
   int m_posY;
   int m_width;

@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 CFFileImpl::CFFileImpl(const TCHAR* pszFileName)
 {
-  m_handle = CreateFile(pszFileName, GENERIC_READ|GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);    
+  m_handle = CreateFile(pszFileName, GENERIC_READ|GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL); 
 }
 
 //------------------------------------------------------------------------------

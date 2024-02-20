@@ -429,7 +429,8 @@ bool CFBitmapImpl::CreateSaveBitmap(const CFBitmapImpl& bmp)
 bool CFBitmapImpl::SaveUnder(const CFBitmapImpl& bmp)
 {
   // Check if DC for saving was already created; if not, do so.
-  if (!m_hSaveDC) {
+  if (!m_hSaveDC)
+  {
     CreateSaveBitmap(bmp);
   }
 

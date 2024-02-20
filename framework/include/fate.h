@@ -23,17 +23,16 @@
 #include "../util/FRect.h"
 #include "../util/FTicker.h"
 
-#ifdef _WIN32
-
 #include "../ext/gui_protocol.h"
 #include "../ext/FVEObjPanel.h"
-#include "../ext/FOffScreenRenderer.h"
 #include "../ext/FNaviMap.h"
-#include "../ext/FController.h"
-#include "../ext/FStartMenu.h"
-#include "../ext/FStartMenu.h"
 #include "../ext/FStartMenu.h"
 #include "../ext/FWidgetPanel.h"
+
+#ifdef _WIN32
+
+#include "../ext/FController.h"
+#include "../ext/FOffscreenRenderer.h"
 
 #include "../audio/FMMWave.h"
 #include "../audio/FWaveIn.h"

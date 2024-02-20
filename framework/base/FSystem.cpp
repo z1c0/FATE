@@ -110,6 +110,12 @@ bool CFSystem::EnableSuspend(bool suspend)
 }
 
 //------------------------------------------------------------------------------
+/* static */ const TCHAR* CFSystem::GetDirectorySeparator()
+{
+  return CFSystemImpl::GetDirectorySeparator();
+}
+
+//------------------------------------------------------------------------------
 /* static */ void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
 {
   CFSystemImpl::GetPathToApplication(pszAppPath);

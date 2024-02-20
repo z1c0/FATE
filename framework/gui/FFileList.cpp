@@ -46,24 +46,31 @@ bool CFFileList::SetCurrDir(LPCTSTR pszDir)
   _tcscpy(pCurrDir, pszDir);
 
   // remove finishing '\' if necessary
-  int iLen= _tcslen(pCurrDir);
-  if ((iLen)&&(pCurrDir[iLen-1] == '\\')) pCurrDir[iLen-1]= 0;
+  int iLen = _tcslen(pCurrDir);
+  if (iLen && pCurrDir[iLen-1] == CFSystem::GetDirectorySeparator()[0])
+  {
+    pCurrDir[iLen-1] = 0;
+  }
 
   if (CFFile::IsDirectory(pCurrDir))
   {
     // directory up?
-    if (!_tcscmp(pCurrDir, TEXT(".."))) {
-      int i= _tcslen(m_szCurrDir) - 2;
+    if (!_tcscmp(pCurrDir, TEXT("..")))
+    {
+      int i = _tcslen(m_szCurrDir) - 2;
+      while (i > 0 && m_szCurrDir[i] != CFSystem::GetDirectorySeparator()[0])
+      {
+        i--;
+      }
+      m_szCurrDir[i + 1]= 0;
 
-      while ((i > 0)&&(m_szCurrDir[i] != '\\')) i--;
-      m_szCurrDir[i+1]= 0;
-
-    } else {
-      _tcscpy(m_szCurrDir, pCurrDir);
-      _tcscat(m_szCurrDir, TEXT("\\"));
     }
-
-    m_bDirRead= false;
+    else
+    {
+      _tcscpy(m_szCurrDir, pCurrDir);
+      _tcscat(m_szCurrDir, CFSystem::GetDirectorySeparator());
+    }
+    m_bDirRead = false;
     return true;
   }
   return false;
@@ -72,20 +79,14 @@ bool CFFileList::SetCurrDir(LPCTSTR pszDir)
 //--------------------------------------------------------------------------------
 bool CFFileList::ReadDir()
 {
-  TCHAR szFilePath[256];
-  TCHAR szFullPath[256];
-  
   // first entry is always "directory up" except for root-directory
-  if (_tcscmp(m_szCurrDir, TEXT("\\")))
+  if (!CFFile::IsRoot(m_szCurrDir))
   {
     AddItem(TEXT(".."), TEXT(".."));
   }
   
-  // create wild card string for directory exploring
-  _tcscpy(szFilePath, m_szCurrDir);
-  _tcscat(szFilePath, TEXT("*.*"));
-
-  CFDirectory directory(szFilePath);
+  TCHAR szFullPath[256];
+  CFDirectory directory(m_szCurrDir);
   while (true)
   {
     const TCHAR* fileName = directory.GetNextChild();
@@ -132,7 +133,6 @@ void CFFileList::ItemSelected(ITEMLISTENTRY *pEntry)
   // move to selected directory
   if (SetCurrDir(pEntry->pszAddInfo))
   {
-    pEntry->ulUser= IL_DIRFLAG;  // mark it as directory
     m_pSystem->QueueEvent(FATE_EVENT_ID_ITEMLISTSELECT, m_ulID, (void*)pEntry);
     Draw();
   }

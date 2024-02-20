@@ -9,6 +9,7 @@ CFBitmapImpl::CFBitmapImpl() :
 	m_pRenderer(NULL),
 	m_pTexture(NULL),
 	m_pTargetTexture(NULL),
+	m_pSaveTexture(NULL),
 	m_posX(0),
 	m_posY(0),
 	m_width(0),
@@ -20,11 +21,17 @@ CFBitmapImpl::CFBitmapImpl() :
 CFBitmapImpl::~CFBitmapImpl()
 {
 	::SDL_DestroyTexture(m_pTexture);
+	if (m_pSaveTexture)
+	{
+		::SDL_DestroyTexture(m_pSaveTexture);
+	}
 }
 
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::Create(int width, int height)
 {
+	assert(width);
+	assert(height);
 	if (!m_pRenderer)
 	{
 		assert(false);
@@ -35,6 +42,12 @@ bool CFBitmapImpl::Create(int width, int height)
 	m_pTexture = ::SDL_CreateTexture(m_pRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, m_width, m_height);
 	assert(m_pTexture);
 	return true;
+}
+
+//------------------------------------------------------------------------------
+void CFBitmapImpl::Trace()
+{
+	printf("CFBitmapImpl { %d, %d, %d, %d }\n", m_posX, m_posY, m_width, m_height);
 }
 
 //------------------------------------------------------------------------------
@@ -54,7 +67,7 @@ bool CFBitmapImpl::Load(const TCHAR* fileName)
 	m_pTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
 	assert(m_pTexture);
 	::SDL_FreeSurface(pSurface);
-  ::SDL_QueryTexture(m_pTexture, NULL, NULL, &m_width, &m_height);
+	::SDL_QueryTexture(m_pTexture, NULL, NULL, &m_width, &m_height);
 	return true;
 }
 
@@ -145,14 +158,29 @@ bool CFBitmapImpl::TransBlit(COLORREF colTrans)
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::SaveUnder(const CFBitmapImpl& bmp)
 {
-	printf("FIX ME: SaveUnder\n");
+	if (!m_pSaveTexture)
+	{
+		m_pSaveTexture = ::SDL_CreateTexture(m_pRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, m_width, m_height);
+	}
+	assert(m_pTargetTexture);
+	::SDL_SetRenderTarget(m_pRenderer, m_pSaveTexture);
+	SDL_Rect sourceRect = { m_posX, m_posY, m_width, m_height };
+	SDL_Rect destRect = { 0, 0, m_width, m_height };
+	::SDL_RenderCopy(m_pRenderer, m_pTargetTexture, &sourceRect, &destRect);
+	::SDL_SetRenderTarget(m_pRenderer, NULL);
 	return true;
 }
 
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::RestoreUnder(const CFBitmapImpl& bmp)
 {
-	printf("FIX ME: RestoreUnder\n");
+	assert(m_pSaveTexture);
+	assert(m_pTargetTexture);
+	::SDL_SetRenderTarget(m_pRenderer, m_pTargetTexture);
+	SDL_Rect sourceRect = { 0, 0, m_width, m_height };
+	SDL_Rect destRect = { m_posX, m_posY, m_width, m_height };
+	::SDL_RenderCopy(m_pRenderer, m_pSaveTexture, &sourceRect, &destRect);
+	::SDL_SetRenderTarget(m_pRenderer, NULL);
 	return true;
 }
 
@@ -212,14 +240,20 @@ bool CFBitmapImpl::DrawFilledRect(int left, int top, int width, int height)
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::DrawPolygon(POINT *points, int count)
 {
-	printf("FIX ME: DrawPolygon\n");
+	::SDL_SetRenderTarget(m_pRenderer, m_pTexture);
+	::SDL_SetRenderDrawColor(m_pRenderer, m_col.r, m_col.g, m_col.b, 255);
+	for (int i = 0; i < count - 1; i++)
+	{
+		::SDL_RenderDrawLine(m_pRenderer, points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
+	}
+	::SDL_SetRenderTarget(m_pRenderer, NULL);
 	return true;
 }
 
 //------------------------------------------------------------------------------
 static TTF_Font* GetFont()
 {
-	static TTF_Font* font = ::TTF_OpenFont("./arial.ttf", 14);
+	static TTF_Font* font = ::TTF_OpenFont("./font.ttf", 14);
 	assert(font);
 	return font;
 }
@@ -230,7 +264,7 @@ bool CFBitmapImpl::DrawText(const TCHAR *text, RECT& rect)
 	SDL_Color textColor = { m_colText.r, m_colText.g, m_colText.b, 255 };
 	SDL_Surface* pSurface = ::TTF_RenderText_Solid(GetFont(), text, textColor);
 	SDL_Texture* pTextTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
-  ::SDL_FreeSurface(pSurface);
+	::SDL_FreeSurface(pSurface);
 	::SDL_SetRenderTarget(m_pRenderer, m_pTexture);
 	SDL_Rect sdlRect = { rect.left, rect.top, pSurface->w, pSurface->h };
 	::SDL_RenderCopy(m_pRenderer, pTextTexture, NULL, &sdlRect);

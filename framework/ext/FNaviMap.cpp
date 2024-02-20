@@ -98,31 +98,34 @@ bool CFNaviMap::StylusDown(int xPos, int yPos)
 //--------------------------------------------------------------------------------
 bool CFNaviMap::StylusMove(int xPos, int yPos)
 {
-  if ((m_bShow[0])&&(m_bmpN->PointInside(xPos, yPos))) {
-    m_bmpMap->SetY(max(m_bmpMap->GetY() - m_iScrollStep, 0));
+  if ((m_bShow[0])&&(m_bmpN->PointInside(xPos, yPos)))
+  {
+    m_bmpMap->SetY(_max(m_bmpMap->GetY() - m_iScrollStep, 0));
+    m_bShow[0]= m_bmpMap->GetY() > 0;
+    m_bShow[1]= m_bmpMap->GetY() < m_iHeight;
+    Draw();
+    return(true);  
+  }
+  else if ((m_bShow[1])&&(m_bmpS->PointInside(xPos, yPos)))
+  {
+    m_bmpMap->SetY(_min(m_bmpMap->GetY() + m_iScrollStep, m_bmpMap->GetHeight() - m_iHeight));
     m_bShow[0]= m_bmpMap->GetY() > 0;
     m_bShow[1]= m_bmpMap->GetY() < m_iHeight;
     Draw();
     return(true);
-  
-  } else if ((m_bShow[1])&&(m_bmpS->PointInside(xPos, yPos))) {
-    m_bmpMap->SetY(min(m_bmpMap->GetY() + m_iScrollStep, 
-                       m_bmpMap->GetHeight() - m_iHeight));
-    m_bShow[0]= m_bmpMap->GetY() > 0;
-    m_bShow[1]= m_bmpMap->GetY() < m_iHeight;
-    Draw();
-    return(true);
-
-  } else if ((m_bShow[2])&&(m_bmpW->PointInside(xPos, yPos))) {
-    m_bmpMap->SetX(max(m_bmpMap->GetX() - m_iScrollStep, 0));
+  }
+  else if ((m_bShow[2])&&(m_bmpW->PointInside(xPos, yPos)))
+  {
+    m_bmpMap->SetX(_max(m_bmpMap->GetX() - m_iScrollStep, 0));
     m_bShow[2]= m_bmpMap->GetX() > 0;
     m_bShow[3]= m_bmpMap->GetX() < m_iWidth;
     Draw();
     return(true);
   
-  } else if ((m_bShow[3])&&(m_bmpE->PointInside(xPos, yPos))) {
-    m_bmpMap->SetX(min(m_bmpMap->GetX() + m_iScrollStep,
-                       m_bmpMap->GetWidth() - m_iWidth));
+  }
+  else if ((m_bShow[3])&&(m_bmpE->PointInside(xPos, yPos)))
+  {
+    m_bmpMap->SetX(_min(m_bmpMap->GetX() + m_iScrollStep, m_bmpMap->GetWidth() - m_iWidth));
     m_bShow[2]= m_bmpMap->GetX() > 0;
     m_bShow[3]= m_bmpMap->GetX() < m_iWidth;
     Draw();
@@ -195,8 +198,8 @@ void CFNaviMap::CreateNaviBmps()
     POINT points[4];
   
     // Adaption needed?
-    m_iWidth = min(m_iWidth , m_app->GetWidth() - m_iPosX);
-    m_iHeight= min(m_iHeight, m_app->GetHeight() - m_iPosX);
+    m_iWidth  = _min(m_iWidth , m_app->GetWidth() - m_iPosX);
+    m_iHeight = _min(m_iHeight, m_app->GetHeight() - m_iPosX);
 
     // Create north navigation bitmap.
     m_bmpN = new CFBitmap(m_pSystem->GetDoubleBuffer());

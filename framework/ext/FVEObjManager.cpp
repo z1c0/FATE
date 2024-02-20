@@ -78,11 +78,13 @@ bool CFVEObjManager::ReadConfigData(char *pszData)
         case 2:
           if ((cRead[0] == '\n')||(!cRead[0])) {  // IP-settings complete
             iState= 0;
-            if (!_stricmp(szHostName, "VR")) {                
+            if (!strcmp(szHostName, "VR"))
+            {
               SAFE_DELETE(m_pAddrServer);
               m_pAddrServer= new CFInetAddr(szHostAddr, atoi(szPort));
-
-            } else {
+            }
+            else
+            {
               // unknown entry found?
               // ... just skip
             }
@@ -330,8 +332,8 @@ bool CFVEObjManager::RequestAllValues()
 bool CFVEObjManager::RequestValues(CFVEObj *pObj)
 {
   CFSocket sock;
-  VE_PACKET pack= {0};
-  VE_PACKET_OBJ packObj= {0};
+  VE_PACKET pack= {};
+  VE_PACKET_OBJ packObj= {};
   TCHAR szObjName[MAX_OBJ_NAME_LEN];
 
   // first clear object list
@@ -372,15 +374,16 @@ bool CFVEObjManager::RequestValues(CFVEObj *pObj)
     pObj->SetScaleZ(packObj.fScaleZ);
 
     // extra attribute(s)
-    for (int i=0; i<packObj.iExtra; i++) {     
+    for (int i=0; i<packObj.iExtra; i++)
+    {     
       VE_PACKET_ATTR packAttr= {0};
-      BYTE *pData;
+      unsigned char* pData;
       int iRet= 0;
       TCHAR szAttrName[MAX_ATTR_NAME_LEN];
 
       // receive information about attribute
       sock.Receive((char*)&packAttr, sizeof(VE_PACKET_ATTR));
-      pData= (BYTE*)malloc(packAttr.uiLen);
+      pData = (unsigned char*)malloc(packAttr.uiLen);
       
       // receive actual attribute
       while (((UINT)iRet < packAttr.uiLen)&&(iRet != SOCKET_ERROR)&&(iRet != SOCKET_TIMEOUT)) {

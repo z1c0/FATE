@@ -1,5 +1,4 @@
-#ifndef __FVEOBJPANEL__H__
-#define __FVEOBJPANEL__H__
+#pragma once
 
 #include "FVEObjManager.h"
 #include "../gui/FPanel.h"
@@ -44,4 +43,3 @@ protected:
   CFLabel *m_labelVal;
 };
 
-#endif  // __FVEOBJPANEL__H__

@@ -15,13 +15,13 @@ public:
 private:  
   CFButton* m_btns;
   CFPanel* m_panels;
-  CFMenu m_menu;
-  CFDropList m_dropList;
   CFItemList m_itemList;
+  CFDropList m_dropList;
   CFDirList m_dirList;
-  CFVEObjPanel m_vePanel;
-  CFLabel m_label;
   CFProgressBar m_progressBar;
   CFFileList m_fileList;
+  CFVEObjPanel m_vePanel;
+  CFLabel m_label;
+  CFMenu m_menu;
 };
 

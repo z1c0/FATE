@@ -56,19 +56,24 @@ bool CFStartMenu::StylusUp(int xPos, int yPos)
 {
   bool bRet= false;
 
-  if ((m_bArrL)&&(m_bmpArrL->PointInside(xPos, yPos))) {
-    m_iCurrApp= max(m_iCurrApp - 1, 0);
+  if ((m_bArrL)&&(m_bmpArrL->PointInside(xPos, yPos)))
+  {
+    m_iCurrApp = _max(m_iCurrApp - 1, 0);
     Draw();
     bRet= true;
   
-  } else if ((m_bArrR)&&(m_bmpArrR->PointInside(xPos, yPos))) {
-    m_iCurrApp= min(m_iCurrApp + 1, m_pPicList->GetSize() - 1);
+  }
+  else if ((m_bArrR)&&(m_bmpArrR->PointInside(xPos, yPos)))
+  {
+    m_iCurrApp = _min(m_iCurrApp + 1, m_pPicList->GetSize() - 1);
     Draw();
     bRet= true;  
 
-  } else if ((m_bApp)&&(m_bmpCurr->PointInside(xPos, yPos))) {
+  }
+  else if ((m_bApp)&&(m_bmpCurr->PointInside(xPos, yPos)))
+  {
     AppSelected(m_iCurrApp);
-    bRet= true;  
+    bRet = true;  
   }
 
   m_bArrL= false;
@@ -160,7 +165,7 @@ CFBitmap* CFStartMenu::CreateAppBmp(int iNr)
     rect.top   = 0;
     rect.right = bmp->GetWidth();
     rect.bottom= bmp->GetHeight();
-    _itot(iNr, szText, 10);
+    _stprintf(szText, "%d", iNr);
 
     bmp->SetBackgroundColor(m_colBack);
     bmp->SetColor(m_colBack);

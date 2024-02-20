@@ -37,6 +37,7 @@ public:
 
 	static int GetDefaultWidth() { return 240; }
 	static int GetDefaultHeight() { return 320; }
+	static const TCHAR* GetDirectorySeparator() { return "/"; }
 	static void GetPathToApplication(TCHAR *pszAppPath);
 	static unsigned int GetTicks();
 	static int GetRandomNumber(int max);

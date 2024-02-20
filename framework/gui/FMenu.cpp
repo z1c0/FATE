@@ -129,7 +129,7 @@ bool CFMenu::StylusDown(int xPos, int yPos)
   // was a sub-menu clicked?
   if (m_pCurrOpen)
   {
-    pTemp= m_pCurrOpen->pDown;
+    pTemp = m_pCurrOpen->pDown;
     while(pTemp)
     {
       if (pTemp->pBmp->PointInside(xPos, yPos))

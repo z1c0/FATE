@@ -1,5 +1,6 @@
 #include "FSystemImpl.h"
 #include "FBitmapImpl.h"
+#include "FFileImpl.h"
 #include "../../base/FateApp.h"
 
 //------------------------------------------------------------------------------
@@ -48,9 +49,17 @@ void CFSystemImpl::ForceRedraw()
 }
 
 //------------------------------------------------------------------------------
-void CFSystemImpl::DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal)
+void CFSystemImpl::DrawFileIcon(CFBitmapImpl& bmp, const TCHAR* filePath, int x, int y, bool normal)
 {
-	assert(false);
+	if (CFFileImpl::IsDirectory(filePath))
+	{
+		bmp.SetBackgroundColor(RGB(255, 205, 0));
+	}
+	else
+	{
+		bmp.SetBackgroundColor(RGB(70, 130, 180));
+	}
+	bmp.DrawFilledRect(x, y, 16, 16);
 }
 
 //------------------------------------------------------------------------------
