@@ -15,8 +15,8 @@ public:
   bool IsValid() const;
   void SetDestBitmap(const CFBitmapImpl& bmp);
 	bool Load(const TCHAR* pszFileName);
-	bool Load(int wResourceID);
-	bool Load(char *pszData, unsigned long dwSize);
+	bool Load(int resourceId, const TCHAR* fallbackFilePath);
+	bool Load(const char *data, unsigned long size);
   bool SaveToFile(const TCHAR *pszFileName) const;
   char* GetBits();
   int GetX() const { return m_posX; }

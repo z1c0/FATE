@@ -8,6 +8,8 @@
 
 #include "../gui/FButton.h"
 #include "../gui/FMenu.h"
+#include "../gui/FPanel.h"
+#include "../gui/FLabel.h"
 #include "../gui/FItemList.h"
 #include "../gui/FFileList.h"
 #include "../gui/FDirList.h"

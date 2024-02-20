@@ -138,7 +138,7 @@ bool CFButton::StylusDown(int xPos, int yPos)
     } 
     m_app->DrawDoubleBuffer();
     
-    m_pSystem->QueueEvent(WM_BUTTONPRESS, m_ulID, NULL);
+    m_pSystem->QueueEvent(FATE_EVENT_ID_BUTTONPRESS, m_ulID, NULL);
     
     return(true);
   }
@@ -148,18 +148,21 @@ bool CFButton::StylusDown(int xPos, int yPos)
 //--------------------------------------------------------------------------------
 bool CFButton::StylusUp(int xPos, int yPos)
 {
-  if (m_app->m_pSysCapt == this) {
-    m_bPressed= false;
-    m_app->m_pSysCapt= NULL;    
-   
+  if (m_app->m_pSysCapt == this)
+  {
+    m_bPressed = false;
+    m_app->m_pSysCapt = NULL;
     // transparency set?
-    if (m_bTrans) {
+    if (m_bTrans)
+    {
       m_pBmpDefault->TransBlit(m_colTrans);
-    } else {
+    }
+    else
+    {
       m_pBmpDefault->Blit();
     }
     
-    m_pSystem->QueueEvent(WM_BUTTONRELEASE, m_ulID, NULL);
+    m_pSystem->QueueEvent(FATE_EVENT_ID_BUTTONRELEASE, m_ulID, NULL);
     return(true);
   }
   return(false);  // event not handled

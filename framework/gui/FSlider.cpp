@@ -116,13 +116,13 @@ bool CFSlider::StylusMove(int xPos, int yPos)
     if ((m_bVer)&&(yPos - pDI->iOffsY >= m_iTop)&&(yPos - pDI->iOffsY + m_bmpSlide->GetHeight() <= m_iBottom))
     {
       m_app->DoDrag(m_iDrag, yPos);
-      m_pSystem->QueueEvent(WM_SLIDERCHANGE, m_ulID, reinterpret_cast<void*>(GetValue()));
+      m_pSystem->QueueEvent(FATE_EVENT_ID_SLIDERCHANGE, m_ulID, reinterpret_cast<void*>(GetValue()));
     
     }
     else if ((xPos - pDI->iOffsX >= m_iBottom)&&(xPos - pDI->iOffsX + m_bmpSlide->GetWidth() <= m_iTop))
     {
       m_app->DoDrag(xPos, m_iDrag);
-      m_pSystem->QueueEvent(WM_SLIDERCHANGE, m_ulID, reinterpret_cast<void*>(GetValue()));
+      m_pSystem->QueueEvent(FATE_EVENT_ID_SLIDERCHANGE, m_ulID, reinterpret_cast<void*>(GetValue()));
     }
     return true;
   }
@@ -141,7 +141,7 @@ bool CFSlider::StylusUp(int xPos, int yPos)
 
     // drag is over anyway
     m_app->StopDragMode();
-    m_pSystem->QueueEvent(WM_SLIDERCHANGE, m_ulID, reinterpret_cast<void*>(GetValue()));
+    m_pSystem->QueueEvent(FATE_EVENT_ID_SLIDERCHANGE, m_ulID, reinterpret_cast<void*>(GetValue()));
     m_bmpSlide->Blit();
     return(true);
   }

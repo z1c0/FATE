@@ -1,9 +1,9 @@
 #include "FSystemImpl.h"
 #include "FBitmapImpl.h"
-
+#include "../../base/FateApp.h"
 
 //------------------------------------------------------------------------------
-CFSystemImpl::CFSystemImpl(SDL_Window* pWindow, int width, int height) : 
+CFSystemImpl::CFSystemImpl(SDL_Window* pWindow, int width, int height) :
 	m_pWindow(pWindow), m_width(width), m_height(height)
 {
 }
@@ -23,14 +23,16 @@ CFBitmapImpl* CFSystemImpl::CreateDoubleBuffer()
 //------------------------------------------------------------------------------
 bool CFSystemImpl::ShutDownSystem()
 {
-	assert(false);
-	return false;
+	SDL_Event evt;
+  evt.type = SDL_QUIT;
+	::SDL_PushEvent(&evt);
+	return true;
 }
 
 //------------------------------------------------------------------------------
 void CFSystemImpl::ShowError(const TCHAR* msg)
 {
-	assert(false);
+	::SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", msg, NULL);
 }
 
 //------------------------------------------------------------------------------
@@ -42,7 +44,7 @@ void CFSystemImpl::RenderDoubleBuffer(CFBitmapImpl& doubleBuffer)
 //------------------------------------------------------------------------------
 void CFSystemImpl::ForceRedraw()
 {
-	assert(false);
+	QueueEvent(FATE_EVENT_ID_REDRAW, 0, NULL);
 }
 
 //------------------------------------------------------------------------------
@@ -52,17 +54,42 @@ void CFSystemImpl::DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int
 }
 
 //------------------------------------------------------------------------------
-void CFSystemImpl::QueueEvent(int iEventID, int iComponentID, void *pCustomData)
+void CFSystemImpl::QueueEvent(int eventId, int componentId, void *pCustomData)
 {
-	assert(false);
+	SDL_Event evt;
+  evt.type = EVENT_TYPE_FATE;
+	FateEventData* data = new FateEventData();
+	data->eventId = eventId;
+	data->componentId = componentId;
+	data->pCustomData = pCustomData;
+	evt.user.data1 = data;
+	::SDL_PushEvent(&evt);
+}
+
+struct TimerData
+{
+	unsigned long id;
+};
+Uint32 TimerCallBack(Uint32 interval, void* param)
+{
+	TimerData* timerData = reinterpret_cast<TimerData*>(param);	
+	CFateApp::GetApp()->Timer(timerData->id);
+	return 1;
 }
 
 //------------------------------------------------------------------------------
 void CFSystemImpl::AddTimer(unsigned long id, int interval)
 {
-	assert(false);
+	TimerData *data = new TimerData();
+	data->id = id;
+	::SDL_AddTimer(interval, TimerCallBack, data);
 }
 
+//------------------------------------------------------------------------------
+void CFSystemImpl::Sleep(int milliSeconds)
+{
+  ::usleep(milliSeconds * 1000);
+}
 
 //------------------------------------------------------------------------------
 /* static */ void CFSystemImpl::GetPathToApplication(TCHAR *pszAppPath)
@@ -73,6 +100,7 @@ void CFSystemImpl::AddTimer(unsigned long id, int interval)
 	{
 		buffer[length] = 0;
 		strcpy(pszAppPath, dirname(buffer));
+		strcat(pszAppPath, "/");
 	}
 	else
 	{

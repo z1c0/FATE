@@ -40,9 +40,9 @@ CFBitmap& CFBitmap::operator=(const CFBitmap& bmp)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::Load(int wResourceID)
+bool CFBitmap::Load(int resourceId, const TCHAR* fallbackFilePath)
 {
-  return m_pImpl->Load(wResourceID);
+  return m_pImpl->Load(resourceId, fallbackFilePath);
 }
 
 //------------------------------------------------------------------------------
@@ -52,9 +52,9 @@ bool CFBitmap::Load(const TCHAR* pszFileName)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmap::Load(char *pszData, unsigned long dwSize)
+bool CFBitmap::Load(const char *data, unsigned long size)
 {
-  return m_pImpl->Load(pszData, dwSize);
+  return m_pImpl->Load(data, size);
 }
 
 //------------------------------------------------------------------------------

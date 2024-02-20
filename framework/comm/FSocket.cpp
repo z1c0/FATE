@@ -53,7 +53,7 @@ bool CFSocket::Listen()
 }
 
 //--------------------------------------------------------------------------------
-int CFSocket::Accept(CFSocket& sock)
+bool CFSocket::Accept(CFSocket& sock)
 {
   return m_pImpl->Accept(*sock.m_pImpl);
 }
@@ -80,12 +80,6 @@ int CFSocket::Receive(char* pBuff, const int size)
 int CFSocket::Send(const char* pBuff, const int size)
 {
   return m_pImpl->Send(pBuff, size);
-}
-
-//--------------------------------------------------------------------------------
-int CFSocket::Write(const char* pBuff, const int size)
-{
-  return m_pImpl->Write(pBuff, size);
 }
 
 //--------------------------------------------------------------------------------

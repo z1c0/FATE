@@ -37,13 +37,13 @@ bool CFDropList::StylusDown(int xPos, int yPos)
       m_app->m_pSysCapt= this;
       m_bmpBack->SaveUnder();
       Draw();
-      m_pSystem->QueueEvent(WM_DROPLISTEXPAND, m_ulID, NULL);    
+      m_pSystem->QueueEvent(FATE_EVENT_ID_DROPLISTEXPAND, m_ulID, NULL);    
     }
     else
     {
       if (m_app->m_pSysCapt == this) m_app->m_pSysCapt= NULL;
       m_bmpBack->RestoreUnder();
-      m_pSystem->QueueEvent(WM_DROPLISTCOLLAPSE, m_ulID, NULL);
+      m_pSystem->QueueEvent(FATE_EVENT_ID_DROPLISTCOLLAPSE, m_ulID, NULL);
     }    
     return(true);
   
@@ -168,8 +168,8 @@ void CFDropList::ItemSelected(ITEMLISTENTRY *pEntry)
   DrawSelItem(pEntry->pszItem);
   m_app->DrawDoubleBuffer();
   m_bmpBack->RestoreUnder();
-  m_pSystem->QueueEvent(WM_DROPLISTSELECT, m_ulID, (void*)pEntry);
-  m_pSystem->QueueEvent(WM_DROPLISTCOLLAPSE, m_ulID, NULL);  
+  m_pSystem->QueueEvent(FATE_EVENT_ID_DROPLISTSELECT, m_ulID, (void*)pEntry);
+  m_pSystem->QueueEvent(FATE_EVENT_ID_DROPLISTCOLLAPSE, m_ulID, NULL);  
 }
 
 //--------------------------------------------------------------------------------

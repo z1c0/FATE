@@ -46,7 +46,13 @@ bool CFFile::WriteBytes(unsigned char* pBytes, unsigned int count)
 }
 
 //------------------------------------------------------------------------------
-/* static */ bool CFFile::IsDirectory(const TCHAR* fileName)
+/* static */ bool CFFile::IsDirectory(const TCHAR* filePath)
 {
-  return CFFileImpl::IsDirectory(fileName);
+  return CFFileImpl::IsDirectory(filePath);
+}
+
+//------------------------------------------------------------------------------
+/* static */ bool CFFile::Exists(const TCHAR* filePath)
+{
+  return CFFileImpl::IsDirectory(filePath);
 }

@@ -60,12 +60,16 @@ struct RECT
 #include <stdarg.h>
 #include <unistd.h>
 #include <libgen.h>
+#include <stdlib.h>
 
 #define _stprintf sprintf
 #define _tcscmp strcmp
 #define _tcscpy strcpy
 #define _tcsncpy strncpy
 #define _tcslen strlen
+#define _tcscat strcat
+#define _tcstok strtok
+#define _tcsrchr strrchr
 
 #define _tfopen fopen
 
@@ -144,3 +148,17 @@ enum EFateDrawMode
 #define SAFE_DELETE(p)  { if (p) { delete(p); (p)= NULL; } }
 
 #define COLOR_CORNFLOWER_BLUE RGB(100, 149, 237)
+
+//--------------------------------------------------------------------------------
+// Messages for exchanging information about events triggered by user interface controls.
+#define FATE_EVENT_ID_BUTTONPRESS           0xBE01
+#define FATE_EVENT_ID_BUTTONRELEASE         0xBE02
+#define FATE_EVENT_ID_MENUSELECTION         0xBE03
+#define FATE_EVENT_ID_ITEMLISTSELECT        0xBE04
+#define FATE_EVENT_ID_DROPLISTEXPAND        0xBE05
+#define FATE_EVENT_ID_DROPLISTSELECT        0xBE06
+#define FATE_EVENT_ID_DROPLISTCOLLAPSE      0xBE07
+#define FATE_EVENT_ID_SLIDERCHANGE          0xBE08
+#define FATE_EVENT_ID_CLIENTCONNECT         0xBE09
+#define FATE_EVENT_ID_REDRAW                0xBE10
+#define FATE_EVENT_ID_TIMER                 0xBE11

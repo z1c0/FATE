@@ -19,9 +19,12 @@ public:
   bool ShutDownSystem();
   int GetWidth() const;
   int GetHeight() const;
-  void AddTimer(unsigned long id, int interval);  
+  void AddTimer(unsigned long id, int interval);
   bool EnableSuspend(bool suspend);
+  void Sleep(int milliSeconds);
 
+  static int GetDefaultWidth();
+  static int GetDefaultHeight();
   static void GetPathToApplication(TCHAR *pszAppPath);
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);

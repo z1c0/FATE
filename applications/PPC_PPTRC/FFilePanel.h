@@ -1,13 +1,4 @@
-// FFilePanel.h: interface for the CFFilePanel class.
-//
-//////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_FFILEPANEL_H__354FB8AB_E98F_4F9D_8B4B_EB71766877C7__INCLUDED_)
-#define AFX_FFILEPANEL_H__354FB8AB_E98F_4F9D_8B4B_EB71766877C7__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include "../../framework/include/fate.h"
 
@@ -22,11 +13,11 @@ public:
   virtual void SetX(int iPosX) { m_iPosX= iPosX; UpdatePos(); };
   virtual void SetY(int iPosY) { m_iPosY= iPosY; UpdatePos(); };
   virtual bool StylusDown(int xPos, int yPos);
-  BOOL Create();
+  bool Create();
   bool ItemListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
-  BOOL AddItem(CFBitmap *bmpPic, TCHAR *pszItem, TCHAR *pszAddInfo) 
+  bool AddItem(CFBitmap *bmpPic, const TCHAR *pszItem, const TCHAR *pszAddInfo) 
   { 
-    return(m_ItemList->AddPicItem(bmpPic, pszItem, pszAddInfo)); 
+    return m_ItemList->AddPicItem(bmpPic, pszItem, pszAddInfo); 
   };
   void ClearItems() { m_ItemList->ClearItems(); };
   TCHAR* GetFilePath() { return(m_pszFullPath); };
@@ -37,7 +28,7 @@ public:
     m_fileLabel->SetText(TEXT("")); 
   };
 private:
-  BOOL FillItemListFromServer(char *pszDir);
+  bool FillItemListFromServer(const char *pszDir);
   void UpdatePos();
   CFItemList *m_ItemList;
   CFButton *m_btnLoad;
@@ -51,4 +42,3 @@ private:
   CPPTRC *m_theApp;
 };
 
-#endif // !defined(AFX_FFILEPANEL_H__354FB8AB_E98F_4F9D_8B4B_EB71766877C7__INCLUDED_)

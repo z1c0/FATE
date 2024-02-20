@@ -86,6 +86,30 @@ void CFSystem::AddTimer(unsigned long id, int interval)
 }
 
 //------------------------------------------------------------------------------
+void CFSystem::Sleep(int milliSeconds)
+{
+  m_pImpl->Sleep(milliSeconds);
+}
+
+//------------------------------------------------------------------------------
+bool CFSystem::EnableSuspend(bool suspend)
+{
+  return m_pImpl->EnableSuspend(suspend);
+}
+
+//------------------------------------------------------------------------------
+/* static */ int CFSystem::GetDefaultWidth()
+{
+  return CFSystemImpl::GetDefaultWidth();
+}
+
+//------------------------------------------------------------------------------
+/* static */ int CFSystem::GetDefaultHeight()
+{
+  return CFSystemImpl::GetDefaultHeight();
+}
+
+//------------------------------------------------------------------------------
 /* static */ void CFSystem::GetPathToApplication(TCHAR *pszAppPath)
 {
   CFSystemImpl::GetPathToApplication(pszAppPath);

@@ -20,12 +20,11 @@ public:
   bool Close();
   bool Connect(const CFInetAddr* pInetAddr);
 	bool Connect(char *pAddrStr, int port);	
-  int Accept(CFSocket& sock);	
+  bool Accept(CFSocket& sock);	
   int Send(const char* pBuff, const int size);
-	int Receive(char* pBuff, const int size);	
-  int Write(const char* pBuff, const int size);	
-  bool GetRemoteAddr(CFInetAddr* pIntAddr);	
-  bool GetInetAddr(CFInetAddr* pInetAddr);  
+	int Receive(char* pBuff, const int size);
+  bool GetRemoteAddr(CFInetAddr* pIntAddr);
+  bool GetInetAddr(CFInetAddr* pInetAddr);
   bool IsClientConnecting() const;
   bool IsReceiving() const;
   int GetListenPort() const;

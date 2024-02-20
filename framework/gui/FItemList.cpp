@@ -179,6 +179,10 @@ bool CFItemList::AddPicItem(CFBitmap *bmpPic, LPCTSTR pszItem, LPCTSTR pszAddInf
   }
 
   // if picture was specified?
+  if (bmpPic)
+  {
+    bmpPic->SetDestBitmap(*m_bmpBack);
+  }
   pTempEntry->pBmp = bmpPic;
   
   pTempEntry->pNext = NULL;
@@ -294,7 +298,7 @@ bool CFItemList::StylusDown(int xPos, int yPos)
 void CFItemList::ItemSelected(ITEMLISTENTRY *pEntry)
 {
   Draw();
-  m_pSystem->QueueEvent(WM_ITEMLISTSELECT, m_ulID, (void*)pEntry);
+  m_pSystem->QueueEvent(FATE_EVENT_ID_ITEMLISTSELECT, m_ulID, (void*)pEntry);
 }
 
 //--------------------------------------------------------------------------------

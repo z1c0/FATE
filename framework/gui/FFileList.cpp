@@ -9,7 +9,7 @@ CFFileList::CFFileList(int iMaxVisItems, int iItemWidth, CFBitmap *cbUpArrow, CF
   CFItemList(iMaxVisItems, iItemWidth, cbUpArrow, cbDownArrow)
 {
   CFSystem::GetPathToApplication(m_szCurrDir);
-  m_bDirRead = FALSE;
+  m_bDirRead = false;
   m_pFilters = NULL;
   m_isFileList = true;
 }
@@ -32,7 +32,7 @@ void CFFileList::BeforeDrawItems()
   {
     ClearItems();
     ReadDir();
-    m_bDirRead= TRUE;
+    m_bDirRead = true;
   }
 }
 
@@ -63,10 +63,10 @@ bool CFFileList::SetCurrDir(LPCTSTR pszDir)
       _tcscat(m_szCurrDir, TEXT("\\"));
     }
 
-    m_bDirRead= FALSE;
-    return(TRUE);
+    m_bDirRead= false;
+    return true;
   }
-  return(FALSE);
+  return false;
 }
 
 //--------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ bool CFFileList::ReadDir()
   // first entry is always "directory up" except for root-directory
   if (_tcscmp(m_szCurrDir, TEXT("\\")))
   {
-     AddItem(TEXT(".."), TEXT(".."));
+    AddItem(TEXT(".."), TEXT(".."));
   }
   
   // create wild card string for directory exploring
@@ -133,7 +133,7 @@ void CFFileList::ItemSelected(ITEMLISTENTRY *pEntry)
   if (SetCurrDir(pEntry->pszAddInfo))
   {
     pEntry->ulUser= IL_DIRFLAG;  // mark it as directory
-    m_pSystem->QueueEvent(WM_ITEMLISTSELECT, m_ulID, (void*)pEntry);
+    m_pSystem->QueueEvent(FATE_EVENT_ID_ITEMLISTSELECT, m_ulID, (void*)pEntry);
     Draw();
   }
   else
@@ -165,7 +165,7 @@ bool CFFileList::SetFilters(LPTSTR pFilterStr)
       if ((_tcslen(pToken) >= 2)&&(pToken[0] == '.')) {
         // add filter
         FILEFILTER *pTemp= new FILEFILTER;
-        if (!pTemp) return(FALSE);
+        if (!pTemp) return false;
         pTemp->pszFilter= (TCHAR*)malloc((_tcslen(pToken) + 1) * sizeof(TCHAR));
         _tcscpy(pTemp->pszFilter, pToken);
         pTemp->pNext= NULL;
@@ -184,9 +184,9 @@ bool CFFileList::SetFilters(LPTSTR pFilterStr)
       pToken = _tcstok(NULL, pDel);
     }
     free(pszCopy);
-    return(TRUE);
+    return true;
   }
-  return(FALSE);
+  return false;
 }
 
 //--------------------------------------------------------------------------------

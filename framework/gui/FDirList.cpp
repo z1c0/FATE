@@ -9,7 +9,7 @@ CFDirList::CFDirList(int iMaxVisItems, int iItemWidth, CFBitmap *cbUpArrow, CFBi
             CFItemList(iMaxVisItems, iItemWidth, cbUpArrow, cbDownArrow)
 {
   CFSystem::GetPathToApplication(m_szCurrDir);
-  m_bDirRead = FALSE;
+  m_bDirRead = false;
   m_isFileList = true;
 }
 
@@ -22,7 +22,7 @@ void CFDirList::BeforeDrawItems()
   {
     ClearItems();
     ReadDir();
-    m_bDirRead= TRUE;
+    m_bDirRead= true;
   }
 
 }
@@ -41,16 +41,16 @@ bool CFDirList::SetCurrDir(const TCHAR* pCurrDir)
       i--;
     }
     m_szCurrDir[i]= 0;
-    m_bDirRead = FALSE;
+    m_bDirRead = false;
   }
   else if ((_tcscmp(m_szCurrDir, pCurrDir) == 0)) // it the same as before? then read directory
   {
-    m_bDirRead = FALSE;
+    m_bDirRead = false;
   }
   else
   {
     _tcscpy(m_szCurrDir, pCurrDir);  // if not, set new name and highlight
-    m_bDirRead = TRUE;
+    m_bDirRead = false;
   }
 
   return true;
@@ -106,5 +106,5 @@ void CFDirList::ItemSelected(ITEMLISTENTRY *pEntry)
     Draw();
   }
   
-  m_pSystem->QueueEvent(WM_ITEMLISTSELECT, m_ulID, (void*)pEntry);
+  m_pSystem->QueueEvent(FATE_EVENT_ID_ITEMLISTSELECT, m_ulID, (void*)pEntry);
 }

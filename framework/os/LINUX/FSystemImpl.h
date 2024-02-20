@@ -3,8 +3,19 @@
 #include "../../base/FateTypeDefs.h"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 class CFBitmapImpl;
+
+#define EVENT_TYPE_FATE SDL_USEREVENT + 1
+
+struct FateEventData
+{
+	int eventId;
+	int componentId;
+	void *pCustomData;
+};
+
 
 class CFSystemImpl
 {
@@ -20,8 +31,12 @@ public:
 	void ForceRedraw();
 	void DrawFileIcon(CFBitmapImpl& bmp, const TCHAR *pszFilePath, int x, int y, bool normal);
 	void QueueEvent(int iEventID, int iComponentID, void *pCustomData);
-	void AddTimer(unsigned long id, int interval);  
+	void AddTimer(unsigned long id, int interval); 
+	void Sleep(int milliSeconds);
+	bool EnableSuspend(bool suspend) { return true; }
 
+	static int GetDefaultWidth() { return 240; }
+	static int GetDefaultHeight() { return 320; }
 	static void GetPathToApplication(TCHAR *pszAppPath);
 	static unsigned int GetTicks();
 	static int GetRandomNumber(int max);

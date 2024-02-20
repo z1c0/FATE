@@ -8,21 +8,6 @@ class CFServer;
 class CFMsgPanel;
 class CFSystem;
 
-
-//--------------------------------------------------------------------------------
-// Window messages for exchanging information about events triggered by user
-// interface controls.
-#define WM_BUTTONPRESS           0xBE01
-#define WM_BUTTONRELEASE         0xBE02
-#define WM_MENUSELECTION         0xBE03
-#define WM_ITEMLISTSELECT        0xBE04
-#define WM_DROPLISTEXPAND        0xBE05
-#define WM_DROPLISTSELECT        0xBE06
-#define WM_DROPLISTCOLLAPSE      0xBE07
-#define WM_SLIDERCHANGE          0xBE08
-#define WM_CLIENTCONNECT         0xBE09
-
-
 //--------------------------------------------------------------------------------
 /// Utility functions for debug output via UDP datagrams
 #ifdef _REMOTE_CONSOLE
@@ -74,9 +59,9 @@ public:
   const CFateVersion& GetFateVersion() const { return m_fateVersion; }
   
   // Methods that can be overridden by subclasses.
-  virtual bool InitFateApp()     { return(true); };
-  virtual bool ActivateFateApp() { return(true); };
-  virtual bool CloseFateApp()    { return(true); };
+  virtual bool InitFateApp()     { return(true); }
+  virtual bool ActivateFateApp() { return(true); }
+  virtual bool CloseFateApp()    { return(true); }
   
   // UI event handling methods are implemented empty
   virtual bool ButtonPressed(unsigned long ulBtnID) { return(false); };

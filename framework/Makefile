@@ -32,7 +32,7 @@ $(BUILD_DIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 demo: $(LIB)
-	$(CXX) $(CXXFLAGS) demo.cpp -o demo -L$(LIB_DIR) -lFATE -lSDL2 
+	$(CXX) $(CXXFLAGS) demo.cpp -o demo -L$(LIB_DIR) -lFATE -lSDL2 -lSDL2_ttf
 
 clean:
 	rm -rf $(BUILD_DIR) $(LIB) 

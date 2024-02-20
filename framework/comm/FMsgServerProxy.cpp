@@ -131,7 +131,7 @@ bool CFMsgServerProxy::SendCall(char *pData)
   {    
     if (!sock.Create()) return false;
     if (!sock.Connect(m_addrVR[i])) return false;
-    sock.Write(pData, strlen(pData) + 1);
+    sock.Send(pData, strlen(pData) + 1);
     sock.Close();
   }
   return true;

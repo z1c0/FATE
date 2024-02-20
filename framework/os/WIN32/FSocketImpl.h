@@ -15,11 +15,10 @@ public:
   bool Bind(int port);	
   bool Bind(const CFInetAddrImpl* pInetAddr);
   int Accept(CFSocketImpl& sock);	
-  int Send(const char* pBuff, const int iSize);
 	int Receive(char* pBuff, const int size);	
-  int Write(const char* pBuff, const int size);	
-  bool GetRemoteAddr(CFInetAddrImpl* pIntAddr);	
-  bool GetInetAddr(CFInetAddrImpl* pInetAddr);  
+  int Send(const char* pBuff, const int size);
+  bool GetRemoteAddr(CFInetAddrImpl* pIntAddr);
+  bool GetInetAddr(CFInetAddrImpl* pInetAddr);
   bool IsReceiving() const;
   bool IsClientConnecting() const;
   int GetListenPort() const { return m_listenPort; }
@@ -31,6 +30,8 @@ public:
 	static const char* GetHostByAddr(const CFInetAddrImpl* pInetAddr);
 
 private:
+  int SendInternal(const char* pBuff, const int iSize);
+
   SOCKET m_hSocket;
   DWORD m_dwTimeout;
   int m_listenPort;

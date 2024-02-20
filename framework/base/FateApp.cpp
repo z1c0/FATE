@@ -27,7 +27,9 @@ CFateApp::CFateApp(EFateDrawMode drawMode /* = DM_PORTRAIT */)
   m_panelMsg         = NULL;  
   m_bIsListening     = false;
   m_pSystem          = NULL;
-                    
+
+  SetWidth(CFSystem::GetDefaultWidth());
+  SetHeight(CFSystem::GetDefaultHeight());
   CFSystem::GetPathToApplication(m_szAppPath);
   CFSocket::InitSocketLibrary();
 }
@@ -85,10 +87,11 @@ bool CFateApp::Init()
 /// Shuts down the application.
 bool CFateApp::Exit() 
 { 
-  if (!m_pSystem) {
+  if (!m_pSystem)
+  {
     return false; 
   }
-  // relelase the main device context
+  // release the main device context
   m_pSystem->ShutDownSystem();
   
   return true; 
@@ -228,9 +231,12 @@ void CFateApp::AddServer(int iPort)
 /// there are incoming connections for a server.
 void CFateApp::CheckServers()
 {
-  for (int i=0; i<m_ListServers.GetSize(); i++) {
+  for (int i=0; i<m_ListServers.GetSize(); i++)
+  {
     if (m_ListServers[i]->IsClientConnecting())
-      m_pSystem->QueueEvent(WM_CLIENTCONNECT, 0, NULL);
+    {
+      m_pSystem->QueueEvent(FATE_EVENT_ID_CLIENTCONNECT, 0, NULL);
+    }
   }
 }
 

@@ -134,7 +134,7 @@ bool CFMenu::StylusDown(int xPos, int yPos)
     {
       if (pTemp->pBmp->PointInside(xPos, yPos))
       {
-        m_pSystem->QueueEvent(WM_MENUSELECTION, m_ulID, reinterpret_cast<void*>(pTemp->id));
+        m_pSystem->QueueEvent(FATE_EVENT_ID_MENUSELECTION, m_ulID, reinterpret_cast<void*>(pTemp->id));
         m_bSubMenuOpen = true;
         return true;
       }

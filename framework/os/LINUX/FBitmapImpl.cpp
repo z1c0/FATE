@@ -1,6 +1,8 @@
 #include "FBitmapImpl.h"
+#include "FFileImpl.h"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 //------------------------------------------------------------------------------
 CFBitmapImpl::CFBitmapImpl() :
@@ -43,21 +45,32 @@ void CFBitmapImpl::SetDestBitmap(const CFBitmapImpl& destination)
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmapImpl::Load(const TCHAR* pszFileName)
+bool CFBitmapImpl::Load(const TCHAR* fileName)
 {
-	assert(false);
-	return false;
+	assert(m_pRenderer);
+	assert(CFFileImpl::Exists(fileName));
+	SDL_Surface* pSurface = ::SDL_LoadBMP(fileName);
+	assert(pSurface);
+	m_pTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
+	assert(m_pTexture);
+	::SDL_FreeSurface(pSurface);
+  ::SDL_QueryTexture(m_pTexture, NULL, NULL, &m_width, &m_height);
+	return true;
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmapImpl::Load(int wResourceID)
+bool CFBitmapImpl::Load(int resourceId, const TCHAR* fallbackFilePath)
 {
-	assert(false);
-	return false;
+	if (!fallbackFilePath)
+	{
+		printf("load bmp %d - no fallback path\n", resourceId);
+		return false;
+	}
+	return Load(fallbackFilePath);
 }
 
 //------------------------------------------------------------------------------
-bool CFBitmapImpl::Load(char *pszData, unsigned long dwSize)
+bool CFBitmapImpl::Load(const char *data, unsigned long size)
 {
 	assert(false);
 	return false;
@@ -73,8 +86,7 @@ bool CFBitmapImpl::SaveToFile(const TCHAR *pszFileName) const
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::IsValid() const
 {
-	assert(false);
-	return false;
+	return m_pTexture != NULL && m_width > 0 && m_height > 0;
 }
 
 //------------------------------------------------------------------------------
@@ -91,10 +103,7 @@ bool CFBitmapImpl::Blit()
 	{
 		::SDL_SetRenderTarget(m_pRenderer, m_pTargetTexture);
 		SDL_Rect destRect = { m_posX, m_posY, m_width, m_height };
-		if (::SDL_RenderCopy(m_pRenderer, m_pTexture, NULL, &destRect) != 0)
-		{
-			printf("%s - %d\n", SDL_GetError(), m_width);
-		}
+		::SDL_RenderCopy(m_pRenderer, m_pTexture, NULL, &destRect);
 		::SDL_SetRenderTarget(m_pRenderer, NULL);
 	}
 	else
@@ -129,21 +138,21 @@ bool CFBitmapImpl::ClipBlit(int width, int height)
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::TransBlit(COLORREF colTrans)
 {
-	assert(false);
+	Blit();
 	return true;
 }
 
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::SaveUnder(const CFBitmapImpl& bmp)
 {
-	assert(false);
+	printf("FIX ME: SaveUnder\n");
 	return true;
 }
 
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::RestoreUnder(const CFBitmapImpl& bmp)
 {
-	assert(false);
+	printf("FIX ME: RestoreUnder\n");
 	return true;
 }
 
@@ -187,9 +196,15 @@ bool CFBitmapImpl::SolidFill(const COLORREF col)
 bool CFBitmapImpl::DrawFilledRect(int left, int top, int width, int height)
 {
 	::SDL_SetRenderTarget(m_pRenderer, m_pTexture);
+
+	::SDL_SetRenderDrawColor(m_pRenderer, m_col.r, m_col.g, m_col.b, 255);
+	SDL_Rect outerRect = { left, top, width, height };
+	::SDL_RenderDrawRect(m_pRenderer, &outerRect);
+
 	::SDL_SetRenderDrawColor(m_pRenderer, m_colBack.r, m_colBack.g, m_colBack.b, 255);
-	SDL_Rect rect = { left, top, width, height };
-	::SDL_RenderFillRect(m_pRenderer, &rect);
+	SDL_Rect innerRect = { left + 1, top + 1, width - 2, height -2 };
+	::SDL_RenderFillRect(m_pRenderer, &innerRect);
+
 	::SDL_SetRenderTarget(m_pRenderer, NULL);
 	return true;
 }
@@ -197,23 +212,39 @@ bool CFBitmapImpl::DrawFilledRect(int left, int top, int width, int height)
 //------------------------------------------------------------------------------
 bool CFBitmapImpl::DrawPolygon(POINT *points, int count)
 {
-	assert(false);
-	return false;
-}
-
-//------------------------------------------------------------------------------
-bool CFBitmapImpl::DrawText(const TCHAR *pszText, RECT& rect)
-{
-	printf("FIX ME: DrawText\n");
-	DrawFilledRect(10, 10, 50, 50);
+	printf("FIX ME: DrawPolygon\n");
 	return true;
 }
 
 //------------------------------------------------------------------------------
-/* static */ bool CFBitmapImpl::CalcRectForText(const TCHAR *pszText, RECT& rect)
+static TTF_Font* GetFont()
 {
-	printf("FIX ME: CalcRectForText\n");
-	rect.right = 20;
-	rect.bottom = 20;
+	static TTF_Font* font = ::TTF_OpenFont("./arial.ttf", 14);
+	assert(font);
+	return font;
+}
+
+//------------------------------------------------------------------------------
+bool CFBitmapImpl::DrawText(const TCHAR *text, RECT& rect)
+{
+	SDL_Color textColor = { m_colText.r, m_colText.g, m_colText.b, 255 };
+	SDL_Surface* pSurface = ::TTF_RenderText_Solid(GetFont(), text, textColor);
+	SDL_Texture* pTextTexture = ::SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
+  ::SDL_FreeSurface(pSurface);
+	::SDL_SetRenderTarget(m_pRenderer, m_pTexture);
+	SDL_Rect sdlRect = { rect.left, rect.top, pSurface->w, pSurface->h };
+	::SDL_RenderCopy(m_pRenderer, pTextTexture, NULL, &sdlRect);
+	::SDL_SetRenderTarget(m_pRenderer, NULL);
+	return true;
+}
+
+//------------------------------------------------------------------------------
+/* static */ bool CFBitmapImpl::CalcRectForText(const TCHAR* text, RECT& rect)
+{
+	int width;
+	int height;
+	::TTF_SizeText(GetFont(), text, &width, &height);
+	rect.right = rect.left + width;
+	rect.bottom = rect.top + height;
 	return true;
 }

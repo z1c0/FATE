@@ -1,13 +1,4 @@
-// PPTPanel.h: interface for the CPPTPanel class.
-//
-//////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_PPTPANEL_H__5F4B30F7_44F9_417B_A449_9A32CA71AC5A__INCLUDED_)
-#define AFX_PPTPANEL_H__5F4B30F7_44F9_417B_A449_9A32CA71AC5A__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include "../../framework/include/fate.h"
 
@@ -25,11 +16,11 @@ public:
   virtual bool KeyDown(int vkKey);
   virtual bool ButtonReleased(DWORD dwBtnID);
   virtual bool DropListSelected(DWORD dwListID, ITEMLISTENTRY* pEntry);
-  BOOL Create();
-  BOOL StartPPT(char *pszFileName);
-  BOOL ClosePPT();
+  bool Create();
+  bool StartPPT(char *pszFileName);
+  bool ClosePPT();
   void SetSlideCount(int iSlideCount);
-  BOOL StorePreview(char *pBuff, DWORD dwSize);
+  bool StorePreview(char *pBuff, DWORD dwSize);
   void SetCurrSlide(int iNr) { m_iCurrSlide= iNr; };
 private:
   void NextSlide();
@@ -65,8 +56,7 @@ private:
   int m_iCurrSlide;
   int m_iPrevWidth; 
   int m_iPrevHeight;
-  BOOL m_bShowCurr;
+  bool m_bShowCurr;
   RECT m_rectTab[2];
 };
 
-#endif // !defined(AFX_PPTPANEL_H__5F4B30F7_44F9_417B_A449_9A32CA71AC5A__INCLUDED_)

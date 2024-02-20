@@ -24,8 +24,8 @@ public:
   bool SolidFill(const COLORREF colFill);
 	
   bool Load(const TCHAR* pszFileName);
-  bool Load(int wResourceID);
-	bool Load(char *pszData, unsigned long dwSize);
+  bool Load(int wesourceId, const TCHAR* fallbackFilePath = NULL);
+	bool Load(const char *data, unsigned long size);
   
   int GetX() const;
   void SetX(int posX);

@@ -54,7 +54,7 @@ bool CFToggleButton::StylusDown(int xPos, int yPos)
     }
     m_bState1= !m_bState1;
     Draw();
-    m_pSystem->QueueEvent(WM_BUTTONPRESS, m_ulID, NULL);
+    m_pSystem->QueueEvent(FATE_EVENT_ID_BUTTONPRESS, m_ulID, NULL);
     
     return(true);
   }

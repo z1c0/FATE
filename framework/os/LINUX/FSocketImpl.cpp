@@ -1,26 +1,33 @@
 #include "FSocketImpl.h"
 
 //--------------------------------------------------------------------------------
-CFSocketImpl::CFSocketImpl()
+CFSocketImpl::CFSocketImpl() : m_socket(INVALID_SOCKET), m_listenPort(-1), m_timeout(NO_TIMEOUT)
 {	
 }
 
 //--------------------------------------------------------------------------------
 bool CFSocketImpl::Create()
 {
-	assert(false);
+	m_socket = ::socket(AF_INET, SOCK_STREAM, 0);
+	return m_socket != INVALID_SOCKET;
 }
 
 //--------------------------------------------------------------------------------
 bool CFSocketImpl::Close()
 {
-	assert(false);
+	return ::close(m_socket) == 0;
 }
 
 //--------------------------------------------------------------------------------
 bool CFSocketImpl::Bind(int port)
 {
-	assert(false);
+	m_listenPort = port;
+	sockaddr_in addr;
+	memset(&addr, 0, sizeof(sockaddr_in));
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(m_listenPort);
+	addr.sin_addr.s_addr = INADDR_ANY;
+	return ::bind(m_socket, (struct sockaddr*)&addr, sizeof(addr)) == 0;
 }
 
 //--------------------------------------------------------------------------------
@@ -32,43 +39,95 @@ bool CFSocketImpl::Bind(const CFInetAddrImpl* pInetAddr)
 //--------------------------------------------------------------------------------
 bool CFSocketImpl::Listen()
 {
-	assert(false);
+	return ::listen(m_socket, 5) == 0;
 }
 
 //--------------------------------------------------------------------------------
-int CFSocketImpl::Accept(CFSocketImpl& sock)
+bool CFSocketImpl::Accept(CFSocketImpl& sock)
 {
-	assert(false);
+	if (m_timeout != NO_TIMEOUT)
+	{
+		fd_set readSet;
+		FD_ZERO(&readSet);
+		FD_SET(m_socket, &readSet);
+		struct timeval timeout;
+		timeout.tv_sec = 0;
+		timeout.tv_usec = m_timeout * 1000;
+		if (::select(m_socket + 1, &readSet, NULL, NULL, &timeout) == -1)
+		{
+			return false;
+		}
+	}
+	sockaddr_in addr;
+	socklen_t size = sizeof(sockaddr_in);
+	sock.m_socket = ::accept(m_socket, (sockaddr*)&addr, &size);
+	return sock.m_socket != INVALID_SOCKET;
 }
 
 //--------------------------------------------------------------------------------
 bool CFSocketImpl::Connect(const CFInetAddrImpl* pInetAddr)
 {
-	assert(false);
+	return ::connect(m_socket, (sockaddr*)&pInetAddr->m_addr, sizeof(pInetAddr->m_addr)) == 0;
 }
 
 //--------------------------------------------------------------------------------
-bool CFSocketImpl::Connect(char *pAddrStr, int port)
+bool CFSocketImpl::Connect(char *addrStr, int port)
 {
-	assert(false);
+	CFInetAddrImpl inetAddr(addrStr, port);
+	return Connect(&inetAddr);
 }
 
 //--------------------------------------------------------------------------------
 int CFSocketImpl::Send(const char* pBuff, const int size)
 {
-	assert(false);
+	if (m_timeout != NO_TIMEOUT)
+	{
+		fd_set writeSet;
+		FD_ZERO(&writeSet);
+		FD_SET(m_socket, &writeSet);
+		// Set up the timeout
+		struct timeval timeout;
+		timeout.tv_sec = 0;
+		timeout.tv_usec = m_timeout * 1000;
+		if  (::select(m_socket + 1, NULL, &writeSet, NULL, &timeout) == -1)
+		{
+			return SOCKET_TIMEOUT;
+		}
+	}
+	int iBytesSent = 0;
+	const char* pTemp= pBuff;
+	do
+	{
+		int tmp = ::send(m_socket, pTemp, size - iBytesSent, 0);
+		if (tmp == SOCKET_ERROR)
+		{
+			return SOCKET_ERROR;
+		}
+		iBytesSent += tmp;
+		pTemp += tmp;
+	}
+	while (iBytesSent < size);
+	
+	return iBytesSent;
 }
 
 //--------------------------------------------------------------------------------
 int CFSocketImpl::Receive(char* pBuff, const int size)
 {
-	assert(false);
-}
-
-//--------------------------------------------------------------------------------
-int CFSocketImpl::Write(const char* pBuff, const int size)
-{
-	assert(false);
+	if (m_timeout != NO_TIMEOUT)
+	{
+		fd_set readSet;
+		FD_ZERO(&readSet);
+		FD_SET(m_socket, &readSet);
+		struct timeval timeout;
+		timeout.tv_sec = 0;
+		timeout.tv_usec = m_timeout * 1000;
+		if (::select(m_socket + 1, &readSet, NULL, NULL, &timeout) == -1)
+		{
+			return SOCKET_TIMEOUT;
+		}
+	}
+	return ::recv(m_socket, pBuff, size, 0);
 }
 
 //--------------------------------------------------------------------------------
@@ -79,18 +138,6 @@ bool CFSocketImpl::IsClientConnecting() const
 
 //--------------------------------------------------------------------------------
 bool CFSocketImpl::IsReceiving() const
-{
-	assert(false);
-}
-
-//--------------------------------------------------------------------------------
-int CFSocketImpl::GetListenPort() const
-{
-	assert(false);
-}
-
-//--------------------------------------------------------------------------------
-void CFSocketImpl::SetTimeout(DWORD dwTimeout)
 {
 	assert(false);
 }

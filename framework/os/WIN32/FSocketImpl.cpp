@@ -31,7 +31,7 @@ bool CFSocketImpl::Close()
   }
 	if (closesocket(m_hSocket) == SOCKET_ERROR)
   {
-	  return(false);
+    return(false);
   }
   m_hSocket= INVALID_SOCKET;
   return true;
@@ -136,7 +136,7 @@ int CFSocketImpl::Write(const char* pBuff, const int iSize)
 /// Return values:
 /// SOCKET_TIMEOUT indicates timeout 
 /// SOCKET_ERROR in case of a problem.
-int CFSocketImpl::Send(const char* pBuff, const int iSize)
+int CFSocketImpl::SendInternal(const char* pBuff, const int iSize)
 {
   if (m_hSocket == INVALID_SOCKET) return(SOCKET_ERROR);
   

@@ -1,6 +1,4 @@
-#ifndef __IFCONNECTONLISTENER__H__
-#define __IFCONNECTONLISTENER__H__
-
+#pragma once
 
 class CFServer;
 
@@ -11,4 +9,3 @@ public:
   virtual bool ClientConnect(CFServer *pServer)= 0;
 };
 
-#endif  // __IFCONNECTONLISTENER__H__
