@@ -107,6 +107,14 @@ SOURCE=.\base\FBitmap.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\base\FDirectory.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\base\FDirectory.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\base\FFile.cpp
 # End Source File
 # Begin Source File
@@ -520,6 +528,14 @@ SOURCE=.\os\WIN32\FComPortImpl.cpp
 # Begin Source File
 
 SOURCE=.\os\WIN32\FComPortImpl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FDirectoryImpl.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\os\WIN32\FDirectoryImpl.h
 # End Source File
 # Begin Source File
 

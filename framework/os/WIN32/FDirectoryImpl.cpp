@@ -5,7 +5,7 @@ CFDirectoryImpl::CFDirectoryImpl(const TCHAR* name) :
   m_handle(INVALID_HANDLE_VALUE)
 {
   _tcscpy(m_filePath, name);
-  _tcscat(szFilePath, TEXT("\\*.*"));
+  _tcscat(m_filePath, TEXT("\\*.*"));
 }
 
 //------------------------------------------------------------------------------

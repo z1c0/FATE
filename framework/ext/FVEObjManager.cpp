@@ -332,8 +332,8 @@ bool CFVEObjManager::RequestAllValues()
 bool CFVEObjManager::RequestValues(CFVEObj *pObj)
 {
   CFSocket sock;
-  VE_PACKET pack= {};
-  VE_PACKET_OBJ packObj= {};
+  VE_PACKET pack= {0};
+  VE_PACKET_OBJ packObj= {0};
   TCHAR szObjName[MAX_OBJ_NAME_LEN];
 
   // first clear object list

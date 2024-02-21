@@ -24,6 +24,7 @@ public:
   void Sleep(int milliSeconds);
 
   static void GetPathToApplication(TCHAR *pszAppPath);
+  static const TCHAR* GetDirectorySeparator() { return TEXT("\\"); }
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);
   static int GetDefaultWidth() { return 240; }

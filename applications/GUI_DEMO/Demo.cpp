@@ -38,7 +38,7 @@ bool CDemo::InitFateApp()
 	for (int i = 0; i < NR_OF_PANELS; i++)
 	{
 		TCHAR str[10];
-		_stprintf(str, "%d", i);
+		_stprintf(str, TEXT("%d"), i);
 
 		m_btns[i].SetCaption(str);
 		m_btns[i].SetId(i);
@@ -74,11 +74,11 @@ bool CDemo::InitFateApp()
 	m_itemList.AddItem(TEXT("entry 9"));
 	m_itemList.SetX(40);
 	m_itemList.SetY(60);
-	m_btnAdd.SetCaption("+");
+	m_btnAdd.SetCaption(TEXT("+"));
 	m_btnAdd.SetId(500);
 	m_btnAdd.SetX(40);
 	m_btnAdd.SetY(30);
-	m_btnClear.SetCaption("clear");
+	m_btnClear.SetCaption(TEXT("clear"));
 	m_btnClear.SetId(501);
 	m_btnClear.SetX(80);
 	m_btnClear.SetY(m_btnAdd.GetY());
@@ -131,8 +131,8 @@ bool CDemo::ButtonReleased(unsigned long id)
 	if (id == 500)
 	{
 		CFBitmap* bmp = new CFBitmap(m_pSystem->GetDoubleBuffer());
-		bmp->Load("icon.bmp");
-		m_itemList.AddPicItem(bmp, "Test Item");
+		bmp->Load(TEXT("icon.bmp"));
+		m_itemList.AddPicItem(bmp, TEXT("Test Item"));
 		m_itemList.Draw();
 	}
 	else if (id == 501)

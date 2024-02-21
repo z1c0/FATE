@@ -75,3 +75,11 @@ bool CFFileImpl::ReadBytes(unsigned char*& bytes, unsigned int& count)
   DWORD attrib = ::GetFileAttributes(fileName);
   return (attrib & FILE_ATTRIBUTE_DIRECTORY) != 0;
 }
+
+//------------------------------------------------------------------------------
+/* static */ bool CFFileImpl::IsRoot(const TCHAR* fileName)
+{
+  return _tcslen(fileName) <= 3;
+}
+
+

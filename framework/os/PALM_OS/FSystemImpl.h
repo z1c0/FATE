@@ -43,6 +43,7 @@ public:
   bool EnableSuspend(bool) { return true; }
   
   static void GetPathToApplication(TCHAR *pszAppPath);
+  static const TCHAR* GetDirectorySeparator();
   static unsigned int GetTicks();
   static int GetRandomNumber(int max);
   static int GetDefaultWidth() { return 320; }

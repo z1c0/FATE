@@ -165,7 +165,7 @@ CFBitmap* CFStartMenu::CreateAppBmp(int iNr)
     rect.top   = 0;
     rect.right = bmp->GetWidth();
     rect.bottom= bmp->GetHeight();
-    _stprintf(szText, "%d", iNr);
+    _stprintf(szText, TEXT("%d"), iNr);
 
     bmp->SetBackgroundColor(m_colBack);
     bmp->SetColor(m_colBack);
