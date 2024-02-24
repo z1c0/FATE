@@ -197,13 +197,11 @@ void EventLoop()
 				}
 			}
 		}
-		/*
 		// FATE loop
 		if (g_pApp->IsListening())
 		{
 			g_pApp->CheckServers();
 		}
-		*/
 		if (g_pApp->IsFateLoopEnabled())
 		{
 			g_pApp->Idle();

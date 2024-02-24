@@ -1,8 +1,6 @@
-# Makefile for creating the 'pptrc' executable
-
 # Compiler and flags
 CXX := g++
-CXXFLAGS := -std=c++98 -Wall -Wextra -pedantic -Wno-unused-parameter -D_LINUX -D_REMOTE_CONSOLE
+CXXFLAGS := -std=c++98 -Wall -Wextra -pedantic -Wno-unused-parameter -D_LINUX
 
 # Directories
 BUILD_DIR := build
@@ -15,7 +13,7 @@ SRC := $(wildcard *.cpp)
 OBJ := $(patsubst %.cpp, $(BUILD_DIR)/%.o, $(SRC))
 
 # Executable name
-EXE_NAME := gui_demo
+EXE_NAME := remote_console
 EXE := $(BIN_DIR)/$(EXE_NAME)
 
 # Targets

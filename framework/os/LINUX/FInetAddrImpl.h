@@ -7,6 +7,7 @@
 class CFInetAddrImpl
 {
   friend class CFSocketImpl;
+  friend class CFUDPSocketImpl;
 public:
 	CFInetAddrImpl() {}
   CFInetAddrImpl(const char* ip, int port)

@@ -5,7 +5,7 @@
 CFSocketImpl::CFSocketImpl()
 {
   m_hSocket = INVALID_SOCKET; 
-  m_dwTimeout = DEFAULT_TIMEOUT; 
+  m_dwTimeout = NO_TIMEOUT; 
   m_listenPort = -1;
 }
 
